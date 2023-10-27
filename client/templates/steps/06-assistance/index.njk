@@ -1,0 +1,316 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+    {{ texts.REASONABLE_ADJUSTMENT_PAGE.HEADING_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+    {{ texts.REASONABLE_ADJUSTMENT_PAGE.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Reasonable Adjustments{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('steps.assistance.post') }}" method="post">
+
+        {# Set heading text #}
+        {% if user.thirdParty == 'Yes' %}
+          {% set pageHeadingText = texts.REASONABLE_ADJUSTMENT_PAGE.HEADING_OB %}
+        {% else %}
+          {% set pageHeadingText = texts.REASONABLE_ADJUSTMENT_PAGE.HEADING %}
+        {% endif %}
+
+        {# Set radio labels #}
+        {% set radioYesLabel = texts.REASONABLE_ADJUSTMENT_PAGE.YES  %}
+        {% set radioNoLabel = texts.REASONABLE_ADJUSTMENT_PAGE.NO %}
+        {% if user.assistanceNeeded == 'Yes' %}
+          {% set radioYesChecked = true %}
+        {% endif %}
+        {% if user.assistanceNeeded == 'No' %}
+          {% set radioNoChecked = true %}
+        {% endif %}
+
+        {# Set radios hint html #}
+        {% set radiosHintHTML %}
+          <p class="govuk-body">
+            {% if user.thirdParty == 'Yes' %}
+              {{ texts.REASONABLE_ADJUSTMENT_PAGE.INTRO_PARAGRAPH_OB }}
+            {% else %}
+              {{ texts.REASONABLE_ADJUSTMENT_PAGE.INTRO_PARAGRAPH }}
+            {% endif %}
+          </p>
+        {% endset %}
+
+        {# Set radios error #}
+        {% set radioAnswerError = undefined%}
+        {% if errors.items['assistanceNeeded'] %}
+          {% set radioAnswerError = {"text": errors.items['assistanceNeeded'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% endif %}
+
+        {# Set checkboxes hint html #}
+        {% set checkboxesHintHTML %}
+        <p class="govuk-body">
+          {% if user.thirdParty == 'Yes' %}
+            {{ texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_DESCRIPTION_OB }}
+          {% else %}
+            {{ texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_DESCRIPTION }}
+          {% endif %}
+        </p>
+        {% endset %}
+
+        {# Set checkboxes answer error #}
+        {% set checkboxesAnswerError = undefined %}
+        {% if errors.items['assistanceType'] %}
+          {% set checkboxesAnswerError = {"text":  errors.items['assistanceType'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% endif %}
+
+        {# Set checkbox checked value #}
+        {% if assistanceActive.mobility %}{% set checkboxMobilityChecked = true %}{% else %}{% set checkboxMobilityChecked = false %}{% endif %}
+        {% if assistanceActive.hearing %}{% set checkboxHearingChecked = true %}{% else %}{% set checkboxHearingChecked = false %}{% endif %}
+        {% if assistanceActive.diabetes %}{% set checkboxDiabetesChecked = true %}{% else %}{% set checkboxDiabetesChecked = false %}{% endif %}
+        {% if assistanceActive.sight %}{% set checkboxSightChecked = true %}{% else %}{% set checkboxSightChecked = false %}{% endif %}
+        {% if assistanceActive.learningDisability %}{% set checkboxLearningChecked = true %}{% else %}{% set checkboxLearningChecked = false %}{% endif %}
+        {% if assistanceActive.other %}{% set checkboxOtherChecked = true %}{% else %}{% set checkboxOtherChecked = false %}{% endif %}
+
+        {# Set special arrangements label #}
+        {% set specialArrangementsLabel %}
+            {% if user.thirdParty == 'Yes' %}
+              {{ texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_SPECIAL_DESCRIPTION_OB }}
+            {% else %}
+              {{ texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_SPECIAL_DESCRIPTION }}
+            {% endif %}
+        {% endset %}
+
+        {# Set sight impairment label/value #}
+        {% if user.thirdParty == 'Yes' %}
+          {% set sightImpairmentValue = texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_SIGHT_OB %}
+        {% else %}
+          {% set sightImpairmentValue = texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_SIGHT %}
+        {% endif %}
+
+        {# Set other details label#}
+        {% if user.thirdParty == 'Yes' %}
+          {% set otherDetailsLabel = texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_OTHER_DESCRIPTION_OB %}
+        {% else %}
+          {% set otherDetailsLabel = texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_OTHER_DESCRIPTION %}
+        {% endif %}
+
+        {# Set Other details error #}
+        {% set otherDetailsError = undefined %}
+        {% if errors.items['assistanceTypeDetails'] %}
+          {% set otherDetailsError = {"text": errors.items['assistanceTypeDetails'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% endif %}
+
+        {# Set Special Arrangements details error #}
+        {% set specialArrangementsError = undefined %}
+        {% if errors.items['assistanceSpecialArrangements'] %}
+          {% set specialArrangementsError = {"text": errors.items['assistanceSpecialArrangements'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% endif %}
+
+        {# Set Other details HTML #}
+        {% set otherDetailsHTML %}
+          {{ govukCharacterCount({
+            name: "assistanceTypeDetails",
+            id: "assistanceTypeDetails",
+            maxlength: "1000",
+            label: {
+              text: otherDetailsLabel
+            },
+            rows: "5",
+            errorMessage: otherDetailsError,
+            value: user.assistanceTypeDetails
+          }) }}
+        {% endset %}
+
+        {# Set disabilities HTML #}
+        {% set disabilitiesHTML%}
+          {{ govukCheckboxes({
+            name: "cjsEmployer",
+            fieldset: {
+            },  
+            hint: {
+              html: checkboxesHintHTML
+            },
+            errorMessage: checkboxesAnswerError,
+            items: [
+              {
+                id: "assistanceType-mobility",
+                name: "assistanceType",
+                value: texts.CHECK_ANSWERS_PAGE.MOBILITY,
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_MOBILITY,
+                checked: checkboxMobilityChecked
+              },
+              {
+                id: "assistanceType-hearing",
+                name: "assistanceType",
+                value: texts.CHECK_ANSWERS_PAGE.HEARING,
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_HEARING,
+                checked: checkboxHearingChecked
+              },
+              {
+                id: "assistanceType-diabetes",
+                name: "assistanceType",
+                value: texts.CHECK_ANSWERS_PAGE.DIABETES,
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_DIABETES,
+                checked: checkboxDiabetesChecked
+              },
+              {
+                id: "assistanceType-sight",
+                name: "assistanceType",
+                value: sightImpairmentValue,
+                text: sightImpairmentValue,
+                checked: checkboxSightChecked
+              },
+              {
+                id: "assistanceType-learningDisability",
+                name: "assistanceType",
+                value: texts.CHECK_ANSWERS_PAGE.LEARNING_DISABILITY,
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_LEARNING_DISABILITY,
+                checked: checkboxLearningChecked
+              },
+              {
+                id: "assistanceType-other",
+                name: "assistanceType",
+                value: "Other",
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.ADJUSTMENT_ANSWER_OTHER,
+                conditional: {
+                  html: otherDetailsHTML
+                },
+                checked: checkboxOtherChecked
+              }
+            ]
+          }) }}
+
+          {{ govukCharacterCount({
+            name: "assistanceSpecialArrangements",
+            id: "assistanceSpecialArrangements",
+            maxlength: "1000",
+            label: {
+              html: specialArrangementsLabel
+            },
+            rows: "5",
+            errorMessage: specialArrangementsError,
+            value: user.assistanceSpecialArrangements
+          }) }}
+
+        {% endset %}
+
+        <div class="govuk-form-group {% if errors.items['assistanceNeeded'] or errors.items['assistanceType'] or errors.items['assistanceTypeDetails'] %}govuk-form-group--error{% endif %}">
+
+          {{ govukRadios({
+            id: "assistanceNeeded",
+            name: "assistanceNeeded",
+            fieldset: {
+              legend: {
+                text: pageHeadingText,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              html: radiosHintHTML
+            },
+            errorMessage: radioAnswerError,
+            items: [
+              {
+                id: "assistanceNeeded-Yes",
+                name: "assistanceNeeded",
+                value: 'Yes' ,
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.YES,
+                checked: radioYesChecked,
+                conditional: {
+                  html: disabilitiesHTML
+                }
+              },
+              {
+                id: "assistanceNeeded-No",
+                name: "assistanceNeeded",
+                value: 'No',
+                text: texts.REASONABLE_ADJUSTMENT_PAGE.NO,
+                checked: radioNoChecked
+              }
+            ]
+          }) }}
+
+        </div>
+
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary ga-details-assistance">
+            <span class="govuk-details__summary-text ga-details-assistance">
+              {{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_SUMMARY }}
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            {% if user.thirdParty == 'Yes' %}
+              <p>{{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_PARAGRAPH_1_OB }}</p>
+              <p>{{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_PARAGRAPH_2_OB }}</p>
+              <p>{{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_PARAGRAPH_3_OB }}
+              {% if texts.INTERFACE.HTML_LANG === "cy" %}
+                <br>
+                {% if texts.INTERFACE.CONTACT_TELEPHONE_1 %}
+                  {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_1 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_1 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_1}}</a>
+                {% endif %}
+                <br>
+                {% if texts.INTERFACE.CONTACT_TELEPHONE_2 %}
+                  {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_2 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_2 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_2}}</a>
+                {% endif %}
+              {% else %}
+                <a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_1 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_1}}</a>.
+              {% endif %}
+              </p>
+            {% else %}
+              <p>{{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_PARAGRAPH_1 }}</p>
+              <p>{{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_PARAGRAPH_2 }}</p>
+              <p>
+                {{ texts.REASONABLE_ADJUSTMENT_PAGE.GUIDANCE_PARAGRAPH_3 }}
+                  {% if texts.INTERFACE.HTML_LANG === "cy" %}
+                    <br>
+                    {% if texts.INTERFACE.CONTACT_TELEPHONE_1 %}
+                      {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_1 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_1 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_1}}</a>
+                    {% endif %}
+                    <br>
+                    {% if texts.INTERFACE.CONTACT_TELEPHONE_2 %}
+                      {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_2 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_2 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_2}}</a>
+                    {% endif %}
+                {% else %}
+                  <a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_1 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_1}}</a>.
+                {% endif %}
+              </p>
+            {% endif %}
+          </div>
+        </details>
+        
+
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+      
+      </form>
+
+  </div>
+</div>
+
+{% endblock %}

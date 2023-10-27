@@ -1,0 +1,288 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.HEADER }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}3rd Party Contact Details{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('branches.third.party.contact.details.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {# Set Phone radios checked #}
+        {% if user.useJurorPhoneDetails == 'No' %}
+          {% set radioPhoneExisitingChecked = 'checked="checked"' %}
+          {% set radioPhoneNewChecked = undefined %}
+        {% endif %}
+        {% if user.useJurorPhoneDetails == 'Yes' %}
+          {% set radioPhoneExisitingChecked = undefined %}
+          {% set radioPhoneNewChecked = 'checked="checked"' %}
+        {% endif %}
+
+        {# Set Email radios checked #}
+        {% if user.useJurorEmailDetails == 'No' %}
+          {% set radioEmailExisitingChecked = 'checked="checked"' %}
+          {% set radioEmailNewChecked = undefined %}
+        {% endif %}
+        {% if user.useJurorEmailDetails == 'Yes' %}
+          {% set radioEmailExisitingChecked = undefined %}
+          {% set radioEmailNewChecked = 'checked="checked"' %}
+        {% endif %}
+
+        {# Set Primary Phone error #}
+        {% if errors.items['primaryPhone'] %}
+          {% set primaryPhoneError = {"text": errors.items['primaryPhone'][0].details} %}
+        {% else %}
+          {% set primaryPhoneError = undefined %}
+        {% endif %}
+
+        {# Set Secondary Phone error #}
+        {% if errors.items['secondaryPhone'] %}
+          {% set secondaryPhoneError = {"text": errors.items['secondaryPhone'][0].details} %}
+        {% else %}
+          {% set secondaryPhoneError = undefined %}
+        {% endif %}
+
+        {# Set Email Address error #}
+        {% if errors.items['emailAddress'] %}
+          {% set emailAddressError = {"text": errors.items['emailAddress'][0].details} %}
+        {% else %}
+          {% set emailAddressError = undefined %}
+        {% endif %}
+
+        {# Set Email Address Confirmation error #}
+        {% if errors.items['emailAddressConfirmation'] %}
+          {% set emailAddressConfirmationError = {"text": errors.items['emailAddressConfirmation'][0].details} %}
+        {% else %}
+          {% set emailAddressConfirmationError = undefined %}
+        {% endif %}
+
+        {# Set radios Phone error #}
+        {% if errors.items['useJurorPhoneDetails'] %}
+          {% set radiosPhoneError = {"text": errors.items['useJurorPhoneDetails'][0].details} %}
+        {% else %}
+          {% set radiosPhoneError = undefined %}
+        {% endif %}
+
+        {# Set radios Email error #}
+        {% if errors.items['useJurorEmailDetails'] %}
+          {% set radiosEmailError = {"text": errors.items['useJurorEmailDetails'][0].details} %}
+        {% else %}
+          {% set radiosEmailError = undefined %}
+        {% endif %}
+        
+        {# Set phone details HTML #}
+        {% set phoneDetailsHTML %}
+
+          {# Primary Phone #}
+          {{ govukInput({
+            label: {
+              text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.MAIN_PHONE
+            },
+            id: "primaryPhone",
+            name: "primaryPhone",
+            errorMessage: primaryPhoneError,
+            attributes: {
+              inputmode: "numeric",
+              maxlength: "15"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "off",
+            value: user.primaryPhone
+          }) }}
+
+          {# Secondary Phone #}
+          {{ govukInput({
+            label: {
+              text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.OTHER_PHONE
+            },
+            id: "secondaryPhone",
+            name: "secondaryPhone",
+            errorMessage: secondaryPhoneError,
+            attributes: {
+              inputmode: "numeric",
+              maxlength: "15"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "off",
+            value: user.secondaryPhone
+          }) }}
+        {% endset %}
+
+        {# Set email details HTML #}
+        {% set emailDetailsHTML %}
+          {# Email Address #}
+          {{ govukInput({
+            label: {
+              text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_ENTER
+            },
+            id: "emailAddress",
+            name: "emailAddress",
+            errorMessage: emailAddressError,
+            type: "email",
+            attributes: {
+              maxlength: "254",
+              spellcheck: "false"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "off",
+            value: user.emailAddress
+          }) }}
+
+          {# Email Address Confirmation #}
+          {{ govukInput({
+            label: {
+              text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_ENTER_CONFIRM
+            },
+            id: "emailAddressConfirmation",
+            name: "emailAddressConfirmation",
+            errorMessage: emailAddressConfirmationError,
+            type: "email",
+            attributes: {
+              maxlength: "254",
+              spellcheck: "false"
+            },
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "off",
+            value: user.emailAddressConfirmation
+          }) }}
+        {% endset %}
+
+        <div class="govuk-form-group {% if errors.items['primaryPhone'] or errors.items['secondaryPhone'] or errors.items['useJurorPhoneDetails'] or errors.items['useJurorEmailDetails'] or errors.items['emailAddress'] or errors.items['emailAddressConfirmation'] %}govuk-form-group--error{% endif %}" id="thirdPartyReasonGroup">
+
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                <span class="govuk-caption-l">
+                  {{- texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.CAPTION -}}
+                </span>
+                {{- texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.HEADER -}}
+              </h1>
+            </legend>
+
+            <h2 class="govuk-heading-m">
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.CONTACT }}
+            </h2>
+            <p class="govuk-body">
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.CONTACT_PARAGRAPH }}
+            </p>
+
+
+            {# Phone options #}
+            <h3 class="govuk-heading-s">
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.PHONE }}
+            </h3>
+            <p class="govuk-body">
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.PHONE_PARAGRAPH }}
+            </p>
+            
+            {{ govukRadios({
+              id: "useJurorPhoneDetails",
+              name: "useJurorPhoneDetails",
+              errorMessage: radiosPhoneError,
+              items: [
+                {
+                  id: "phoneNumber_existing",
+                  name: "useJurorPhoneDetails",
+                  value: "No" ,
+                  text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.PHONE_USE_PREVIOUS,
+                  checked: radioPhoneExisitingChecked
+                },
+                {
+                  id: "phoneNumber_new",
+                  name: "useJurorPhoneDetails",
+                  value: "Yes",
+                  text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.PHONE_GIVE_NEW,
+                  checked: radioPhoneNewChecked,
+                  conditional: {
+                    html: phoneDetailsHTML
+                  }
+                }
+              ]
+            }) }}
+            
+
+            {# Email options #}
+            <h3 class="govuk-heading-s">
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL }}
+            </h3>
+            <p class="govuk-body">
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_PARAGRAPH }}
+            </p>
+
+
+            
+            {{ govukRadios({
+              id: "useJurorEmailDetails",
+              name: "useJurorEmailDetails",
+              errorMessage: radiosEmailError,
+              items: [
+                {
+                  id: "emailAddress_existing",
+                  name: "useJurorEmailDetails",
+                  value: "No" ,
+                  text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_USE_PREVIOUS,
+                  checked: radioEmailExisitingChecked
+                },
+                {
+                  id: "emailAddress_new",
+                  name: "useJurorEmailDetails",
+                  value: "Yes",
+                  text: texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_GIVE_NEW,
+                  checked: radioEmailNewChecked,
+                  conditional: {
+                    html: emailDetailsHTML
+                  }
+                }
+              ]
+            }) }}
+            
+
+          </fieldset>
+        
+        </div>
+
+        <details class="govuk-details ga-problems-with-details" data-module="govuk-details">
+          <summary class="govuk-details__summary ga-third-party-contact-details">
+            <span class="govuk-details__summary-text ga-third-party-contact-details">
+                {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_HELPER_TITLE }}
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            <p>
+              {{ texts.ON_BEHALF.THIRD_PARTY_CONTACT_DETAILS.EMAIL_HELPER_TEXT }}
+            </p>
+          </div>
+        </details>
+
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
