@@ -1,0 +1,21 @@
+{
+  "HEADING": "Gwiriwch eich dyddiad dechrau",
+  "HEADING_OB": "Gwiriwch eich dyddiad dechrau",
+
+  "PANEL_INTRO": "Rydych wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar",
+  "PANEL_INTRO_OB": "Mae'r unigolyn yr ydych chi'n ateb ar ei ran wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar",
+  "AT": "yn",
+  "DATE_CONFIRMATION_QUESTION": "Ydych chi'n gallu dechrau gwasanaeth rheithgor ar y dyddiad hwn?",
+  "DATE_CONFIRMATION_QUESTION_OB": "Ydi'r unigolyn yn gallu dechrau gwasanaeth rheithgor ar y dyddiad hwn?",
+
+  "ANSWER_YES_1": "Ydw, rydw i'n gallu dechrau ar ",
+  "ANSWER_YES_2": " a gwasanaethu am o leiaf pythefnos",
+  "ANSWER_YES_1_OB": "Ydi, mae'r unigolyn yn gallu dechrau ar ",
+  "ANSWER_YES_2_OB": " a gwasanaethu am o leiaf pythefnos",
+
+  "ANSWER_DEFERRAL": "Nac ydw, hoffwn newid y dyddiad",
+  "ANSWER_DEFERRAL_OB": "Nac ydi, rhaid newid y dyddiad",
+  
+  "ANSWER_EXCUSAL": "Nac ydw, ni allaf wasanaethu ar reithgor a hoffwn gael fy esgusodi",
+  "ANSWER_EXCUSAL_OB": "Nac ydi, ni all yr unigolyn wasanaethu ar reithgor a rhaid esgusodi"
+}

@@ -1,0 +1,109 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+    {{ texts.DEFERRAL_PAGE.REASON.REASON_HEADING_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+    {{ texts.DEFERRAL_PAGE.REASON.REASON_HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Deferral{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+    <form class="govuk-form" action="{{ url('steps.confirm.date.deferral.post') }}" method="post">
+        
+        {# Set label text #}
+        {% if user.thirdParty == 'Yes' %} 
+          {% set reasonLabel = texts.DEFERRAL_PAGE.REASON.REASON_HEADING_OB %}
+        {% else %}
+          {% set reasonLabel = texts.DEFERRAL_PAGE.REASON.REASON_HEADING %}
+        {% endif %}
+
+        {# Set hint text #}
+        {% set reasonHint %}
+          <p class="govuk-body">
+            {% if user.thirdParty == 'Yes' %}
+              {{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_INFO_OB }}
+            {% else %}
+              {{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_INFO }}
+            {% endif %}
+          </p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>{{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_LIST_ITEM_1 }}</li>
+            <li>{{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_LIST_ITEM_2 }}</li>
+            <li>{{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_LIST_ITEM_3 }}</li>
+            {% if user.thirdParty == 'Yes' %}
+              <li>{{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_LIST_ITEM_4_OB }}</li>
+            {% else %} 
+              <li>{{ texts.DEFERRAL_PAGE.REASON.ACCEPTABLE_LIST_ITEM_4 }}</li>
+            {% endif %} 
+          </ul>
+          {% if user.thirdParty == 'Yes' %} 
+            {{ govukInsetText({
+              text: texts.DEFERRAL_PAGE.REASON.REASON_FIELD_HINT_OB
+            }) }}
+          {% else %}
+            {{ govukInsetText({
+              text: texts.DEFERRAL_PAGE.REASON.REASON_FIELD_HINT
+            }) }}
+          {% endif %}
+        {% endset %}
+
+
+        {# Set deferral reason error #}
+        {% set deferralReasonError = undefined %}
+        {% if errors.items['deferralReason']%}
+          {% set deferralReasonError = {"text": errors.items['deferralReason'][0].details} %}
+        {% endif %}
+
+        <div class="govuk-form-group" id="deferralReasonGroup">
+          {{ govukCharacterCount({   
+            name: "deferralReason",
+            id: "deferralReason",
+            label: {
+              text: reasonLabel,
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              html: reasonHint
+            },
+            maxlength: "1000",
+            rows: "4",
+            errorMessage: deferralReasonError,
+            value: user.deferral.reason
+          }) }}
+        </div>
+
+      {# Submit form #}
+      {{ govukButton({
+        text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+      }) }}
+
+      <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+      
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

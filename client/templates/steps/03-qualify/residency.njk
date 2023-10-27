@@ -1,0 +1,150 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+    {{ texts.QUALIFY_PAGE.RESIDENCY_TITLE_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+    {{ texts.QUALIFY_PAGE.RESIDENCY_TITLE }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Eligibility Residency{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  {# set first/third content #}
+  {% if user.thirdParty == 'Yes' %}
+    {% set radioYesLabel = texts.QUALIFY_PAGE.RESIDENCY_YES_OB %}
+    {% set radioNoLabel = texts.QUALIFY_PAGE.RESIDENCY_NO_OB %}
+    {% set captionText = texts.QUALIFY_PAGE.CAPTION_OB %}
+    {% set titleText = texts.QUALIFY_PAGE.RESIDENCY_TITLE_OB %}
+    {% set detailsLabelText = texts.QUALIFY_PAGE.RESIDENCY_DETAILS_LABEL_OB %}
+  {% else %}
+    {% set radioYesLabel = texts.QUALIFY_PAGE.RESIDENCY_YES %}
+    {% set radioNoLabel = texts.QUALIFY_PAGE.RESIDENCY_NO %}
+    {% set captionText = texts.QUALIFY_PAGE.CAPTION %}
+    {% set titleText = texts.QUALIFY_PAGE.RESIDENCY_TITLE %}
+    {% set detailsLabelText = texts.QUALIFY_PAGE.RESIDENCY_DETAILS_LABEL %}
+  {% endif %}
+
+  {# Set radio values #}
+  {% if user.qualify.livedConsecutive.answer === texts.QUALIFY_PAGE.YES %}
+    {% set radioYesChecked = 'checked="checked"' %}
+  {% else %}
+    {% set radioYesChecked = undefined %}
+  {% endif %}
+  {% if user.qualify.livedConsecutive.answer === texts.QUALIFY_PAGE.NO %}
+    {% set radioNoChecked = 'checked="checked"' %}
+  {% else %}
+    {% set radioNoChecked = undefined %}
+  {% endif %}
+
+  {# Set radio errors #}
+  {% set radioAnswerError = undefined %}
+  {% set radioDetailsError = undefined %}
+  {% if errors.items['livedConsecutive']%}
+    {% set radioAnswerError = {"text": errors.items['livedConsecutive'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+  {% endif %}
+  {% if errors.items['livedConsecutiveDetails']%}
+    {% set radioDetailsError = {"text": errors.items['livedConsecutiveDetails'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+  {% endif %}
+
+  {# set Legend HTML #}
+  {% set legendHTML %}
+    <span class="govuk-caption-l">
+      {{- captionText -}}
+    </span>
+    {{- titleText -}}
+  {% endset %}
+
+  {# set Details HTML #}
+  {% set detailsHTML %}
+    {{ govukCharacterCount({
+      name: "livedConsecutiveDetails",
+      id: "livedConsecutiveDetails",
+      maxlength: "1000",
+      label: {
+        text: detailsLabelText,
+        classes: "govuk-body",
+        isPageHeading: false
+      },
+      errorMessage: radioDetailsError,
+      value: user.qualify.livedConsecutive.details
+    }) }}
+  {% endset %}
+
+  {# set radio group class #}
+  {% if radioAnswerError or radioDetailsError %}
+    {% set radioGroupClass = "govuk-form-group--error" %}
+  {% else %}
+    {% set radioGroupClass = undefined %}
+  {% endif %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('steps.qualify.residency.post') }}" method="post">
+
+        {{ govukRadios({
+          idPrefix: "livedConsecutive",
+          name: "livedConsecutive",
+          errorMessage: radioAnswerError,
+          formGroup: {
+            id: "livedConsecutiveGroup",
+            classes: radioGroupClass
+          },
+          fieldset: {
+            legend: {
+              html: legendHTML,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: texts.QUALIFY_PAGE.YES,
+              text: radioYesLabel,
+              checked: radioYesChecked,
+              id: "livedConsecutive-Yes"
+            },
+            {
+              value: texts.QUALIFY_PAGE.NO,
+              text: radioNoLabel,
+              checked: radioNoChecked,
+              id: "livedConsecutive-No",
+              conditional: {
+                html: detailsHTML
+              }
+            }
+          ]
+        }) }}
+
+        {% include "./residency-info.njk" %}
+        
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" id="_csrf" value="{{ csrftoken }}">
+        <input type="hidden" id="store_url" value="{{ url('steps.qualify.store') }}">
+        
+      </form>
+
+  </div>
+</div>
+
+{% endblock %}

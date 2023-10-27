@@ -1,0 +1,27 @@
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary ga-details-mh-capacity">
+    <span class="govuk-details__summary-text ga-details-mh-capacity">
+      {{ texts.INFO_PAGE.MENTAL_HEALTH.DETAILS_HEADING }}
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+
+    <div class="govuk-body">
+      {# 1st and 3rd party #}
+      <p>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_1}}</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_LIST_1}}</li>
+        <li>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_LIST_2}}</li>
+        <li>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_LIST_3}}</li>
+      </ul>
+
+      <p>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_2}}</p>
+      <p>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_3}}</p>
+      <p>{{texts.INFO_PAGE.MENTAL_HEALTH.CAPACITY.SECTION_1_4}}</p>
+    </div>
+
+  </div>
+</details>

@@ -1,0 +1,159 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {{ texts.ON_BEHALF.THIRD_PARTY_REASON.HEADER }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}3rd Party Reason{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('branches.third.party.reason.post') }}" method="POST">
+
+        {# Set Not Here radio checked #}
+        {% if user.thirdPartyDetails.thirdPartyReason === 'nothere' %}
+          {% set radioNotHereChecked = true %}
+        {% else %}
+          {% set radioNotHereChecked = false %}
+        {% endif %}
+
+        {# Set Assistance radio checked #}
+        {% if user.thirdPartyDetails.thirdPartyReason === 'assistance' %}
+          {% set radioAssistanceChecked = true %}
+        {% else %}
+          {% set radioAssistanceChecked = false %}
+        {% endif %}
+
+        {# Set Deceased radio checked #}
+        {% if user.thirdPartyDetails.thirdPartyReason === 'deceased' %}
+          {% set radioDeceasedChecked = true %}
+        {% else %}
+          {% set radioDeceasedChecked = false %}
+        {% endif %}
+
+        {# Set Other radio checked #}
+        {% if user.thirdPartyDetails.thirdPartyReason === 'other' %}
+          {% set radioOtherChecked = true %}
+        {% else %}
+          {% set radioOtherChecked = false %}
+        {% endif %}
+
+        {# Set radio answer error #}
+        {% if errors.items['thirdPartyReason'] %}
+          {% set radioAnswerError = {"text": errors.items['thirdPartyReason'][0].details} %}
+        {% else %}
+          {% set radioAnswerError = undefined %}
+        {% endif %}
+
+        {# Set other reason details error #}
+        {% if errors.items['thirdPartyOtherReason'] %}
+          {% set otherReasonDetailsError = {"text": errors.items['thirdPartyOtherReason'][0].details} %}
+        {% else %}
+          {% set otherReasonDetailsError = undefined %}
+        {% endif %}
+
+        {# Set Other details HTML #}
+        {% set otherDetailsHTML %}
+            {{ govukCharacterCount({
+              name: "thirdPartyOtherReason",
+              id: "thirdPartyOtherReason",
+              maxlength: "100",
+              label: {
+                text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.OTHER_INFO
+              },
+              rows: "3",
+              classes: "govuk-!-width-two-thirds",
+              errorMessage: otherReasonDetailsError,
+              value: user.thirdPartyDetails.thirdPartyOtherReason
+            }) }}
+        {% endset %}
+
+        <div class="govuk-form-group {% if errors.items['thirdPartyReason'] or errors.items['thirdPartyOtherReason'] %}govuk-form-group--error{% endif %}" id="thirdPartyReasonGroup">
+          
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                {{- texts.ON_BEHALF.THIRD_PARTY_REASON.HEADER -}}
+              </h1>
+            </legend>
+
+            {{ govukRadios({
+              id: "thirdPartyReason",
+              name: "thirdPartyReason",
+              hint: {
+                html: infoLinkHtml
+              },
+              errorMessage: radioAnswerError,
+              items: [
+                {
+                  id: "thirdPartyReasonNotHere",
+                  name: "thirdPartyReason",
+                  value: "nothere",
+                  text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.NOT_HERE,
+                  hint: {
+                    text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.NOT_HERE_HELP
+                  },
+                  checked: radioNotHereChecked
+                },
+                {
+                  id: "thirdPartyReasonAssistance",
+                  name: "thirdPartyReason",
+                  value: "assistance",
+                  text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.REQUIRE_ASSISTANCE,
+                  hint: {
+                    text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.REQUIRE_ASSISTANCE_HELP
+                  },
+                  checked: radioAssistanceChecked
+                },
+                {
+                  id: "thirdPartyReasonDeceased",
+                  name: "thirdPartyReason",
+                  value: "deceased",
+                  text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.DECEASED,
+                  checked: radioDeceasedChecked
+                },
+                {
+                  id: "thirdPartyReasonOther",
+                  name: "thirdPartyReason",
+                  value: "other",
+                  text: texts.ON_BEHALF.THIRD_PARTY_REASON.REASONS.OTHER,
+                  checked: radioOtherChecked,
+                  conditional: {
+                    html: otherDetailsHTML
+                  }
+                }
+              ]
+            }) }}
+
+          </fieldset>
+        </div>
+
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{csrftoken}}">
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

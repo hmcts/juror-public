@@ -1,0 +1,49 @@
+{
+  "HEADING": "Eich manylion rheithiwr",
+  "HEADING_OB": "Ei fanylion rheithiwr",
+
+  "SAMPLE_TITLE": "Gellir dod o hyd i'ch rhif rheithiwr ar eich llythyr gwŷs rheithgor, fel y dangosir yn y ddelwedd isod.",
+  "SAMPLE_TITLE_OB": "Gellir dod o hyd i'r rhif rheithiwr ar y llythyr gwŷs rheithgor, fel y dangosir yn y ddelwedd isod.",
+  "SAMPLE_IMAGE_ALT": "Gellir dod o hyd i'r rhif rheithiwr ar frig y llythyr gwŷs",
+  "IMAGE_TITLE": "Gellir dod o hyd i'r rhif rheithiwr ar frig y llythyr gwŷs",
+
+  "FIELD_JUROR_NUMBER_TITLE": "Rhif rheithiwr – 9 digid",
+  "FIELD_JUROR_NUMBER_HINT": "Gallwch ddod o hyd i'ch rhif rheithiwr ar eich llythyr gwŷs rheithgor.",
+  "FIELD_JUROR_NUMBER_HINT_OB": "Gallwch ddod o hyd i'r rhif rheithiwr ar y llythyr gwŷs rheithgor.",
+
+  "GUIDANCE_TITLE": "Nid oes gennyf rif rheithiwr",
+  "GUIDANCE_TITLE_OB": "Nid oes gennyf rif rheithiwr ar gyfer yr unigolyn",
+  "GUIDANCE_INTRO": "Os nad oes gennych rif rheithiwr, cysylltwch â:",
+  "GUIDANCE_INTRO_OB": "Os nad oes gennych rif rheithiwr ar gyfer yr unigolyn rydych yn ymateb ar ei ran, cysylltwch â'r:",
+
+  "GUIDANCE_COMPANY_NAME": "Swyddfa Ganolog Gwysio Rheithgor",
+  "GUIDANCE_OPENING_TIMES": "Dydd Llun i Ddydd Iau 9am – 5pm",
+  "GUIDANCE_OPENING_TIMES_FRIDAY": "Dydd Gwener 9am – 3pm",
+  "GUIDANCE_CALL_CHARGE_LABEL": "Canfod mwy am gostau galwadau",
+  "GUIDANCE_CALL_CHARGE_LINK": "https://www.gov.uk/costau-galwadau",
+  "GUIDANCE_ADDRESS_LINE_1": "Swyddfa Ganolog Gwysio Rheithgor",
+  "GUIDANCE_ADDRESS_LINE_2": "Phoenix House",
+  "GUIDANCE_ADDRESS_LINE_3": "Rushton Avenue",
+  "GUIDANCE_ADDRESS_LINE_4": "Bradford",
+  "GUIDANCE_ADDRESS_LINE_5": "BD3 7BH",
+
+  "FIELD_LAST_NAME_TITLE": "Cyfenw'r Rheithiwr",
+  "FIELD_LAST_NAME_HINT": "Rhowch eich enw olaf fel y mae wedi'i nodi ar y llythyr gwŷs rheithgor, hyd yn oed os yw'n anghywir. Gallwch ei newid nes ymlaen.",
+  "FIELD_LAST_NAME_HINT_OB": "Rhowch enw olaf yr unigolyn fel y mae wedi'i nodi ar eu llythyr gwŷs rheithgor, hyd yn oed os yw'n anghywir. Gallwch ei newid nes ymlaen.",
+
+  "FIELD_POSTCODE_TITLE": "Cod post Rheithiwr",
+  "FIELD_POSTCODE_HINT": "Rhowch eich cod post fel y mae wedi'i nodi ar y llythyr gwŷs rheithgor, hyd yn oed os yw'n anghywir. Gallwch ei newid nes ymlaen.",
+  "FIELD_POSTCODE_HINT_OB": "Rhowch eu cod post fel y mae wedi'i nodi ar eu llythyr gwŷs rheithgor, hyd yn oed os yw'n anghywir. Gallwch ei newid nes ymlaen.",
+
+  "FIELD_THIRD_PARTY_LABEL": "Rwy'n ymateb ar ran rhywun arall",
+
+  "FURTHER_GUIDANCE_TITLE": "Problemau wrth nodi eich manylion?",
+  "FURTHER_GUIDANCE_TITLE_OB": "Problemau wrth nodi eu manylion?",
+
+  "FURTHER_GUIDANCE_INTRO": "Os ydych wedi gwirio'ch manylion a’ch bod dal methu parhau, gallwch gysylltu â ni.",
+  "FURTHER_GUIDANCE_INTRO_OB":"Os ydych wedi gwirio eu manylion a’ch bod dal methu parhau, gallwch gysylltu â ni.",
+
+  "ALREADY_REPLIED_TITLE": "Mae ein cofnodion yn dangos eich bod eisoes wedi ymateb i'r wŷs rheithgor hon",
+  "ALREADY_REPLIED_GUIDANCE": "Os ydych eisiau dweud wrthym am newidiadau neu os ydym wedi gofyn am ragor o wybodaeth gennych, mae angen ichi gysylltu â ni ar e-bost, dros y ffôn neu lythyr.",
+  "ALREADY_REPLIED_INSET": "Ni allwch ddefnyddio'r gwasanaeth digidol hwn i roi gwybodaeth ychwanegol i ni."
+}

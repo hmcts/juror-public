@@ -1,0 +1,6 @@
+.git
+.github
+infrastructure
+node_modules
+Jenkinsfile*
+README.md

@@ -1,0 +1,113 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+    {{ texts.EXCUSAL_PAGE.HEADING_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+    {{ texts.EXCUSAL_PAGE.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Excusal{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('steps.confirm.date.excusal.post') }}" method="post">
+
+        {# Set hint text #}
+        {% set reasonHintHTML %}
+          {% if user.thirdParty == 'Yes' %}
+            {{texts.EXCUSAL_PAGE.HINT_1_OB}}<br/>
+            {{texts.EXCUSAL_PAGE.HINT_2_OB}}
+          {% else %}
+            {{texts.EXCUSAL_PAGE.HINT_1}}<br/>
+            {{texts.EXCUSAL_PAGE.HINT_2}}
+          {% endif %}
+        {% endset %}
+
+        {# Set label text #}
+        {% if user.thirdParty == 'Yes' %}
+          {% set labelText = texts.EXCUSAL_PAGE.HEADING_OB %}
+        {% else %}
+          {% set labelText = texts.EXCUSAL_PAGE.HEADING %}
+        {% endif %}
+
+        {# Set excusal details error #}
+        {% set excusalReasonError = undefined %}
+        {% if errors.items['excusalReason']%}
+          {% set excusalReasonError = {"text": errors.items['excusalReason'][0].details} %}
+        {% endif %}
+
+        <div class="govuk-form-group" id="excusalReasonGroup">
+          {{ govukCharacterCount({
+            name: "excusalReason",
+            id: "excusalReason",
+            maxlength: "1000",
+            label: {
+              text: labelText,
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              html: reasonHintHTML
+            },
+            rows: "4",
+            errorMessage: excusalReasonError,
+            value: user.excusal.reason
+          }) }}
+        </div>
+
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary ga-details-excusal-evidence">
+            <span class="govuk-details__summary-text ga-details-excusal-evidence">
+              {% if user.thirdParty == 'Yes' %}
+                {{ texts.EXCUSAL_PAGE.EVIDENCE_QUESTION_OB }}
+              {% else %}
+                {{ texts.EXCUSAL_PAGE.EVIDENCE_QUESTION }}
+              {% endif %}
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            {% if user.thirdParty == 'Yes' %}
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_1_OB }}</p>
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_2_OB }}</p>
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_3_OB }}</p>
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_4_OB }}</p>
+            {% else %}
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_1 }}</p>
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_2 }}</p>
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_3 }}</p>
+              <p>{{ texts.EXCUSAL_PAGE.EVIDENCE_GUIDANCE_4 }}</p>
+            {% endif %}
+          </div>
+        </details>
+
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+      </form>
+
+  </div>
+</div>
+
+{% endblock %}

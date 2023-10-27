@@ -1,0 +1,59 @@
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+<div class="govuk-panel govuk-panel--confirmation">
+  <h1 class="govuk-panel__title">
+    {{ texts.CONFIRMATION.HERO.FINISHED }}
+  </h1>
+  <div class="govuk-panel__body">
+    <span>
+      {% if user.ineligibleDeceased == true %}
+        {{ texts.CONFIRMATION.DECEASED.REFERENCE }}<br>
+      {% elif user.thirdParty == 'Yes' %}
+        {{ texts.CONFIRMATION.HERO.YOUR_NUMBER_OB }}<br>
+      {% else %}
+        {{ texts.CONFIRMATION.HERO.YOUR_NUMBER }}<br>
+      {% endif %}
+      <strong>{{ user.jurorNumber }}</strong>
+    </span>
+  </div>
+</div>
+
+<p class="govuk-body">
+
+  {% if user.thirdParty == 'Yes'%}
+    {% if user.ineligibleDeceased == false %}
+      {{ texts.CONFIRMATION.HERO.GETTING_IN_TOUCH_OB }}
+    {% endif %}
+  {% else %}
+    {{ texts.CONFIRMATION.HERO.GETTING_IN_TOUCH }}
+  {% endif %}
+</p>
+
+<p class="govuk-body">
+  {% if user.thirdParty == 'Yes' %}
+    {{ texts.CONFIRMATION.HERO.EMAIL_SUMMONS_OB }}
+  {% else %}
+    {{ texts.CONFIRMATION.HERO.EMAIL_SUMMONS }}
+  {% endif %}
+</p>
+
+{% set PDFButtonText %}
+  <span class="govuk-visually-hidden">{{texts.CONFIRMATION.HERO.OPEN_PDF_HIDDEN}}</span>{{texts.CONFIRMATION.HERO.OPEN_PDF}}
+{% endset %}
+
+<a class="govuk-link ga-download-summons-reply-pdf" href="/steps/confirmation/download">{{PDFButtonText | safe}}</a>
+
+<br/>
+<br/>
+
+{% set HTMLButtonText %}
+  <span class="govuk-visually-hidden">{{texts.CONFIRMATION.HERO.OPEN_HTML_HIDDEN}}</span>{{texts.CONFIRMATION.HERO.OPEN_HTML}}
+{% endset %}
+
+<a class="govuk-link ga-download-summons-reply-html" href="/steps/confirmation/download-html">{{HTMLButtonText | safe}}</a>
+
+<br/>
+<br/>
+
+

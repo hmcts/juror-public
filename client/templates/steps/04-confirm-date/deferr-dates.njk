@@ -1,0 +1,158 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "./date-picker-macro.njk" import datePicker %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+    {{ texts.DEFERRAL_PAGE.DATES.HEADING_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+    {{ texts.DEFERRAL_PAGE.DATES.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Deferral Dates{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+<input type="hidden" name="_lang" id="_lang" value="{{ ulang }}">
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+    <form action="{{ url('steps.confirm.date.deferral-dates.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+      
+      <div class="govuk-form-group ">
+        
+        <h1 class="govuk-heading-l">
+          {% if user.thirdParty == 'Yes' %}
+            {{- texts.DEFERRAL_PAGE.DATES.HEADING_OB -}}
+          {% else %}
+            {{- texts.DEFERRAL_PAGE.DATES.HEADING -}}
+          {% endif %}
+        </h1>
+
+        <p class="govuk-body">{{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P1 }} {{deferralDateRange.earliestDateShort | translateDate("D MM YYYY", "D MMMM YYYY", texts.INTERFACE.HTML_LANG)}} {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_AND }} {{deferralDateRange.latestDateShort | translateDate("D MM YYYY", "D MMMM YYYY", texts.INTERFACE.HTML_LANG)}}</p>
+
+        <p class="govuk-body govuk-!-margin-bottom-6">
+          {% if user.thirdParty == 'Yes' %}
+            {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P2_OB }}
+          {% else %}
+            {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P2 }}
+          {% endif %}
+        </p>
+      
+        <div class="{% if errors.items['dates'] %}govuk-error{% endif %}" id="datesGroup">
+
+          {% set date1Error = undefined %}
+          {% if errors.items['date1'] %}
+            {% set date1Error = errors.items['date1'][0].summary %}
+          {% endif %}
+
+          {% set date2Error = undefined %}
+          {% if errors.items['date2'] %}
+            {% set date2Error = errors.items['date2'][0].summary %}
+          {% endif %}
+
+          {% set date3Error = undefined %}
+          {% if errors.items['date3'] %}
+            {% set date3Error = errors.items['date3'][0].summary %}
+          {% endif %}
+      
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              {{ datePicker({
+                id: "deferDate1",
+                lang: texts.INTERFACE.HTML_LANG,
+                label: texts.DEFERRAL_PAGE.DATES.DATE1_LABEL,
+                hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
+                dateMin: deferralDateRange.earliestDateShort,
+                dateMax: deferralDateRange.latestDateShort,
+                dateValue: user["deferDate1"],
+                dateError: date1Error
+              }) }}
+            </div>
+          </div>
+
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              {{ datePicker({
+                id: "deferDate2",
+                lang: texts.INTERFACE.HTML_LANG,
+                label: texts.DEFERRAL_PAGE.DATES.DATE2_LABEL,
+                hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
+                dateMin: deferralDateRange.earliestDateShort,
+                dateMax: deferralDateRange.latestDateShort,
+                dateValue: user["deferDate2"],
+                dateError: date2Error
+              }) }}
+            </div>
+          </div>
+
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              {{ datePicker({
+                id: "deferDate3",
+                lang: texts.INTERFACE.HTML_LANG,
+                label: texts.DEFERRAL_PAGE.DATES.DATE3_LABEL,
+                hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
+                dateMin: deferralDateRange.earliestDateShort,
+                dateMax: deferralDateRange.latestDateShort,
+                dateValue: user["deferDate3"],
+                dateError: date3Error
+              }) }}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      {# guidance details sections #}
+      {% include "./defer-guidance-1.njk" %}
+
+      {% include "./defer-guidance-2.njk" %}
+
+      {# Submit form #}
+      {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+      }) }}
+
+      <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+    </form>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+
+  <script type="text/javascript" src="{{ assetPath }}js/svgxuse.min.js"></script>
+
+  <script type="text/javascript" src="{{ assetPath }}js/ds-datepicker.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      const datePickers = [].slice.call(document.querySelectorAll('[data-module="ds-datepicker"]'));
+      datePickers.forEach(datePicker => new DSDatePicker(datePicker, 
+        {imagePath: '{{ assetPath }}assets/images/icons/'
+        }).init());
+
+    });
+  </script>
+
+{% endblock %}

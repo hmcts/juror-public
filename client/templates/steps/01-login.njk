@@ -1,0 +1,229 @@
+{% extends "../layouts/default-gds.njk" %}
+
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+  {{ texts.LOGIN_PAGE.HEADING_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+  {{ texts.LOGIN_PAGE.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Login{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+  
+  {% include "../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('steps.login.post') }}" method="POST" id="login-form" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {# Set Juror Number error #}
+        {% if errors.items['jurorNumber'] %}
+          {% set jurorNumberError = {"text": errors.items['jurorNumber'][0].details} %}
+        {% else %}
+          {% set jurorNumberError = undefined %}
+        {% endif %}
+
+        {# set Last Name error #}
+        {% if errors.items['jurorLastName'] %}
+          {% set lastNameError = {"text": errors.items['jurorLastName'][0].details} %}
+        {% else %}
+          {% set lastNameError = undefined %}
+        {% endif %}
+
+        {# Set Postcode error #}
+        {% if errors.items['jurorPostcode'] %}
+          {% set postcodeError = {"text": errors.items['jurorPostcode'][0].details} %}
+        {% else %}
+          {% set postcodeError = undefined %}
+        {% endif %}
+
+        {# Set Last Name hint #}
+        {% if user.thirdParty == 'Yes' %}
+          {% set lastNameHintText = texts.LOGIN_PAGE.FIELD_LAST_NAME_HINT_OB %}
+        {% else %}
+          {% set lastNameHintText = texts.LOGIN_PAGE.FIELD_LAST_NAME_HINT %}
+        {% endif %}
+
+        {# Set Postcode hint #}
+        {% if user.thirdParty == 'Yes' %}
+          {% set postcodeHintText = texts.LOGIN_PAGE.FIELD_POSTCODE_HINT_OB %}
+        {% else %}
+          {% set postcodeHintText = texts.LOGIN_PAGE.FIELD_POSTCODE_HINT %}
+        {% endif %}
+
+        {# Set Juror Number hint #}
+        {% if user.thirdParty == 'Yes' %}
+          {% set jurorNumberHintText = texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT_OB %}
+        {% else %}
+          {% set jurorNumberHintText = texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT %}
+        {% endif %}
+        
+
+        <div class="govuk-form-group {% if jurorNumberError or lastNameError or postcodeError %}govuk-form-group--error{% endif %}" id="loginGroup">
+
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                <span>
+                  {% if user.thirdParty == 'Yes' %}
+                    {{- texts.LOGIN_PAGE.HEADING_OB -}}
+                  {% else %}
+                    {{- texts.LOGIN_PAGE.HEADING -}}
+                  {% endif %}
+                </span>
+              </h1>
+            </legend>
+              
+            {# Juror number example image #}
+            {% if user.thirdParty == 'Yes' %}
+              <img src="/assets/images/juror-number-example-1x.png" alt="{{ texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT_OB }}" title="{{ texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT_OB }}">
+            {% else %}
+              <img src="/assets/images/juror-number-example-1x.png" alt="{{ texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT }}" title="{{ texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT }}">
+            {% endif %}
+            <br><br>
+
+            {# Juror Number #}
+            {{ govukInput({
+              label: {
+                text: texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_TITLE
+              },
+              hint: {
+                text: jurorNumberHintText
+              },
+              classes: "govuk-!-width-one-third",
+              id: "jurorNumber",
+              name: "jurorNumber",
+              type: "number",
+              pattern: "[0-9]*",
+              autocomplete: "off",
+              errorMessage: jurorNumberError,
+              attributes: {
+                inputmode: "numeric",
+                minlength: "9",
+                maxlength: "9"
+              }
+            }) }}
+
+            <details class="govuk-details ga-no-juror-number" data-module="govuk-details">
+
+              <summary class="govuk-details__summary ga-details-no-juror-number">
+                <span class="govuk-details__summary-text ga-details-no-juror-number">
+                  {% if user.thirdParty == 'Yes' %}
+                    {{ texts.LOGIN_PAGE.GUIDANCE_TITLE_OB }}
+                    {% else %}
+                    {{ texts.LOGIN_PAGE.GUIDANCE_TITLE }}
+                    {% endif %}
+                </span>
+              </summary>
+              
+              <div class="govuk-details__text">
+                <p>
+                  {% if user.thirdParty == 'Yes' %}
+                  {{ texts.LOGIN_PAGE.GUIDANCE_INTRO_OB }}
+                  {% else %}
+                  {{ texts.LOGIN_PAGE.GUIDANCE_INTRO }}
+                  {% endif %}
+                </p>
+                <p>
+                  {% include "../includes/contact-details.njk" %}
+                </p>
+                <p>
+                  {% include "../includes/contact-address.njk" %}
+                </p>
+              </div>
+            </details>
+
+            {# Last Name #}
+            {{ govukInput({
+              label: {
+                text: texts.LOGIN_PAGE.FIELD_LAST_NAME_TITLE
+              },
+              hint: {
+                text: lastNameHintText
+              },
+              classes: "govuk-!-width-one-third",
+              id: "jurorLastName",
+              name: "jurorLastName",
+              autocomplete: "off",
+              errorMessage: lastNameError,
+              attributes: {
+                maxlength: "20"
+              }
+            }) }}
+
+            {# Postcode #}
+            {{ govukInput({
+              label: {
+                text: texts.LOGIN_PAGE.FIELD_POSTCODE_TITLE
+              },
+              hint: {
+                text: postcodeHintText
+              },
+              classes: "govuk-!-width-one-third",
+              id: "jurorPostcode",
+              name: "jurorPostcode",
+              autocomplete: "off",
+              errorMessage: postcodeError
+            }) }}
+
+          </fieldset>
+
+        </div>
+
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <details class="govuk-details ga-problems-with-details" data-module="govuk-details">
+
+          <summary class="govuk-details__summary ga-details-problems-with-details">
+            <span class="govuk-details__summary-text ga-details-problems-with-details">
+              {% if user.thirdParty == 'Yes' %}
+                {{ texts.LOGIN_PAGE.FURTHER_GUIDANCE_TITLE_OB }}
+                {% else %}
+                {{ texts.LOGIN_PAGE.FURTHER_GUIDANCE_TITLE }}
+                {% endif %}
+            </span>
+          </summary>
+          
+          <div class="govuk-details__text">
+            <p>
+              {% if user.thirdParty == 'Yes' %}
+              {{ texts.LOGIN_PAGE.FURTHER_GUIDANCE_INTRO_OB }}
+              {% else %}
+              {{ texts.LOGIN_PAGE.FURTHER_GUIDANCE_INTRO }}
+              {% endif %}
+            </p>
+
+            <p>
+              {% include "../includes/contact-details.njk" %}
+            </p>
+
+          </div>
+
+        </details>
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+      </form>
+      
+    </div>
+  </div>
+
+{% endblock %}

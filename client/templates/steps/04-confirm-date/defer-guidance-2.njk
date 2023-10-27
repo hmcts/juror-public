@@ -1,0 +1,30 @@
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+{# guidance details 2 #}
+
+{% if user.thirdParty == 'Yes' %}
+  {% set guidanceSummary%}
+    {{ texts.DEFERRAL_PAGE.GUIDANCE_SUMMARY_2_OB | safe }}
+  {% endset %}
+  {% set guidanceText %}
+    <p>{{ texts.DEFERRAL_PAGE.GUIDANCE_DETAIL_2_P1_OB }}</p>
+  {% endset %}
+{% else %}
+  {% set guidanceSummary %}
+    {{ texts.DEFERRAL_PAGE.GUIDANCE_SUMMARY_2 | safe }}
+  {% endset %}
+  {% set guidanceText %}
+    <p>{{ texts.DEFERRAL_PAGE.GUIDANCE_DETAIL_2_P1 }}</p>
+  {% endset %}
+{% endif %}
+
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary ga-details-confirm-date-2">
+    <span class="govuk-details__summary-text ga-details-confirm-date-2">
+      {{ guidanceSummary | safe }}
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    {{ guidanceText | safe }}
+  </div>
+</details>

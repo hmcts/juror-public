@@ -1,0 +1,31 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% block pageTitle %}
+  {{ texts.CONFIRMATION.TITLE }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Confirmation Deceased{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "./_hero.njk" %}
+
+      <br/><br/>
+      
+      <h2 class="govuk-heading-l">{{ texts.CONFIRMATION.DECEASED.NO_ACTION }}</h2>
+
+      <h2 class="govuk-heading-m">{{ texts.CONFIRMATION.DECEASED.APOLOGY }}</h2>
+      <p class="govuk-body">
+        {{ texts.CONFIRMATION.DECEASED.APOLOGY_INFO }}
+      </p>
+
+      {% include "../../includes/feedback.njk" %}
+
+    </div>
+
+  </div>
+
+{% endblock %}

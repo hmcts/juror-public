@@ -1,0 +1,110 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {{ texts.YOUR_DETAILS_PAGE.HEADING_PHONE }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Personal Details Phone{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('steps.your.details.phone.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {# Set Primary Phone error #}
+        {% if errors.items['primaryPhone'] %}
+          {% set primaryPhoneError = {"text": errors.items['primaryPhone'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% else %}
+          {% set primaryPhoneError = undefined %}
+        {% endif %}
+
+        {# Set Secondary Phone error #}
+        {% if errors.items['secondaryPhone'] %}
+          {% set secondaryPhoneError = {"text": errors.items['secondaryPhone'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% else %}
+          {% set secondaryPhoneError = undefined %}
+        {% endif %}
+        
+        <div class="govuk-form-group {% if primaryPhoneError or secondaryPhoneError %}govuk-form-group--error{% endif %}" id="phoneGroup">
+           
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                <span class="govuk-caption-l">
+                  {{- texts.YOUR_DETAILS_PAGE.CAPTION -}}
+                </span>
+                {{- texts.YOUR_DETAILS_PAGE.HEADING_PHONE -}}
+              </h1>
+            </legend>
+            
+            <p id="phone-hint" class="govuk-body">
+              {{ texts.YOUR_DETAILS_PAGE.FORM_PHONE_DESCRIPTION }}
+            </p>
+
+            {# Primary Phone #}
+            {{ govukInput({
+              label: {
+                html: texts.YOUR_DETAILS_PAGE.FORM_PHONE_PRIMARY_LABEL
+              },
+              id: "primaryPhone",
+              name: "primaryPhone",
+              errorMessage: primaryPhoneError,
+              attributes: {
+                maxlength: "15",
+                inputmode: "numeric",
+                "aria-describedby": "phone-hint"
+              },
+              classes: "govuk-!-width-two-thirds",
+              autocomplete: "off",
+              value: user.primaryPhone
+            }) }}
+
+            {# Secondary Phone #}
+            {{ govukInput({
+              label: {
+                html: texts.YOUR_DETAILS_PAGE.FORM_PHONE_SECONDARY_LABEL
+              },
+              id: "secondaryPhone",
+              name: "secondaryPhone",
+              errorMessage: secondaryPhoneError,
+              attributes: {
+                maxlength: "15",
+                inputmode: "numeric",
+                "aria-describedby": "phone-hint"
+              },
+              classes: "govuk-!-width-two-thirds",
+              autocomplete: "off",
+              value: user.secondaryPhone
+            }) }}
+
+          </fieldset>
+
+        </div>
+
+        {# Submit form #}
+        {{ govukButton({
+            text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+        
+      </form>
+      
+    </div>
+  </div>
+
+{% endblock %}
