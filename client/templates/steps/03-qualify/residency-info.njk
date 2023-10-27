@@ -1,0 +1,71 @@
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary ga-details-residency">
+    <span class="govuk-details__summary-text ga-details-residency">
+      {{ texts.INFO_PAGE.RESIDENCY.DETAILS_HEADING }}
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+
+    <div class="govuk-body">
+      {% if user.thirdParty == 'Yes' %}
+        {# 3rd party #}
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_1_OB }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_LIST_1 }}</li>
+          <li>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_LIST_2 }}</li>
+          <li>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_LIST_3 }}</li>
+        </ul>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_2_OB }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_1_OB }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_2_OB }}</p>
+        <h3 class="govuk-heading-s">{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_3 }}</h3>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_4_OB }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_5_OB }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_1_OB }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_2_OB }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_3_OB }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.RESIDENCY.SECTION_4_HEADING_OB}}</h2>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_4_1_OB }}</p>
+
+      {% else %}
+        {# 1st person #}
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_1 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_LIST_1 }}</li>
+          <li>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_LIST_2 }}</li>
+          <li>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_LIST_3 }}</li>
+        </ul>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_1_2 }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_1 }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_2 }}</p>
+        <h3 class="govuk-heading-s">{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_3 }}</h3>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_4 }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_2_5 }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_1 }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_2 }}</p>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_3_3 }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.RESIDENCY.SECTION_4_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.RESIDENCY.SECTION_4_1 }}</p>
+
+      {% endif %}
+        {# contact details #}
+        <p>
+          {% include "../../includes/contact-details.njk" %}
+        </p>
+        
+    </div>
+
+  </div>
+</details>

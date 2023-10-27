@@ -1,0 +1,115 @@
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary ga-details-convictions">
+    <span class="govuk-details__summary-text ga-details-convictions">
+      {{ texts.INFO_PAGE.CONVICTIONS.DETAILS_HEADING }}
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+
+    <div class="govuk-body">
+      {% if user.thirdParty == 'Yes' %}
+        {# 3rd party #}
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_HEADING_OB }}</h2>
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_1_OB }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_LIST_1_OB }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_LIST_2_OB }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_LIST_3_OB }}</li>
+        </ul>
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_2_OB }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_HEADING_OB }}</h2>
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_1_OB }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_2 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_3 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_4 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_5 }}</li>
+        </ul>
+
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_2_OB }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_2_1_OB }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_2_2_OB }}</li>
+        </ul>
+
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_3_OB }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_2 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_3 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_4 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_5 }}</li>
+        </ul>
+
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_4_OB }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_4_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_4_2 }}</li>
+        </ul>
+
+        {{ govukWarningText({
+          text: texts.INFO_PAGE.CONVICTIONS.WARNING_OB,
+          iconFallbackText: texts.INFO_PAGE.CONVICTIONS.WARNING_FALLBACK
+        }) }}
+
+
+      {% else %}
+        {# 1st person #}
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_1 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_LIST_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_LIST_2 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_LIST_3 }}</li>
+        </ul>
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_1_2 }}</p>
+
+        <h2 class="govuk-heading-m">{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_HEADING }}</h2>
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_1 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_2 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_3 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_4 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_1_5 }}</li>
+        </ul>
+
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_2 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_2_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_2_2 }}</li>
+        </ul>
+
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_3 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_2 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_3 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_4 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_3_5 }}</li>
+        </ul>
+
+        <p>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_4 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_4_1 }}</li>
+          <li>{{ texts.INFO_PAGE.CONVICTIONS.SECTION_2_LIST_4_2 }}</li>
+        </ul>
+
+        {{ govukWarningText({
+          text: texts.INFO_PAGE.CONVICTIONS.WARNING,
+          iconFallbackText: texts.INFO_PAGE.CONVICTIONS.WARNING_FALLBACK
+        }) }}
+
+      {% endif %}
+
+    </div>
+
+  </div>
+</details>

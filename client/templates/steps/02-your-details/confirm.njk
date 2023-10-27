@@ -1,0 +1,101 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {% if user.thirdParty == 'Yes' %}
+  {{ texts.YOUR_DETAILS_CONFIRM_PAGE.HEADING_OB }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% else %}
+  {{ texts.YOUR_DETAILS_CONFIRM_PAGE.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {% endif %}
+{% endblock %}
+
+{% block page_identifier %}Confirm your date of birth{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  {# Set radio button error #}
+  {% set radioButtonError = undefined %}
+  {% if errors.items['dobConfirm']%}
+    {% set radioButtonError = {"text": errors.items['dobConfirm'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+  {% endif %}
+
+  {# Set legend text #}
+  {% if user.thirdParty == 'Yes' %}
+    {% set legendText = texts.YOUR_DETAILS_CONFIRM_PAGE.DOB_CONFIRM_MESSAGE_OB %}
+  {% else %}
+    {% set legendText = texts.YOUR_DETAILS_CONFIRM_PAGE.DOB_CONFIRM_MESSAGE %}
+  {% endif %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {% if user.thirdParty == 'Yes' %}
+          <span class="govuk-caption-l">{{- texts.YOUR_DETAILS_CONFIRM_PAGE.CAPTION_OB -}}</span>
+          {{- texts.YOUR_DETAILS_CONFIRM_PAGE.HEADING_OB -}}
+        {% else %}
+          <span class="govuk-caption-l">{{- texts.YOUR_DETAILS_CONFIRM_PAGE.CAPTION -}}</span>
+          {{- texts.YOUR_DETAILS_CONFIRM_PAGE.HEADING -}}
+        {% endif %}
+      </h1>
+
+      {% set translatedDate = formattedDob | translateDate('', 'DD MMMM YYYY', texts.INTERFACE.HTML_LANG) %}
+
+      {% if user.thirdParty == 'Yes' %}
+        <p class="govuk-body">{{ 'YOUR_DETAILS_CONFIRM_PAGE.DOB_CURRENT_VALUE_OB' | translate(texts, { formattedDob: translatedDate }) }}</p>
+        <p class="govuk-body">{{ 'YOUR_DETAILS_CONFIRM_PAGE.DOB_CURRENT_AGE_OB' | translate(texts, { currentAge: currentAge }) }}</p>
+      {% else %}
+        <p class="govuk-body">{{ 'YOUR_DETAILS_CONFIRM_PAGE.DOB_CURRENT_VALUE' | translate(texts, { formattedDob: translatedDate }) }}</p>
+        <p class="govuk-body">{{ 'YOUR_DETAILS_CONFIRM_PAGE.DOB_CURRENT_AGE' | translate(texts, { currentAge: currentAge }) }}</p>
+      {% endif %}
+
+      <form action="{{ url('steps.your.details.confirm.post') }}" method="post" id="confirmDOBForm" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {{ govukRadios({
+          name: "dobConfirm",
+          classes: "govuk-radios--inline",
+          fieldset: {
+            legend: {
+              text: legendText,
+              classes: "govuk-fieldset__legend--m",
+              isPageHeading: false
+            }
+          },
+          errorMessage: radioButtonError,
+          items: [
+            {
+              id: "dobConfirm-Yes",
+              value: texts.YOUR_DETAILS_PAGE.YES,
+              text: texts.YOUR_DETAILS_PAGE.FORM_CONFIRM_ADDRESS_YES
+            },
+            {
+              id: "dobConfirm-No",
+              value: texts.YOUR_DETAILS_PAGE.NO,
+              text: texts.YOUR_DETAILS_PAGE.FORM_CONFIRM_ADDRESS_NO
+            }
+          ]
+        }) }}
+
+        {# Submit form #}
+        {{ govukButton({
+            text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+      </form>
+      
+    </div>
+  </div>
+
+{% endblock %}

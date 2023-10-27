@@ -1,0 +1,21 @@
+{
+  "HEADING": "Check your start date",
+  "HEADING_OB": "Check your start date",
+  
+  "PANEL_INTRO": "You are summoned to start jury service on",
+  "PANEL_INTRO_OB": "The person you're replying for is summoned to start jury service on",
+  "AT": "at",
+  "DATE_CONFIRMATION_QUESTION": "Can you start jury service on this date?",
+  "DATE_CONFIRMATION_QUESTION_OB": "Can they start jury service on this date?",
+
+  "ANSWER_YES_1": "Yes, I can start on ",
+  "ANSWER_YES_2": " and serve for at least 2 weeks",
+  "ANSWER_YES_1_OB": "Yes, they can start on ",
+  "ANSWER_YES_2_OB": " and serve for at least 2 weeks",
+
+  "ANSWER_DEFERRAL": "No, I need to change the date ",
+  "ANSWER_DEFERRAL_OB": "No, we need to change the date",
+  
+  "ANSWER_EXCUSAL": "No, I cannot do jury service and need to be excused",
+  "ANSWER_EXCUSAL_OB": "No, they cannot do jury service and need to be excused"
+}

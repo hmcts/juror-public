@@ -1,0 +1,118 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {{ texts.YOUR_DETAILS_PAGE.HEADING_EMAIL }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Personal Details Email{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('steps.your.details.email.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {# Set Email Address error #}
+        {% if errors.items['emailAddress'] %}
+          {% set emailAddressError = {"text": errors.items['emailAddress'][0].details} %}
+        {% else %}
+          {% set emailAddressError = undefined %}
+        {% endif %}
+
+        {# Set Confirm Email Address error #}
+        {% if errors.items['emailAddressConfirmation'] %}
+          {% set emailAddressConfirmationError = {"text": errors.items['emailAddressConfirmation'][0].details, visuallyHiddenText: texts.ERRORS.HIDDEN_ERROR} %}
+        {% else %}
+          {% set emailAddressConfirmationError = undefined %}
+        {% endif %}
+
+        <div class="govuk-form-group {% if emailAddressError or emailAddressConfirmationError %}govuk-form-group--error{% endif %}" id="emailGroup">
+          
+          <fieldset class="govuk-fieldset">
+          
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                <span class="govuk-caption-l">
+                  {{- texts.YOUR_DETAILS_PAGE.CAPTION -}}
+                </span>
+                {{- texts.YOUR_DETAILS_PAGE.HEADING_EMAIL -}}
+              </h1>
+            </legend>
+
+            {# Email Address #}
+            {{ govukInput({
+              label: {
+                text: texts.YOUR_DETAILS_PAGE.FORM_EMAIL_LABEL
+              },
+              id: "emailAddress",
+              name: "emailAddress",
+              errorMessage: emailAddressError,
+              type: "email",
+              autocomplete: "off",
+              attributes: {
+                maxlength: "254",
+                spellcheck: "false"
+              },
+              classes: "govuk-!-width-two-thirds",
+              value: user.emailAddress
+            }) }}
+
+            {# Email Address Confirmation #}
+            {{ govukInput({
+              label: {
+                text: texts.YOUR_DETAILS_PAGE.FORM_EMAIL_CONFIRM_LABEL
+              },
+              id: "emailAddressConfirmation",
+              name: "emailAddressConfirmation",
+              errorMessage: emailAddressConfirmationError,
+              type: "email",
+              autocomplete: "off",
+              attributes: {
+                maxlength: "254",
+                spellcheck: "false"
+              },
+              classes: "govuk-!-width-two-thirds",
+              value: user.emailAddressConfirmation
+            }) }}
+
+          </fieldset>
+        </div>
+
+        {# Info about email address #}
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary ga-details-email-address">
+            <span class="govuk-details__summary-text ga-details-email-address">
+              {{- texts.YOUR_DETAILS_PAGE.FORM_EMAIL_HELPER_TITLE -}}
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            {{- texts.YOUR_DETAILS_PAGE.FORM_EMAIL_HELPER_PARAGRAPH_1 -}}
+          </div>
+        </details>
+
+        {# Submit form #}
+        {{ govukButton({
+            text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+        
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

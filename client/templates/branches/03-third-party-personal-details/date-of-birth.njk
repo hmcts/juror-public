@@ -1,0 +1,174 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.DOB_HEADER }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}3rd Party Personal Details Date Of Birth{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('branches.third.party.personal.details.date-of-birth.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {# Set Date of birth error #}
+        {% set dobError = undefined %}
+        {% if errors.items %}
+          {% set dobErrorHTML %}
+            {% if errors.items['dobDay'] %}
+              <span class="govuk-error-message dateOfBirthErrorMessage" id="dobDayErrorMessage">
+              <span class="govuk-visually-hidden">{{texts.ERRORS.TITLE_ERROR}}</span>{{ errors.items['dobDay'][0].details }}
+              </span>
+            {% endif %}
+            {% if errors.items['dobMonth'] %}
+              <span class="govuk-error-message dateOfBirthErrorMessage" id="dobMonthErrorMessage">
+              <span class="govuk-visually-hidden">{{texts.ERRORS.TITLE_ERROR}}</span>{{ errors.items['dobMonth'][0].details }}
+              </span>
+            {% endif %}
+            {% if errors.items['dobYear'] %}
+              <span class="govuk-error-message dateOfBirthErrorMessage" id="dobYearErrorMessage">
+              <span class="govuk-visually-hidden">{{texts.ERRORS.TITLE_ERROR}}</span>{{ errors.items['dobYear'][0].details }}
+              </span>
+            {% endif %}
+            {% if errors.items['dateOfBirth'] %}
+              <span class="govuk-error-message dateOfBirthErrorMessage" id="dateOfBirthErrorMessage">
+              <span class="govuk-visually-hidden">{{texts.ERRORS.TITLE_ERROR}}</span>{{ errors.items['dateOfBirth'][0].details }}
+              </span>
+            {% endif %}
+          {% endset %}
+          {% set dobError = {"html": dobErrorHTML} %}
+        {% endif %}
+
+        {% set dobDayClass = "govuk-input--width-2" %}
+        {% if errors.items['dobDay']  or errors.items['dateOfBirth'] %}
+            {% set dobDayClass = "govuk-input--width-2 govuk-input--error" %}
+        {% endif %}
+
+        {% set dobMonthClass = "govuk-input--width-2" %}
+        {% if errors.items['dobMonth']  or errors.items['dateOfBirth'] %}
+            {% set dobMonthClass = "govuk-input--width-2 govuk-input--error" %}
+        {% endif %}
+
+        {% set dobYearClass = "govuk-input--width-4" %}
+        {% if errors.items['dobYear'] or errors.items['dateOfBirth'] %}
+            {% set dobYearClass = "govuk-input--width-4 govuk-input--error" %}
+      {% endif %}
+
+        <div class="govuk-form-group {% if dobError %}govuk-form-group--error{% endif %}" id="dateOfBirthGroup">
+      
+          <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                <span class="govuk-caption-l">
+                  {{- texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.CAPTION -}}
+                </span>
+                {{- texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.DOB_HEADER -}}
+              </h1>
+            </legend>
+
+            {{ govukDateInput({
+              id: "dateOfBirth",
+              hint: {
+                text: texts.YOUR_DETAILS_PAGE.FORM_DOB_HELPER
+              },
+              errorMessage: dobError,
+              items: [
+                {
+                  id: "dobDay",
+                  name: "dobDay",
+                  classes: dobDayClass,
+                  autocomplete: "off",
+                  label: texts.YOUR_DETAILS_PAGE.FORM_DOB_DAY_LABEL,
+                  attributes: {
+                    min: "1",
+                    max: "31",
+                    minlength: "1",
+                    maxlength: "2"
+                  },
+                  value: user.dobDay
+                },
+                {
+                  id: "dobMonth",
+                  name: "dobMonth",
+                  classes: dobMonthClass,
+                  autocomplete: "off",
+                  label: texts.YOUR_DETAILS_PAGE.FORM_DOB_MONTH_LABEL,
+                  attributes: {
+                    min: "1",
+                    max: "12",
+                    maxlength: "2"
+                  },
+                  value: user.dobMonth
+                },
+                {
+                  id: "dobYear",
+                  name: "dobYear",
+                  classes: dobYearClass,
+                  autocomplete: "off",
+                  label: texts.YOUR_DETAILS_PAGE.FORM_DOB_YEAR_LABEL,
+                  attributes: {
+                    maxlength: "4"
+                  },
+                  value: user.dobYear
+                }
+              ]
+            }) }}
+            
+          </fieldset>
+
+        </div>
+
+        {# Info about DOB #}
+          <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+              <span class="govuk-details__summary-text">
+                {{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.FORM_DOB_HELPER_TITLE }}
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              <p>{{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.FORM_DOB_HELPER_PARAGRAPH_1 }}</p>
+            <p>{{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.FORM_DOB_HELPER_PARAGRAPH_2 }}</p>
+              <p>
+                {{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.FORM_DOB_HELPER_PARAGRAPH_3 }}
+                {% if texts.INTERFACE.HTML_LANG === "cy" %}
+                  <br>
+                  {% if texts.INTERFACE.CONTACT_TELEPHONE_1 %}
+                    {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_1 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_1 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_1}}</a>
+                  {% endif %}
+                  <br>
+                  {% if texts.INTERFACE.CONTACT_TELEPHONE_2 %}
+                    {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_2 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_2 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_2}}</a>
+                  {% endif %}
+                {% endif %}
+              </p>
+            </div>
+          </details>
+
+          {# Submit form #}
+          {{ govukButton({
+            text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+          }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

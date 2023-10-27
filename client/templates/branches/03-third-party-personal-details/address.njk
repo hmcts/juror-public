@@ -1,0 +1,96 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block pageTitle %}
+  {% include "../../includes/title-error.njk" %}
+  {{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_CONFIRM_HEADER }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}3rd Party Personal Details Address{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "../../includes/errors-gds.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="{{ url('branches.third.party.personal.details.address.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+
+        {# Set radio errors #}
+        {% set radioAnswerError = undefined %}
+        {% if errors.items['addressConfirm']%}
+          {% set radioAnswerError = {text: errors.items['addressConfirm'][0].details} %}
+        {% endif %}
+
+        {# set legend HTML #}
+        {% set legendHTML %}
+          <h1 class="govuk-fieldset__heading">
+            <span class="govuk-caption-l">{{- texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.CAPTION -}}</span>
+            {{- texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_CONFIRM_HEADER -}}
+          </h1>
+        {% endset %}
+
+        {{ govukRadios({
+          name: "addressConfirm",
+          fieldset: {
+            legend: {
+              html: legendHTML,
+              classes: "govuk-fieldset__legend--l",
+              isPageHeading: false
+            }
+          },
+          hint: {
+            html: user.addressRender
+          },
+          errorMessage: radioAnswerError,
+          items: [
+            {
+              id: "addressConfirm-Yes",
+              value: texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.YES,
+              text: texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.FORM_CONFIRM_ADDRESS_YES_LABEL
+            },
+            {
+              id: "addressConfirm-No",
+              value: texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.NO,
+              text: texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.FORM_CONFIRM_ADDRESS_NO_LABEL
+            }
+          ]
+        }) }}
+
+        {# Info about change of address #}
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              {{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.HELPER_CONFIRM_ADDRESS_TITLE }}
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            <p>{{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.HELPER_CONFIRM_ADDRESS_PARAGRAPH_1 }}</p>
+            <p>{{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.HELPER_CONFIRM_ADDRESS_PARAGRAPH_2 }}</p>
+            <p>{{ texts.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.HELPER_CONFIRM_ADDRESS_PARAGRAPH_3 }}</p>
+          </div>
+        </details>
+
+        {# Submit form #}
+        {{ govukButton({
+          text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+        }) }}
+
+        <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

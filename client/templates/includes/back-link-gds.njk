@@ -1,0 +1,7 @@
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% if backLinkUrl%}
+  {{ govukBackLink({
+  text: texts.INTERFACE.BUTTON_TEXT_BACK,
+  href: url(backLinkUrl)
+  }) }}
+{% endif %}

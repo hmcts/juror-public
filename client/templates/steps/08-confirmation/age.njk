@@ -1,0 +1,50 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% block pageTitle %}
+  {{ texts.CONFIRMATION.TITLE }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Confirmation Age Disqualified{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% include "./_hero.njk" %}
+
+      <br>
+
+      <h2 class="govuk-heading-l">
+        {% if user.thirdParty == 'Yes' %}
+          {{ texts.CONFIRMATION.AGE.DISQUALIFICATION_OB }}
+        {% else %}
+          {{ texts.CONFIRMATION.AGE.DISQUALIFICATION }}
+        {% endif %}
+      </h2>
+      <div class="govuk-body">
+        {% if user.thirdParty == 'Yes' %}
+          {{ texts.CONFIRMATION.AGE.DOB_QUALIFICATION_OB }}
+        {% else %}
+          {{ texts.CONFIRMATION.AGE.DOB_QUALIFICATION }}
+        {% endif %}
+      </div>
+
+
+      <h2 class="govuk-heading-m">{{ texts.CONFIRMATION.NEXT_INFO }}</h2>
+      <div class="govuk-body">
+        {% if user.thirdParty == 'Yes' %}
+          <p>{{ texts.CONFIRMATION.AGE.NO_SERVICE_REQUIRED_OB }}</p>
+        {% else %}
+          <p>{{ texts.CONFIRMATION.AGE.NO_SERVICE_REQUIRED }}</p>
+        {% endif %}
+
+        
+      </div>
+
+      {% include "../../includes/feedback.njk" %}
+    </div>
+
+  </div>
+
+{% endblock %}
