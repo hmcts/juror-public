@@ -27,7 +27,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "@hmcts/properties-volume": "0.0.13",
+    "@hmcts/properties-volume": "0.0.14",
     "basic-auth": "^2.0.0",
     "body-parser": "^1.20.1",
     "compression": "^1.6.2",
