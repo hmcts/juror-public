@@ -1,12 +1,10 @@
-FROM hmctspublic.azurecr.io/base/node:14-alpine as base
+FROM hmctspublic.azurecr.io/base/node:18-alpine as base
 COPY package.json ./
 
-FROM node:14.18.3-alpine as build
-RUN mkdir /opt/app
-WORKDIR /opt/app
-RUN npm install fibers@1.0.15 --ignore-script
-COPY . .
-RUN npm install --production
+FROM base as build
+COPY --chown=hmcts:hmcts . .
+RUN yarn install
+RUN yarn build
 
 FROM base as runtime
 COPY --from=build $WORKDIR ./

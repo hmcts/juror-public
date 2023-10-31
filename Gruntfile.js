@@ -4,6 +4,7 @@
     , fs = require('fs-extra')
     , exec = require('child_process').exec
     , readline = require('readline')
+    , sass = require('sass')
     , config = {
       EXPRESS_PORT: 3000,
       BROWSERSYNC_PORT: 3001
@@ -154,6 +155,7 @@
 
       sass: {
         options: {
+          implementation: sass,
           includePaths: [
             'node_modules/@scottish-government'
           ]
@@ -683,3 +685,4 @@
   };
 
 })();
+
