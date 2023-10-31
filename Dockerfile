@@ -1,13 +1,14 @@
 FROM hmctspublic.azurecr.io/base/node:18-alpine as base
-COPY package.json ./
+COPY package.json yarn.lock ./
 
 FROM base as build
-COPY --chown=hmcts:hmcts . .
+USER root
+RUN apk add autoconf automake gcc make g++ zlib-dev nasm
+USER hmcts
+COPY . .
 RUN yarn install
-RUN yarn build
 
 FROM base as runtime
 COPY --from=build $WORKDIR ./
 USER hmcts
 EXPOSE 3000
-CMD ["nodejs", "server/index.js"]
