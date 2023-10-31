@@ -12,7 +12,8 @@
     "test:e2e-debug": "./node_modules/.bin/chimp tests/e2e/chimp.conf.js --debugCucumber",
     "test:e2e-watch": "./node_modules/.bin/chimp tests/e2e/chimp.conf.js --watch",
     "generate-report": "node tests/e2e/support/generateReport.js",
-    "nsp": "nsp check"
+    "nsp": "nsp check",
+    "lint": "echo TODO: lint"
   },
   "repository": {
     "type": "git",
