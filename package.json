@@ -1,7 +1,10 @@
 {
-  "name": "juror-public-front-end",
-  "version": "3.5.61",
-  "description": "A front-end for responding to jury summons",
+  "name": "juror-public",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "main": "server/index.js",
   "scripts": {
     "start": "grunt serve",
@@ -12,18 +15,6 @@
     "lint": "echo TODO: lint",
     "nsp": "nsp check"
   },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@gitlab.cgi-odsc.com:57476/moj-juror/juror-public-front-end.git"
-  },
-  "author": "ODSC",
-  "contributors": [
-    "Jonathan Deaves <jonathan.deaves@cgi.com>",
-    "Ryan Hanlon <ryan.hanlon@cgi.com>",
-    "Samantha Kirkwood <samantha.kirkwood@cgi.com>",
-    "Victoria Taylor <victoria.taylor@cgi.com>"
-  ],
-  "license": "ISC",
   "dependencies": {
     "@hmcts/properties-volume": "^0.0.14",
     "basic-auth": "^2.0.0",

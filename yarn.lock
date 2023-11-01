@@ -8456,9 +8456,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"juror-public-front-end@workspace:.":
+"juror-public@workspace:.":
   version: 0.0.0-use.local
-  resolution: "juror-public-front-end@workspace:."
+  resolution: "juror-public@workspace:."
   dependencies:
     "@hmcts/properties-volume": ^0.0.14
     "@scottish-government/pattern-library": 0.0.336
