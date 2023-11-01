@@ -5,7 +5,7 @@ FROM base as build
 USER root
 RUN apk add autoconf automake gcc make g++ zlib-dev nasm
 USER hmcts
-COPY . .
+COPY --chown=hmcts:hmcts . .
 RUN yarn install
 
 FROM base as runtime
