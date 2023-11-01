@@ -119,5 +119,5 @@
     "sinon-chai": "^2.8.0",
     "time-grunt": "^1.4.0"
   },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@3.6.4"
 }
