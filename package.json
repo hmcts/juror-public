@@ -34,6 +34,7 @@
     "helmet": "^3.9.0",
     "i18n-express": "^1.0.4",
     "ip": "^1.1.5",
+    "jackspeak": "2.1.1",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15",
     "method-override": "^2.3.6",

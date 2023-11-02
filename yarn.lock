@@ -7976,6 +7976,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jackspeak@npm:2.1.1":
+  version: 2.1.1
+  resolution: "jackspeak@npm:2.1.1"
+  dependencies:
+    "@pkgjs/parseargs": ^0.11.0
+    cliui: ^8.0.1
+  dependenciesMeta:
+    "@pkgjs/parseargs":
+      optional: true
+  checksum: ddd1a41c613dd12ec1a3568dd014e42d166f7f007e0d6ea3bf1d1d0f5480147c17ff27606e9131aa23489849e67bd6abf0b8cff90b17fa65271a35cbf74b2b1e
+  languageName: node
+  linkType: hard
+
 "jackspeak@npm:^2.3.5":
   version: 2.3.6
   resolution: "jackspeak@npm:2.3.6"
@@ -8358,6 +8371,7 @@ __metadata:
     imagemin-svgo: ^10.0.1
     ip: ^1.1.5
     istanbul: ^0.4.4
+    jackspeak: 2.1.1
     jit-grunt: ^0.10.0
     jsonwebtoken: ^9.0.0
     lodash: ^4.17.15
