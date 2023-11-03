@@ -11,6 +11,8 @@
     "test": "grunt test:intergration --force",
     "test:coverage": "grunt test:coverage --force",
     "test:a11y": "echo TODO: a11y",
+    "test:smoke": "echo TODO: smoke",
+    "test:functional": "echo TODO: functional",
     "serve": "NODE_ENV=production USE_AUTH=false USE_HTTPS=false node server/index.js",
     "lint": "echo TODO: lint",
     "nsp": "nsp check"
