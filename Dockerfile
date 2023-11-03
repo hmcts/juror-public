@@ -9,6 +9,7 @@ COPY --chown=hmcts:hmcts . .
 RUN yarn install
 
 FROM base as runtime
+ENV NODE_ENV=production
 COPY --from=build $WORKDIR ./
 USER hmcts
 EXPOSE 3000
