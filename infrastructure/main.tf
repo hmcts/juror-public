@@ -23,8 +23,8 @@ module "juror-public-redis" {
 }
 
 data "azurerm_key_vault" "juror" {
-  name                = local.resourceName
-  resource_group_name = local.vaultName
+  name                = local.vaultName
+  resource_group_name = local.resourceName
 }
 
 resource "azurerm_key_vault_secret" "redis_connection_string" {
