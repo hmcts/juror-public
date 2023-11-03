@@ -3,6 +3,7 @@ provider "azurerm" {
 }
 
 locals {
+  resourceName = "${var.product}-${var.env}-rg"
   vaultName = "${var.product}-${var.env}"
 }
 
@@ -22,7 +23,7 @@ module "juror-public-redis" {
 }
 
 data "azurerm_key_vault" "juror" {
-  name                = local.vaultName
+  name                = local.resourceName
   resource_group_name = local.vaultName
 }
 
