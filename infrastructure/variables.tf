@@ -1,17 +1,40 @@
-variable "product" {
-  description = "The name of your application"
-}
-variable "location" {
-  default = "UK South"
+#Variables with values passed in by Jenkins
+variable "env" {
+  description = "The deployment environment (sandbox, aat, prod etc..)"
 }
 
-variable "env" {
-  description = "(Required) The environment in which to deploy the application infrastructure."
+variable "product" {
+  description = "The name of the application"
+}
+
+variable "component" {
+  description = "The name of the microservice"
+}
+
+variable "subscription" {
+  description = "The subscription ID"
+}
+
+variable "aks_subscription_id" {
+  description = "The aks subscription ID"
+}
+
+variable "tenant_id" {
+  description = "The Azure AD tenant ID for authenticating to key vault"
+}
+
+variable "jenkins_AAD_objectId" {
+  description = "The object ID of the user to be granted access to the key vault"
 }
 
 variable "common_tags" {
   type = map(string)
 }
+
+variable "location" {
+  default = "UK South"
+}
+
 variable "family" {
   default     = "C"
   description = "The SKU family/pricing group to use. Valid values are `C` (for Basic/Standard SKU family) and `P` (for Premium). Use P for higher availability, but beware it costs a lot more."
