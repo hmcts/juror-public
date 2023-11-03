@@ -64,6 +64,11 @@
       });
     });
 
+    app.route('/health')
+      .get(function(req, res) {
+        return errors(req, res, 200);
+      });
+
     app.route('/health/*')
       .get(function(req, res) {
         return errors(req, res, 200);
