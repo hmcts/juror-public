@@ -34,7 +34,6 @@
     "helmet": "^3.9.0",
     "i18n-express": "^1.0.4",
     "ip": "^1.1.5",
-    "jackspeak": "2.1.1",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15",
     "method-override": "^2.3.6",
@@ -108,6 +107,9 @@
     "sinon": "^4.1.2",
     "sinon-chai": "^2.8.0",
     "time-grunt": "^1.4.0"
+  },
+  "resolutions": {
+    "jackspeak": "2.1.1"
   },
   "packageManager": "yarn@3.6.4"
 }
