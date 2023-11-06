@@ -4,7 +4,7 @@ provider "azurerm" {
 
 locals {
   resourceName = "${var.product}-${var.env}-rg"
-  vaultName = "${var.product}-${var.env}"
+  vaultName    = "${var.product}-${var.env}"
 }
 
 module "juror-public-redis" {
