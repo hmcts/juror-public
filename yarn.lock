@@ -36,6 +36,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jsdoc/salty@npm:^0.2.1":
+  version: 0.2.5
+  resolution: "@jsdoc/salty@npm:0.2.5"
+  dependencies:
+    lodash: ^4.17.21
+  checksum: 16c65d48c340d8f1b892797bdd6ace4f90d916d16bed5023f2a5421240ead20e828031dfb1d07b8eb0e172a62f532c3c005287e723e30ee9a0c8a0d7d2e98953
+  languageName: node
+  linkType: hard
+
 "@npmcli/agent@npm:^2.0.0":
   version: 2.2.0
   resolution: "@npmcli/agent@npm:2.2.0"
@@ -3510,10 +3519,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docdash@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "docdash@npm:0.4.0"
-  checksum: a4df6ddd7a7664fa9ed309f5c59f91f6a4c686fde89445766e7576cbfbfe2313a27d5f97ece8094917173b0b0e9ddc832e47b59b02ba4952d1479807b33b2d71
+"docdash@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "docdash@npm:2.0.2"
+  dependencies:
+    "@jsdoc/salty": ^0.2.1
+  checksum: de802483b5f72458c488d430b17de7cf0ad86b8e1dea38bae14607d820e5860f18f61d11578280f5fc2051bf31d294b7ca8c8192d0a9b159df801e2b56778875
   languageName: node
   linkType: hard
 
@@ -8275,7 +8286,7 @@ __metadata:
     cookie-parser: ^1.4.3
     crypto-js: ^4.1.1
     csurf: ^1.9.0
-    docdash: ^0.4.0
+    docdash: ^2.0.0
     errorhandler: ^1.4.3
     eslint: ^4.12.1
     eslint-config-airbnb: ^16.1.0
