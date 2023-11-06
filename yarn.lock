@@ -121,10 +121,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@scottish-government/pattern-library@npm:0.0.336":
-  version: 0.0.336
-  resolution: "@scottish-government/pattern-library@npm:0.0.336"
-  checksum: f514a930f62a4230c41c3481c884ca1616e8592232c87ba016fecba573f6485f3dfb9bca8e2af751422141a9423c278942e4b7ba4d0a2a8931593d3c2680fc5e
+"@scottish-government/pattern-library@npm:0.0.381":
+  version: 0.0.381
+  resolution: "@scottish-government/pattern-library@npm:0.0.381"
+  checksum: c624b8871f81e2f46ce1240bf3a94f3b690f5dd44a2c3f4c090591e2340fc85daa25951c893bce9092d98bcd4ecc697f0349c2934612e32b5def2a34181ea75d
   languageName: node
   linkType: hard
 
@@ -8262,7 +8262,7 @@ __metadata:
   resolution: "juror-public@workspace:."
   dependencies:
     "@hmcts/properties-volume": ^0.0.14
-    "@scottish-government/pattern-library": 0.0.336
+    "@scottish-government/pattern-library": 0.0.381
     basic-auth: ^2.0.0
     body-parser: ^1.20.1
     browser-sync: ^2.13.0
