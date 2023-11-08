@@ -15,7 +15,7 @@
     "test:functional": "echo TODO: functional",
     "serve": "NODE_ENV=production USE_AUTH=false USE_HTTPS=false node server/index.js",
     "lint": "echo TODO: lint",
-    "cichecks": "echo TODO: cichecks",
+    "cichecks": "yarn install && echo TODO: cichecks",
     "nsp": "nsp check"
   },
   "dependencies": {
