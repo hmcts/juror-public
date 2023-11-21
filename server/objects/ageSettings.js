@@ -1,40 +1,20 @@
-;(function(){
+; (function() {
   'use strict';
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , config = require('../config/environment')()
-    , secretsConfig = require('config')
-    , utils = require('../lib/utils')
-    , options = {
-      uri: config.apiEndpoint,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      json: true,
-      transform: utils.basicDataTransform
-    }
-    , jwt = require('jsonwebtoken')
+  const { axiosInstance } = require('./axios-instance');
+  const secretsConfig = require('config');
+  const jwt = require('jsonwebtoken');
 
-    , processData = function(body) {
-      return body.data;
-    }
+  const ageSettings = {
+    resource: 'auth/settings',
+    get: function(app) {
 
-    , responseObject = {
-      resource: 'auth/settings',
-      get: function(rp) {
-        var reqOptions = _.clone(options);
+      let url = this.resource;
+      let jwtToken = jwt.sign({}, secretsConfig.get('secrets.juror-digital-vault.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
 
-        reqOptions.headers.Authorization = jwt.sign({}, secretsConfig.get('secrets.juror-digital-vault.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
-        reqOptions.transform = processData;
-        reqOptions.uri = urljoin(reqOptions.uri, this.resource);
+      return axiosInstance(url, app, jwtToken, null);
+    },
+  };
 
-        return rp(reqOptions);
-      }
-    };
-
-
-  module.exports.object = responseObject;
-
+  module.exports.ageSettings = ageSettings;
 })();
