@@ -11,7 +11,7 @@
     , config = require('./config/environment')()
     , logger = require('./components/logger')(config)
     , http = require('http')
-    , ageSettingsObj = require('./objects/ageSettings').object
+    , ageSettings = require('./objects/ageSettings').ageSettings
     , app = express()
     , server = http.createServer(app)
 
@@ -20,9 +20,6 @@
     , versionStr = appTitle + ' v' + releaseVersion
     , upperAgeLimit
     , lowerAgeLimit
-    , pcqServiceEnabled = null
-    , pcqServiceUrl = ''
-    , pcqServiceReturnUrl = ''
 
   // Attach logger to app
   app.logger = logger;
@@ -32,7 +29,6 @@
   require('./routes')(app);
 
 
-  // A bit of shiny
   if (config.logConsole !== false) {
     console.info('\n\n');
     console.info(_.pad('###########', versionStr.length + 12, '#'));
@@ -44,12 +40,9 @@
 
   // Control server
   function startServer() {
-    ageSettingsObj.get(require('request-promise'))
+    ageSettings.get(app)
       .then(function(response) {
-
-        // upperAgeLimit = 76;
-        // lowerAgeLimit = 18;
-        response.forEach(function(res) {
+        response.data.forEach(function(res) {
 
           switch (res.setting){
           case '100':
@@ -64,12 +57,16 @@
           upperAgeLimit: upperAgeLimit,
           lowerAgeLimit: lowerAgeLimit
         };
+        console.info('Retrieved age limit settings');
       })
-      .catch(function() {
+      .catch(function(error) {
+        console.info('Error retrieving age settings: ', error);
+
         app.ageSettings = {
           upperAgeLimit: 76,
           lowerAgeLimit: 18
         };
+        console.info('Using default age limit settings');
       });
 
     app.pcqSettings = {
