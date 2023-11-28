@@ -45,7 +45,7 @@
     "named-routes": "^2.0.6",
     "nunjucks": "3.2.4",
     "nunjucks-async-loader": "1.1.5",
-    "pdfmake": "^0.1.72",
+    "pdfmake": "^0.2.0",
     "redis": "^4.6.10",
     "referrer-policy": "^1.0.0",
     "request": "^2.88.2",
