@@ -19,7 +19,7 @@
     "nsp": "nsp check"
   },
   "dependencies": {
-    "@hmcts/properties-volume": "^0.0.14",
+    "@hmcts/properties-volume": "^1.0.0",
     "axios": "^1.6.0",
     "basic-auth": "^2.0.0",
     "body-parser": "^1.20.1",
