@@ -19,6 +19,11 @@
     , errorHandler = require('errorhandler')
     , path = require('path')
     , i18n = require('i18n-express')
+    , { createClient } = require('redis')
+    , RedisStore = require('connect-redis').default
+    , redisStore
+    , redisClient
+    , redisConnectionString = ''
 
     , filters = require('../components/filters')
     , texts_en = require('../../client/js/i18n/en.json')
@@ -27,7 +32,7 @@
     , config = require('./environment')()
     , utils = require('../lib/utils.js')
     , menuBuilder = require(__dirname + '/../menubuilder')
-    , sessionExpires
+    , sessionExpires = 10 * (60 * 60)
     , sessionConfig = {}
 
     // Grab environment variables to enable/disable certain services
@@ -75,9 +80,10 @@
     app.use(cookieParser());
   }
 
-  function configureSessions(app) {
+  function configureSessionsDefault(app) {
     // Configure sessions
-    sessionExpires = 10 * (60 * 60);
+
+    console.log('Redis connection string not defined, using default session store');
 
     sessionConfig = {
       secret: secretsConfig.get('secrets.juror-digital-vault.public-sessionSecret'),
@@ -92,6 +98,57 @@
 
     app.use(session(sessionConfig));
 
+    // CSRF Protection
+    app.use(csrf());
+
+  }
+
+  function configureSessionsRedis(app) {
+
+    // Configure Redis connection
+    console.log('Attempting to connect to redis using connection string: ');
+    console.log(redisConnectionString);
+
+    //redisConnectionString = 'rediss://:aBFrORY04KyCLmFngZN4OLa3QV6gPt9znAzCaGhUHWE%3D@juror-test-bureau.redis.cache.windows.net:6380?tls=true';
+
+    redisClient = createClient({
+      url: redisConnectionString,
+      pingInterval: 5000,
+      socket: {
+        keepAlive: true
+      }
+    });
+    redisClient.connect()
+      .catch(function(error) {
+        console.log('Error connecting redis client: ', error);
+      });
+
+    // Initialise store
+    redisStore = new RedisStore({
+      client: redisClient,
+      prefix: 'JurorPublic:',
+    })
+
+    redisClient.on('error', function(err) {
+      console.log(new Date().toLocaleString() + ' - ' + 'Could not connect to redis ' + err);
+    });
+    redisClient.on('connect', function(err) {
+      console.log(new Date().toLocaleString() + ' - ' + 'Connected to redis successfully');
+    });
+
+    // Configure session middleware
+    app.use(session({
+      store: redisStore,
+      secret: secretsConfig.get('secrets.juror-digital-vault.public-sessionSecret'),
+      resave: false,
+      saveUninitialized: false,
+      maxAge: sessionExpires,
+      name : 'sessionId',
+      cookie: {
+        //secure: true
+        httpOnly: true
+      }
+    }))
 
     // CSRF Protection
     app.use(csrf());
@@ -143,9 +200,23 @@
     // Set up parts of express
     configureSecurity(app);
     configureRequests(app);
-    configureSessions(app);
-    configureTemplating(app);
 
+
+    console.log('Configuring session store...');
+    try {
+      redisConnectionString = secretsConfig.get('secrets.juror-digital-vault.public-redisConnection');
+
+      if (redisConnectionString){
+        configureSessionsRedis(app);
+      } else {
+        configureSessionsDefault(app);
+      }
+    } catch (error) {
+      console.log(error);
+      configureSessionsDefault(app);
+    };
+
+    configureTemplating(app);
 
     // Send data to all views
     app.use(function(req, res, next) {
