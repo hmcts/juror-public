@@ -3829,13 +3829,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docdash@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "docdash@npm:0.4.0"
-  checksum: a4df6ddd7a7664fa9ed309f5c59f91f6a4c686fde89445766e7576cbfbfe2313a27d5f97ece8094917173b0b0e9ddc832e47b59b02ba4952d1479807b33b2d71
-  languageName: node
-  linkType: hard
-
 "doctrine@npm:^2.1.0":
   version: 2.1.0
   resolution: "doctrine@npm:2.1.0"
@@ -8757,7 +8750,6 @@ __metadata:
     cookie-parser: ^1.4.3
     crypto-js: ^4.1.1
     csurf: ^1.9.0
-    docdash: ^0.4.0
     errorhandler: ^1.4.3
     eslint: ^4.12.1
     eslint-config-airbnb: ^16.1.0
