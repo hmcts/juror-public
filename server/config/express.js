@@ -109,8 +109,6 @@
     console.log('Attempting to connect to redis using connection string: ');
     console.log(redisConnectionString);
 
-    //redisConnectionString = 'rediss://:aBFrORY04KyCLmFngZN4OLa3QV6gPt9znAzCaGhUHWE%3D@juror-test-bureau.redis.cache.windows.net:6380?tls=true';
-
     redisClient = createClient({
       url: redisConnectionString,
       pingInterval: 5000,
@@ -140,8 +138,8 @@
     app.use(session({
       store: redisStore,
       secret: secretsConfig.get('secrets.juror-digital-vault.public-sessionSecret'),
-      resave: false,
-      saveUninitialized: false,
+      resave: true,
+      saveUninitialized: true,
       maxAge: sessionExpires,
       name : 'sessionId',
       cookie: {
