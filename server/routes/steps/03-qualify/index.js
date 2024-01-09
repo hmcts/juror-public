@@ -25,8 +25,8 @@
     app.get('/steps/qualify/tp', 'steps.qualify.tp.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 3), controller.index());
 
     // Residency
-    app.get('/steps/qualify/residency', 'steps.qualify.residency.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 3), controller.getResidency());
-    app.get('/steps/qualify/residency/tp', 'steps.qualify.residency.tp.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 3), controller.getResidency());
+    app.get('/steps/qualify/residency', 'steps.qualify.residency.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 3), controller.getResidency(app));
+    app.get('/steps/qualify/residency/tp', 'steps.qualify.residency.tp.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 3), controller.getResidency(app));
     app.post('/steps/qualify/residency', 'steps.qualify.residency.post', auth.verify, auth.completeCheck, controller.createResidency(app));
 
     // CJS Employment

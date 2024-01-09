@@ -46,7 +46,7 @@
     "nunjucks": "3.2.4",
     "nunjucks-async-loader": "1.1.5",
     "pdfmake": "^0.2.0",
-    "redis": "^4.6.10",
+    "redis": "^4.6.12",
     "referrer-policy": "^1.0.0",
     "request": "^2.88.2",
     "request-promise": "^4.1.1",

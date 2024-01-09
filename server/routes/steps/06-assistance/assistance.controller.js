@@ -14,12 +14,15 @@
     , utils = require('../../../lib/utils')
     , pcqService = require('../../../components/pcqService');
 
-  module.exports.index = function() {
+  module.exports.index = function(app) {
     return function(req, res) {
       var assistanceActive
         , merged
         , tmpErrors
         , backLinkUrl;
+
+      // Temp log session
+      app.logger.debug('Assistance page load - session data:', JSON.stringify(req.session));
 
       // Get current value for assistanceType
       merged = _.merge(_.cloneDeep(req.session.user), req.session.formFields);
@@ -113,6 +116,10 @@
           app.logger.info('Skip PCQ');
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirm.information', req.session.user.thirdParty)));
         };
+
+      // Temp log session
+      app.logger.debug('Assistance page confirm - session data:');
+      app.logger.debug(req.session);
 
       // Reset error and saved field sessions
       delete req.session.errors;

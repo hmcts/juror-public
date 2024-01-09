@@ -100,6 +100,11 @@
             }
             return res.redirect(app.namedRoutes.build('steps.your.details.get'));
           });
+
+          // Temp log session details
+          app.logger.debug('SessionID: ', req.sessionID);
+          app.logger.debug('User authenticated - session data:', JSON.stringify(req.session));
+
         }
 
         , authFailure = function(err) {

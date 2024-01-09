@@ -7,9 +7,9 @@
 
   module.exports = function(app) {
     // eslint-disable-next-line max-len
-    app.get('/steps/assistance', 'steps.assistance.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 6), controller.index());
+    app.get('/steps/assistance', 'steps.assistance.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 6), controller.index(app));
     // eslint-disable-next-line max-len
-    app.get('/steps/assistance/tp', 'steps.assistance.tp.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 6), controller.index());
+    app.get('/steps/assistance/tp', 'steps.assistance.tp.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 6), controller.index(app));
 
     app.post('/steps/assistance', 'steps.assistance.post', auth.verify, auth.completeCheck, controller.create(app));
 
