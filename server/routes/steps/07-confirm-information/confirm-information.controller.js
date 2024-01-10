@@ -161,6 +161,9 @@
           });
         }
 
+      // Temp log session
+      app.logger.debug('Check Answers page load - session data:', JSON.stringify(req.session));
+
       //reset value for conventional route vs edit route
       if (req.session.change === true){
         req.session.change = false;
