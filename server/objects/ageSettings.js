@@ -10,7 +10,7 @@
     get: function(app) {
 
       let url = this.resource;
-      let jwtToken = jwt.sign({}, secretsConfig.get('secrets.juror-digital-vault.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
+      let jwtToken = jwt.sign({}, secretsConfig.get('secrets.juror.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
       return axiosInstance(url, app, jwtToken, null);
     },

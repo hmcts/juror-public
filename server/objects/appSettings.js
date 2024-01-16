@@ -26,7 +26,7 @@
       get: function(rp, app) {
         var reqOptions = _.clone(options);
 
-        reqOptions.headers.Authorization = jwt.sign({}, secretsConfig.get('secrets.juror-digital-vault.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
+        reqOptions.headers.Authorization = jwt.sign({}, secretsConfig.get('secrets.juror.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
         reqOptions.transform = processData;
         reqOptions.uri = urljoin(reqOptions.uri, this.resource);
 
