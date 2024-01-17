@@ -30,7 +30,7 @@
       // On first load of app we want to create a JWT that will be used for all API calls.
       //
       // It will have an empty body to begin with
-      authComponent.createJWTToken(req, {}, secretsConfig.get('secrets.juror-digital-vault.public-jwtNoAuthKey'));
+      authComponent.createJWTToken(req, {}, secretsConfig.get('secrets.juror.public-jwtNoAuthKey'));
 
 
       // On load of page, we should clear any data

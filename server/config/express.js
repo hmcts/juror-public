@@ -86,7 +86,7 @@
     console.log('Redis connection string not defined, using default session store');
 
     sessionConfig = {
-      secret: secretsConfig.get('secrets.juror-digital-vault.public-sessionSecret'),
+      secret: secretsConfig.get('secrets.juror.public-sessionSecret'),
       resave: false,
       saveUninitialized: false,
       maxAge: sessionExpires,
@@ -137,7 +137,7 @@
     // Configure session middleware
     app.use(session({
       store: redisStore,
-      secret: secretsConfig.get('secrets.juror-digital-vault.public-sessionSecret'),
+      secret: secretsConfig.get('secrets.juror.public-sessionSecret'),
       resave: true,
       saveUninitialized: true,
       maxAge: sessionExpires,
@@ -202,7 +202,7 @@
 
     console.log('Configuring session store...');
     try {
-      redisConnectionString = secretsConfig.get('secrets.juror-digital-vault.public-redisConnection');
+      redisConnectionString = secretsConfig.get('secrets.juror.public-redisConnection');
 
       if (redisConnectionString){
         configureSessionsRedis(app);

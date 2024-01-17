@@ -1,6 +1,6 @@
 {
   "secrets": {
-    "juror-digital-vault": {
+    "juror": {
       "public-sessionSecret" : "[super-secret-key]",
       "public-jwtKey": "[super-secret-key]",
       "public-jwtNoAuthKey": "[super-secret-key-login]",

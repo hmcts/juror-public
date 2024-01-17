@@ -11,7 +11,7 @@
 
     , createJWTToken = function(req, body, key) {
       // if user is found create a token
-      var token = jwt.sign(body, key, { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
+      var token = jwt.sign(body, key, { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
       // Store in session
       req.session.authToken = token;
@@ -43,7 +43,7 @@
             }
           };
 
-          createJWTToken(req, tokenBody, secretsConfig.get('secrets.juror-digital-vault.public-jwtKey'));
+          createJWTToken(req, tokenBody, secretsConfig.get('secrets.juror.public-jwtKey'));
           return successCB(resp);
         }
         , authFailure = function(err) {

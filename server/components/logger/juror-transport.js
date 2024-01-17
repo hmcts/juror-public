@@ -62,7 +62,7 @@
 
     this.latestLog = logstashOutput;
 
-    this.jwtToken = jwt.sign({}, secretsConfig.get('secrets.juror-digital-vault.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
+    this.jwtToken = jwt.sign({}, secretsConfig.get('secrets.juror.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
     options = {
       url: urljoin(config.apiEndpoint, 'auth/public/log'),

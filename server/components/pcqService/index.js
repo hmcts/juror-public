@@ -11,7 +11,7 @@
     , utils = require('../../lib/utils')
 
     , createToken = function(req, app, params) {
-  
+
       var encryptedToken
       , tokenKey
       , algorithm = 'aes-256-gcm'
@@ -25,9 +25,9 @@
 
       try {
         //tokenKey ='SERVICE_TOKEN_KEY'
-        tokenKey = secretsConfig.get('secrets.juror-digital-vault.public-pcqTokenKey')  
+        tokenKey = secretsConfig.get('secrets.juror.public-pcqTokenKey')
       } catch(e) {
-        app.logger.info('No PCQ Key found in key vault:  secrets.juror-digital-vault.public-pcqTokenKey');
+        app.logger.info('No PCQ Key found in key vault:  secrets.juror.public-pcqTokenKey');
       }
 
       if (tokenKey){
@@ -84,19 +84,19 @@
             }
           });
 
-          app.logger.info('PCQ APP_SETTINGS:', 'PCQ_SERVICE_ENABLED:', app.pcqSettings.serviceEnabled, 
-                          ', PCQ_SERVICE_URL:', app.pcqSettings.serviceUrl, 
+          app.logger.info('PCQ APP_SETTINGS:', 'PCQ_SERVICE_ENABLED:', app.pcqSettings.serviceEnabled,
+                          ', PCQ_SERVICE_URL:', app.pcqSettings.serviceUrl,
                           ', PCQ_SERVICE_RETURN_URL:', app.pcqSettings.serviceReturnUrl);
 
           if ((!req.session['pcqId']) && (pcqServiceEnabled === true) && (isThirdParty === false) && (app.pcqSettings.serviceUrl)){
             proceedWithPCQ = true;
           }
-    
+
           if (!proceedWithPCQ){
             app.logger.info('PCQ enabled:', pcqServiceEnabled, ', PCQ already invoked:', (req.session['pcqSettings'] ? 'true':'false'), ', Third party:', isThirdParty, ', PCQ_SERVICE_URL:',  app.pcqSettings.serviceUrl);
           }
           app.logger.info('Proceed with PCQ:', proceedWithPCQ);
-    
+
           return successCB(proceedWithPCQ);
 
         }
@@ -202,7 +202,7 @@
       app.logger.info('Skipping PCQ');
 
       return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirm.information', req.session.user.thirdParty)));
-      
+
     }
 
   // Export public functions

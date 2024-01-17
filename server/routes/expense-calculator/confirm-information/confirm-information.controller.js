@@ -177,7 +177,7 @@
       }
 
       // Create JWT
-      jwtToken = jwt.sign(apiUserObj, secretsConfig.get('secrets.juror-digital-vault.public-jwtKeyBureau'), { expiresIn: secretsConfig.get('secrets.juror-digital-vault.public-jwtTTL') });
+      jwtToken = jwt.sign(apiUserObj, secretsConfig.get('secrets.juror.public-jwtKeyBureau'), { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
       // Send the calculation request to the api
       expenseCalculatorObj.create(require('request-promise'), app, jwtToken, expenseData)
