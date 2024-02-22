@@ -21,7 +21,7 @@
     , upperAgeLimit
     , lowerAgeLimit
     , secretsConfig = require('config')
-    , appInsights = require('applicationinsights');
+    , appInsights = require('applicationinsights-web');
 
   // Attach logger to app
   app.logger = logger;
