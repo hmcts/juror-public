@@ -20,6 +20,8 @@
     , versionStr = appTitle + ' v' + releaseVersion
     , upperAgeLimit
     , lowerAgeLimit
+    , secretsConfig = require('config')
+    , appInsights = require('applicationinsights');
 
   // Attach logger to app
   app.logger = logger;
@@ -29,8 +31,6 @@
   require('./routes')(app);
 
   // Start AppInsights
-  let appInsights = require('applicationinsights');
-
   appInsights.setup(secretsConfig.get('secrets.juror.app-insights-connection-string'))
     .setAutoCollectConsole(true, true)
     .start();
