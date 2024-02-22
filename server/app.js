@@ -28,6 +28,12 @@
   require('./config/express')(app);
   require('./routes')(app);
 
+  // Start AppInsights
+  let appInsights = require('applicationinsights');
+
+  appInsights.setup(secretsConfig.get('secrets.juror.app-insights-connection-string'))
+    .setAutoCollectConsole(true, true)
+    .start();
 
   if (config.logConsole !== false) {
     console.info('\n\n');
@@ -36,7 +42,6 @@
     console.info(_.pad('###########', versionStr.length + 12, '#'));
     console.info('\n\n');
   }
-
 
   // Control server
   function startServer() {
