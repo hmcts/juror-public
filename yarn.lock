@@ -9059,6 +9059,7 @@ __metadata:
     request: ^2.88.2
     request-promise: ^4.1.1
     sass: ^1.69.5
+    semver: ^5.7.2
     serve-favicon: ^2.3.0
     sinon: ^4.1.2
     sinon-chai: ^2.8.0
@@ -12721,7 +12722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.0.3, semver@npm:^5.1.0, semver@npm:^5.3.0, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.6.0, semver@npm:^5.7.1":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.0.3, semver@npm:^5.1.0, semver@npm:^5.3.0, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.6.0, semver@npm:^5.7.1, semver@npm:^5.7.2":
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
   bin:
