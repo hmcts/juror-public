@@ -39,7 +39,7 @@
     "helmet": "^3.9.0",
     "i18n-express": "^1.0.4",
     "ip": "^1.1.5",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.15",
     "method-override": "^2.3.6",
     "moment": "^2.29.4",
