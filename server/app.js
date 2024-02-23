@@ -20,6 +20,8 @@
     , versionStr = appTitle + ' v' + releaseVersion
     , upperAgeLimit
     , lowerAgeLimit
+    , secretsConfig = require('config')
+    , appInsights = require('applicationinsights');
 
   // Attach logger to app
   app.logger = logger;
@@ -28,6 +30,10 @@
   require('./config/express')(app);
   require('./routes')(app);
 
+  // Start AppInsights
+  appInsights.setup(secretsConfig.get('secrets.juror.app-insights-connection-string'))
+    .setAutoCollectConsole(true, true)
+    .start();
 
   if (config.logConsole !== false) {
     console.info('\n\n');
@@ -36,7 +42,6 @@
     console.info(_.pad('###########', versionStr.length + 12, '#'));
     console.info('\n\n');
   }
-
 
   // Control server
   function startServer() {
