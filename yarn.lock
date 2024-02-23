@@ -8938,7 +8938,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonwebtoken@npm:^9.0.0":
+"jsonwebtoken@npm:^9.0.0, jsonwebtoken@npm:^9.0.2":
   version: 9.0.2
   resolution: "jsonwebtoken@npm:9.0.2"
   dependencies:
@@ -9043,7 +9043,7 @@ __metadata:
     ip: ^1.1.5
     istanbul: ^0.4.4
     jit-grunt: ^0.10.0
-    jsonwebtoken: ^9.0.0
+    jsonwebtoken: ^9.0.2
     lodash: ^4.17.15
     method-override: ^2.3.6
     mocha: ^4.0.1
