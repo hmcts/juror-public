@@ -138,8 +138,8 @@
     app.use(session({
       store: redisStore,
       secret: secretsConfig.get('secrets.juror.public-sessionSecret'),
-      resave: true,
-      saveUninitialized: true,
+      resave: false,
+      saveUninitialized: false,
       maxAge: sessionExpires,
       name : 'sessionId',
       cookie: {
