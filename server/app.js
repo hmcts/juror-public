@@ -14,14 +14,12 @@
     , ageSettings = require('./objects/ageSettings').ageSettings
     , app = express()
     , server = http.createServer(app)
-
     , appTitle = require(path.resolve(__dirname, '../', 'package.json')).name
     , releaseVersion = require(path.resolve(__dirname, '../', 'package.json')).version
     , versionStr = appTitle + ' v' + releaseVersion
     , upperAgeLimit
     , lowerAgeLimit
-    , secretsConfig = require('config')
-    , appInsights = require('applicationinsights');
+    , { AppInsights } = require('./lib/appinsights');
 
   // Attach logger to app
   app.logger = logger;
@@ -30,10 +28,7 @@
   require('./config/express')(app);
   require('./routes')(app);
 
-  // Start AppInsights
-  appInsights.setup(secretsConfig.get('secrets.juror.app-insights-connection-string'))
-    .setAutoCollectConsole(true, true)
-    .start();
+  new AppInsights();
 
   if (config.logConsole !== false) {
     console.info('\n\n');
