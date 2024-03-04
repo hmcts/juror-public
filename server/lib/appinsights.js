@@ -4,9 +4,9 @@ const secretsConfig = require('config');
 module.exports.AppInsights = class AppInsights {
 
   constructor() {
-    const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod';
+    const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev';
 
-    if (isProd) {
+    if (!isDev) {
       appInsights.setup(secretsConfig.get('secrets.juror.app-insights-connection-string'))
         .setAutoCollectConsole(true, true)
         .start();
