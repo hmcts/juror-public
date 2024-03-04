@@ -6,7 +6,8 @@
       "public-jwtNoAuthKey": "[super-secret-key-login]",
       "public-jwtKeyBureau": "[super-secret-key-bureau]",
       "public-jwtTTL": "8h",
-      "public-pcqTokenKey": "key"
+      "public-pcqTokenKey": "key",
+      "app-insights-connection-string": ""
     }
   }
  }
