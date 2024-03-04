@@ -239,6 +239,9 @@
       next();
     });
 
+    if (env === 'production') {
+      app.set('trust proxy', 1);
+    }
 
     // Modify request body to strip out white spaces
     app.use(function(req, res, next) {
