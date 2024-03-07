@@ -118,10 +118,10 @@
     //    keepAlive: true
     //  }
     );
-    redisClient.connect()
-      .catch(function(error) {
-        console.log('Error connecting redis client: ', error);
-      });
+    //redisClient.connect()
+    //  .catch(function(error) {
+    //    console.log('Error connecting redis client: ', error);
+    //  });
 
     // Initialise store
     redisStore = new RedisStore({
