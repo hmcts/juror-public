@@ -110,11 +110,12 @@
     console.log(redisConnectionString);
 
     redisClient = createClient({
-      url: redisConnectionString,
-      pingInterval: 5000,
-      socket: {
-        keepAlive: true
-      }
+      redisConnectionString
+    //  url: redisConnectionString,
+    //  pingInterval: 5000,
+    //  socket: {
+    //    keepAlive: true
+    //  }
     });
     redisClient.connect()
       .catch(function(error) {
