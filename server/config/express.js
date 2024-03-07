@@ -107,6 +107,7 @@
 
     // Configure Redis connection
     console.log('Attempting to connect to redis using connection string: ');
+    redisConnectionString += '/0';
     console.log(redisConnectionString);
 
     redisClient = createClient({
