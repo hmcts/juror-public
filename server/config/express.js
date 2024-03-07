@@ -19,7 +19,7 @@
     , errorHandler = require('errorhandler')
     , path = require('path')
     , i18n = require('i18n-express')
-    , { createClient } = require('redis')
+    , { createClient } = require('ioredis')
     , RedisStore = require('connect-redis').default
     , redisStore
     , redisClient
