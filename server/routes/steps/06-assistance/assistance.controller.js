@@ -118,8 +118,7 @@
         };
 
       // Temp log session
-      app.logger.debug('Assistance page confirm - session data:');
-      app.logger.debug(req.session);
+      app.logger.debug('Assistance page confirm 1 - session data:', JSON.stringify(req.session));
 
       // Reset error and saved field sessions
       delete req.session.errors;
@@ -155,6 +154,13 @@
       req.session.user.assistanceTypeDetails = (req.session.user.assistanceNeeded === 'Yes' || req.session.user.assistanceNeeded === texts_cy.REASONABLE_ADJUSTMENT_PAGE.YES) ? req.body['assistanceTypeDetails'] : '';
 
       req.session.user.assistanceSpecialArrangements = (req.session.user.assistanceNeeded === 'Yes' || req.session.user.assistanceNeeded === texts_cy.REASONABLE_ADJUSTMENT_PAGE.YES) ? req.body['assistanceSpecialArrangements'] : '';
+
+      // Temp log session
+      app.logger.debug('Assistance page confirm 2 - session data:', JSON.stringify(req.session));
+
+      // Temp log session
+      app.logger.debug('Calling req.session.save()');
+      req.session.save();
 
       // Verify if valid to proceed with PCQ step
       pcqService.checkPCQ(req, app, checkPCQSuccess, checkPCQFailure);
