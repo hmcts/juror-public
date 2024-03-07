@@ -19,7 +19,7 @@
     , errorHandler = require('errorhandler')
     , path = require('path')
     , i18n = require('i18n-express')
-    , { createClient } = require('ioredis')
+    , Redis = require("ioredis")
     , RedisStore = require('connect-redis').default
     , redisStore
     , redisClient
@@ -110,14 +110,14 @@
     redisConnectionString += '/0';
     console.log(redisConnectionString);
 
-    redisClient = createClient({
+    redisClient = new Redis(
       redisConnectionString
     //  url: redisConnectionString,
     //  pingInterval: 5000,
     //  socket: {
     //    keepAlive: true
     //  }
-    });
+    );
     redisClient.connect()
       .catch(function(error) {
         console.log('Error connecting redis client: ', error);
