@@ -256,7 +256,7 @@
     // Date of Birth
     // -----------------------
     if (typeof postObj.dobYear !== 'undefined' && postObj.dobYear.length > 0) {
-      postObj.dateOfBirth = moment(postObj.dobYear + '-' + postObj.dobMonth + '-' + postObj.dobDay)
+      postObj.dateOfBirth = moment(postObj.dobYear + '-' + postObj.dobMonth + '-' + postObj.dobDay, 'YYYY-MM-DD')
       .format('YYYY-MM-DD[T]HH:mm:ss');
     }
 
@@ -745,9 +745,8 @@
 
   };
 
-  module.exports.calculateAgeAtHearing = function calculateAgeAtHearing(dateOfBirth, hearingDateTimestamp) {
-    //JDB-3418: Modified to use hearingDateTimestamp
-    var hearingDateMoment = moment(hearingDateTimestamp, 'x')
+  module.exports.calculateAgeAtHearing = function calculateAgeAtHearing(dateOfBirth, hearingDate) {
+    var hearingDateMoment = moment(hearingDate, 'YYYY-MM-DD')
       , ageTimeOfHearing = hearingDateMoment.diff(dateOfBirth, 'years');
 
     return ageTimeOfHearing;
@@ -816,5 +815,5 @@
     return dates;
 
   }
-
+  
 })();
