@@ -1,13 +1,15 @@
 {
   "secrets": {
     "juror": {
-      "public-sessionSecret" : "[super-secret-key]",
-      "public-jwtKey": "[super-secret-key]",
-      "public-jwtNoAuthKey": "[super-secret-key-login]",
-      "public-jwtKeyBureau": "[super-secret-key-bureau]",
+      "public-sessionSecret" : "[super-secret-key][super-secret-key][super-secret-key]",
+      "public-jwtKey": "[super-secret-key][super-secret-key][super-secret-key]",
+      "public-jwtNoAuthKey": "[super-secret-key-login][super-secret-key-login][super-secret-key-login]",
+      "public-jwtKeyBureau": "[super-secret-key-bureau][super-secret-key-bureau][super-secret-key-bureau]",
       "public-jwtTTL": "8h",
       "public-pcqTokenKey": "key",
-      "app-insights-connection-string": ""
+      "public-redisConnection": "",
+      "app-insights-connection-string": "",
+      "launchDarklyKey": ""
     }
   }
  }
