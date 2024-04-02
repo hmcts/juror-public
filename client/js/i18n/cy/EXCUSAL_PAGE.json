@@ -8,12 +8,12 @@
   "ERROR": "Dywedwch pam eich bod angen cael eich esgusodi",
   "EVIDENCE_QUESTION": "A fydd angen imi ddarparu tystiolaeth yn fuan?",
   "EVIDENCE_QUESTION_OB": "A fydd angen inni ddarparu tystiolaeth yn fuan?",
-  "EVIDENCE_GUIDANCE_1": "Os bydd angen tystiolaeth arnom, byddwn yn cysylltu â chi eto i ddweud wrthych.",
-  "EVIDENCE_GUIDANCE_1_OB": "Os bydd angen tystiolaeth arnom, byddwn yn cysylltu â chi eto i ddweud wrthych.",
-  "EVIDENCE_GUIDANCE_2": "Er enghraifft, os ydych yn rhy wael i wasanaethu ar reithgor, efallai y byddwn yn gofyn am lythyr gan eich meddyg.",
-  "EVIDENCE_GUIDANCE_2_OB": "Er enghraifft, os yw'n rhy wael i wasanaethu ar reithgor, efallai y byddwn yn gofyn am lythyr doctor.",
-  "EVIDENCE_GUIDANCE_3": "Byddwch yn cael amser i gasglu unrhyw dystiolaeth felly peidiwch â phoeni am geisio ei chasglu ar hyn o bryd.",
-  "EVIDENCE_GUIDANCE_3_OB": "Bydd yn cael amser i gasglu unrhyw dystiolaeth felly peidiwch â phoeni am geisio ei chasglu ar hyn o bryd.",
-  "EVIDENCE_GUIDANCE_4": "Dylech aros nes byddwn wedi dweud wrthych pa dystiolaeth yr ydym ei hangen, os o gwbl.",
-  "EVIDENCE_GUIDANCE_4_OB": "Arhoswch nes byddwn wedi dweud wrthych pa dystiolaeth yr ydym ei hangen, os o gwbl."
+  "EVIDENCE_GUIDANCE_1": "Os oes angen tystiolaeth arnom, byddwn yn cysylltu â chi ar wahân i ddweud wrthych.",
+  "EVIDENCE_GUIDANCE_1_OB": "Os oes angen tystiolaeth arnom, byddwn yn cysylltu â chi ar wahân i ddweud wrthych.",
+  "EVIDENCE_GUIDANCE_2": "Er enghraifft, os ydych chi'n rhy sâl i wasanaethu ar reithgor, efallai y byddwn yn gofyn i chi ddarparu tystysgrif feddygol gan weithiwr gofal iechyd proffesiynol rheoledig priodol, fel meddyg, nyrs, ffisiotherapydd, fferyllydd neu therapydd galwedigaethol.",
+  "EVIDENCE_GUIDANCE_2_OB": "Er enghraifft, os ydynt yn rhy sâl i wasanaethu ar reithgor, efallai y byddwn yn gofyn i chi ddarparu tystysgrif feddygol gan weithiwr gofal iechyd proffesiynol rheoledig priodol, fel meddyg, nyrs, ffisiotherapydd, fferyllydd neu therapydd galwedigaethol.",
+  "EVIDENCE_GUIDANCE_3": "Dylech aros nes ein bod wedi dweud wrthych pa dystiolaeth sydd ei hangen arnom, os o gwbl.",
+  "EVIDENCE_GUIDANCE_3_OB": "Dylech aros nes ein bod wedi dweud wrthych pa dystiolaeth sydd ei hangen arnom, os o gwbl.",
+  "EVIDENCE_GUIDANCE_4": "Byddwch yn cael amser i gasglu unrhyw dystiolaeth, felly nid oes angen i chi boeni am geisio ei chael yn awr.",
+  "EVIDENCE_GUIDANCE_4_OB": "Byddant yn cael amser i gasglu unrhyw dystiolaeth, felly nid oes angen iddynt boeni am geisio ei chael yn awr."
 }
