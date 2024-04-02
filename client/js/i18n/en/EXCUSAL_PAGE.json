@@ -10,10 +10,10 @@
   "EVIDENCE_QUESTION_OB": "Will we need to provide evidence soon?",
   "EVIDENCE_GUIDANCE_1": "If we need evidence, we'll contact you separately to tell you.",
   "EVIDENCE_GUIDANCE_1_OB": "If we need evidence, we'll contact you separately to tell you.",
-  "EVIDENCE_GUIDANCE_2": "For example, if you're too ill for jury service, we might ask for a letter from your doctor.",
-  "EVIDENCE_GUIDANCE_2_OB": "For example, if they're too ill for jury service, we might ask for a letter from their doctor.",
-  "EVIDENCE_GUIDANCE_3": "You'll be given time to gather any evidence so do not worry about trying to gather this now.",
-  "EVIDENCE_GUIDANCE_3_OB": "They'll be given time to gather any evidence so do not worry about trying to gather this now.",
-  "EVIDENCE_GUIDANCE_4": "You should wait until we've told you what evidence we need, if any.",
-  "EVIDENCE_GUIDANCE_4_OB": "Wait until we've told you what evidence we need, if any."
+  "EVIDENCE_GUIDANCE_2": "For example, if you're too ill to do jury service, we might ask you to provide a medical certificate from an appropriate regulated healthcare professional, such as a doctor, nurse, physiotherapist, pharmacist or occupational therapist.",
+  "EVIDENCE_GUIDANCE_2_OB": "For example, if they're too ill to do jury service, we might ask you to provide a medical certificate from an appropriate regulated healthcare professional, such as a doctor, nurse, physiotherapist, pharmacist or occupational therapist.",
+  "EVIDENCE_GUIDANCE_3": "You should wait until we've told you what evidence we need, if any.",
+  "EVIDENCE_GUIDANCE_3_OB": "You should wait until we've told you what evidence we need, if any.",
+  "EVIDENCE_GUIDANCE_4": "You will be given time to gather any evidence so do not need to worry about trying to get this now.",
+  "EVIDENCE_GUIDANCE_4_OB": "They will be given time to gather any evidence so do not need to worry about trying to get this now."
 }
