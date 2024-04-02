@@ -80,7 +80,7 @@
     app.use(cookieParser());
   }
 
-  function configureSessionsDefault(app) {
+  function configureSessionsDefault(app, isProduction) {
     // Configure sessions
 
     console.log('Redis connection string not defined, using default session store');
@@ -92,6 +92,7 @@
       maxAge: sessionExpires,
       name : 'sessionId',
       cookie: {
+        secure: isProduction,
         httpOnly: true
       }
     };
@@ -103,7 +104,7 @@
 
   }
 
-  function configureSessionsRedis(app) {
+  function configureSessionsRedis(app, isProduction) {
 
     // Configure Redis connection
     console.log('Attempting to connect to redis using connection string: ');
@@ -143,8 +144,8 @@
       maxAge: sessionExpires,
       name : 'sessionId',
       cookie: {
-        //secure: true
-        httpOnly: true
+        secure: isProduction,
+        httpOnly: true,
       }
     }))
 
@@ -161,8 +162,6 @@
       paramLangName: 'clang',
       siteLangs: ['en', 'cy']
     }));
-
-    //app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/assets')));
 
     // Setup templating engine
     app.set('view engine', 'njk');
@@ -184,16 +183,15 @@
   module.exports = function(app) {
     // Used to show service title
     var serviceTitleExcludedUrls = ['/', '/start'];
+    var isProduction;
 
     // Ensure provided environment values are lowercase
     env = env.toLowerCase();
     useAuth = useAuth.toLowerCase();
     useHttps = useHttps.toLowerCase();
 
-
     // Base Path of the client folder
     app.set('appPath', path.join(config.root, 'client'));
-
 
     // Set up parts of express
     configureSecurity(app);
@@ -201,17 +199,18 @@
 
 
     console.log('Configuring session store...');
+    isProduction = env === 'production';
     try {
       redisConnectionString = secretsConfig.get('secrets.juror.public-redisConnection');
 
       if (redisConnectionString){
-        configureSessionsRedis(app);
+        configureSessionsRedis(app, isProduction);
       } else {
-        configureSessionsDefault(app);
+        configureSessionsDefault(app, isProduction);
       }
     } catch (error) {
       console.log(error);
-      configureSessionsDefault(app);
+      configureSessionsDefault(app, isProduction);
     };
 
     configureTemplating(app);
@@ -284,7 +283,6 @@
       res.locals.cookieText = filters.translate('INTERFACE.COOKIE_MESSAGE', (req.session.ulang === 'cy' ? texts_cy : texts_en));
 
       if (req.url.includes('expense-calculator')){
-        //return res.render('start-expense-calculator.njk');
         return res.redirect(app.namedRoutes.build('start-expense-calculator.get'));
       }
 
@@ -329,9 +327,6 @@
           }
         }
       }
-
-      //console.log('Cookie: ', cookie);
-      //console.log('usage', objCookie['usage']);
 
       next(); // <-- important!
     });
