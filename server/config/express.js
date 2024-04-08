@@ -93,7 +93,8 @@
       name : 'sessionId',
       cookie: {
         secure: isProduction,
-        httpOnly: true
+        sameSite: 'lax',
+        httpOnly: true,
       }
     };
 
