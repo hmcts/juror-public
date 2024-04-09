@@ -57,14 +57,11 @@
         , tmpArr
         , assistanceTmp
         , deferralDisplayDates={}
-        // , personalDetailsChangeLink
         , personalDetailsChangeNameLink
         , personalDetailsChangeAddressLink
         , personalDetailsChangeDateOfBirthLink
-        // , contactDetailsChangeLink
         , contactDetailsChangePhoneLink
         , contactDetailsChangeEmailLink
-        , _ = require('lodash')
         , thirdPartyMapping = {
           nothere: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.NOT_HERE', (req.session.ulang === 'cy' ? texts_cy : texts_en))
           , assistance: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.REQUIRE_ASSISTANCE', (req.session.ulang === 'cy' ? texts_cy : texts_en))
@@ -114,42 +111,45 @@
               return val;
             }).join(' ');
           }
-  
-          //Try and parse date for hearing
+
+          // Parse date for hearing
           try {
-            if (!moment(response['hearingDate']).isValid()) {
+            if (!moment(response['hearingDate'], 'YYYY-MM-DD').isValid()) {
               throw 'Invalid hearing date format. MomentJS could not parse: "' + response['hearingDate'] + '"';
             }
-            req.session.user['hearingDate'] = moment(response['hearingDate']).format('dddd Do MMMM YYYY');
+            req.session.user['hearingDate'] = moment(response['hearingDate'], 'YYYY-MM-DD').format('dddd Do MMMM YYYY');
           } catch (err) {
-            app.logger.debug('Hearing date could not be parsed by momentjs', err);
+            app.logger.crit('Hearing date could not be parsed by momentjs', err);
             req.session.user['hearingDate'] = '';
           }
-  
+
+          // Parse time for hearing
           if (!req.session.user['hearingTime']) {
-            if (moment(response['courtAttendTime']).isValid()) {
-              req.session.user['hearingTime'] = moment(response['courtAttendTime']).format('HH:mm a');
-            } else if (moment(response['courtAttendTime'], 'HH:mm').isValid()) {
+            try {
+              if (!moment(response['courtAttendTime'], 'HH:mm').isValid()) {
+                throw 'Invalid hearing time format. MomentJS could not parse: "' + response['courtAttendTime'] + '"';
+              }
               req.session.user['hearingTime'] = moment(response['courtAttendTime'], 'HH:mm').format('HH:mm a');
+            } catch (err) {
+              app.logger.crit('Hearing time could not be parsed by momentjs', err);
+              req.session.user['hearingTime'] = '';
             }
           }
-  
+
           // merge updated user into session
           mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
-  
+
           app.logger.info('Fetched and parsed summoned details required for pdf download', {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
             response: response
           });
-  
+
           return res.render('steps/07-confirm-information/index.njk', {
             user: mergedUser,
-            //personalDetailsChangeLink: personalDetailsChangeLink,
             personalDetailsChangeNameLink: personalDetailsChangeNameLink,
             personalDetailsChangeAddressLink: personalDetailsChangeAddressLink,
             personalDetailsChangeDateOfBirthLink: personalDetailsChangeDateOfBirthLink,
-            // contactDetailsChangeLink: contactDetailsChangeLink,
             contactDetailsChangePhoneLink: contactDetailsChangePhoneLink,
             contactDetailsChangeEmailLink: contactDetailsChangeEmailLink,
             errors: {
@@ -161,8 +161,6 @@
           });
         }
 
-      // Temp log session
-      app.logger.debug('Check Answers page load - session data:', JSON.stringify(req.session));
 
       //reset value for conventional route vs edit route
       if (req.session.change === true){
@@ -277,23 +275,11 @@
         delete mergedUser.informationConfirmed;
       }
 
-      /*
-      if (req.session.user.ineligibleDeceased || req.session.user.ineligibleAge) {
-        //adds court details to session
-        jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
-          .then(getDetailsSuccess, getDetailsError)
-          .catch(getDetailsError);
-      }
-      */
-
-      // Get correct link for changing personal details
-      // of summoned juror
+      // Links for changing personal details of summoned juror
       if (req.session.user.thirdParty === 'Yes') {
-        //personalDetailsChangeLink = app.namedRoutes.build('branches.third.party.personal.details.change.get');
         personalDetailsChangeNameLink = app.namedRoutes.build('branches.third.party.personal.details.name.change.get');
         personalDetailsChangeAddressLink = app.namedRoutes.build('branches.third.party.personal.details.address.change.get');
         personalDetailsChangeDateOfBirthLink = app.namedRoutes.build('branches.third.party.personal.details.date-of-birth.change.get');
-        //contactDetailsChangeLink = app.namedRoutes.build('branches.third.party.contact.details.change.get');
         contactDetailsChangePhoneLink = app.namedRoutes.build('branches.third.party.contact.details.change.get');
         contactDetailsChangeEmailLink = app.namedRoutes.build('branches.third.party.contact.details.change.get');
       } else {
@@ -303,7 +289,6 @@
         contactDetailsChangePhoneLink = app.namedRoutes.build('steps.your.details.phone.change.get');
         contactDetailsChangeEmailLink = app.namedRoutes.build('steps.your.details.email.change.get');
       }
-
 
       //Final checks for Excusal
       if (req.session.user.confirmedDate === 'No'){
@@ -389,11 +374,9 @@
       } else {
         return res.render('steps/07-confirm-information/index.njk', {
           user: mergedUser,
-          //personalDetailsChangeLink: personalDetailsChangeLink,
           personalDetailsChangeNameLink: personalDetailsChangeNameLink,
           personalDetailsChangeAddressLink: personalDetailsChangeAddressLink,
           personalDetailsChangeDateOfBirthLink: personalDetailsChangeDateOfBirthLink,
-          // contactDetailsChangeLink: contactDetailsChangeLink,
           contactDetailsChangePhoneLink: contactDetailsChangePhoneLink,
           contactDetailsChangeEmailLink: contactDetailsChangeEmailLink,
           deferralDisplayDates: deferralDisplayDates,
