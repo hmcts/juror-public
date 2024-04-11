@@ -8,6 +8,7 @@
       "public-jwtTTL": "8h",
       "public-pcqTokenKey": "key",
       "public-redisConnection": "",
+      "public-dynatraceScriptUrl": "",
       "app-insights-connection-string": "",
       "launchDarklyKey": ""
     }

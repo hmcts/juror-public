@@ -7,6 +7,7 @@
       "public-jwtKeyBureau": "[super-secret-key-bureau][super-secret-key-bureau][super-secret-key-bureau]",
       "public-jwtTTL": "8h",
       "public-pcqTokenKey": "key",
+      "public-dynatraceScriptUrl": "",
       "app-insights-connection-string": "",
       "launchDarklyKey": ""
     }

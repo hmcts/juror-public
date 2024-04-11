@@ -24,6 +24,7 @@
     , redisStore
     , redisClient
     , redisConnectionString = ''
+    , dynatraceScriptUrl = ''
 
     , filters = require('../components/filters')
     , texts_en = require('../../client/js/i18n/en.json')
@@ -52,10 +53,10 @@
       directives: {
         defaultSrc: ['\'self\'', 'https://vcc-eu4.8x8.com', '*.google-analytics.com'],
         styleSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://fonts.googleapis.com', 'https://vcc-eu4.8x8.com', '\'unsafe-inline\''],
-        scriptSrc: ['\'self\'', 'cdnjs.cloudflare.com', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://vcc-eu4.8x8.com', '\'unsafe-inline\''],
+        scriptSrc: ['\'self\'', 'cdnjs.cloudflare.com', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://vcc-eu4.8x8.com', 'https://*.dynatrace.com', '\'unsafe-inline\''],
         fontSrc: ['\'self\'', 'https://fonts.gstatic.com', 'data:'],
         imgSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://ssl.gstatic.com', 'https://www.gstatic.com', 'https://vcc-eu4.8x8.com', 'https://fonts.gstatic.com', 'data:'],
-        connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net']
+        connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net', 'https://*.dynatrace.com']
       }
     }));
     app.use(helmet.dnsPrefetchControl());
@@ -214,6 +215,16 @@
       configureSessionsDefault(app, isProduction);
     };
 
+    // Get Dynatrace script url
+    try {
+      dynatraceScriptUrl = secretsConfig.get('secrets.juror.public-dynatraceScriptUrl');
+    } catch (error) {
+      console.log('Error retrieving Dynatrace script url: ', error);
+    }
+    if (!dynatraceScriptUrl){
+      console.log('Dynatrace script url not defined');
+    }
+
     configureTemplating(app);
 
     // Send data to all views
@@ -222,6 +233,7 @@
       res.locals.releaseVersion = 'v' + releaseVersion;
       res.locals.csrftoken = req.csrfToken();
       res.locals.trackingCode = config.trackingCode;
+      res.locals.dynatraceScriptUrl = dynatraceScriptUrl;
 
       // eslint-disable-next-line
       res.locals.cookieText = filters.translate('INTERFACE.COOKIE_MESSAGE', (req.session.ulang === 'cy' ? texts_cy : texts_en));
