@@ -24,6 +24,11 @@
       })(window,document,'script','dataLayer','{{trackingCode}}');</script>
       <!-- End Google Tag Manager -->
     {% endif %}
+
+    {# Load Dynatrace script if url is configured #}
+    {% if dynatraceScriptUrl %}
+      <script type="text/javascript" src="{{dynatraceScriptUrl}}" crossorigin="anonymous"></script>
+    {% endif %}
     
     {% block headIcons %}
       <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ assetPath | default('/assets') }}assets/images/favicon.ico" type="image/x-icon" />
