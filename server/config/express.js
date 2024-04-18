@@ -7,7 +7,7 @@
 
   var express = require('express')
     , session = require('express-session')
-    , nunjucks = require('express-nunjucks')
+    , nunjucks = require('express-nunjucks').default
     , njk = require('nunjucks')
     , cookieParser = require('cookie-parser')
     , csrf = require('csurf')
