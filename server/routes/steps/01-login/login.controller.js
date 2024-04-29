@@ -100,10 +100,7 @@
             }
             return res.redirect(app.namedRoutes.build('steps.your.details.get'));
           });
-
-          // Temp log session details
-          app.logger.debug('SessionID: ', req.sessionID);
-          app.logger.debug('User authenticated - session data:', JSON.stringify(req.session));
+   
 
         }
 
@@ -114,7 +111,7 @@
             jurorLastName: req.body.jurorLastName,
             jurorPostcode: req.body.jurorPostcode,
             jwt: req.session.authToken,
-            error: (typeof err.originalError.error !== 'undefined') ? err.originalError.error : err.originalError
+            error: (typeof err.originalError !== 'undefined') ? err.originalError : err
           });
 
           // Add error feedback

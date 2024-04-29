@@ -1,41 +1,19 @@
 ;(function() {
   'use strict';
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , config = require('../config/environment')()
-    , utils = require('../lib/utils')
-    , options = {
-      uri: config.apiEndpoint,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      json: true,
-      transform: utils.basicDataTransform,
-      resolveWithFullResponse: true,
-    };
+  const { axiosInstance } = require('./axios-instance');
 
-  module.exports.object = {
+  module.exports.auth = {
     resource: 'auth/juror',
-    post: function(rp, app, jwtToken, body) {
-      // Deep clone object to make changes in only this scope.
-      var reqOptions = _.clone(options);
 
-      // Custom request options for this request
-      reqOptions.headers.Authorization = jwtToken;
-      reqOptions.method = 'POST';
-      reqOptions.uri = urljoin(reqOptions.uri, this.resource);
-      reqOptions.body = body;
+    post: function(app, jwtToken, userDetails) {
 
-      app.logger.debug('Sending request to API: ', {
-        uri: reqOptions.uri,
-        headers: reqOptions.headers,
-        body: reqOptions.body,
-      });
+      let url = this.resource;
+      let options = {'method': 'post'};
 
-      // Will return a promise
-      return rp(reqOptions);
+      options.data = userDetails;
+
+      return axiosInstance(url, app, jwtToken, options);
     }
   };
 

@@ -26,8 +26,8 @@
       timeout: 5000,
       headers: {
         'Content-type': 'application/vnd.api+json',
-        Accept: 'application/json',
-        Authorization: jwtToken,
+        'Accept': 'application/json',
+        'Authorization': jwtToken,
       },
     });
     let data = {};
