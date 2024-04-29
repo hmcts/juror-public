@@ -5,7 +5,7 @@
 
     , secretsConfig = require('config')
     , errors = require('../errors')
-    , authObj = require('../../objects/auth').object
+    , auth = require('../../objects/auth').auth
     , msgMappingsEn = require('../errors/message-mapping_en')
     , msgMappingsCy = require('../errors/message-mapping_cy')
 
@@ -30,7 +30,7 @@
     }
 
     , authenticate = function(req, app, successCB, errorCB) {
-      var userObj = {
+      var userDetails = {
           jurorNumber: req.body.jurorNumber,
           lastName: req.body.jurorLastName,
           postcode: req.body.jurorPostcode,
@@ -47,28 +47,33 @@
           return successCB(resp);
         }
         , authFailure = function(err) {
-          var errJson = { statusCode: err.statusCode, error: 'USER_NOT_FOUND', originalError: err }
+
+          var errJson = {}
             , identifiedErr
             , logonMsgs = (req.session.ulang === 'cy' ? msgMappingsCy : msgMappingsEn).logon;
 
-          // Map the provided error message to our identifiers
-          Object.keys(logonMsgs).forEach(function(key) {
-            if (typeof err.error !== 'undefined' && key === err.error.message) {
-              identifiedErr = key + (req.session.user.thirdParty === 'Yes' ? '_thirdParty' : '');
+          if (err.response) {
+            errJson = { statusCode: err.response.status, error: 'USER_NOT_FOUND', originalError: err.response.data }
+
+            // Map the provided error message to our identifiers
+            Object.keys(logonMsgs).forEach(function(key) {
+              if (typeof err.response.data !== 'undefined' && key === err.response.data.message) {
+                identifiedErr = key + (req.session.user.thirdParty === 'Yes' ? '_thirdParty' : '');
+              }
+            });
+
+            // Set the returned error message to this identifier
+            if (typeof identifiedErr !== 'undefined') {
+              errJson.error = identifiedErr;
             }
-          });
-
-          // Set the returned error message to this identifier
-          if (typeof identifiedErr !== 'undefined') {
-            errJson.error = identifiedErr;
           }
-
+          
           // Return the error as an identifier
           return errorCB(errJson);
         };
 
       // Send request using auth request object
-      return authObj.post(require('request-promise'), app, req.session.authToken, userObj)
+      return auth.post(app, req.session.authToken, userDetails)
         .then(authSuccess)
         .catch(authFailure);
     }
