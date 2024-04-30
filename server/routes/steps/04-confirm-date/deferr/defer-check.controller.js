@@ -4,9 +4,9 @@
   var _ = require('lodash')
     , validate = require('validate.js')
     , filters = require('../../../../components/filters')
-    , texts_en = require('../../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../../client/js/i18n/cy.json')
-    , deferralHolidayObj = require('../../../../objects/deferralHoliday').object
+    , textsEn = require('../../../../../client/js/i18n/en.json')
+    , textsCy = require('../../../../../client/js/i18n/cy.json')
+    , deferralHoliday = require('../../../../objects/deferralHoliday').deferralHoliday
     , utils = require('../../../../lib/utils')
     , moment = require('moment');
 
@@ -15,7 +15,6 @@
       var tmpErrors
         , mergedUser
         , backLinkUrl
-        , deferralDate
         , displayDates={};
 
       // Merge and then delete form fields and errors, prevents retention after pressing back link
@@ -40,7 +39,7 @@
         user: mergedUser,
         displayDates: displayDates,
         errors: {
-          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
           message: '',
           count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
           items: tmpErrors,
@@ -61,8 +60,7 @@
           var redirectUrl
             , dateMatchesCount;
 
-          //console.log('API Success');
-          //console.log(JSON.stringify(response));
+          app.logger.debug('Holiday dates API response: ', JSON.stringify(response));
 
           dateMatchesCount = response.matchingHolidayDates.publicHolidayDates.length;
 
@@ -77,7 +75,6 @@
             } else {
               redirectUrl = utils.getRedirectUrl('steps.assistance', req.session.user.thirdParty);
             }
-
           }
 
           return res.redirect(app.namedRoutes.build(redirectUrl));
@@ -87,8 +84,9 @@
         , checkDatesError = function(err) {
           var redirectUrl;
 
-          console.log('Error calling Holiday Dates API');
-          console.log(err);
+          app.logger.crit('Error calling Holiday Dates API: ', {
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
+          });
 
           req.session.user.deferral['deferralDatesPublicHoliday'] = false;
 
@@ -120,7 +118,9 @@
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
-        return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirm.date.deferral-check', req.session.user.thirdParty)));
+        return res.redirect(app.namedRoutes.build(
+          utils.getRedirectUrl('steps.confirm.date.deferral-check', req.session.user.thirdParty)
+        ));
       }
 
       // parse radio selection
@@ -134,7 +134,7 @@
       if (dateCheckProceed === false){
         // return to defer dates page
         redirectUrl = utils.getRedirectUrl('steps.confirm.date.deferral-dates', req.session.user.thirdParty);
-        res.redirect(app.namedRoutes.build(redirectUrl));
+        return res.redirect(app.namedRoutes.build(redirectUrl));
       }
 
       // format deferral dates as JSON data object to pass to API
@@ -149,12 +149,12 @@
       }
 
       holidayAPIData = {
-        'holidaysDate': deferralDateList
-      }
+        'holidaysDate': deferralDateList,
+      };
 
       // call API
-      deferralHolidayObj.post(require('request-promise'), app, holidayAPIData, req.session.authToken)
-        .then(checkDatesSuccess, checkDatesError)
+      deferralHoliday.post(app, holidayAPIData, req.session.authToken)
+        .then(checkDatesSuccess)
         .catch(checkDatesError);
 
     };

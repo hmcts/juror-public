@@ -1,41 +1,21 @@
 ;(function(){
   'use strict';
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , config = require('../config/environment')()
-    , utils = require('../lib/utils')
-    , options = {
-      uri: config.apiEndpoint,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      json: true,
-      transform: utils.basicDataTransform
-    }
+  const { axiosInstance } = require('./axios-instance');
 
-    , deferralHoidayObject = {
-      resource: 'public/deferral-dates',
-      post: function(rp, app, deferralDates, jwt) {
-        var reqOptions = _.clone(options);
+  const deferralHoliday = {
+    resource: 'public/deferral-dates',
+    post: function(app, deferralDates, jwtToken) {
 
-        reqOptions.headers.Authorization = jwt;
-        reqOptions.uri = urljoin(reqOptions.uri, this.resource);
-        reqOptions.body = deferralDates;
-        reqOptions.method = 'POST';
+      let url = this.resource;
+      let options = {'method': 'post'};
 
-        app.logger.debug('Sending request to API: ', {
-          uri: reqOptions.uri,
-          headers: reqOptions.headers,
-          body: reqOptions.body,
-        });
+      options.data = deferralDates;
 
-        return rp(reqOptions);
-      }
-    };
+      return axiosInstance(url, app, jwtToken, options);
+    },
+  };
 
-
-  module.exports.object = deferralHoidayObject;
+  module.exports.deferralHoliday = deferralHoliday;
 
 })();
