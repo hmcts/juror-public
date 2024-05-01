@@ -8,12 +8,10 @@
   var _ = require('lodash')
     , jwt = require('jsonwebtoken')
     , secretsConfig = require('config')
-    , expenseCalculatorObj = require('../../../objects/expenseCalculator').object
-    , validate = require('validate.js')
+    , expenseCalculatorObj = require('../../../objects/expenseCalculator').expenseCalculator
     , filters = require('../../../components/filters')
-    , texts_en = require('../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , utils = require('../../../lib/utils');
+    , textsEn = require('../../../../client/js/i18n/en.json')
+    , textsCy = require('../../../../client/js/i18n/cy.json');
 
   module.exports.index = function(app) {
     return function(req, res) {
@@ -41,25 +39,25 @@
       changeLinks.travelCar = app.namedRoutes.build('expense.calculator.travel.car.change.get');
       changeLinks.travelMotorcycle = app.namedRoutes.build('expense.calculator.travel.motorcycle.change.get');
       changeLinks.travelParking = app.namedRoutes.build('expense.calculator.travel.parking.get');
-      changeLinks.travelPublicTransport = app.namedRoutes.build('expense.calculator.travel.public.transport.change.get');
+      changeLinks.travelPublicTransport =
+        app.namedRoutes.build('expense.calculator.travel.public.transport.change.get');
 
       return res.render('expense-calculator/confirm-information/index.njk', {
         user: mergedUser,
         changeLinks: changeLinks,
         errors: {
-          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
           message: '',
           count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
           items: tmpErrors,
-        }
+        },
       });
     };
   };
 
   module.exports.create = function(app) {
     return function(req, res) {
-      var validatorResult
-        , expenseData
+      var expenseData
         , travelData
         , jwtToken
         , apiUserObj
@@ -67,7 +65,7 @@
         , createExpenseCalculatorSuccess = function(response) {
           app.logger.info('Expense calculator submission succeeded', {
             jwt: req.session.authToken,
-            response: response
+            response: response,
           });
 
           // Convert rates from pounds to pence for display
@@ -88,19 +86,19 @@
         }
 
         , createExpenseCalculatorFailure = function(err) {
-          if (err.statusCode === 409 || err.statusCode === 304) {
+          if (err.response.status === 409 || err.response.status === 304) {
             app.logger.info('Expense Calculation submission detected a conflict', {
               jwt: jwtToken,
-              error: (typeof err.error !== 'undefined') ? err.error : err,
+              error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
             });
 
             return res.redirect(app.namedRoutes.build('expense.calculator.confirm.information.get'));
           }
 
           // Catch error
-          app.logger.crit('Expense Calculation submission failed with error ' + err.statusCode, {
+          app.logger.crit('Expense Calculation submission failed with error ' + err.response.status, {
             jwt: jwtToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err,
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
           });
 
           return res.redirect(app.namedRoutes.build('expense.calculator.confirm.information.get'));
@@ -110,40 +108,29 @@
       delete req.session.errors;
       delete req.session.formFields;
 
-      // Validate form submission
-      /*
-      validatorResult = validate(req.body, require('../../../config/validation/confirm-information')(req));
-      if (typeof validatorResult !== 'undefined') {
-        req.session.errors = validatorResult;
-        req.session.formFields = req.body;
-
-        return res.redirect(app.namedRoutes.build('expense.calculator.confirm.information.get'));
-      }
-      */
-
       travelData = [];
       if (req.session.user['travelBicycle'] === true){
         travelData.push({
           modeOfTravel: 'bicycle',
-          dailyMiles: req.session.user['bicycleMiles']
+          dailyMiles: req.session.user['bicycleMiles'],
         });
       }
       if (req.session.user['travelCar'] === true){
         travelData.push({
           modeOfTravel: 'car',
-          dailyMiles: req.session.user['carMiles']
+          dailyMiles: req.session.user['carMiles'],
         });
       }
       if (req.session.user['travelMotorcycle'] === true){
         travelData.push({
           modeOfTravel: 'motorcycle',
-          dailyMiles: req.session.user['motorcycleMiles']
+          dailyMiles: req.session.user['motorcycleMiles'],
         });
       }
       if (req.session.user['travelPublicTransport'] === true){
         travelData.push({
           modeOfTravel: 'public',
-          dailyCost: req.session.user['publicTransportAmount']
+          dailyCost: req.session.user['publicTransportAmount'],
         });
       }
       if (req.session.user['travelWalking'] === true){
@@ -159,8 +146,8 @@
         dailyEarnings : req.session.user['earningsAmount'],
         extraCosts: convertBooleanString(req.session.user['extraCosts']),
         extraCostsAmount: req.session.user['extraCostsAmount'],
-        travellingModes: travelData
-      }
+        travellingModes: travelData,
+      };
 
       // Create user object for JWT
       apiUserObj = {
@@ -172,33 +159,17 @@
           name: 'AUTO',
           rank: -1,
           active: 1,
-          courts: []
-        }
-      }
+          courts: [],
+        },
+      };
 
       // Create JWT
-      jwtToken = jwt.sign(apiUserObj, secretsConfig.get('secrets.juror.public-jwtKeyBureau'), { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
+      jwtToken = jwt.sign(apiUserObj, secretsConfig.get('secrets.juror.public-jwtKeyBureau'),
+        { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
-      // Send the calculation request to the api
-      expenseCalculatorObj.create(require('request-promise'), app, jwtToken, expenseData)
+      expenseCalculatorObj.post(app, jwtToken, expenseData)
         .then(createExpenseCalculatorSuccess, createExpenseCalculatorFailure)
         .catch(createExpenseCalculatorFailure);
-    };
-  };
-
-  module.exports.createOLD = function(app) {
-    return function(req, res) {
-      // Validate form submission
-      var validatorResult
-        , redirectUrl = '';
-
-      // Reset error and saved field sessions
-      delete req.session.errors;
-      delete req.session.formFields;
-
-
-      return res.redirect(app.namedRoutes.build('expense.calculator.total.get'));
-
     };
   };
 
@@ -215,6 +186,5 @@
 
     return boolString;
   };
-
 
 })();
