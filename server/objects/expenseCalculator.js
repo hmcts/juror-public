@@ -1,42 +1,21 @@
 ;(function(){
   'use strict';
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , config = require('../config/environment')()
-    , utils = require('../lib/utils')
-    , options = {
-      uri: config.apiEndpoint,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      json: true,
-      transform: utils.basicDataTransform
-    }
+  const { axiosInstance } = require('./axios-instance');
 
-    , expenseCalculatorObject = {
-      resource: 'bureau/expenseCalculator/estimate',
-      create: function(rp, app, jwtToken, body) {
-        var reqOptions = _.clone(options);
+  const expenseCalculator = {
+    resource: 'bureau/expenseCalculator/estimate',
+    post: function(app, jwtToken, expenseData) {
 
-        reqOptions.transform = null;
-        reqOptions.headers.Authorization = jwtToken;
-        reqOptions.uri = urljoin(reqOptions.uri, this.resource);
-        reqOptions.body = body;
-        reqOptions.method = 'POST';
+      let url = this.resource;
+      let options = {'method': 'post'};
 
-        app.logger.debug('Sending request to API: ', {
-          uri: reqOptions.uri,
-          headers: reqOptions.headers,
-          body: reqOptions.body,
-        });
+      options.data = expenseData;
 
-        return rp(reqOptions);
-      },
-    };
+      return axiosInstance(url, app, jwtToken, options);
+    },
+  };
 
-
-  module.exports.object = expenseCalculatorObject;
+  module.exports.expenseCalculator = expenseCalculator;
 
 })();
