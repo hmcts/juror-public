@@ -4,9 +4,9 @@
   var fse = require('fs-extra')
     , _ = require('lodash')
     , moment = require('moment')
-    , texts_en = require('../../client/js/i18n/en.json')
-    , texts_cy = require('../../client/js/i18n/cy.json')
-    , specialNeedsMappings = {
+    , textsEn = require('../../client/js/i18n/en.json')
+    , textsCy = require('../../client/js/i18n/cy.json')
+    , assistanceTypeCodes = {
       'SEVERE SIGHT IMPAIRMENT': 'V',
       'NAM DIFRIFOL AR EICH GOLWG': 'V',
       'NAM DIFRIFOL AR EI OLWG': 'V',
@@ -21,7 +21,7 @@
       'LEARNING DISABILITY': 'R',
       'ANABLEDD DYSGU': 'R',
       'LIMITED MOBILITY': 'L',
-      'SYMUDEDD CYFYNGEDIG': 'L'
+      'SYMUDEDD CYFYNGEDIG': 'L',
     };
 
   /// Will require HTTP basic auth username and password
@@ -124,19 +124,19 @@
     if (typeof responseObject.qualify !== 'undefined') {
       postObj.qualify = {
         'livedConsecutive': {
-          'answer': checkValue(responseObject, 'qualify.livedConsecutive.answer', (lang === 'cy' ? texts_cy.QUALIFY_PAGE.YES : texts_en.QUALIFY_PAGE.YES)),
+          'answer': checkValue(responseObject, 'qualify.livedConsecutive.answer', (lang === 'cy' ? textsCy.QUALIFY_PAGE.YES : textsEn.QUALIFY_PAGE.YES)),
           'details': fetchValue(responseObject, 'qualify.livedConsecutive.details'),
         },
         'mentalHealthAct': {
-          'answer': checkValue(responseObject, 'qualify.mentalHealthAct.answer', (lang === 'cy' ? texts_cy.QUALIFY_PAGE.YES : texts_en.QUALIFY_PAGE.YES)),
+          'answer': checkValue(responseObject, 'qualify.mentalHealthAct.answer', (lang === 'cy' ? textsCy.QUALIFY_PAGE.YES : textsEn.QUALIFY_PAGE.YES)),
           'details': fetchValue(responseObject, 'qualify.mentalHealthAct.details'),
         },
         'onBail': {
-          'answer': checkValue(responseObject, 'qualify.onBail.answer', (lang === 'cy' ? texts_cy.QUALIFY_PAGE.YES : texts_en.QUALIFY_PAGE.YES)),
+          'answer': checkValue(responseObject, 'qualify.onBail.answer', (lang === 'cy' ? textsCy.QUALIFY_PAGE.YES : textsEn.QUALIFY_PAGE.YES)),
           'details': fetchValue(responseObject, 'qualify.onBail.details'),
         },
         'convicted': {
-          'answer': checkValue(responseObject, 'qualify.convicted.answer', (lang === 'cy' ? texts_cy.QUALIFY_PAGE.YES : texts_en.QUALIFY_PAGE.YES)),
+          'answer': checkValue(responseObject, 'qualify.convicted.answer', (lang === 'cy' ? textsCy.QUALIFY_PAGE.YES : textsEn.QUALIFY_PAGE.YES)),
           'details': fetchValue(responseObject, 'qualify.convicted.details'),
         }
       };
@@ -180,8 +180,8 @@
         postObj.emailAddress = postObj.thirdParty.emailAddress;
       }
     }
-    
-    
+
+
     // CJS employer
     // -----------------------
     if (typeof responseObject.cjsEmployer !== 'undefined') {
@@ -223,30 +223,30 @@
         postObj.cjsEmployment.push({
           cjsEmployer: employerName,
           cjsEmployerDetails: details,
-        })
+        });
       });
     }
 
-    // Special Needs
+    // Reasonable addjustments
     // -----------------------
     if (typeof responseObject.assistanceType !== 'undefined' && responseObject.assistanceType.length > 0) {
-      postObj.specialNeeds = [];
+      postObj.reasonableAdjustments = [];
 
       // If only one result, ensure it is an array
       if (typeof responseObject.assistanceType !== 'object') {
         responseObject.assistanceType = [responseObject.assistanceType];
       }
 
-      responseObject.assistanceType.forEach(function(specialNeed) {
-        if (specialNeed === 'Other') {
-          postObj.specialNeeds.push({
-            assistanceType: specialNeedsMappings['OTHER'],
+      responseObject.assistanceType.forEach(function(assitanceTypeItem) {
+        if (assitanceTypeItem === 'Other') {
+          postObj.reasonableAdjustments.push({
+            assistanceType: assistanceTypeCodes['OTHER'],
             assistanceTypeDetails: responseObject.assistanceTypeDetails,
           });
         } else {
-          postObj.specialNeeds.push({
-            assistanceType: specialNeedsMappings[specialNeed.toUpperCase()],
-            assistanceTypeDetails: specialNeedsMappings[specialNeed.toUpperCase()],
+          postObj.reasonableAdjustments.push({
+            assistanceType: assistanceTypeCodes[assitanceTypeItem.toUpperCase()],
+            assistanceTypeDetails: assistanceTypeCodes[assitanceTypeItem.toUpperCase()],
           });
         }
       });
@@ -257,7 +257,7 @@
     // -----------------------
     if (typeof postObj.dobYear !== 'undefined' && postObj.dobYear.length > 0) {
       postObj.dateOfBirth = moment(postObj.dobYear + '-' + postObj.dobMonth + '-' + postObj.dobDay, 'YYYY-MM-DD')
-      .format('YYYY-MM-DD[T]HH:mm:ss');
+        .format('YYYY-MM-DD[T]HH:mm:ss');
     }
 
 
@@ -307,7 +307,7 @@
       delete postObj.deferral;
       delete postObj.excusal;
       delete postObj.cjsEmployment;
-      delete postObj.specialNeeds;
+      delete postObj.reasonableAdjustments;
       delete postObj.assistanceSpecialArrangements;
     }
 
@@ -334,12 +334,12 @@
 
       delete postObj.cjsEmployment;
 
-      delete postObj.specialNeeds;
+      delete postObj.reasonableAdjustments;
       delete postObj.assistanceSpecialArrangements;
     }
 
     return postObj;
-  }
+  };
 
 
   function checkQualifyCompletedResidency(userData) {
@@ -357,7 +357,7 @@
       userData.qualify.livedConsecutive.answer === 'No' && (
         typeof userData.qualify.livedConsecutive.details === 'undefined' ||
         userData.qualify.livedConsecutive.details.length === 0
-    )) {
+      )) {
       return false;
     }
 
