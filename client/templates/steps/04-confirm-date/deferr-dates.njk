@@ -144,7 +144,7 @@
 
   <script type="text/javascript" src="{{ assetPath }}js/ds-datepicker.js"></script>
 
-  <script type="text/javascript">
+  <script type="text/javascript" nonce="{{ nonce }}">
     $(document).ready(function(){
 
       const datePickers = [].slice.call(document.querySelectorAll('[data-module="ds-datepicker"]'));

@@ -35,7 +35,7 @@
   {% include "../includes/scripts-gds.njk" %}
 
   <!-- Init GDS toolkit =-->
-  <script>
+  <script nonce="{{ nonce }}">
     $(document).ready(function () {
       window.GOVUKFrontend.initAll();
     })
