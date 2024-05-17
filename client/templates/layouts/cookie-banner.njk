@@ -22,7 +22,7 @@
           {{ texts.COOKIE_BANNER.BUTTON_REJECT }}
         </button>
 
-        <a class="govuk-link" href="#" onclick="document.getElementById('cookieBannerForm').submit();">{{ texts.COOKIE_BANNER.BUTTON_VIEW_COOKIES }}</a>
+         <a id="cookiesViewLink" class="govuk-link" href="#">{{ texts.COOKIE_BANNER.BUTTON_VIEW_COOKIES }}</a>
       </div>
     </div>
 
@@ -94,6 +94,11 @@
       document.querySelector('#cookieRejectMessage').removeAttribute("hidden");
       //window.location.reload(true);
       //event.preventDefault();
+    });
+    
+    document.querySelector('#cookiesViewLink').addEventListener('click', function(event){
+      // submit the banner form
+      document.getElementById('cookieBannerForm').submit();
     });
 
     document.querySelector('#hideAcceptedMessageButton').addEventListener('click', function(event){
