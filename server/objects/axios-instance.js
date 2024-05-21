@@ -12,6 +12,15 @@
     withHeaders: (response) => {
       return { 'headers': response.headers, 'data': response.data };
     },
+    getSingle: (response) => {
+      var returnData = response.data;
+
+      if (_.isArray(returnData)) {
+        returnData = returnData.data[0];
+      };
+
+      return returnData;
+    },
   };
 
   const defaultOptions = {

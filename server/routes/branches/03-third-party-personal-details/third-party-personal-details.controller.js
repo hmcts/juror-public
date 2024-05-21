@@ -12,7 +12,7 @@
     , filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , jurorObj = require('../../../objects/juror').object
+    , jurorDetails = require('../../../objects/juror').jurorDetails
     , utils = require('../../../lib/utils');
 
 
@@ -81,17 +81,17 @@
         }
 
         , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.statusCode, {
+          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
           });
 
           res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
         };
 
 
-      jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
+      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };
@@ -189,17 +189,17 @@
         }
 
         , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.statusCode, {
+          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
           });
 
           res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
         };
 
 
-      jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
+      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };
@@ -315,17 +315,17 @@
         }
 
         , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.statusCode, {
+          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
           });
 
           res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
         };
 
 
-      jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
+      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };
@@ -424,17 +424,17 @@
         }
 
         , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.statusCode, {
+          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
           });
 
           res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
         };
 
 
-      jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
+      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };
@@ -536,17 +536,17 @@
         }
 
         , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.statusCode, {
+          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
           });
 
           res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
         };
 
 
-      jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
+      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };

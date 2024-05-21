@@ -3,7 +3,7 @@
 
   var secretsConfig = require('config')
     , errors = require('../errors')
-    , appSettingsObj = require('../../objects/appSettings').object
+    , appSettingsObj = require('../../objects/appSettings').appSettings
     , pcqServiceObj = require('../../objects/pcqService').object
     , { v4: uuidv4 } = require('uuid')
     , crypto = require('crypto')
@@ -69,7 +69,7 @@
             serviceReturnUrl: null
           };
 
-          response.forEach(function(res) {
+          response.data.forEach(function(res) {
             switch (res.setting){
             case 'PCQ_SERVICE_ENABLED':
               pcqServiceEnabled = (res.value === 'TRUE');
@@ -100,15 +100,15 @@
           return successCB(proceedWithPCQ);
 
         }
-        , pcqAppSettingsFailed = function(response) {
-          app.logger.info('Get PCQ APP_SETTINGS failed: ', response);
+        , pcqAppSettingsFailed = function(err) {
+          app.logger.info('Get PCQ APP_SETTINGS failed: ', err.response.data);
           return errorCB(false);
         }
 
       if ((!req.session['pcqId']) && (isThirdParty === false)){
       // Send request
         app.logger.info('Get PCQ APP_SETTINGS');
-        appSettingsObj.get(require('request-promise'), app)
+        appSettingsObj.get(app)
           .then(pcqAppSettingsResponse)
           .catch(pcqAppSettingsFailed);
       } else {
@@ -187,8 +187,8 @@
           return skipPCQ(req, app, res);
         };
 
-      req.session.pcqSettings = {};
-      req.session.pcqSettings.pcqId = pcqId;
+      //req.session.pcqSettings = {};
+      //req.session.pcqSettings.pcqId = pcqId;
 
       // Send request
       return pcqServiceObj.getHealth(require('request-promise'), app)

@@ -1,52 +1,24 @@
 ;(function(){
   'use strict';
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , config = require('../config/environment')()
-    , utils = require('../lib/utils')
-    , options = {
-      uri: config.apiEndpoint,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      json: true,
-      transform: utils.basicDataTransform
-    }
+  const { axiosInstance } = require('./axios-instance');
 
-  , getSingleTransform = function(body) {
-    var tmpBody = body;
+  var urljoin = require('url-join');
 
-    if (tmpBody.hasOwnProperty('data') && _.isArray(tmpBody.data)) {
-      tmpBody = tmpBody.data[0];
-    } else if (_.isArray(tmpBody)) {
-      tmpBody = tmpBody[0];
-    }
-
-    return tmpBody;
-  }
-
-  , responseObject = {
+  const jurorDetails = {
     resource: 'public/juror',
-    get: function(rp, app, id, jwt) {
-      var reqOptions = _.clone(options);
+    get: function(app, jurorNumber, jwtToken) {
 
-      reqOptions.headers.Authorization = jwt;
-      reqOptions.transform = getSingleTransform;
-      reqOptions.uri = urljoin(reqOptions.uri, this.resource, id);
+      let url = urljoin(this.resource, jurorNumber);
 
-      app.logger.debug('Sending request to API: ', {
-        uri: reqOptions.uri,
-        headers: reqOptions.headers,
-        body: reqOptions.body,
-      });
+      let options = {'method': 'get'};
 
-      return rp(reqOptions);
-    }
+      options.transformer = 'getSingle';
+
+      return axiosInstance(url, app, jwtToken, options);
+    },
   };
 
-
-  module.exports.object = responseObject;
+  module.exports.jurorDetails = jurorDetails;
 
 })();
