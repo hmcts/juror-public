@@ -6,7 +6,7 @@ USER root
 RUN apk add autoconf automake gcc make g++ zlib-dev nasm
 USER hmcts
 COPY --chown=hmcts:hmcts . .
-RUN yarn install
+RUN yarn workspaces focus --all --production && yarn cache clean
 
 FROM base as runtime
 ENV NODE_ENV=production
