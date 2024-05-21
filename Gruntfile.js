@@ -1,13 +1,11 @@
 ;(function(){
   'use strict';
   var path = require('path')
-    , fs = require('fs-extra')
     , exec = require('child_process').exec
     , readline = require('readline')
     , sass = require('sass')
     , config = {
       EXPRESS_PORT: 3000,
-      BROWSERSYNC_PORT: 3001
     };
 
   module.exports = function(grunt){
@@ -34,12 +32,6 @@
           files: [{
             dot: true,
             src: ['coverage/']
-          }]
-        },
-        accessibility: {
-          files: [{
-            dot: true,
-            src: ['reports/accessibility']
           }]
         },
         dev: {
@@ -109,40 +101,7 @@
             {expand: true, cwd: 'config/', src: ['*.*'], dest: 'test/config'}
           ]
         },
-        
-        /*
-        govuk: {
-          files: [
-            {expand: true, cwd: 'node_modules/govuk_frontend_toolkit/', src: '**', dest: 'govuk_modules/govuk_frontend_toolkit/'},
-            {expand: true, cwd: 'node_modules/govuk_template_jinja/assets/', src: '**', dest: 'govuk_modules/govuk_template/assets/'},
-            {expand: true, cwd: 'node_modules/govuk-elements-sass/public/sass/', src: '**', dest: 'govuk_modules/govuk-elements-sass/'}
-          ]
-        }
-        */
-
       },
-
-
-      accessibility: {
-        options: {
-          accessibilityLevel: 'WCAG2A',
-          reportType: 'json',
-          reportLocation: 'reports/accessibility',
-          reportLevels: {
-            notice: false,
-            warning: true,
-            error: true
-          },
-          force: true
-        },
-        all: {
-          options: {
-            urls: ['http://localhost:'+(process.env.PORT || config.EXPRESS_PORT)]
-          },
-          src: ['client/templates/**/*.njk']
-        }
-      },
-
 
       // Styles
       scsslint: {
@@ -250,21 +209,6 @@
         }
       },
 
-      /*
-      babel: {
-        options: {
-          sourceMap: false,
-          presets: ['@babel/preset-env']
-        },
-        dev: {
-          files: {
-            'dev/client/js/ds/new-ds-date-picker.js': 'client/js/ds-date-picker.js'
-          },
-        },
-      },
-      */
-
-
 
       // Check code against SonarQube
       sonarRunner: {
@@ -313,35 +257,6 @@
           ]
         }
       },
-
-
-      // Browser dev tools
-      browserSync: {
-        bsFiles: {
-          src : [
-            './dev/client/css/**/*.css',
-            './dev/client/**/*.html',
-            './dev/client/**/*.njk',
-            './dev/client/**/*.js',
-            './dev/client/**/*.{png,jpg,jpeg,gif,svg}',
-            './dev/client/js/i18n/*.json',
-            './dev/.rebooted'
-          ]
-        },
-        options: {
-          proxy: "localhost:" + (process.env.PORT || config.EXPRESS_PORT),
-          watchTask: true,
-          port: config.BROWSERSYNC_PORT,
-          open: false,
-          notify: {
-            styles: {
-              top: 'auto',
-              bottom: '0'
-            }
-          }
-        }
-      },
-
 
 
       // Run server
@@ -482,7 +397,7 @@
             mask: '**/*.spec.js',
             coverageFolder: 'reports/coverage/server/unit'
           },
-          src: './server'
+          src: './server'  //'./test/server'
         }
       },
 
@@ -525,7 +440,6 @@
         }
       },
 
-
       // Security Scan
       nsp: {
         package: grunt.file.readJSON('./package.json')
@@ -533,20 +447,8 @@
 
     });
 
-
-
-
     // Maintain code quality from command line
     grunt.registerTask('code-lint', ['scsslint', 'eslint']);
-
-    // Maintain accessibility standards
-    grunt.registerTask('accessibility-check', 'Remove old reports and run accessibility checks generating a report. Will start server itself so either run as single task or with PORT environment variable set', function() {
-      return grunt.task.run([
-        'serve:test',
-        'clean:accessibility',
-        'accessibility'
-      ]);
-    });
 
     // Package app
     grunt.registerTask('build-translations', 'Compile individual translations entry files into single [langname].json', function(env) {
@@ -596,7 +498,6 @@
 
       return grunt.task.run([
         'clean:dev',
-        //'do-babel:dev',
         'build-files:dev',
         'build-styles:dev',
         'build-scripts:dev',
@@ -637,12 +538,9 @@
       return grunt.task.run([
         'env:dev',
         'build:dev',
-        'browserSync',
         'concurrent:dev'
       ]);
     });
-
-
 
 
     // Testing
