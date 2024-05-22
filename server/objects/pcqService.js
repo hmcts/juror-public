@@ -1,34 +1,19 @@
-;(function(){
+; (function() {
   'use strict';
+  
+  const { axiosInstance } = require('./axios-instance');
+  const urljoin = require('url-join')
+  const secretsConfig = require('config');
+  const jwt = require('jsonwebtoken');
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , utils = require('../lib/utils')
-    , options = {
-      uri: '',
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      json: true,
-      transform: utils.basicDataTransform
-    }
+  const pcqService = {
+    getHealth: function(app) {
 
-    , pcqServiceObject = {
-      getHealth: function(rp, app) {
-        var reqOptions = _.clone(options);
+      let url = urljoin(app.pcqSettings.serviceUrl, 'health');
 
-        reqOptions.uri = urljoin(app.pcqSettings.serviceUrl, 'health');
+      return axiosInstance(url, app, null, null);
+    },
+  };
 
-        app.logger.info('Sending request to API: ', {
-          uri: reqOptions.uri,
-          headers: reqOptions.headers,
-          body: reqOptions.body,
-        });
-
-        return rp(reqOptions);
-      }
-    };
-
-  module.exports.object = pcqServiceObject;
+  module.exports.pcqService = pcqService;
 })();
