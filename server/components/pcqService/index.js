@@ -4,7 +4,7 @@
   var secretsConfig = require('config')
     , errors = require('../errors')
     , appSettingsObj = require('../../objects/appSettings').appSettings
-    , pcqServiceObj = require('../../objects/pcqService').object
+    , pcqServiceObj = require('../../objects/pcqService').pcqService
     , { v4: uuidv4 } = require('uuid')
     , crypto = require('crypto')
     , urlJoin = require('url-join')
@@ -101,7 +101,7 @@
 
         }
         , pcqAppSettingsFailed = function(err) {
-          app.logger.info('Get PCQ APP_SETTINGS failed: ', err.response.data);
+          app.logger.info('Get PCQ APP_SETTINGS failed: ', err);
           return errorCB(false);
         }
 
@@ -181,8 +181,8 @@
           return skipPCQ(req, app, res);
 
         }
-        , pcqHealthError = function(response) {
-          app.logger.info('PCQ Health check attempt failed: ', response);
+        , pcqHealthError = function(err) {
+          app.logger.info('PCQ Health check attempt failed: ', err);
 
           return skipPCQ(req, app, res);
         };
@@ -191,7 +191,7 @@
       //req.session.pcqSettings.pcqId = pcqId;
 
       // Send request
-      return pcqServiceObj.getHealth(require('request-promise'), app)
+      return pcqServiceObj.getHealth(app)
         .then(pcqHealthResponse)
         .catch(pcqHealthError);
 
