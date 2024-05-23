@@ -68,7 +68,7 @@
           , deceased: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.DECEASED', (req.session.ulang === 'cy' ? texts_cy : texts_en))
           , other: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.OTHER', (req.session.ulang === 'cy' ? texts_cy : texts_en))
         },
-        jurorObj = require('../../../objects/juror').object
+        jurorDetails = require('../../../objects/juror').jurorDetails
         , qualifyDetailsExist = function(objQualify){
           var boolDetalsExist = false;
 
@@ -368,7 +368,7 @@
 
       if (req.session.user.ineligibleDeceased) {
         //adds court details to session
-        jurorObj.get(require('request-promise'), app, req.session.user.jurorNumber, req.session.authToken)
+        jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
           .then(getDetailsSuccess, getDetailsError)
           .catch(getDetailsError);
       } else {
