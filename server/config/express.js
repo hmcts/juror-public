@@ -5,48 +5,39 @@
 ;(function(){
   'use strict';
 
-  var express = require('express')
-    , session = require('express-session')
-    , nunjucks = require('express-nunjucks').default
-    , njk = require('nunjucks')
-    , cookieParser = require('cookie-parser')
-    , csrf = require('csurf')
-    , helmet = require('helmet')
-    , referrerPolicy = require('referrer-policy')
-    , compression = require('compression')
-    , bodyParser = require('body-parser')
-    , methodOverride = require('method-override')
-    , errorHandler = require('errorhandler')
-    , path = require('path')
-    , i18n = require('i18n-express')
-    , { createClient } = require('redis')
-    , RedisStore = require('connect-redis').default
-    , redisStore
-    , redisClient
-    , redisConnectionString = ''
-    , dynatraceScriptUrl = ''
+  const express = require('express');
+  const session = require('express-session');
+  const nunjucks = require('express-nunjucks').default;
+  const njk = require('nunjucks');
+  const cookieParser = require('cookie-parser');
+  const csrf = require('csurf');
+  const helmet = require('helmet');
+  const referrerPolicy = require('referrer-policy');
+  const compression = require('compression');
+  const bodyParser = require('body-parser');
+  const methodOverride = require('method-override');
+  const errorHandler = require('errorhandler');
+  const path = require('path');
+  const i18n = require('i18n-express');
+  const { createClient } = require('redis');
+  const RedisStore = require('connect-redis').default;
+  const filters = require('../components/filters');
+  const textsEN = require('../../client/js/i18n/en.json');
+  const textsCY = require('../../client/js/i18n/cy.json');
+  const secretsConfig = require('config');
+  const config = require('./environment')();
+  const utils = require('../lib/utils.js');
+  const menuBuilder = require(__dirname + '/../menubuilder');
+  const sessionExpires = 10 * (60 * 60);
+  const sessionName = 'juror_summons_reply_session';
 
-    , filters = require('../components/filters')
-    , texts_en = require('../../client/js/i18n/en.json')
-    , texts_cy = require('../../client/js/i18n/cy.json')
-    , secretsConfig = require('config')
-    , config = require('./environment')()
-    , utils = require('../lib/utils.js')
-    , menuBuilder = require(__dirname + '/../menubuilder')
-    , sessionExpires = 10 * (60 * 60)
-    , sessionConfig = {}
+  // Grab environment variables to enable/disable certain services
+  const pkg = require(__dirname + '/../../package.json');
+  const releaseVersion = pkg.version;
 
-    // Grab environment variables to enable/disable certain services
-    , pkg = require(__dirname + '/../../package.json')
-    , releaseVersion = pkg.version
-    , env = process.env.NODE_ENV || 'development'
-    , useAuth = process.env.USE_AUTH || config.useAuth
-    , useHttps = process.env.USE_HTTPS || config.useHttps
-
-    // Basic Auth credentials
-    , basicAuthUsername = process.env.USERNAME
-    , basicAuthPassword = process.env.PASSWORD;
-
+  // Basic Auth credentials
+  const basicAuthUsername = process.env.USERNAME;
+  const basicAuthPassword = process.env.PASSWORD;
 
   const generateNonce = () => {
     return require('crypto').randomBytes(16).toString('base64');
@@ -65,9 +56,9 @@
           scriptSrc: ['\'self\'', `'nonce-${nonce}'`, 'cdnjs.cloudflare.com', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://vcc-eu4.8x8.com', 'https://*.dynatrace.com'],
           fontSrc: ['\'self\'', 'https://fonts.gstatic.com', 'data:'],
           imgSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://ssl.gstatic.com', 'https://www.gstatic.com', 'https://vcc-eu4.8x8.com', 'https://fonts.gstatic.com', 'data:'],
-          connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net', 'https://*.dynatrace.com']
-        }
-      })(req, res, next)
+          connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net', 'https://*.dynatrace.com'],
+        },
+      })(req, res, next);
     });
     app.use(helmet.dnsPrefetchControl());
     app.use(helmet.frameguard());
@@ -96,17 +87,17 @@
 
     console.log('Redis connection string not defined, using default session store');
 
-    sessionConfig = {
+    let sessionConfig = {
       secret: secretsConfig.get('secrets.juror.public-sessionSecret'),
       resave: false,
       saveUninitialized: false,
       maxAge: sessionExpires,
-      name : 'sessionId',
+      name : sessionName,
       cookie: {
         secure: isProduction,
         sameSite: 'lax',
         httpOnly: true,
-      }
+      },
     };
 
     app.use(session(sessionConfig));
@@ -116,7 +107,10 @@
 
   }
 
-  function configureSessionsRedis(app, isProduction) {
+  function configureSessionsRedis(app, isProduction, redisConnectionString) {
+
+    var redisStore;
+    var redisClient;
 
     // Configure Redis connection
     console.log('Attempting to connect to redis using connection string: ');
@@ -126,8 +120,8 @@
       url: redisConnectionString,
       pingInterval: 5000,
       socket: {
-        keepAlive: true
-      }
+        keepAlive: true,
+      },
     });
     redisClient.connect()
       .catch(function(error) {
@@ -138,7 +132,7 @@
     redisStore = new RedisStore({
       client: redisClient,
       prefix: 'JurorPublic:',
-    })
+    });
 
     redisClient.on('error', function(err) {
       console.log(new Date().toLocaleString() + ' - ' + 'Could not connect to redis ' + err);
@@ -154,12 +148,12 @@
       resave: false,
       saveUninitialized: false,
       maxAge: sessionExpires,
-      name : 'sessionId',
+      name : sessionName,
       cookie: {
         secure: isProduction,
         httpOnly: true,
-      }
-    }))
+      },
+    }));
 
     // CSRF Protection
     app.use(csrf());
@@ -172,7 +166,7 @@
       browserEnable: false,
       defaultLang: 'en',
       paramLangName: 'clang',
-      siteLangs: ['en', 'cy']
+      siteLangs: ['en', 'cy'],
     }));
 
     // Setup templating engine
@@ -187,7 +181,7 @@
       watch: true,
       noCache: true,
       filters: filters,
-      loader: njk.FileSystemLoader // Use synchronous loader templates
+      loader: njk.FileSystemLoader, // Use synchronous loader templates
     });
   }
 
@@ -196,11 +190,14 @@
     // Used to show service title
     var serviceTitleExcludedUrls = ['/', '/start'];
     var isProduction;
+    var env = process.env.NODE_ENV || 'development';
+    var useAuth = process.env.USE_AUTH || config.useAuth;
+    var dynatraceScriptUrl = '';
+    var redisConnectionString = '';
 
     // Ensure provided environment values are lowercase
     env = env.toLowerCase();
     useAuth = useAuth.toLowerCase();
-    useHttps = useHttps.toLowerCase();
 
     // Base Path of the client folder
     app.set('appPath', path.join(config.root, 'client'));
@@ -216,7 +213,7 @@
       redisConnectionString = secretsConfig.get('secrets.juror.public-redisConnection');
 
       if (redisConnectionString){
-        configureSessionsRedis(app, isProduction);
+        configureSessionsRedis(app, isProduction, redisConnectionString);
       } else {
         configureSessionsDefault(app, isProduction);
       }
@@ -246,11 +243,11 @@
       res.locals.dynatraceScriptUrl = dynatraceScriptUrl;
 
       // eslint-disable-next-line
-      res.locals.cookieText = filters.translate('INTERFACE.COOKIE_MESSAGE', (req.session.ulang === 'cy' ? texts_cy : texts_en));
+      res.locals.cookieText = filters.translate('INTERFACE.COOKIE_MESSAGE', (req.session.ulang === 'cy' ? textsCY : textsEN));
 
       if (serviceTitleExcludedUrls.indexOf(req.originalUrl) === -1) {
         // res.locals.serviceName = config.serviceName;
-        res.locals.serviceName = filters.translate('INTERFACE.SERVICE_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en))
+        res.locals.serviceName = filters.translate('INTERFACE.SERVICE_TITLE', (req.session.ulang === 'cy' ? textsCY : textsEN));
       }
 
       res.locals.IS_PRODUCTION = (config.env === 'production');
