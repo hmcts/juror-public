@@ -7,12 +7,12 @@
   'use strict';
 
   var _ = require('lodash')
-    , responseObj = require('../../../objects/response').object
+    , jurorResponse = require('../../../objects/response').jurorResponse
     , validate = require('validate.js')
     , moment = require('moment')
     , filters = require('../../../components/filters')
-    , texts_en = require('../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../client/js/i18n/cy.json')
+    , textsEN = require('../../../../client/js/i18n/en.json')
+    , textsCY = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
 
 
@@ -63,10 +63,10 @@
         , contactDetailsChangePhoneLink
         , contactDetailsChangeEmailLink
         , thirdPartyMapping = {
-          nothere: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.NOT_HERE', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          , assistance: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.REQUIRE_ASSISTANCE', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          , deceased: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.DECEASED', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          , other: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.OTHER', (req.session.ulang === 'cy' ? texts_cy : texts_en))
+          nothere: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.NOT_HERE', (req.session.ulang === 'cy' ? textsCY : textsEN))
+          , assistance: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.REQUIRE_ASSISTANCE', (req.session.ulang === 'cy' ? textsCY : textsEN))
+          , deceased: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.DECEASED', (req.session.ulang === 'cy' ? textsCY : textsEN))
+          , other: filters.translate('ON_BEHALF.THIRD_PARTY_REASON.REASONS.OTHER', (req.session.ulang === 'cy' ? textsCY : textsEN)),
         },
         jurorDetails = require('../../../objects/juror').jurorDetails
         , qualifyDetailsExist = function(objQualify){
@@ -83,7 +83,7 @@
           app.logger.crit('Failed to fetch and parse details required for pdf download: ' + err.statusCode, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err
+            error: (typeof err.error !== 'undefined') ? err.error : err,
           });
         }
         , getDetailsSuccess = function(response) {
@@ -96,17 +96,17 @@
             response['courtAddress4'],
             response['courtAddress5'],
             response['courtAddress6'],
-            response['courtPostcode']
+            response['courtPostcode'],
           ].filter(function(val) {
             return val;
           }).join('<br>');
           req.session.user['hearingDateTimestamp'] = response['hearingDate'];
-  
+
           if (req.session.user.ineligibleDeceased) {
             req.session.user['nameRender'] = [
               response['title'],
               response['firstName'],
-              response['lastName']
+              response['lastName'],
             ].filter(function(val){
               return val;
             }).join(' ');
@@ -142,7 +142,7 @@
           app.logger.info('Fetched and parsed summoned details required for pdf download', {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            response: response
+            response: response,
           });
 
           return res.render('steps/07-confirm-information/index.njk', {
@@ -153,13 +153,13 @@
             contactDetailsChangePhoneLink: contactDetailsChangePhoneLink,
             contactDetailsChangeEmailLink: contactDetailsChangeEmailLink,
             errors: {
-              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
+              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCY : textsEN)),
               message: '',
               count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
               items: tmpErrors,
             },
           });
-        }
+        };
 
 
       //reset value for conventional route vs edit route
@@ -257,10 +257,10 @@
 
         req.session.user.thirdPartyDetails.nameRender = [
           req.session.user.thirdPartyDetails.firstName,
-          req.session.user.thirdPartyDetails.lastName
+          req.session.user.thirdPartyDetails.lastName,
         ].filter(function(val) {
           return val;
-        }).join(' ')
+        }).join(' ');
       }
 
       // Get current value for informationConfirmed
@@ -359,8 +359,7 @@
       if (req.session.user.qualify) {
         if (qualifyDetailsExist(req.session.user.qualify.livedConsecutive)|| qualifyDetailsExist(req.session.user.qualify.mentalHealthSectioned) || qualifyDetailsExist(req.session.user.qualify.mentalHealthCapacity) || qualifyDetailsExist(req.session.user.qualify.onBail) || qualifyDetailsExist(req.session.user.qualify.convicted)) {
           req.session.user['ineligible'] = 'Yes';
-        }
-        else {
+        } else {
           req.session.user['ineligible'] = 'No';
         }
       }
@@ -381,7 +380,7 @@
           contactDetailsChangeEmailLink: contactDetailsChangeEmailLink,
           deferralDisplayDates: deferralDisplayDates,
           errors: {
-            title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
+            title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCY : textsEN)),
             message: '',
             count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
             items: tmpErrors,
@@ -398,28 +397,28 @@
           app.logger.info('Response submission succeeded', {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            response: response
+            response: response,
           });
 
           return sendToComplete(req, res, app);
         }
 
         , createResponseFailure = function(err) {
-          if (err.statusCode === 409 || err.statusCode === 304) {
+          if (err.response.status === 409 || err.response.status === 304) {
             app.logger.info('Response submission detected a conflict, passing through to complete without saving', {
               jurorNumber: req.session.user.jurorNumber,
               jwt: req.session.authToken,
-              error: (typeof err.error !== 'undefined') ? err.error : err,
+              error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
             });
 
             return sendToComplete(req, res, app);
           }
 
           // No conflicts found
-          app.logger.crit('Response submission failed with error ' + err.statusCode, {
+          app.logger.crit('Response submission failed with error ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
             jwt: req.session.authToken,
-            error: (typeof err.error !== 'undefined') ? err.error : err,
+            error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
           });
 
           return res.redirect(app.namedRoutes.build('steps.confirm.information.get'));
@@ -457,7 +456,7 @@
       req.session.informationConfirmed = req.body['informationConfirmed'];
 
       // Send the response to the server
-      responseObj.create(require('request-promise'), app, req.session.authToken, utils.transformSubmission(req.session.user, req.session.ulang))
+      jurorResponse.create(app, req.session.authToken, utils.transformSubmission(req.session.user, req.session.ulang))
         .then(createResponseSuccess, createResponseFailure)
         .catch(createResponseFailure);
     };
