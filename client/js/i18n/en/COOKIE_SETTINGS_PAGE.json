@@ -4,28 +4,51 @@
   "JAVASCROPTR_ITEM_2": "turning on Javascript in your browser",
 
   "HEADING": "Cookies",
-  "COOKIE_GUIDANCE_1": "Cookies are files saved on your phone, tablet or computer when you visit a website.",
-  "COOKIE_GUIDANCE_2": "We use cookies to store information about how you use the GOV.UK website, such as the pages you visit.",
+  "COOKIE_GUIDANCE_1": "Cookies are small files saved on your phone, tablet or computer when you visit a website.",
+  "COOKIE_GUIDANCE_2": "We use cookies to make the 'Reply to a jury summons' service work and to collect information about how you use our service.",
+
+  "ESSENTIAL_HEADING": "Essential cookies",
+  "ESSENTIAL_GUIDANCE": "Essential cookies keep your information secure while you use the 'Reply to a jury summons' service . We do not need to ask permission to use them.",
+  "ESSENTIAL_TABLE":
+  {
+    "HEADINGS": ["Name", "Purpose", "Expires"],
+    "ROWS":
+    [
+      ["juror_summons_reply_session", "Keeps track of whether you're logged in or not", "When you close your browser"],
+      ["ApplicationGatewayAffinity", "It enables web browser traffic to be kept assigned to a single server during certain sections of the website", "When you close your browser"]
+    ]
+  },
+
+  "ANALYTICS_HEADING": "Analytics cookies (optional)",
+  "ANALYTICS_GUIDANCE_1": "With your permission, we use Google Analytics cookies to collect data about how you use this service and helps us to improve it.",
+  "ANALYTICS_GUIDANCE_2": "Google Analytics stores information anonymously about:",
+  "ANALYTICS_GUIDANCE_2_BULLETS": ["how you got to this service", "the pages you visit on this service and how long you spend on them", "any errors you see while using this service"],
+  "ANALYTICS_GUIDANCE_3": "It does not capture your name or where you live.",
+  "ANALYTICS_GUIDANCE_4": "We also use Dynatrace cookies to measure how well this service performs with users and track errors.",
+  "ANALYTICS_GUIDANCE_5": "We do not allow Google or Dynatrace to use or share our analytics data with anyone.",
+
+  "ANALYTICS_TABLE":
+  {
+    "HEADINGS": ["Name", "Purpose", "Expires"],
+    "ROWS":
+    [
+      ["_gat", "Used to throttle the rate of requests to Google Analytics.", "1 minute"],
+      ["_ga", "Checks if you’ve visited this service before. This helps us count how many people visit our site.", "2 years"],
+      ["_gid", "Registers a unique ID that is used to generate statistical data on how people use the service.", "24 hours"],
+      ["dtCookie", "Used to collect information to track service performance and user errors.", "When you close your browser"],
+      ["dtLatC", "Measures server latency for performance monitoring.", "When you close your browser"],
+      ["dtPC", "Used to collect information to track service performance and user errors.", "When you close your browser"],
+      ["dtSa", "Serves as an intermediate storage for page-spanning actions.", "When you close your browser"],
+      ["dtValidationCookie", "Used to determine the top-level domain.", "Immediately"],
+      ["dtDisabled", "Determines if the RUM JavaScript should be deactivated due to cost and traffic control or overload prevention.", "When you close your browser"],
+      ["rxVisitor", "Used to store the Visitor ID for returning visitors.", "When you close your browser"],
+      ["rxvt", "Used to store two timestamps and specifies the session timeout.", "When you close your browser"]
+    ]
+  },
   
-  "COOKIE_SETTINGS_HEADING": "Cookie settings",
-  "COOKIE_SETTINGS_GUIDANCE": "We use 2 types of cookie. You can choose which cookies you're happy for us to use.",
-
-  "COOKIE_ANALYTICS_HEADING": "Cookies that measure website use",
-  "COOKIE_ANALYTICS_HINT_1": "We use Google Analytics to measure how you use the website so we can improve it based on user needs. We do not allow Google to use or share the data about how you use this site.",
-  "COOKIE_ANALYTICS_HINT_2": "Google Analytics sets cookies that store anonymised information about:",
-
-  "COOKIE_ANALYTICS_ITEM_1": "how you got to the site",
-  "COOKIE_ANALYTICS_ITEM_2": "the pages you visit on GOV.UK and government digital services, and how long you spend on each page",
-  "COOKIE_ANALYTICS_ITEM_3": "what you click on while you're visiting the site",
-  
-  "COOKIE_ANALYTICS_BUTTON_YES": "Use cookies that measure my website use",
-  "COOKIE_ANALYTICS_BUTTON_NO": "Do not use cookies that measure my website use",
-
-  "COOKIE_NECESSARY_HEADING": "Strictly necessary cookies",
-  "COOKIE_NECESSARY_GUIDANCE_1": "These essential cookies do things like remember your progress through a form (for example a licence application)",
-  "COOKIE_NECESSARY_GUIDANCE_2": "They always need to be on.",
-
-  "COOKIE_LINK_TEXT": "How we use cookies",
+  "ANALYTICS_ACCEPT_QUESTION": "Do you want to accept analytics cookies?",
+  "COOKIE_ANALYTICS_RADIO_YES": "Yes",
+  "COOKIE_ANALYTICS_RADIO_NO": "No",
 
   "SAVE_BUTTON_TEXT": "Save changes",
 

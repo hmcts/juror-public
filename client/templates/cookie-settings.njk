@@ -52,87 +52,116 @@
           <h1 class="govuk-heading-l">
             {{ texts.COOKIE_SETTINGS_PAGE.HEADING }}
           </h1>
-
           <p>
             {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_GUIDANCE_1 }}
           </p>
-
           <p>
             {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_GUIDANCE_2 }}
           </p>
 
           <h2 class="govuk-heading-m">
-            {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_SETTINGS_HEADING }}
+            {{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_HEADING }}
+          </h2>
+          <p class="govuk-body">
+            {{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_GUIDANCE }}
+          </p>
+
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">{{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_TABLE.HEADINGS[0] }}</th>
+                <th scope="col" class="govuk-table__header">{{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_TABLE.HEADINGS[1] }}</th>
+                <th scope="col" class="govuk-table__header">{{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_TABLE.HEADINGS[2] }}</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              {% for row in range(0, 2) -%}
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">{{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_TABLE.ROWS[row][0] }}</td>
+                  <td class="govuk-table__cell">{{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_TABLE.ROWS[row][1] }}</td>
+                  <td class="govuk-table__cell">{{ texts.COOKIE_SETTINGS_PAGE.ESSENTIAL_TABLE.ROWS[row][2] }}</td>
+                </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+
+          <h2 class="govuk-heading-m">
+            {{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_HEADING }}
           </h2>
 
           <p class="govuk-body">
-            {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_SETTINGS_GUIDANCE }}
+            {{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_GUIDANCE_1 }}
           </p>
 
-          {% set analyticsHintText %}
-            <p class="govuk-body">
-              {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_HINT_1 }}
-            </p>
-            <p class="govuk-body">
-              {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_HINT_2 }}
-            </p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>
-                {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_ITEM_1 }}
-              </li>
-              <li>
-                {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_ITEM_2 }}
-              </li>
-              <li>
-                {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_ITEM_3 }}
-              </li>
-            </ul>
-          {% endset %}
+          <p class="govuk-body">
+            {{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_GUIDANCE_2 }}
+          </p>
+          <ul class="govuk-list govuk-list--bullet">
+            {% for item in range(0, 3) -%}
+              <li>{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_GUIDANCE_2_BULLETS[item] }}</li>
+            {%- endfor %}
+          </ul>
+
+          <p class="govuk-body">
+            {{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_GUIDANCE_3 }}
+          </p>
+
+          <p class="govuk-body">
+            {{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_GUIDANCE_4 }}
+          </p>
+
+          <p class="govuk-body">
+            {{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_GUIDANCE_5 }}
+          </p>
+
+
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_TABLE.HEADINGS[0] }}</th>
+                <th scope="col" class="govuk-table__header">{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_TABLE.HEADINGS[1] }}</th>
+                <th scope="col" class="govuk-table__header">{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_TABLE.HEADINGS[2] }}</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              {% for row in range(0, 11) -%}
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_TABLE.ROWS[row][0] }}</td>
+                  <td class="govuk-table__cell">{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_TABLE.ROWS[row][1] }}</td>
+                  <td class="govuk-table__cell">{{ texts.COOKIE_SETTINGS_PAGE.ANALYTICS_TABLE.ROWS[row][2] }}</td>
+                </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
 
 
           {{ govukRadios({
+            classes: "govuk-radios--inline",
             name: "analyticsUsage",
             fieldset: {
               legend: {
-                text: texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_HEADING,
+                text: texts.COOKIE_SETTINGS_PAGE.ANALYTICS_ACCEPT_QUESTION,
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--m"
               }
-            },
-            hint: {
-              html: analyticsHintText
             },
             items: [
               {
                 id: "analyticsYes",
                 value: 'yes',
                 checked: radioAnalyticsYesChecked,
-                text: texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_BUTTON_YES
+                text: texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_RADIO_YES
                 
               },
               {
                 id: "analyticsNo",
                 value: 'no',
                 checked: radioAnalyticsNoChecked,
-                text: texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_BUTTON_NO
+                text: texts.COOKIE_SETTINGS_PAGE.COOKIE_ANALYTICS_RADIO_NO
               }
             ]
           }) }}
 
-          <h2 class="govuk-heading-m">
-            {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_NECESSARY_HEADING }}
-          </h2>
-          <p>
-          {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_NECESSARY_GUIDANCE_1 }}
-          </p>    
-
-          <p>
-            {{ texts.COOKIE_SETTINGS_PAGE.COOKIE_NECESSARY_GUIDANCE_2 }}
-          </p>
-
-          <p>
-            <a class="govuk-link" id="cookieInfoLink" href="{{ url('cookie.get') }}">{{ texts.COOKIE_SETTINGS_PAGE.COOKIE_LINK_TEXT }}</a>
-          </p>
 
           {# Submit form #}
           {{ govukButton({
