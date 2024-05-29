@@ -4,32 +4,55 @@
   "JAVASCROPTR_ITEM_2": "turning on Javascript in your browser",
 
   "HEADING": "Cwcis",
-  "COOKIE_GUIDANCE_1": "Ffeiliau a gedwir ar eich ffôn, eich tabled neu'ch cyfrifiadur pan fyddwch chi'n ymweld â gwefan yw cwcis.",
-  "COOKIE_GUIDANCE_2": "Rydym yn defnyddio cwcis i storio gwybodaeth am sut rydych yn defnyddio gwefan GOV.UK, megis y tudalennau yr ydych yn ymweld â hwy.",
+  "COOKIE_GUIDANCE_1": "Ffeiliau bach sy'n cael eu cadw ar eich ffôn, tabled neu gyfrifiadur pan fyddwch yn ymweld â gwefan yw cwcis.",
+  "COOKIE_GUIDANCE_2": "Rydym yn defnyddio cwcis i wneud i'r gwasanaeth 'Ymateb i wŷs rheithgor' weithio ac i gasglu gwybodaeth am sut rydych chi'n defnyddio ein gwasanaeth.",
+
+  "ESSENTIAL_HEADING": "Cwcis hanfodol",
+  "ESSENTIAL_GUIDANCE": "Mae cwcis hanfodol yn cadw'ch gwybodaeth yn ddiogel wrth i chi ddefnyddio'r gwasanaeth 'Ymateb i wŷs rheithgor'.  Nid oes rhaid inni ofyn am ganiatâd i'w defnyddio.",
+  "ESSENTIAL_TABLE":
+  {
+    "HEADINGS": ["Enw", "Pwrpas", "Pryd y daw i ben"],
+    "ROWS":
+    [
+      ["juror_summons_reply_session", "Nodi p'un a ydych wedi mewngofnodi ai peidio", "Pan fyddwch yn cau eich porwr"],
+      ["ApplicationGatewayAffinity", "Mae'n galluogi i draffig porwr gwe gael ei neilltuo i un gweinydd yn ystod rhai rhannau o'r wefan", "Pan fyddwch yn cau eich porwr"]
+    ]
+  },
+
+  "ANALYTICS_HEADING": "Cwcis dadansoddol (dewisol)",
+  "ANALYTICS_GUIDANCE_1": "Gyda'ch caniatâd chi, rydym yn defnyddio cwcis Google Analytics i gasglu data am sut rydych chi'n defnyddio'r gwasanaeth hwn ac maent yn ein helpu i'w wella.",
+  "ANALYTICS_GUIDANCE_2": "Mae Google Analytics yn storio gwybodaeth ddienw am:",
+  "ANALYTICS_GUIDANCE_2_BULLETS": ["sut y daethoch o hyd i'r gwasanaeth", "y tudalennau rydych chi'n ymweld â nhw ar y gwasanaeth hwn a pha mor hir rydych chi'n ei dreulio arnyn nhw", "unrhyw wallau a welwch wrth ddefnyddio'r gwasanaeth hwn"],
+  "ANALYTICS_GUIDANCE_3": "Nid yw'n casglu gwybodaeth am eich enw na lle'r ydych chi'n byw.",
+  "ANALYTICS_GUIDANCE_4": "Rydym hefyd yn defnyddio cwcis Dynatrace i fesur pa mor dda y mae'r gwasanaeth hwn yn perfformio gyda defnyddwyr a thracio gwallau.",
+  "ANALYTICS_GUIDANCE_5": "Nid ydym yn caniatáu i Google na Dynatrace ddefnyddio neu rannu ein data dadansoddol gydag unrhyw un.",
+
+  "ANALYTICS_TABLE":
+  {
+    "HEADINGS": ["Enw", "Pwrpas", "Pryd y daw i ben"],
+    "ROWS":
+    [
+      ["_gat", "Fe'i defnyddir i leihau cyfradd y ceisiadau i Google Analytics.", "1 munud"],
+      ["_ga", "Gwirio os ydych wedi ymweld â’r gwasanaeth hwn o’r blaen.  Mae'n ein helpu i gyfrif faint o bobl sy'n ymweld â'n gwefan.", "2 flynedd"],
+      ["_gid", "Cofrestru ID unigryw a ddefnyddir i gynhyrchu data ystadegol ar sut mae pobl yn defnyddio'r gwasanaeth.", "24 awr"],
+      ["dtCookie", "Fe'i defnyddir i gasglu gwybodaeth i olrhain perfformiad y gwasanaeth a gwallau defnyddwyr.", "Pan fyddwch yn cau eich porwr"],
+      ["dtLatC", "Mesurau segurdod gweinydd ar gyfer monitro perfformiad.", "Pan fyddwch yn cau eich porwr"],
+      ["dtPC", "Fe'i defnyddir i gasglu gwybodaeth i olrhain perfformiad y gwasanaeth a gwallau defnyddwyr.", "Pan fyddwch yn cau eich porwr"],
+      ["dtSa", "Gwasanaethu fel storfa ganolradd ar gyfer camau gweithredu rhychwantu tudalennau.", "Pan fyddwch yn cau eich porwr"],
+      ["dtValidationCookie", "Fe'i defnyddir i bennu'r parth lefel uchaf.", "Ar unwaith"],
+      ["dtDisabled", "Penderfynu a ddylid dadactifadu'r JavaScript RUM oherwydd cost a rheoli traffig neu atal gorlwytho.", "Pan fyddwch yn cau eich porwr"],
+      ["rxVisitor", "Fe'i defnyddir i storio'r ID Ymwelydd ar gyfer ymwelwyr sy'n dychwelyd.", "Pan fyddwch yn cau eich porwr"],
+      ["rxvt", "Fe'i defnyddir i storio dau stamp amser ac yn nodi amserlen y sesiwn.", "Pan fyddwch yn cau eich porwr"]
+    ]
+  },
   
-  "COOKIE_SETTINGS_HEADING": "Gosodiadau cwcis",
-  "COOKIE_SETTINGS_GUIDANCE": "Rydym yn defnyddio 2 fath o gwcis. Gallwch ddewis pa gwcis yr ydych yn hapus inni eu defnyddio.",
+  "ANALYTICS_ACCEPT_QUESTION": "Ydych chi eisiau derbyn cwcis dadansoddol?",
+  "COOKIE_ANALYTICS_RADIO_YES": "Oes",
+  "COOKIE_ANALYTICS_RADIO_NO": "Nac oes",
 
-  "COOKIE_ANALYTICS_HEADING": "Cwcis sy'n mesur y defnydd a wneir o wefan",
-  "COOKIE_ANALYTICS_HINT_1": "Rydym yn defnyddio Google Analytics i fesur sut rydych yn defnyddio'r wefan fel y gallwn ei gwella yn seiliedig ar anghenion defnyddwyr. Nid ydym yn caniatáu i Google ddefnyddio neu rannu'r data am sut rydych yn defnyddio'r wefan hon.",
-  "COOKIE_ANALYTICS_HINT_2": "Mae Google Analytics yn gosod cwcis sy'n storio gwybodaeth gyffredinol am:",
-
-  "COOKIE_ANALYTICS_ITEM_1": "sut y daethoch i'r wefan hon",
-  "COOKIE_ANALYTICS_ITEM_2": "y tudalennau rydych chi'n ymweld â nhw ar GOV.UK a gwasanaethau digidol y Llywodraeth, a pha mor hir rydych chi'n ei dreulio ar bob tudalen",
-  "COOKIE_ANALYTICS_ITEM_3": "beth rydych chi'n clicio arno tra byddwch yn ymweld â'r wefan",
-  
-  "COOKIE_ANALYTICS_BUTTON_YES": "Derbyn cwcis sy'n mesur sut wyf yn defnyddio'r wefan",
-  "COOKIE_ANALYTICS_BUTTON_NO": "Peidio â derbyn cwcis sy'n mesur sut wyf yn defnyddio'r wefan",
-
-  "COOKIE_NECESSARY_HEADING": "Cwcis hanfodol yn unig",
-  "COOKIE_NECESSARY_GUIDANCE_1": "Mae'r cwcis hanfodol hyn yn gwneud pethau fel cofio lle'r oeddech wedi cyrraedd wrth lenwi ffurflen (er enghraifft cais am drwydded)",
-  "COOKIE_NECESSARY_GUIDANCE_2": "Mae'n rhaid iddynt fod ymlaen drwy'r amser.",
-
-  "COOKIE_LINK_TEXT": "Sut rydym yn defnyddio cwcis",
-  
   "SAVE_BUTTON_TEXT": "Arbed newidiadau",
 
   "SAVE_SUCCESS_HEADING": "Llwyddiant",
-  "SAVE_SUCCESS_MESSAGE": "Rydych wedi gosod eich dewisiadau cwcis.",
-  "SAVE_SUCCESS_LINK_TEXT": "Ewch yn ôl i'r dudalen yr oeddech yn edrych arni gynt"
+  "SAVE_SUCCESS_MESSAGE": "Rydych chi wedi gosod eich dewisiadau cwcis.",
+  "SAVE_SUCCESS_LINK_TEXT": "Ewch yn ôl i'r dudalen yr oeddech yn edrych arni."
 }

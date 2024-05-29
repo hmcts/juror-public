@@ -1,19 +1,6 @@
 ;(function(){
   'use strict';
-
-  module.exports.index = function() {
-    return function(req, res) {
-      if (req.session.back === true){
-        delete req.session.errors;
-        req.session.back = false;
-      }
-
-      delete req.session.cookieSettingsSaved
-
-      return res.render('cookies.njk');
-    };
-  };
-
+  
   module.exports.submitCookieBanner = function(app) {
     return function(req, res) {
       if (req.session.back === true){

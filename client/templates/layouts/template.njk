@@ -14,7 +14,7 @@
     {# Ensure that older IE versions always render with the correct rendering engine #}
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    {# Only send analytics if a tracking code has been set and cookie preferences allow #}
+    {# Only send analytics if a tracking code is configured and cookie consent given #}
     {% if trackingCode and allowAnalytics %}
       <!-- Google Tag Manager -->
       <script nonce="{{ nonce }}">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -25,8 +25,8 @@
       <!-- End Google Tag Manager -->
     {% endif %}
 
-    {# Load Dynatrace script if url is configured #}
-    {% if dynatraceScriptUrl %}
+    {# Load Dynatrace script if url is configured and cookie consent given #}
+    {% if dynatraceScriptUrl and allowAnalytics %}
       <script type="text/javascript" src="{{dynatraceScriptUrl}}" crossorigin="anonymous"></script>
     {% endif %}
     
