@@ -321,10 +321,11 @@
     app.use(function(req, res, next) {
       // check if client sent cookie
       var cookie = req.cookies.cookies_policy,
-        objCookie = null;
+        objCookie = null,
+        ignoreUrls = ['/cookie-settings', '/cookie-banner', '/js/govuk/all.js.map'];
 
       // store return url used on cookie-settings page
-      if (!(req.url.endsWith('cookie-settings') || req.url.endsWith('cookie-banner') || req.url.endsWith('cookies'))){
+      if (!(ignoreUrls.find(urlItem => urlItem === req.url))){
         req.session.cookieReturnUrl = req.url;
       }
 
