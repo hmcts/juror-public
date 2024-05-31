@@ -39,6 +39,8 @@
   const basicAuthUsername = process.env.USERNAME;
   const basicAuthPassword = process.env.PASSWORD;
 
+  const { RateLimitConfig } = require('../lib/rate-limit-config.js');
+
   const generateNonce = () => {
     return require('crypto').randomBytes(16).toString('base64');
   };
@@ -85,7 +87,7 @@
   function configureSessionsDefault(app, isProduction) {
     // Configure sessions
 
-    console.log('Redis connection string not defined, using default session store');
+    console.log('Redis connection string not defined, using default store for user sessions');
 
     let sessionConfig = {
       secret: secretsConfig.get('secrets.juror.public-sessionSecret'),
@@ -113,7 +115,7 @@
     var redisClient;
 
     // Configure Redis connection
-    console.log('Attempting to connect to redis using connection string: ');
+    console.log('Attempting to connect to redis for user sessions using connection string: ');
     console.log(redisConnectionString);
 
     redisClient = createClient({
@@ -125,7 +127,7 @@
     });
     redisClient.connect()
       .catch(function(error) {
-        console.log('Error connecting redis client: ', error);
+        console.log('Error connecting redis client for user sessions: ' + error);
       });
 
     // Initialise store
@@ -135,10 +137,10 @@
     });
 
     redisClient.on('error', function(err) {
-      console.log(new Date().toLocaleString() + ' - ' + 'Could not connect to redis ' + err);
+      console.log(new Date().toLocaleString() + ' - ' + 'Could not connect to redis for user sessions: ' + err);
     });
     redisClient.on('connect', function(err) {
-      console.log(new Date().toLocaleString() + ' - ' + 'Connected to redis successfully');
+      console.log(new Date().toLocaleString() + ' - ' + 'Connected to redis for user sessions');
     });
 
     // Configure session middleware
@@ -194,6 +196,7 @@
     var useAuth = process.env.USE_AUTH || config.useAuth;
     var dynatraceScriptUrl = '';
     var redisConnectionString = '';
+    var rateLimitEnabled = process.env.RATE_LIMIT_ENABLED || config.rateLimitEnabled;
 
     // Ensure provided environment values are lowercase
     env = env.toLowerCase();
@@ -207,7 +210,6 @@
     configureRequests(app);
 
 
-    console.log('Configuring session store...');
     isProduction = env === 'production';
     try {
       redisConnectionString = secretsConfig.get('secrets.juror.public-redisConnection');
@@ -230,6 +232,14 @@
     }
     if (!dynatraceScriptUrl){
       console.log('Dynatrace script url not defined');
+    }
+
+    // Configure rate limiting if enabled
+    if (rateLimitEnabled){
+      console.log('Rate limiting enabled');
+      new RateLimitConfig().start(app, config.rateLimit);
+    } else {
+      console.log('Rate limiting not enabled');
     }
 
     configureTemplating(app);
