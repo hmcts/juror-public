@@ -1,6 +1,8 @@
 ;(function(){
   'use strict';
 
+  require('../scss/main.scss');
+
   // Turn off jQuery animation
   jQuery.fx.off = true;
 
