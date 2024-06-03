@@ -89,7 +89,8 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0"
+    "webpack-node-externals": "^3.0.0",
+    "webpack-shell-plugin-next": "^2.3.1"
   },
   "resolutions": {
     "jackspeak": "2.1.1"

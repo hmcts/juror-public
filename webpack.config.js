@@ -3,6 +3,7 @@ const path = require('path');
 const sourcePath = path.resolve(__dirname, 'client/js');
 const scss = require(path.resolve(__dirname, 'webpack/scss'));
 const HtmlWebpack = require(path.resolve(__dirname, 'webpack/htmlWebpack'));
+const translation = require(path.resolve(__dirname, 'webpack/translation'));
 
 const devMode = process.env.NODE_ENV !== 'production';
 const filename = 'js/bundle.js';
@@ -10,7 +11,7 @@ const filename = 'js/bundle.js';
 const outDir = devMode ? 'dev/client' : 'dist/client';
 
 module.exports = {
-  plugins: [...scss.plugins, ...HtmlWebpack.plugins],
+  plugins: [...scss.plugins, ...HtmlWebpack.plugins, ...translation.plugins],
   entry: path.resolve(sourcePath, 'main.js'),
   mode: devMode ? 'development' : 'production',
   module: {

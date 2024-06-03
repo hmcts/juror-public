@@ -37,6 +37,11 @@ const copyClientCode = new CopyWebpackPlugin({
       to: '../client/assets/fonts',
     },
     {
+      context: 'node_modules/govuk-frontend/govuk/assets/fonts/',
+      from: '*.*',
+      to: '../client/assets/fonts',
+    },
+    {
       context: 'client/assets/documents/',
       from: '*.pdf',
       to: '../client/assets/documents',
@@ -50,6 +55,11 @@ const copyClientCode = new CopyWebpackPlugin({
       context: 'node_modules/govuk-frontend/govuk/assets/images/',
       from: '*.*',
       to: '../client/assets/images',
+    },
+    {
+      context: 'node_modules/@scottish-government/pattern-library/dist/images/icons/',
+      from: '*.*',
+      to: '../client/assets/images/icons',
     },
   ],
 });
