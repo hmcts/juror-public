@@ -39,6 +39,14 @@
 
         // If anything other than false, logs will be output in terminal using the provided log level as minimum level
         logConsole: false,
+
+        // rate limiting - defaults to 1 mil requests per minute
+        rateLimitEnabled: true,
+        rateLimit: {
+          time: process.env.RATE_LIMIT_TIME || (1 * 60 * 1000), // time window in milliseconds
+          max: process.env.RATE_LIMIT_MAX || 1000000, // max number of requests per time (in ms above)
+          message: 'Too many requests, please try again later.',
+        },
       };
 
       // Export the config object based on the NODE_ENV
