@@ -1,34 +1,38 @@
-;(function(){
+;(function () {
   'use strict';
 
-  var _ = require('lodash')
-    , urljoin = require('url-join')
-    , config = require('../config/environment')()
-    , options = {
-      uri: config.apiEndpoint,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      resolveWithFullResponse: true,
-    }
+  const { axiosInstance } = require('./axios-instance');
+  const jwt = require('jsonwebtoken');
+  const secretsConfig = require('config');
 
-  , responseObject = {
+  let health = {
     resource: '/actuator/health',
-    get: function(rp, app) {
-      var reqOptions = _.clone(options);
+    get: function (app) {
 
-      reqOptions.uri = urljoin(reqOptions.uri.replace('api/v1', ''), this.resource);
+      let jwtToken;
+      let apiUserObj = {
+        login: 'AUTO',
+        userLevel: '1',
+        daysToExpire: 6,
+        passwordWarning: true,
+        staff: {
+          name: 'AUTO',
+          rank: -1,
+          active: 1,
+          courts: [],
+        },
+      };
 
-      app.logger.debug('Sending request to API: ', {
-        uri: reqOptions.uri,
-        headers: reqOptions.headers,
-        body: reqOptions.body,
-      });
+      jwtToken = jwt.sign(apiUserObj,
+        secretsConfig.get('secrets.juror.public-jwtKeyBureau'),
+        { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
-      return rp(reqOptions);
-    }
+      let url = this.resource;
+
+      return axiosInstance(url, app, jwtToken, null);
+
+    },
   };
 
-  module.exports.object = responseObject;
+  module.exports.health = health;
 })();
