@@ -59,9 +59,6 @@
         , mergedUser
         , backLinkUrl;
 
-      // Temp log session details   
-      app.logger.debug('Residency page load - session data:', JSON.stringify(req.session));
-
       // Merge and then delete form fields and errors, prevents retention after pressing back link
       mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
       tmpErrors = _.cloneDeep(req.session.errors);

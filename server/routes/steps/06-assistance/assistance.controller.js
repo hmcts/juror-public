@@ -3,7 +3,7 @@
  * GET    /    ->    index
  */
 
-;(function(){
+;(function () {
   'use strict';
 
   var _ = require('lodash')
@@ -20,9 +20,6 @@
         , merged
         , tmpErrors
         , backLinkUrl;
-
-      // Temp log session
-      app.logger.debug('Assistance page load - session data:', JSON.stringify(req.session));
 
       // Get current value for assistanceType
       merged = _.merge(_.cloneDeep(req.session.user), req.session.formFields);
@@ -117,9 +114,6 @@
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirm.information', req.session.user.thirdParty)));
         };
 
-      // Temp log session
-      app.logger.debug('Assistance page confirm 1 - session data:', JSON.stringify(req.session));
-
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
@@ -155,23 +149,26 @@
 
       req.session.user.assistanceSpecialArrangements = (req.session.user.assistanceNeeded === 'Yes' || req.session.user.assistanceNeeded === texts_cy.REASONABLE_ADJUSTMENT_PAGE.YES) ? req.body['assistanceSpecialArrangements'] : '';
 
-      // Temp log session
-      app.logger.debug('Assistance page confirm 2 - session data:', JSON.stringify(req.session));
-
-      // Temp log session
-      app.logger.debug('Calling req.session.save()');
-      req.session.save();
-
-      // Verify if valid to proceed with PCQ step
-      pcqService.checkPCQ(req, app, checkPCQSuccess, checkPCQFailure);
+      // Save session to redis prior to PCQ step
+      req.session.save(function (err) {
+        if (!err) {
+          app.logger.info('Session saved successfully');
+          // Process PCQ step
+          pcqService.checkPCQ(req, app, checkPCQSuccess, checkPCQFailure);
+        } else {
+          // Session save failed
+          app.logger.crit('Error saving session: ', err);
+          return res.redirect(app.namedRoutes.build('start.get'));
+        }
+      });
 
     };
   };
 
-  module.exports.change = function(app){
-    return function(req, res){
+  module.exports.change = function (app) {
+    return function(req, res) {
       req.session.change = true;
       res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.assistance', req.session.user.thirdParty)));
-    }
+    };
   }
 })();
