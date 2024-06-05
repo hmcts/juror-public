@@ -1,0 +1,35 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block pageTitle %}
+  {{ texts.LOGIN_PAGE.SUMMONS_DATE_PASSED_TITLE }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Summons Date Passed{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {{ texts.LOGIN_PAGE.SUMMONS_DATE_PASSED_TITLE }}
+      </h1>
+
+      <p class="govuk-body">
+        {{ texts.LOGIN_PAGE.SUMMONS_DATE_PASSED_GUIDANCE }}
+      </p>
+
+      <div class="govuk-inset-text">
+        {% include "../../includes/contact-details.njk" %}
+      </div>
+        
+      </p>
+
+      <input type="hidden" name="_csrf" id="_csrf" value="{{ csrftoken }}">
+
+  </div>
+</div>
+
+{% endblock %}
