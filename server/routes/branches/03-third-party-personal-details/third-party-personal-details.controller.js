@@ -3,93 +3,51 @@
  * GET    /    ->    index
  */
 
-;(function(){
+;(function () {
   'use strict';
 
-  var _ = require('lodash')
-    , validate = require('validate.js')
-    , moment = require('moment')
-    , filters = require('../../../components/filters')
-    , texts_en = require('../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , jurorDetails = require('../../../objects/juror').jurorDetails
-    , utils = require('../../../lib/utils');
+  const _ = require('lodash');
+  const validate = require('validate.js');
+  const moment = require('moment');
+  const filters = require('../../../components/filters');
+  const textsEn = require('../../../../client/js/i18n/en.json');
+  const textsCy = require('../../../../client/js/i18n/cy.json');
+
+  const jurorDetails = require('../../../objects/juror').jurorDetails;
+  const utils = require('../../../lib/utils');
 
 
-  //
-  // Name Functions
-  //
+  module.exports.index = function (app) {
+    return function (req, res) {
 
-  module.exports.changeName = function(app){
-    return function(req, res){
-      req.session.change = true;
-      res.redirect(app.namedRoutes.build('branches.third.party.personal.details.name-change.get'));
-    };
-  };
+      let getDetailsSuccess = function (response) {
 
-  // Name confirm/change pages
-  module.exports.getNameConfirm = function(app) {
-    return function(req, res) {
-      var getDetailsSuccess = function(response) {
-          var nameError
-            , tmpErrors
-            , mergedUser
-            , backLinkUrl;
+        utils.setRespondantDetails(app, req, response);
 
-          utils.setRespondantDetails(app, req, response);
+        app.logger.info('Fetched and parsed summoned juror details on third party route', {
+          jurorNumber: req.session.user.jurorNumber,
+          jwt: req.session.authToken,
+          response: response,
+        });
 
-          if (typeof req.session.errors !== 'undefined') {
-            nameError = (
-              typeof req.session.errors['title'] !== 'undefined' ||
-              typeof req.session.errors['firstName'] !== 'undefined' ||
-              typeof req.session.errors['lastName'] !== 'undefined'
-            );
-          }
+        // Reset error and saved field sessions
+        delete req.session.errors;
+        delete req.session.formFields;
 
-          app.logger.info('Fetched and parsed summoned juror details on third party route', {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            response: response
-          });
+        return res.redirect(app.namedRoutes.build('branches.third.party.personal.details.name.get'));
 
-          // Merge and then delete form fields and errors, prevents retention after pressing back link
-          mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
-          tmpErrors = _.cloneDeep(req.session.errors);
+      };
 
-          // Reset error and saved field sessions
-          delete req.session.errors;
-          delete req.session.formFields;
+      let getDetailsError = function (err) {
+        app.logger.crit('Failed to fetch and parse summoned juror details on third party route: '
+          + err.response.status, {
+          jurorNumber: req.session.user.jurorNumber,
+          jwt: req.session.authToken,
+          error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
+        });
 
-          // Set back link URL
-          if (req.session.change === true){
-            backLinkUrl = 'steps.confirm.information.tp.get';
-          } else {
-            backLinkUrl = 'branches.third.party.reason.get';
-          }
-
-          return res.render('branches/03-third-party-personal-details/name.njk', {
-            user: mergedUser,
-            errors: {
-              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-              message: '',
-              count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
-              items: tmpErrors,
-              nameError: nameError,
-            },
-            backLinkUrl: backLinkUrl
-          });
-        }
-
-        , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
-          });
-
-          res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
-        };
-
+        res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
+      };
 
       jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
@@ -97,17 +55,76 @@
     };
   };
 
-  module.exports.createNameConfirm = function(app) {
-    return function(req, res) {
-      var validatorResult
-        , redirectPage;
+  //
+  // Name Functions
+  //
+
+  module.exports.changeName = function (app) {
+    return function (req, res) {
+      req.session.change = true;
+      res.redirect(app.namedRoutes.build('branches.third.party.personal.details.name-change.get'));
+    };
+  };
+
+  // Name confirm/change pages
+  module.exports.getNameConfirm = function () {
+    return function (req, res) {
+
+      let nameError;
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
+
+      if (typeof req.session.errors !== 'undefined') {
+        nameError = (
+          typeof req.session.errors['title'] !== 'undefined' ||
+          typeof req.session.errors['firstName'] !== 'undefined' ||
+          typeof req.session.errors['lastName'] !== 'undefined'
+        );
+      }
+
+      // Merge and then delete form fields and errors, prevents retention after pressing back link
+      mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
+      tmpErrors = _.cloneDeep(req.session.errors);
+
+      // Reset error and saved field sessions
+      delete req.session.errors;
+      delete req.session.formFields;
+
+      // Set back link URL
+      if (req.session.change === true) {
+        backLinkUrl = 'steps.confirm.information.tp.get';
+      } else {
+        backLinkUrl = 'branches.third.party.reason.get';
+      }
+
+      return res.render('branches/03-third-party-personal-details/name.njk', {
+        user: mergedUser,
+        errors: {
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
+          message: '',
+          count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
+          items: tmpErrors,
+          nameError: nameError,
+        },
+        backLinkUrl: backLinkUrl,
+      });
+
+    };
+  };
+
+  module.exports.createNameConfirm = function (app) {
+    return function (req, res) {
+      let validatorResult;
+      let redirectPage;
 
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-personal-details-name-confirm')(req));
+      validatorResult = validate(
+        req.body, require('../../../config/validation/third-party-personal-details-name-confirm')(req));
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -115,114 +132,88 @@
         return res.redirect(app.namedRoutes.build('branches.third.party.personal.details.name.get'));
       }
 
-      // Input validated, store information in session
-      // Update name confirm
-      //req.session.user['nameConfirm'] = req.body['nameConfirm'];
-
-
       // JDB-2961 - only redirect to confirm information page if thirdPartyContactDetails page has been completed
-      if (req.session.change === true && (typeof req.session.user.useJurorPhoneDetails !== 'undefined' || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
+      if (req.session.change === true && (typeof req.session.user.useJurorPhoneDetails !== 'undefined'
+        || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
         return res.redirect(app.namedRoutes.build('steps.confirm.information.tp.get'));
       }
 
-      if (req.body['nameConfirm'] === 'Yes'){
+      if (req.body['nameConfirm'] === 'Yes') {
         redirectPage = 'branches.third.party.personal.details.address.get';
       } else {
         redirectPage = 'branches.third.party.personal.details.name-change.get';
       }
 
-      //return res.redirect(app.namedRoutes.build('branches.third.party.personal.details.address-confirm.get'));
       return res.redirect(app.namedRoutes.build(redirectPage));
     };
   };
 
-  module.exports.getNameChange = function(app) {
-    return function(req, res) {
-      var getDetailsSuccess = function(response) {
-          var nameError
-            , tmpErrors
-            , mergedUser
-            , backLinkUrl;
+  module.exports.getNameChange = function () {
+    return function (req, res) {
 
-          utils.setRespondantDetails(app, req, response);
+      let nameError;
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
-          if (typeof req.session.errors !== 'undefined') {
-            nameError = (
-              typeof req.session.errors['title'] !== 'undefined' ||
-              typeof req.session.errors['firstName'] !== 'undefined' ||
-              typeof req.session.errors['lastName'] !== 'undefined'
-            );
-          }
+      if (typeof req.session.errors !== 'undefined') {
+        nameError = (
+          typeof req.session.errors['title'] !== 'undefined' ||
+          typeof req.session.errors['firstName'] !== 'undefined' ||
+          typeof req.session.errors['lastName'] !== 'undefined'
+        );
+      }
 
-          app.logger.info('Fetched and parsed summoned juror details on third party route', {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            response: response
-          });
+      // Merge and then delete form fields and errors, prevents retention after pressing back link
+      mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
+      tmpErrors = _.cloneDeep(req.session.errors);
 
-          // Merge and then delete form fields and errors, prevents retention after pressing back link
-          mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
-          tmpErrors = _.cloneDeep(req.session.errors);
+      // Reset error and saved field sessions
+      delete req.session.errors;
+      delete req.session.formFields;
 
-          // Reset error and saved field sessions
-          delete req.session.errors;
-          delete req.session.formFields;
+      // Set back link URL
+      if (req.session.change === true) {
+        backLinkUrl = 'steps.confirm.information.tp.get';
+      } else {
+        backLinkUrl = 'branches.third.party.personal.details.name.get';
+      }
 
-          // Set back link URL
-          if (req.session.change === true){
-            backLinkUrl = 'steps.confirm.information.tp.get';
-          } else {
-            backLinkUrl = 'branches.third.party.personal.details.name.get';
-          }
+      return res.render('branches/03-third-party-personal-details/name-change.njk', {
+        user: mergedUser,
+        errors: {
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
+          message: '',
+          count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
+          items: tmpErrors,
+          nameError: nameError,
+        },
+        backLinkUrl: backLinkUrl,
+      });
 
-          return res.render('branches/03-third-party-personal-details/name-change.njk', {
-            user: mergedUser,
-            errors: {
-              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-              message: '',
-              count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
-              items: tmpErrors,
-              nameError: nameError,
-            },
-            backLinkUrl: backLinkUrl
-          });
-        }
-
-        , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
-          });
-
-          res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
-        };
-
-
-      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
-        .then(getDetailsSuccess, getDetailsError)
-        .catch(getDetailsError);
     };
   };
 
-  module.exports.createNameChange = function(app) {
-    return function(req, res) {
-      var validatorResult
-        // Join parts of name
-        , nameRender = [
-          req.body['title'],
-          req.body['firstName'],
-          req.body['lastName']
-        ].filter(function(val) {
-          return val;
-        }).join(' ')
+  module.exports.createNameChange = function (app) {
+    return function (req, res) {
+
+      let validatorResult;
+      // Join parts of name
+      let nameRender = [
+        req.body['title'],
+        req.body['firstName'],
+        req.body['lastName'],
+      ].filter(function (val) {
+        return val;
+      }).join(' ');
 
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-personal-details-name')(req));
+      validatorResult = validate(req.body,
+        require('../../../config/validation/third-party-personal-details-name')(req));
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -239,7 +230,9 @@
       req.session.user['lastName'] = req.body['lastName'];
 
       // JDB-2961 - only redirect to confirm information page if thirdPartyContactDetails page has been completed
-      if (req.session.change === true && (typeof req.session.user.useJurorPhoneDetails !== 'undefined' || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
+      if (req.session.change === true
+        && (typeof req.session.user.useJurorPhoneDetails !== 'undefined'
+        || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
         return res.redirect(app.namedRoutes.build('steps.confirm.information.tp.get'));
       }
 
@@ -251,97 +244,75 @@
   // Address Functions
   //
 
-  module.exports.changeAddress = function(app){
-    return function(req, res){
+  module.exports.changeAddress = function (app) {
+    return function (req, res) {
       req.session.change = true;
       res.redirect(app.namedRoutes.build('branches.third.party.personal.details.address-change.get'));
     };
   };
 
-  module.exports.getAddressConfirm = function(app) {
-    return function(req, res) {
-      var getDetailsSuccess = function(response) {
-          var addressError
-            , tmpErrors
-            , mergedUser
-            , backLinkUrl;
+  module.exports.getAddressConfirm = function () {
+    return function (req, res) {
 
-          utils.setRespondantDetails(app, req, response);
+      let addressError;
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
-          if (typeof req.session.errors !== 'undefined') {
-            addressError = (
-              typeof req.session.errors['address'] !== 'undefined' ||
-              typeof req.session.errors['addressLineOne'] !== 'undefined' ||
-              typeof req.session.errors['addressLineTwo'] !== 'undefined' ||
-              typeof req.session.errors['addressLineThree'] !== 'undefined' ||
-              typeof req.session.errors['addressTown'] !== 'undefined' ||
-              typeof req.session.errors['addressCounty'] !== 'undefined' ||
-              typeof req.session.errors['addressPostcode'] !== 'undefined'
-            );
-          }
+      if (typeof req.session.errors !== 'undefined') {
+        addressError = (
+          typeof req.session.errors['address'] !== 'undefined' ||
+          typeof req.session.errors['addressLineOne'] !== 'undefined' ||
+          typeof req.session.errors['addressLineTwo'] !== 'undefined' ||
+          typeof req.session.errors['addressLineThree'] !== 'undefined' ||
+          typeof req.session.errors['addressTown'] !== 'undefined' ||
+          typeof req.session.errors['addressCounty'] !== 'undefined' ||
+          typeof req.session.errors['addressPostcode'] !== 'undefined'
+        );
+      }
 
-          app.logger.info('Fetched and parsed summoned juror details on third party route', {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            response: response
-          });
+      // Merge and then delete form fields and errors, prevents retention after pressing back link
+      mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
+      tmpErrors = _.cloneDeep(req.session.errors);
 
-          // Merge and then delete form fields and errors, prevents retention after pressing back link
-          mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
-          tmpErrors = _.cloneDeep(req.session.errors);
+      // Reset error and saved field sessions
+      delete req.session.errors;
+      delete req.session.formFields;
 
-          // Reset error and saved field sessions
-          delete req.session.errors;
-          delete req.session.formFields;
+      // Set back link URL
+      if (req.session.change === true) {
+        backLinkUrl = 'steps.confirm.information.tp.get';
+      } else {
+        backLinkUrl = 'branches.third.party.personal.details.name.get';
+      }
 
-          // Set back link URL
-          if (req.session.change === true){
-            backLinkUrl = 'steps.confirm.information.tp.get';
-          } else {
-            backLinkUrl = 'branches.third.party.personal.details.name.get';
-          }
+      return res.render('branches/03-third-party-personal-details/address.njk', {
+        user: mergedUser,
+        errors: {
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
+          message: '',
+          count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
+          items: tmpErrors,
+          addressError: addressError,
+        },
+        backLinkUrl: backLinkUrl,
+      });
 
-          return res.render('branches/03-third-party-personal-details/address.njk', {
-            user: mergedUser,
-            errors: {
-              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-              message: '',
-              count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
-              items: tmpErrors,
-              addressError: addressError,
-            },
-            backLinkUrl: backLinkUrl
-          });
-        }
-
-        , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
-          });
-
-          res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
-        };
-
-
-      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
-        .then(getDetailsSuccess, getDetailsError)
-        .catch(getDetailsError);
     };
   };
 
-  module.exports.createAddressConfirm = function(app) {
-    return function(req, res) {
-      var validatorResult
-        , redirectPage;
+  module.exports.createAddressConfirm = function (app) {
+    return function (req, res) {
+      let validatorResult;
+      let redirectPage;
 
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-personal-details-address-confirm')(req));
+      validatorResult = validate(req.body,
+        require('../../../config/validation/third-party-personal-details-address-confirm')(req));
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -349,16 +320,14 @@
         return res.redirect(app.namedRoutes.build('branches.third.party.personal.details.address.get'));
       }
 
-      // Input validated, store information in session
-      // Update address confirm
-      //req.session.user['addressConfirm'] = req.body['addressConfirm']
-
       // JDB-2961 - only redirect to confirm information page if thirdPartyContactDetails page has been completed
-      if (req.session.change === true && (typeof req.session.user.useJurorPhoneDetails !== 'undefined' || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
+      if (req.session.change === true
+        && (typeof req.session.user.useJurorPhoneDetails !== 'undefined'
+        || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
         return res.redirect(app.namedRoutes.build('steps.confirm.information.tp.get'));
       }
 
-      if (req.body['addressConfirm'] === 'No'){
+      if (req.body['addressConfirm'] === 'No') {
         redirectPage = 'branches.third.party.personal.details.address-change.get';
       } else {
         redirectPage = 'branches.third.party.personal.details.date-of-birth.get';
@@ -367,100 +336,78 @@
     };
   };
 
-  module.exports.getAddressChange = function(app) {
-    return function(req, res) {
-      var getDetailsSuccess = function(response) {
-          var addressError
-            , tmpErrors
-            , mergedUser
-            , backLinkUrl;
+  module.exports.getAddressChange = function () {
+    return function (req, res) {
 
-          utils.setRespondantDetails(app, req, response);
+      let addressError;
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
-          if (typeof req.session.errors !== 'undefined') {
-            addressError = (
-              typeof req.session.errors['address'] !== 'undefined' ||
-              typeof req.session.errors['addressLineOne'] !== 'undefined' ||
-              typeof req.session.errors['addressLineTwo'] !== 'undefined' ||
-              typeof req.session.errors['addressLineThree'] !== 'undefined' ||
-              typeof req.session.errors['addressTown'] !== 'undefined' ||
-              typeof req.session.errors['addressCounty'] !== 'undefined' ||
-              typeof req.session.errors['addressPostcode'] !== 'undefined'
-            );
-          }
+      if (typeof req.session.errors !== 'undefined') {
+        addressError = (
+          typeof req.session.errors['address'] !== 'undefined' ||
+          typeof req.session.errors['addressLineOne'] !== 'undefined' ||
+          typeof req.session.errors['addressLineTwo'] !== 'undefined' ||
+          typeof req.session.errors['addressLineThree'] !== 'undefined' ||
+          typeof req.session.errors['addressTown'] !== 'undefined' ||
+          typeof req.session.errors['addressCounty'] !== 'undefined' ||
+          typeof req.session.errors['addressPostcode'] !== 'undefined'
+        );
+      }
 
-          app.logger.info('Fetched and parsed summoned juror details on third party route', {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            response: response
-          });
+      // Merge and then delete form fields and errors, prevents retention after pressing back link
+      mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
+      tmpErrors = _.cloneDeep(req.session.errors);
 
-          // Merge and then delete form fields and errors, prevents retention after pressing back link
-          mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
-          tmpErrors = _.cloneDeep(req.session.errors);
+      // Reset error and saved field sessions
+      delete req.session.errors;
+      delete req.session.formFields;
 
-          // Reset error and saved field sessions
-          delete req.session.errors;
-          delete req.session.formFields;
+      // Set back link URL
+      if (req.session.change === true) {
+        backLinkUrl = 'steps.confirm.information.tp.get';
+      } else {
+        backLinkUrl = 'branches.third.party.personal.details.address.get';
+      }
 
-          // Set back link URL
-          if (req.session.change === true){
-            backLinkUrl = 'steps.confirm.information.tp.get';
-          } else {
-            backLinkUrl = 'branches.third.party.personal.details.address.get';
-          }
+      return res.render('branches/03-third-party-personal-details/address-change.njk', {
+        user: mergedUser,
+        errors: {
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
+          message: '',
+          count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
+          items: tmpErrors,
+          addressError: addressError,
+        },
+        backLinkUrl: backLinkUrl,
+      });
 
-          return res.render('branches/03-third-party-personal-details/address-change.njk', {
-            user: mergedUser,
-            errors: {
-              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-              message: '',
-              count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
-              items: tmpErrors,
-              addressError: addressError,
-            },
-            backLinkUrl: backLinkUrl
-          });
-        }
-
-        , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
-          });
-
-          res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
-        };
-
-
-      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
-        .then(getDetailsSuccess, getDetailsError)
-        .catch(getDetailsError);
     };
   };
 
-  module.exports.createAddressChange = function(app) {
-    return function(req, res) {
-      var validatorResult
-        // Join parts of address
-        , addressRender = [
-          req.body['addressLineOne'],
-          req.body['addressLineTwo'],
-          req.body['addressLineThree'],
-          req.body['addressTown'],
-          req.body['addressCounty'],
-          req.body['addressPostcode']
-        ].filter(function(val) {
-          return val;
-        }).join('<br>')
+  module.exports.createAddressChange = function (app) {
+    return function (req, res) {
+      let validatorResult;
+      // Join parts of address
+      let addressRender = [
+        req.body['addressLineOne'],
+        req.body['addressLineTwo'],
+        req.body['addressLineThree'],
+        req.body['addressTown'],
+        req.body['addressCounty'],
+        req.body['addressPostcode'],
+      ].filter(function (val) {
+        return val;
+      }).join('<br>');
 
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-personal-details-address')(req));
+      validatorResult = validate(
+        req.body, require('../../../config/validation/third-party-personal-details-address')(req));
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -481,7 +428,9 @@
       req.session.user['addressRender'] = addressRender;
 
       // JDB-2961 - only redirect to confirm information page if thirdPartyContactDetails page has been completed
-      if (req.session.change === true && (typeof req.session.user.useJurorPhoneDetails !== 'undefined' || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
+      if (req.session.change === true
+        && (typeof req.session.user.useJurorPhoneDetails !== 'undefined'
+        || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
         return res.redirect(app.namedRoutes.build('steps.confirm.information.tp.get'));
       }
 
@@ -493,69 +442,46 @@
   // DOB Functions
   //
 
-  module.exports.getDateOfBirth = function(app) {
-    return function(req, res) {
-      var getDetailsSuccess = function(response) {
-          var tmpErrors
-            , mergedUser
-            , backLinkUrl;
+  module.exports.getDateOfBirth = function () {
+    return function (req, res) {
 
-          utils.setRespondantDetails(app, req, response);
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
-          app.logger.info('Fetched and parsed summoned juror details on third party route', {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            response: response
-          });
+      // Merge and then delete form fields and errors, prevents retention after pressing back link
+      mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
+      tmpErrors = _.cloneDeep(req.session.errors);
 
-          // Merge and then delete form fields and errors, prevents retention after pressing back link
-          mergedUser = _.merge(_.cloneDeep(req.session.user), _.cloneDeep(req.session.formFields));
-          tmpErrors = _.cloneDeep(req.session.errors);
+      // Reset error and saved field sessions
+      delete req.session.errors;
+      delete req.session.formFields;
 
-          // Reset error and saved field sessions
-          delete req.session.errors;
-          delete req.session.formFields;
+      // Set back link URL
+      if (req.session.change === true) {
+        backLinkUrl = 'steps.confirm.information.tp.get';
+      } else {
+        backLinkUrl = 'branches.third.party.personal.details.address.get';
+      }
 
-          // Set back link URL
-          if (req.session.change === true){
-            backLinkUrl = 'steps.confirm.information.tp.get';
-          } else {
-            backLinkUrl = 'branches.third.party.personal.details.address.get';
-          }
+      return res.render('branches/03-third-party-personal-details/date-of-birth.njk', {
+        user: mergedUser,
+        errors: {
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
+          message: '',
+          count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
+          items: tmpErrors,
+        },
+        backLinkUrl: backLinkUrl,
+      });
 
-          return res.render('branches/03-third-party-personal-details/date-of-birth.njk', {
-            user: mergedUser,
-            errors: {
-              title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-              message: '',
-              count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
-              items: tmpErrors
-            },
-            backLinkUrl: backLinkUrl
-          });
-        }
-
-        , getDetailsError = function(err) {
-          app.logger.crit('Failed to fetch and parse summoned juror details on third party route: ' + err.response.status, {
-            jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
-            error: (typeof err.response.data !== 'undefined') ? err.response.data : err
-          });
-
-          res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));
-        };
-
-
-      jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
-        .then(getDetailsSuccess, getDetailsError)
-        .catch(getDetailsError);
     };
   };
 
-  module.exports.createDateOfBirth = function(app) {
-    return function(req, res) {
-      var validatorResult
-        , dobValue;
+  module.exports.createDateOfBirth = function (app) {
+    return function (req, res) {
+      let validatorResult;
+      let dobValue;
 
       // Reset error and saved field sessions
       delete req.session.errors;
@@ -563,7 +489,7 @@
 
       // Add dob fields into single dob object & calculate if age will be valid
       if (req.body['dobDay'].length > 0 && req.body['dobMonth'].length > 0 && req.body['dobYear'].length > 0) {
-        dobValue = moment([req.body['dobYear'], req.body['dobMonth'], req.body['dobDay']].filter(function(val) {
+        dobValue = moment([req.body['dobYear'], req.body['dobMonth'], req.body['dobDay']].filter(function (val) {
           return val;
         }).join('-'), 'YYYY-MM-DD');
 
@@ -571,27 +497,28 @@
         req.body['dateOfBirth'] = dobValue;
         req.body['ageTimeOfHearing'] = utils.calculateAgeAtHearing(
           req.body['dateOfBirth'],
-          req.session.user['hearingDateTimestamp']
+          req.session.user['hearingDateTimestamp'],
         );
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-personal-details-date-of-birth')(req));
+      validatorResult = validate(
+        req.body, require('../../../config/validation/third-party-personal-details-date-of-birth')(req));
       if (typeof validatorResult !== 'undefined') {
 
         // Only show 1 error at a time for the DOB
         // Report the first error item if multiple errors were raised
 
-        if (validatorResult.dobDay){
+        if (validatorResult.dobDay) {
           delete validatorResult.dobMonth;
           delete validatorResult.dobYear;
           delete validatorResult.dateOfBirth;
         }
-        if (validatorResult.dobMonth){
+        if (validatorResult.dobMonth) {
           delete validatorResult.dobYear;
           delete validatorResult.dateOfBirth;
         }
-        if (validatorResult.dobYear){
+        if (validatorResult.dobYear) {
           delete validatorResult.dateOfBirth;
         }
 
@@ -612,12 +539,15 @@
       req.session.user['ineligibleAge'] = false;
 
       // redirect to dob confirmation if under lower age limit or above higher age limit
-      if (req.body['ageTimeOfHearing'] < app.ageSettings.lowerAgeLimit || req.body['ageTimeOfHearing'] >= app.ageSettings.upperAgeLimit) {
+      if (req.body['ageTimeOfHearing'] < app.ageSettings.lowerAgeLimit
+        || req.body['ageTimeOfHearing'] >= app.ageSettings.upperAgeLimit) {
         return res.redirect(app.namedRoutes.build('steps.your.details.confirm.tp.get'));
       }
 
       // JDB-2961 - only redirect to confirm information page if thirdPartyContactDetails page has been completed
-      if (req.session.change === true && (typeof req.session.user.useJurorPhoneDetails !== 'undefined' || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
+      if (req.session.change === true
+        && (typeof req.session.user.useJurorPhoneDetails !== 'undefined'
+        || typeof req.session.user.useJurorEmailDetails !== 'undefined')) {
         return res.redirect(app.namedRoutes.build('steps.confirm.information.tp.get'));
       }
 
@@ -625,8 +555,8 @@
     };
   };
 
-  module.exports.changeDateOfBirth = function(app){
-    return function(req, res){
+  module.exports.changeDateOfBirth = function (app) {
+    return function (req, res) {
       req.session.change = true;
       res.redirect(app.namedRoutes.build('branches.third.party.personal.details.date-of-birth.get'));
     };

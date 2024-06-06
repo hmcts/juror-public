@@ -3,21 +3,20 @@
  * GET    /    ->    index
  */
 
-;(function(){
+;(function () {
   'use strict';
 
-  var _ = require('lodash')
-    , validate = require('validate.js')
-    , filters = require('../../../components/filters')
-    , texts_en = require('../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , utils = require('../../../lib/utils');
+  const _ = require('lodash');
+  const validate = require('validate.js');
+  const filters = require('../../../components/filters');
+  const textsEn = require('../../../../client/js/i18n/en.json');
+  const textsCy = require('../../../../client/js/i18n/cy.json');
 
-  module.exports.index = function() {
-    return function(req, res) {
-      var tmpErrors
-        , mergedUser
-        , backLinkUrl;
+  module.exports.index = function () {
+    return function (req, res) {
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
       // Make sure the user session exists
       if (typeof req.session.user === 'undefined') {
@@ -32,7 +31,7 @@
       delete req.session.formFields;
 
       // Set back link URL
-      if (req.session.change === true){
+      if (req.session.change === true) {
         backLinkUrl = 'steps.confirm.information.tp.get';
       } else {
         backLinkUrl = 'branches.third.party.details.contact.get';
@@ -41,26 +40,25 @@
       return res.render('branches/02-third-party-reason/index.njk', {
         user: mergedUser,
         errors: {
-          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
+          title: filters.translate('VALIDATION.ERROR_TITLE', (req.session.ulang === 'cy' ? textsCy : textsEn)),
           message: '',
           count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
           items: tmpErrors,
         },
-        backLinkUrl: backLinkUrl
+        backLinkUrl: backLinkUrl,
       });
     };
   };
 
-  module.exports.create = function(app) {
-    return function(req, res) {
-      var validatorResult;
-
+  module.exports.create = function (app) {
+    return function (req, res) {
+      let validatorResult;
 
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
 
-      if (req.body.thirdPartyReason !== 'other'){
+      if (req.body.thirdPartyReason !== 'other') {
         req.body.thirdPartyOtherReason = '';
       }
 
@@ -92,12 +90,13 @@
         return res.redirect(app.namedRoutes.build('steps.confirm.information.tp.get'));
       }
 
-      return res.redirect(app.namedRoutes.build('branches.third.party.personal.details.name.get'));
+      return res.redirect(app.namedRoutes.build('branches.third.party.personal.details.get'));
+
     };
   };
 
-  module.exports.change = function(app){
-    return function(req, res){
+  module.exports.change = function (app) {
+    return function (req, res) {
       req.session.change = true;
       res.redirect(app.namedRoutes.build('branches.third.party.reason.get'));
     };
