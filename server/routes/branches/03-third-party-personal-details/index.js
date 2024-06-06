@@ -1,17 +1,20 @@
-;(function(){
+;(function () {
   'use strict';
 
-  var controller = require('./third-party-personal-details.controller')
-    , auth = require('../../../components/auth')
-    , utils = require('../../../lib/utils');
+  let controller = require('./third-party-personal-details.controller');
+  let auth = require('../../../components/auth');
+  let utils = require('../../../lib/utils');
 
-  module.exports = function(app) {
+  module.exports = function (app) {
     // eslint-disable-next-line max-len
     app.get('/branches/third-party-personal-details/name/change', 'branches.third.party.personal.details.name.change.get', auth.verify, controller.changeName(app));
     // eslint-disable-next-line max-len
     app.get('/branches/third-party-personal-details/address/change', 'branches.third.party.personal.details.address.change.get', auth.verify, controller.changeAddress(app));
     // eslint-disable-next-line max-len
     app.get('/branches/third-party-personal-details/date-of-birth/change', 'branches.third.party.personal.details.date-of-birth.change.get', auth.verify, controller.changeDateOfBirth(app));
+
+    // eslint-disable-next-line max-len
+    app.get('/branches/third-party-personal-details', 'branches.third.party.personal.details.get', auth.verify, utils.checkBranchAccess(app, 3), controller.index(app));
 
     // eslint-disable-next-line max-len
     app.get('/branches/third-party-personal-details/name', 'branches.third.party.personal.details.name.get', auth.verify, utils.checkBranchAccess(app, 3), controller.getNameConfirm(app));
@@ -35,7 +38,6 @@
     app.get('/branches/third-party-personal-details/date-of-birth', 'branches.third.party.personal.details.date-of-birth.get', auth.verify, utils.checkBranchAccess(app, 3), controller.getDateOfBirth(app));
     // eslint-disable-next-line max-len
     app.post('/branches/third-party-personal-details/date-of-birth', 'branches.third.party.personal.details.date-of-birth.post', auth.verify, controller.createDateOfBirth(app));
-
 
   };
 
