@@ -54,7 +54,5 @@
     app.get('/steps/qualify/mental-health-capacity/tp', 'steps.qualify.mental.health.capacity.tp.get', auth.verify, auth.completeCheck, utils.checkPageAccess(app, 3.5), controller.getMentalHealthCapacity());
     app.post('/steps/qualify/mental-health-capacity', 'steps.qualify.mental.health.capacity.post', auth.verify, auth.completeCheck, controller.createMentalHealthCapacity(app));
 
-
-    app.post('/steps/qualify/store', 'steps.qualify.store', auth.verify, auth.completeCheck, controller.store());
   };
 })();
