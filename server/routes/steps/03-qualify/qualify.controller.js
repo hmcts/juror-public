@@ -1,12 +1,12 @@
-;(function(){
+;(function () {
   'use strict';
 
-  var _ = require('lodash')
-    , validate = require('validate.js')
-    , filters = require('../../../components/filters')
-    , texts_en = require('../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , utils = require('../../../lib/utils');
+  const _ = require('lodash');
+  const validate = require('validate.js');
+  const filters = require('../../../components/filters');
+  const texts_en = require('../../../../client/js/i18n/en.json');
+  const texts_cy = require('../../../../client/js/i18n/cy.json');
+  const utils = require('../../../lib/utils');
 
   // Landing page functions
   module.exports.index = function() {
@@ -28,25 +28,6 @@
         user: req.session.user,
         backLinkUrl: backLinkUrl
       });
-    };
-  };
-
-  module.exports.store = function() {
-    return function(req, res) {
-      if (typeof req.session.user.qualify === 'undefined') {
-        req.session.user.qualify = {};
-      }
-
-      if (typeof req.session.user.qualify[req.body['name'].replace('Details', '')] === 'undefined') {
-        req.session.user.qualify[req.body['name'].replace('Details', '')] = {};
-      }
-
-      if (req.body['name'].indexOf('Details') === -1) {
-        req.session.user.qualify[req.body['name']].answer = req.body['value'];
-      } else {
-        req.session.user.qualify[req.body['name'].replace('Details', '')].details = req.body['value'];
-      }
-      res.status(204).send();
     };
   };
 
