@@ -1,7 +1,7 @@
 {
   "JAVASCRIPT_GUIDANCE": "We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:",
-  "JAVASCROPTR_ITEM_1": "reloading the page",
-  "JAVASCROPTR_ITEM_2": "turning on Javascript in your browser",
+  "JAVASCRIPT_ITEM_1": "reloading the page",
+  "JAVASCRIPT_ITEM_2": "turning on Javascript in your browser",
 
   "HEADING": "Cookies",
   "COOKIE_GUIDANCE_1": "Cookies are small files saved on your phone, tablet or computer when you visit a website.",

@@ -1,7 +1,7 @@
 {
-  "JAVASCRIPT_GUIDANCE": "We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:",
-  "JAVASCROPTR_ITEM_1": "reloading the page",
-  "JAVASCROPTR_ITEM_2": "turning on Javascript in your browser",
+  "JAVASCRIPT_GUIDANCE": "Rydym yn defnyddio Javascript i osod y rhan fwyaf o'n cwcis. Yn anffodus nid yw Javascript yn rhedeg ar eich porwr, felly ni allwch newid eich gosodiadau. Gallwch geisio:",
+  "JAVASCRIPT_ITEM_1": "ail-lwytho'r dudalen",
+  "JAVASCRIPT_ITEM_2": "troi Javascript ymlaen yn eich porwr",
 
   "HEADING": "Cwcis",
   "COOKIE_GUIDANCE_1": "Ffeiliau bach sy'n cael eu cadw ar eich ffôn, tabled neu gyfrifiadur pan fyddwch yn ymweld â gwefan yw cwcis.",
