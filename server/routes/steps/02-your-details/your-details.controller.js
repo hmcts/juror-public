@@ -435,7 +435,7 @@
 
 
       // Validate form submission
-      req.body.addressPostcode = req.body.addressPostcode.replace(/\s*$/, '');
+      req.body.addressPostcode = req.body.addressPostcode.trim();
       validatorResult = validate(req.body, require('../../../config/validation/your-details-address.js')(req));
 
       if (typeof validatorResult !== 'undefined') {

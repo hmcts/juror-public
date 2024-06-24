@@ -152,7 +152,7 @@
 
 
       // Validate form submission
-      req.body.jurorPostcode = req.body.jurorPostcode.replace(/\s*$/, '');
+      req.body.jurorPostcode = req.body.jurorPostcode.trim();
       validatorResult = validate(req.body, require('../../../config/validation/login')(req));
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
