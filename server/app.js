@@ -89,13 +89,13 @@
   }
 
   async function stopServer () {
+
     app.server.close();
     await new Promise((res) => setTimeout(res, 5000));
     console.info('\nIRFTMP Express server shutdown signal received');
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
-
 
     process.exit(0);
     return;
