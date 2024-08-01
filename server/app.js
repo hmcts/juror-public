@@ -92,10 +92,13 @@
     global.sleep = (ms = 5000) => {
       return new Promise(res => setTimeout(res, ms));
     };
+    console.info('\nIRFTMP Express server shutdown signal received');
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
-
+    global.sleep = (ms = 1000) => {
+      return new Promise(res => setTimeout(res, ms));
+    };
     if (typeof app.server !== 'undefined') {
       app.server.close(function () {
         process.exit(0);
@@ -110,10 +113,17 @@
 
   // Handle shutdown
   process.on('SIGINT', function () {
+    console.info('\nIRFTMP SIGINT signal received');
     stopServer();
   });
 
   process.on('SIGTERM', function () {
+    console.info('\nIRFTMP SIGTERM signal received');
+    stopServer();
+  });
+
+  process.on('SIGKILL', function () {
+    console.info('\nIRFTMP SIGKILL signal received');    
     stopServer();
   });
 
