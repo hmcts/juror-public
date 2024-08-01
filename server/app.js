@@ -88,28 +88,26 @@
     });
   }
 
-  function stopServer () {
-    global.sleep = (ms = 5000) => {
-      return new Promise(res => setTimeout(res, ms));
-    };
+  async function stopServer () {
+    app.server.close();
+    await new Promise((res) => setTimeout(res, 5000));
     console.info('\nIRFTMP Express server shutdown signal received');
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
-    global.sleep = (ms = 1000) => {
-      return new Promise(res => setTimeout(res, ms));
-    };
-    if (typeof app.server !== 'undefined') {
-      app.server.close(function () {
-        process.exit(0);
-        return;
-      });
-    }
+
 
     process.exit(0);
     return;
   }
-
+  
+  function msleep(n) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+  }
+  function sleep(n) {
+    msleep(n*1000);
+  }
+  
   // Handle shutdown
   process.on('SIGINT', function () {
     console.info('\nIRFTMP SIGINT signal received');
