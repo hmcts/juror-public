@@ -89,6 +89,9 @@
   }
 
   function stopServer () {
+    global.sleep = (ms = 5000) => {
+      return new Promise(res => setTimeout(res, ms));
+    };
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
@@ -107,6 +110,10 @@
 
   // Handle shutdown
   process.on('SIGINT', function () {
+    stopServer();
+  });
+
+  process.on('SIGTERM', function () {
     stopServer();
   });
 
