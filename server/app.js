@@ -110,7 +110,6 @@
     return;
   }
 
-
   // Handle shutdown
   process.on('SIGINT', function () {
     console.info('\nIRFTMP SIGINT signal received');
@@ -119,11 +118,6 @@
 
   process.on('SIGTERM', function () {
     console.info('\nIRFTMP SIGTERM signal received');
-    stopServer();
-  });
-
-  process.on('SIGKILL', function () {
-    console.info('\nIRFTMP SIGKILL signal received');    
     stopServer();
   });
 
