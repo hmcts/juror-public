@@ -23,7 +23,7 @@
   let lowerAgeLimit;
 
   // Initialise
-  new AppInsights();
+  const appInsightsClient = new AppInsights().client();
   new Logger(config).initLogger(app);
 
   // Configure express
@@ -98,8 +98,7 @@
     }
     app.server.close();
     await new Promise((res) => setTimeout(res, 2000));
-    //client.flush({ callback: () => process.exit(0) });
-    return;
+    appInsightsClient?.flush({ callback: () => process.exit() });
   }
 
   function msleep (n) {
