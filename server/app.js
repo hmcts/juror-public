@@ -89,13 +89,14 @@
   }
 
   async function stopServer () {
-
-    app.server.close();
-    await new Promise((res) => setTimeout(res, 2000));
-    console.info('\nIRFTMP Express server shutdown signal received');
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
+    await new Promise((res) => setTimeout(res, 5000));
+    if (config.logConsole !== false) {
+      console.info('\nExpress server closing down');
+    }
+    app.server.close();
     await new Promise((res) => setTimeout(res, 2000));
     process.exit(0);
     return;
@@ -110,12 +111,10 @@
 
   // Handle shutdown
   process.on('SIGINT', function () {
-    console.info('\nIRFTMP SIGINT signal received');
     stopServer();
   });
 
   process.on('SIGTERM', function () {
-    console.info('\nIRFTMP SIGTERM signal received');
     stopServer();
   });
 
