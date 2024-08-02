@@ -2,33 +2,33 @@
  * Main application file
  */
 
-;(function(){
+;(function () {
   'use strict';
 
-  var express = require('express')
-    , path = require('path')
-    , _ = require('lodash')
-    , config = require('./config/environment')()
-    , logger = require('./components/logger')(config)
-    , http = require('http')
-    , ageSettings = require('./objects/ageSettings').ageSettings
-    , app = express()
-    , server = http.createServer(app)
-    , appTitle = require(path.resolve(__dirname, '../', 'package.json')).name
-    , releaseVersion = require(path.resolve(__dirname, '../', 'package.json')).version
-    , versionStr = appTitle + ' v' + releaseVersion
-    , upperAgeLimit
-    , lowerAgeLimit
-    , { AppInsights } = require('./lib/appinsights');
+  const express = require('express');
+  const path = require('path');
+  const _ = require('lodash');
+  const config = require('./config/environment')();
+  const http = require('http');
+  const ageSettings = require('./objects/ageSettings').ageSettings;
+  const app = express();
+  const server = http.createServer(app);
+  const appTitle = require(path.resolve(__dirname, '../', 'package.json')).name;
+  const releaseVersion = require(path.resolve(__dirname, '../', 'package.json')).version;
+  const versionStr = appTitle + ' v' + releaseVersion;
+  const { AppInsights } = require('./lib/appinsights');
+  const { Logger } = require('./components/logger');
 
-  // Attach logger to app
-  app.logger = logger;
+  let upperAgeLimit;
+  let lowerAgeLimit;
+
+  // Initialise
+  const appInsightsClient = new AppInsights().client();
+  new Logger(config).initLogger(app);
 
   // Configure express
   require('./config/express')(app);
   require('./routes')(app);
-
-  new AppInsights();
 
   if (config.logConsole !== false) {
     console.info('\n\n');
@@ -39,74 +39,85 @@
   }
 
   // Control server
-  function startServer() {
+  function startServer () {
     ageSettings.get(app)
-      .then(function(response) {
+      .then(function (response) {
+
         response.data.forEach(function(res) {
 
-          switch (res.setting){
-          case '100':
-            upperAgeLimit = res.value
-            break;
-          case '101':
-            lowerAgeLimit = res.value;
-            break;
+          switch (res.setting) {
+            case '100':
+              upperAgeLimit = res.value;
+              break;
+            case '101':
+              lowerAgeLimit = res.value;
+              break;
           }
         });
+
         app.ageSettings = {
           upperAgeLimit: upperAgeLimit,
-          lowerAgeLimit: lowerAgeLimit
+          lowerAgeLimit: lowerAgeLimit,
         };
         console.info('Retrieved age limit settings');
+        console.info(app.ageSettings);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.info('Error retrieving age settings: ', error);
 
         app.ageSettings = {
           upperAgeLimit: 76,
-          lowerAgeLimit: 18
+          lowerAgeLimit: 18,
         };
-        console.info('Using default age limit settings');
+        console.info('Using default age limit values:');
+        console.info(app.ageSettings);
       });
+
 
     app.pcqSettings = {
       serviceEnabled: null,
       serviceUrl: null,
-      serviceReturnUrl: null
+      serviceReturnUrl: null,
     };
 
 
-    app.server = server.listen(config.port, config.ip, function() {
+    app.server = server.listen(config.port, config.ip, function () {
       if (config.logConsole !== false) {
         console.info('Express server listening on http://%s:%s', config.ip, config.port);
       }
     });
   }
 
-  function stopServer() {
+  async function stopServer () {
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
-
-    if (typeof app.server !== 'undefined') {
-      app.server.close(function() {
-        process.exit(0);
-        return;
-      });
+    await new Promise((res) => setTimeout(res, 5000));
+    if (config.logConsole !== false) {
+      console.info('\nExpress server closing down');
     }
-
-    process.exit(0);
-    return;
+    app.server.close();
+    await new Promise((res) => setTimeout(res, 2000));
+    appInsightsClient?.flush({ callback: () => process.exit() });
   }
 
+  function msleep (n) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+  }
+  function sleep (n) {
+    msleep(n*1000);
+  }
 
   // Handle shutdown
-  process.on('SIGINT', function() {
+  process.on('SIGINT', function () {
     stopServer();
   });
 
-  //console.log('process.env:');
-  //console.log(JSON.stringify(process.env));
+  process.on('SIGTERM', function () {
+    stopServer();
+  });
+
+  //app.logger.debug('NODE_ENV: ', process.env.NODE_ENV);
 
   // Start the app immediately
   setImmediate(startServer);
