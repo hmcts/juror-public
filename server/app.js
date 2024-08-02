@@ -98,7 +98,7 @@
     }
     app.server.close();
     await new Promise((res) => setTimeout(res, 2000));
-    process.exit(0);
+    //client.flush({ callback: () => process.exit(0) });
     return;
   }
 
