@@ -91,23 +91,23 @@
   async function stopServer () {
 
     app.server.close();
-    await new Promise((res) => setTimeout(res, 5000));
+    await new Promise((res) => setTimeout(res, 2000));
     console.info('\nIRFTMP Express server shutdown signal received');
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
-
+    await new Promise((res) => setTimeout(res, 2000));
     process.exit(0);
     return;
   }
-  
-  function msleep(n) {
+
+  function msleep (n) {
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
   }
-  function sleep(n) {
+  function sleep (n) {
     msleep(n*1000);
   }
-  
+
   // Handle shutdown
   process.on('SIGINT', function () {
     console.info('\nIRFTMP SIGINT signal received');
