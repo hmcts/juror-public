@@ -88,25 +88,32 @@
     });
   }
 
-  function stopServer () {
+  async function stopServer () {
     if (config.logConsole !== false) {
       console.info('\nExpress server shutdown signal received');
     }
-
-    if (typeof app.server !== 'undefined') {
-      app.server.close(function () {
-        process.exit(0);
-        return;
-      });
+    await new Promise((res) => setTimeout(res, 5000));
+    if (config.logConsole !== false) {
+      console.info('\nExpress server closing down');
     }
-
-    process.exit(0);
-    return;
+    app.server.close();
+    await new Promise((res) => setTimeout(res, 2000));
+    appInsightsClient?.flush({ callback: () => process.exit() });
   }
 
+  function msleep (n) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+  }
+  function sleep (n) {
+    msleep(n*1000);
+  }
 
   // Handle shutdown
   process.on('SIGINT', function () {
+    stopServer();
+  });
+
+  process.on('SIGTERM', function () {
     stopServer();
   });
 
