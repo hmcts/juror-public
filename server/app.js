@@ -93,15 +93,15 @@
       console.info('Express server shutdown signal received.');
       console.info('Express server closing down.');
     }
-  
+
     app.server.close();
     await new Promise((res) => setTimeout(res, 5000));
-  
+
     AppInsights.client()?.flush({
       callback: () => {
         process.exit();
       },
-    }) ?? process.exit();
+    });
   }
 
   // Handle shutdown
