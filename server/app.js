@@ -88,25 +88,28 @@
     });
   }
 
-  function stopServer () {
+  async function stopServer () {
     if (config.logConsole !== false) {
-      console.info('\nExpress server shutdown signal received');
+      console.info('Express server shutdown signal received.');
+      console.info('Express server closing down.');
     }
 
-    if (typeof app.server !== 'undefined') {
-      app.server.close(function () {
-        process.exit(0);
-        return;
-      });
-    }
+    app.server.close();
+    await new Promise((res) => setTimeout(res, 5000));
 
-    process.exit(0);
-    return;
+    AppInsights.client()?.flush({
+      callback: () => {
+        process.exit();
+      },
+    });
   }
-
 
   // Handle shutdown
   process.on('SIGINT', function () {
+    stopServer();
+  });
+
+  process.on('SIGTERM', function () {
     stopServer();
   });
 

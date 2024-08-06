@@ -2,7 +2,7 @@
  * Express configuration
  */
 
-;(function(){
+;(function() {
   'use strict';
 
   const express = require('express');
@@ -301,8 +301,11 @@
     app.use(function(err, req, res, next) {
       // If error is not csrf, then we don't need to handle it
       if (err.code !== 'EBADCSRFTOKEN') {
+        app.logger.crit('General system error', { error: err });
         return next(err);
       }
+
+      app.logger.crit('CSRF token error', { error: err });
 
       // Ensure any template global variables needed are available.
       res.locals.assetPath = '/';
