@@ -298,7 +298,7 @@
 
 
     // error handler
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
       // If error is not csrf, then we don't need to handle it
       if (err.code !== 'EBADCSRFTOKEN') {
         app.logger.crit('General system error', { error: err });
@@ -313,9 +313,9 @@
       res.locals.trackingCode = config.trackingCode;
 
       // eslint-disable-next-line
-      res.locals.cookieText = filters.translate('INTERFACE.COOKIE_MESSAGE', (req.session.ulang === 'cy' ? texts_cy : texts_en));
+      res.locals.cookieText = filters.translate('INTERFACE.COOKIE_MESSAGE', (req.session.ulang === 'cy' ? textsCY : textsEN));
 
-      if (req.url.includes('expense-calculator')){
+      if (req.url.includes('expense-calculator')) {
         return res.redirect(app.namedRoutes.build('start-expense-calculator.get'));
       }
 
