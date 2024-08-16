@@ -3,20 +3,20 @@
  * GET    /    ->    index
  */
 
-;(function(){
+;(function () {
   'use strict';
 
-  var _ = require('lodash')
-    , jurorResponse = require('../../../objects/response').jurorResponse
-    , validate = require('validate.js')
-    , moment = require('moment')
-    , filters = require('../../../components/filters')
-    , textsEN = require('../../../../client/js/i18n/en.json')
-    , textsCY = require('../../../../client/js/i18n/cy.json')
-    , utils = require('../../../lib/utils');
+  const _ = require('lodash');
+  const jurorResponse = require('../../../objects/response').jurorResponse;
+  const validate = require('validate.js');
+  const moment = require('moment');
+  const filters = require('../../../components/filters');
+  const textsEN = require('../../../../client/js/i18n/en.json');
+  const textsCY = require('../../../../client/js/i18n/cy.json');
+  const utils = require('../../../lib/utils');
 
 
-  function sendToComplete(req, res, app) {
+  function sendToComplete (req, res, app) {
     // If juror does not meet the age requirements, redirect to confirmation page with ineligable
     if (req.session.user.ineligibleAge === true) {
       return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirmation.age', req.session.user.thirdParty)));
@@ -39,7 +39,7 @@
     return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirmation.straight', req.session.user.thirdParty)));
   }
 
-  function modifyPhoneNumber(phoneNumber){
+  function modifyPhoneNumber (phoneNumber) {
     var newPhoneNumber;
 
     // Remove unwanted characters ("+") from phone number strings
@@ -49,7 +49,7 @@
   };
 
 
-  module.exports.index = function(app) {
+  module.exports.index = function (app) {
     return function(req, res) {
       var mergedUser
         , tmpErrors
@@ -82,7 +82,6 @@
         , getDetailsError = function(err) {
           app.logger.crit('Failed to fetch and parse details required for pdf download: ' + err.statusCode, {
             jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
             error: (typeof err.error !== 'undefined') ? err.error : err,
           });
         }
@@ -141,7 +140,6 @@
 
           app.logger.info('Fetched and parsed summoned details required for pdf download', {
             jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
             response: response,
           });
 
@@ -204,19 +202,19 @@
           tmpArr.push(tmp);
         });
 
-        if (tmpArr.indexOf('National Crime Agency') > -1){
+        if (tmpArr.indexOf('National Crime Agency') > -1) {
           req.session.user.cjsNca = 'the National Crime Agency';
         }
-        if (tmpArr.indexOf('Judiciary') > -1){
+        if (tmpArr.indexOf('Judiciary') > -1) {
           req.session.user.cjsJudiciary = 'the Judiciary';
         }
-        if (tmpArr.indexOf('HMCTS') > -1){
+        if (tmpArr.indexOf('HMCTS') > -1) {
           req.session.user.cjsHMCTS = 'HM Courts & Tribunal Service';
         }
-        if (tmpArr.indexOf('HM Prison Service') > -1){
+        if (tmpArr.indexOf('HM Prison Service') > -1) {
           req.session.user.cjsPrison = 'HM Prison Service';
         }
-        if (tmpArr.indexOf('Police Force') > -1){
+        if (tmpArr.indexOf('Police Force') > -1) {
           req.session.user.cjsPolice = 'Police Force';
         }
       }
@@ -244,15 +242,15 @@
       // Format values to readable strings for third party reasons
       if (req.session.user.thirdParty === 'Yes') {
         switch (req.session.user.thirdPartyDetails.thirdPartyReason) {
-        // eslint-disable-next-line no-undefined
-        case undefined:
-          break;
-        case 'other':
-          req.session.user.thirdPartyDetails.reasonText = req.session.user.thirdPartyDetails.thirdPartyOtherReason;
-          break;
-        default:
-          // eslint-disable-next-line max-len
-          req.session.user.thirdPartyDetails.reasonText = thirdPartyMapping[req.session.user.thirdPartyDetails.thirdPartyReason];
+          // eslint-disable-next-line no-undefined
+          case undefined:
+            break;
+          case 'other':
+            req.session.user.thirdPartyDetails.reasonText = req.session.user.thirdPartyDetails.thirdPartyOtherReason;
+            break;
+          default:
+            // eslint-disable-next-line max-len
+            req.session.user.thirdPartyDetails.reasonText = thirdPartyMapping[req.session.user.thirdPartyDetails.thirdPartyReason];
         }
 
         req.session.user.thirdPartyDetails.nameRender = [
@@ -390,13 +388,12 @@
     };
   };
 
-  module.exports.create = function(app) {
+  module.exports.create = function (app) {
     return function(req, res) {
       var validatorResult
         , createResponseSuccess = function(response) {
           app.logger.info('Response submission succeeded', {
             jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
             response: response,
           });
 
@@ -404,10 +401,19 @@
         }
 
         , createResponseFailure = function(err) {
-          if (err.response.status === 409 || err.response.status === 304) {
+
+          if (typeof err.response === 'undefined'){
+            app.logger.crit('Response submission failed with error', {
+              error: (typeof err.error !== 'undefined') ? err.error : err,
+            });
+
+            return res.redirect(app.namedRoutes.build('steps.confirm.information.get'));
+          }
+
+          if (typeof err.response.status !== 'undefined' &&
+            (err.response.status === 409 || err.response.status === 304)) {
             app.logger.info('Response submission detected a conflict, passing through to complete without saving', {
               jurorNumber: req.session.user.jurorNumber,
-              jwt: req.session.authToken,
               error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
             });
 
@@ -417,7 +423,6 @@
           // No conflicts found
           app.logger.crit('Response submission failed with error ' + err.response.status, {
             jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
             error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
           });
 
