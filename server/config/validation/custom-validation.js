@@ -662,7 +662,7 @@
   };
 
   validate.validators.deferralDateValid = function(value, options, key, attributes) {
-    var dateRegex = /^[0-9]{1,2}\/[0-9]{1,2}(\/[0-9]{2}|\/[0-9]{4})$/
+    var dateRegex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/
       , dayMonthRegex = /^[0-9]{1,2}$/
       , yearRegex = /^[0-9]{4}$/
       , deferMoment = moment(value, 'DD/MM/YYYY')
