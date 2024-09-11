@@ -83,7 +83,7 @@
     "oracledb": "^5.0.0",
     "sass": "^1.69.5",
     "sass-loader": "^14.2.1",
-    "sinon": "^4.1.2",
+    "sinon": "^18.0.0",
     "sinon-chai": "^2.8.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.94.0",
