@@ -6,7 +6,7 @@ USER root
 RUN apk add autoconf automake gcc make g++ zlib-dev nasm
 USER hmcts
 COPY --chown=hmcts:hmcts . .
-RUN yarn install
+RUN yarn install --production
 
 FROM base as runtime
 ENV NODE_ENV=production
