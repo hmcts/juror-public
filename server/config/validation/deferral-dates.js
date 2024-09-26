@@ -1,27 +1,35 @@
-;(function(){
+;(function () {
   'use strict';
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+  const filters = require('../../components/filters');
+  const textsEn = require('../../../client/js/i18n/en.json');
+  const textsCy = require('../../../client/js/i18n/cy.json');
 
-  module.exports = function(req) {
+  module.exports = function (req) {
+
+    const langText = (req.session.ulang === 'cy' ? textsCy : textsEn);
+    const thirdPartyInd = (req.session.user.thirdParty === 'Yes' ? '_OB' : '');
+    const earliestDate = filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort,
+      'D MM YYYY', 'D MMMM YYYY', req.session.ulang);
+    const latestDate = filters.translateDate(req.session.user.deferral.dateRange.latestDateShort,
+      'D MM YYYY', 'D MMMM YYYY', req.session.ulang);
+
     return {
       date1: {
         deferralDateValid: {
           index: 1,
           jurorDOB: req.session.user.dateOfBirth,
           message: {
-            invalidDay: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ONE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidMonth: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ONE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidYear: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ONE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidDate: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ONE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            dateLowerLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ERROR_ONE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)).replace('[earliestDate]', filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)).replace('[latestDate]', filters.translateDate(req.session.user.deferral.dateRange.latestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)),
-            dateUpperLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ERROR_ONE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)).replace('[earliestDate]', filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)).replace('[latestDate]', filters.translateDate(req.session.user.deferral.dateRange.latestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)),
-            dateAgeLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATE_AGE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            dateUnique: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_UNIQUE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        }
+            missingDate: filters.translate('VALIDATION.DEFERRAL.DATE_ONE_MISSING' + thirdPartyInd, langText),
+            invalidDate: filters.translate('VALIDATION.DEFERRAL.DATE_ONE_FORMAT' + thirdPartyInd, langText),
+            dateLowerLimit: filters.translate('VALIDATION.DEFERRAL.DATE_ONE_RANGE' + thirdPartyInd,
+              langText).replace('[earliestDate]', earliestDate).replace('[latestDate]', latestDate),
+            dateUpperLimit: filters.translate('VALIDATION.DEFERRAL.DATE_ONE_RANGE' + thirdPartyInd,
+              langText).replace('[earliestDate]', earliestDate).replace('[latestDate]', latestDate),
+            dateAgeLimit: filters.translate('VALIDATION.DEFERRAL.DATE_AGE' + thirdPartyInd, langText),
+            dateUnique: filters.translate('VALIDATION.DEFERRAL.DATE_UNIQUE' + thirdPartyInd, langText),
+          },
+        },
       },
 
       date2: {
@@ -29,16 +37,16 @@
           index: 2,
           jurorDOB: req.session.user.dateOfBirth,
           message: {
-            invalidDay: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_TWO' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidMonth: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_TWO' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidYear: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_TWO' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidDate: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_TWO' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            dateLowerLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ERROR_TWO' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)).replace('[earliestDate]', filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)).replace('[latestDate]', filters.translateDate(req.session.user.deferral.dateRange.latestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)),
-            dateUpperLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ERROR_TWO' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)).replace('[earliestDate]', filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)).replace('[latestDate]', filters.translateDate(req.session.user.deferral.dateRange.latestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)),
-            dateAgeLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATE_AGE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            dateUnique: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_UNIQUE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        }
+            missingDate: filters.translate('VALIDATION.DEFERRAL.DATE_TWO_MISSING' + thirdPartyInd, langText),
+            invalidDate: filters.translate('VALIDATION.DEFERRAL.DATE_TWO_FORMAT' + thirdPartyInd, langText),
+            dateLowerLimit: filters.translate('VALIDATION.DEFERRAL.DATE_TWO_RANGE' + thirdPartyInd,
+              langText).replace('[earliestDate]', earliestDate).replace('[latestDate]', latestDate),
+            dateUpperLimit: filters.translate('VALIDATION.DEFERRAL.DATE_TWO_RANGE' + thirdPartyInd,
+              langText).replace('[earliestDate]', earliestDate).replace('[latestDate]', latestDate),
+            dateAgeLimit: filters.translate('VALIDATION.DEFERRAL.DATE_AGE' + thirdPartyInd, langText),
+            dateUnique: filters.translate('VALIDATION.DEFERRAL.DATE_UNIQUE' + thirdPartyInd, langText),
+          },
+        },
       },
 
       date3: {
@@ -46,17 +54,18 @@
           index: 3,
           jurorDOB: req.session.user.dateOfBirth,
           message: {
-            invalidDay: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_THREE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidMonth: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_THREE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidYear: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_THREE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            invalidDate: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_THREE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            dateLowerLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ERROR_THREE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)).replace('[earliestDate]', filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)).replace('[latestDate]', filters.translateDate(req.session.user.deferral.dateRange.latestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)),
-            dateUpperLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_ERROR_THREE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)).replace('[earliestDate]', filters.translateDate(req.session.user.deferral.dateRange.earliestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)).replace('[latestDate]', filters.translateDate(req.session.user.deferral.dateRange.latestDateShort, 'D MM YYYY', 'D MMMM YYYY', req.session.ulang)),
-            dateAgeLimit: filters.translate('VALIDATION.DEFERRAL.CHECK_DATE_AGE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            dateUnique: filters.translate('VALIDATION.DEFERRAL.CHECK_DATES_UNIQUE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        }
+            missingDate: filters.translate('VALIDATION.DEFERRAL.DATE_THREE_MISSING' + thirdPartyInd, langText),
+            invalidDate: filters.translate('VALIDATION.DEFERRAL.DATE_THREE_FORMAT' + thirdPartyInd, langText),
+            dateLowerLimit: filters.translate('VALIDATION.DEFERRAL.DATE_THREE_RANGE' + thirdPartyInd,
+              langText).replace('[earliestDate]', earliestDate).replace('[latestDate]', latestDate),
+            dateUpperLimit: filters.translate('VALIDATION.DEFERRAL.DATE_THREE_RANGE' + thirdPartyInd,
+              langText).replace('[earliestDate]', earliestDate).replace('[latestDate]', latestDate),
+            dateAgeLimit: filters.translate('VALIDATION.DEFERRAL.DATE_AGE' + thirdPartyInd, langText),
+            dateUnique: filters.translate('VALIDATION.DEFERRAL.DATE_UNIQUE' + thirdPartyInd, langText),
+          },
+        },
       },
+
     };
   };
 
