@@ -196,41 +196,35 @@
     "CHECK_REASON_OB": "Enter their reason for needing another date for jury service",
     "CHECK_REASON_MISSING": "Enter your reason for needing another date for jury service",
     "CHECK_REASON_MISSING_OB": "Enter their reason for needing another date for jury service",
-
-    "CHECK_DATES_ONE":"Enter the first Monday you'd prefer to start jury service",
-    "CHECK_DATES_ONE_OB":"Enter the first Monday they'd prefer to start jury service",
-    "CHECK_DATES_TWO":"Enter the second Monday you'd prefer to start jury service",
-    "CHECK_DATES_TWO_OB":"Enter the second Monday they'd prefer to start jury service",
-    "CHECK_DATES_THREE":"Enter the third Monday you'd prefer to start jury service",
-    "CHECK_DATES_THREE_OB":"Enter the third Monday they'd prefer to start jury service",
-
-    "CHECK_DATES_ERROR_ONE": "Your first choice must be a Monday between [earliestDate] and [latestDate]",
-    "CHECK_DATES_ERROR_ONE_OB": "Their first choice must be a Monday between [earliestDate] and [latestDate]",
-    "CHECK_DATES_ERROR_TWO": "Your second choice must be a Monday between [earliestDate] and [latestDate]",
-    "CHECK_DATES_ERROR_TWO_OB": "Their second choice must be a Monday between [earliestDate] and [latestDate]",
-    "CHECK_DATES_ERROR_THREE": "Your third choice must be a Monday between [earliestDate] and [latestDate]",
-    "CHECK_DATES_ERROR_THREE_OB": "Their third choice must be a Monday between [earliestDate] and [latestDate]",
-    
-    "CHECK_DATES_UNIQUE": "Enter a date that's different to your other choices",
-    "CHECK_DATES_UNIQUE_OB": "Enter a date that's different to the other choices",
-    
-    "CHECK_DATE_FUTURE_ONE": "The first date provided cannot be more than 12 months after the original summons date of [summons-date]",
-    "CHECK_DATE_BEFORE_HEARING_ONE": "The first date provided cannot be before the original summons date of [summons-date]",
-    "CHECK_DATE_HEARING_ONE": "The first date provided must be after the original summons date of [summons-date]",
-    
-    "CHECK_DATE_FUTURE_TWO": "The second date provided cannot be more than 12 months after the original summons date of [summons-date]",
-    "CHECK_DATE_BEFORE_HEARING_TWO": "The second date provided cannot be before the original summons date of [summons-date]",
-    "CHECK_DATE_HEARING_TWO": "The second date provided must be after the original summons date of [summons-date]",
-    
-    "CHECK_DATE_FUTURE_THREE": "The third date provided cannot be more than 12 months after the original summons date of [summons-date]",
-    "CHECK_DATE_BEFORE_HEARING_THREE": "The third date provided cannot be before the original summons date of [summons-date]",
-    "CHECK_DATE_HEARING_THREE": "The third date provided must be after the original summons date of [summons-date]",
-
     "CHECK_REASON_LENGTH": "Your reason for asking for a later date for your jury service must be fewer characters",
     "CHECK_REASON_LENGTH_OB": "The reason for asking for a later date for the person's jury service must be fewer characters",
-    "CHECK_DATE_AGE": "Give another date, you will be older than 76 on this date and would not qualify for jury service",
-    "CHECK_DATE_AGE_OB": "Give another date, the juror will be older than 76 on this date and would not qualify for jury service",
-    "CHECK_DATE_AGE_ERROR": "Give another date",
+
+    "DATE_ONE_MISSING":"Enter the first Monday you'd prefer to start jury service",
+    "DATE_ONE_MISSING_OB":"Enter the first Monday they'd prefer to start jury service",
+    "DATE_TWO_MISSING":"Enter the second Monday you'd prefer to start jury service",
+    "DATE_TWO_MISSING_OB":"Enter the second Monday they'd prefer to start jury service",
+    "DATE_THREE_MISSING":"Enter the third Monday you'd prefer to start jury service",
+    "DATE_THREE_MISSING_OB":"Enter the third Monday they'd prefer to start jury service",
+
+    "DATE_ONE_FORMAT":"Enter the first Monday you'd prefer to start jury service using the dd/mm/yyyy format",
+    "DATE_ONE_FORMAT_OB":"Enter the first Monday they'd prefer to start jury service using the dd/mm/yyyy format",
+    "DATE_TWO_FORMAT":"Enter the second Monday you'd prefer to start jury service using the dd/mm/yyyy format",
+    "DATE_TWO_FORMAT_OB":"Enter the second Monday they'd prefer to start jury service using the dd/mm/yyyy format",
+    "DATE_THREE_FORMAT":"Enter the third Monday you'd prefer to start jury service using the dd/mm/yyyy format",
+    "DATE_THREE_FORMAT_OB":"Enter the third Monday they'd prefer to start jury service using the dd/mm/yyyy format",
+
+    "DATE_ONE_RANGE": "Your first choice must be a Monday between [earliestDate] and [latestDate]",
+    "DATE_ONE_RANGE_OB": "Their first choice must be a Monday between [earliestDate] and [latestDate]",
+    "DATE_TWO_RANGE": "Your second choice must be a Monday between [earliestDate] and [latestDate]",
+    "DATE_TWO_RANGE_OB": "Their second choice must be a Monday between [earliestDate] and [latestDate]",
+    "DATE_THREE_RANGE": "Your third choice must be a Monday between [earliestDate] and [latestDate]",
+    "DATE_THREE_RANGE_OB": "Their third choice must be a Monday between [earliestDate] and [latestDate]",
+    
+    "DATE_UNIQUE": "Enter a date that's different to your other choices",
+    "DATE_UNIQUE_OB": "Enter a date that's different to the other choices",
+
+    "DATE_AGE": "Give another date, you will be older than 76 on this date and would not qualify for jury service",
+    "DATE_AGE_OB": "Give another date, the juror will be older than 76 on this date and would not qualify for jury service",
 
     "CHECK_DATES_PROCEED": "Confirm whether you want to proceed with these dates",
     "CHECK_DATES_PROCEED_OB": "Select whether you want to proceed with these dates"

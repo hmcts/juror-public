@@ -663,10 +663,8 @@
 
   validate.validators.deferralDateValid = function(value, options, key, attributes) {
     var dateRegex = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/
-      , dayMonthRegex = /^[0-9]{1,2}$/
-      , yearRegex = /^[0-9]{4}$/
-      , deferMoment = moment(value, 'DD/MM/YYYY')
-      , jurorDOB
+    const deferMoment = moment(value, 'DD/MM/YYYY');
+    let jurorDOB
       , ageUnit = 'years'
       , ageLimit = attributes['ageLimit']
       , ageDateLimit
@@ -683,7 +681,16 @@
         details: [],
       }
 
-    // Check DATE value
+    // Check date present
+    if (!value.trim()){
+      errMessage = options.message['missingDate'];
+      message.details.push(errMessage);
+      message.summary = errMessage;
+      message.summaryLink = fieldId;
+      return message;
+    }
+
+    // Check date value/format
     if (!(dateRegex.test(value) && deferMoment.isValid())){
       errMessage = options.message['invalidDate'];
       message.details.push(errMessage);
@@ -692,7 +699,7 @@
       return message;
     }
 
-    // Check DATE lower limit
+    // Check date lower limit
     if (dateRegex.test(value) && deferMoment.isValid()){
       if (deferMoment.isBefore(attributes['earliestDate'])){
         errMessage = options.message['dateLowerLimit'];
@@ -703,7 +710,7 @@
       }
     }
 
-    // Check DATE upper limit
+    // Check date upper limit
     if (dateRegex.test(value) && deferMoment.isValid()){
       if (deferMoment.isAfter(attributes['latestDate'])){
         errMessage = options.message['dateUpperLimit'];
@@ -714,7 +721,7 @@
       }
     }
 
-    // Check DATE is a MONDAY
+    // Check date is a Monday
     if (dateRegex.test(value) && deferMoment.isValid()){
       if (deferMoment.isoWeekday() !== 1){
         errMessage = options.message['invalidDate'];
