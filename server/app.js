@@ -19,8 +19,11 @@
   const { AppInsights } = require('./lib/appinsights');
   const { Logger } = require('./components/logger');
 
-  let upperAgeLimit;
-  let lowerAgeLimit;
+  const upperAgeLimitValue = 76;
+  const lowerAgeLimitValue = 18;
+
+  let upperAgeLimitSetting;
+  let lowerAgeLimitSetting;
 
   // Initialise
   new AppInsights();
@@ -47,27 +50,37 @@
 
           switch (res.setting) {
             case '100':
-              upperAgeLimit = res.value;
+              upperAgeLimitSetting = res.value;
               break;
             case '101':
-              lowerAgeLimit = res.value;
+              lowerAgeLimitSetting = res.value;
               break;
           }
         });
 
         app.ageSettings = {
-          upperAgeLimit: upperAgeLimit,
-          lowerAgeLimit: lowerAgeLimit,
+          upperAgeLimit: upperAgeLimitSetting,
+          lowerAgeLimit: lowerAgeLimitSetting,
         };
-        console.info('Retrieved age limit settings');
+
+        console.info('Retrieved age limit settings:');
         console.info(app.ageSettings);
+
+        if (!app.ageSettings.upperAgeLimit) {
+          app.ageSettings.upperAgeLimit = upperAgeLimitValue;
+          console.info('Using default for upperAgeLimit: ', app.ageSettings.upperAgeLimit);
+        }
+        if (!app.ageSettings.lowerAgeLimit) {
+          app.ageSettings.lowerAgeLimit = lowerAgeLimitValue;
+          console.info('Using default for lowerAgeLimit: ', app.ageSettings.lowerAgeLimit);
+        }
       })
       .catch(function (error) {
         console.info('Error retrieving age settings: ', error);
 
         app.ageSettings = {
-          upperAgeLimit: 76,
-          lowerAgeLimit: 18,
+          upperAgeLimit: upperAgeLimitValue,
+          lowerAgeLimit: lowerAgeLimitValue,
         };
         console.info('Using default age limit values:');
         console.info(app.ageSettings);
