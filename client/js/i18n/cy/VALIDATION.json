@@ -211,7 +211,7 @@
     "DATE_TWO_RANGE": "Rhaid i'ch ail ddewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
     "DATE_TWO_RANGE_OB": "Rhaid i'w hail ddewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
     "DATE_THREE_RANGE": "Rhaid i'ch trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-    "DATE_THREE_RANE_OB": "Rhaid i'w trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+    "DATE_THREE_RANGE_OB": "Rhaid i'w trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
 
     "DATE_ONE_FORMAT":"Nodwch y dydd Llun cyntaf y byddai'n well gennych gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
     "DATE_ONE_FORMAT_OB":"Nodwch y dydd Llun cyntaf y byddai'n well ganddynt gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
