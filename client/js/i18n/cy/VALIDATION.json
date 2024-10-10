@@ -196,41 +196,35 @@
     "CHECK_REASON_OB": "Nodwch eu rheswm dros fod angen dyddiad arall ar gyfer eu gwasanaeth rheithgor",
     "CHECK_REASON_MISSING": "Nodwch y rheswm dros fod angen dyddiad arall ar gyfer eich gwasanaeth rheithgor",
     "CHECK_REASON_MISSING_OB": "Nodwch eu rheswm dros fod angen dyddiad arall ar gyfer eu gwasanaeth rheithgor",
-
-    "CHECK_DATES_ONE":"Rhowch y dydd Llun cyntaf y byddai'n well gennych ddechrau gwasanaeth rheithgor",
-    "CHECK_DATES_ONE_OB":"Rhowch y dydd Llun cyntaf y byddai'n well ganddynt ddechrau gwasanaeth rheithgor",
-    "CHECK_DATES_TWO":"Rhowch yr ail ddewis o ddydd Llun y byddai'n well gennych ddechrau gwasanaeth rheithgor",
-    "CHECK_DATES_TWO_OB":"Rhowch yr ail ddydd Llun y byddai'n well ganddynt ddechrau gwasanaeth rheithgor",
-    "CHECK_DATES_THREE":"Rhowch y trydydd dewis o ddydd Llun y byddai'n well gennych ddechrau gwasanaeth rheithgor",
-    "CHECK_DATES_THREE_OB":"Rhowch y trydydd dydd Llun y byddai'n well ganddynt ddechrau gwasanaeth rheithgor",
-
-    "CHECK_DATES_ERROR_ONE": "Rhaid i'ch dewis cyntaf fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-    "CHECK_DATES_ERROR_ONE_OB": "Rhaid i'w dewis cyntaf fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-    "CHECK_DATES_ERROR_TWO": "Rhaid i'ch ail ddewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-    "CHECK_DATES_ERROR_TWO_OB": "Rhaid i'w hail ddewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-    "CHECK_DATES_ERROR_THREE": "Rhaid i'ch trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-    "CHECK_DATES_ERROR_THREE_OB": "Rhaid i'w trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
-
-    "CHECK_DATES_UNIQUE": "Nodwch ddyddiad sy'n wahanol i'ch dewisiadau eraill",
-    "CHECK_DATES_UNIQUE_OB": "Rhowch ddyddiad sy'n wahanol i'r dewisiadau eraill",
-
-    "CHECK_DATE_FUTURE_ONE": "Ni all y dyddiad cyntaf a ddarperir fod yn fwy na 12 mis ar ôl y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    "CHECK_DATE_BEFORE_HEARING_ONE": "Ni all y dyddiad cyntaf a ddarperir fod cyn y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    "CHECK_DATE_HEARING_ONE": "Rhaid I'r dyddiad cyntaf a ddarperir fod ar ôl y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    
-    "CHECK_DATE_FUTURE_TWO": "Ni all yr ail ddyddiad a ddarperir fod yn fwy na 12 mis ar ôl y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    "CHECK_DATE_BEFORE_HEARING_TWO": "Ni all yr ail ddyddiad a ddarperir fod cyn y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    "CHECK_DATE_HEARING_TWO": "Rhaid I'r ail ddyddiad a ddarperir fod ar ôl y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    
-    "CHECK_DATE_FUTURE_THREE": "Ni all y trydydd dyddiad a ddarperir fod yn fwy na 12 mis ar ôl y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    "CHECK_DATE_BEFORE_HEARING_THREE": "Ni all y trydydd dyddiad a ddarperir fod cyn y dyddiad gwysio gwreiddiol, sef [summons-date]",
-    "CHECK_DATE_HEARING_THREE": "Rhaid I'r trydydd dyddiad a ddarperir fod ar ôl y dyddiad gwysio gwreiddiol, sef [summons-date]",
-
     "CHECK_REASON_LENGTH": "Os gwelwch yn dda, sicrhewch fod hyd y rheswm yn llai na 1000 o nodau",
     "CHECK_REASON_LENGTH_OB": "Os gwelwch yn dda, sicrhewch fod hyd y rheswm yn llai na 1000 o nodau",
-    "CHECK_DATE_AGE": "Darparwch ddyddiad arall. Byddwch yn hŷn na 76 oed ar y dyddiad hwn ac ni fyddwch yn gymwys i wasanaethu ar reithgor",
-    "CHECK_DATE_AGE_OB": "Darparwch ddyddiad arall. Bydd yr unigolyn yn hŷn na 76 oed ar y dyddiad hwn ac ni fydd yn gymwys i wasanaethu ar reithgor",
-    "CHECK_DATE_AGE_ERROR": "Os gwelwch yn dda, rhowch ddyddiad arall",
+
+    "DATE_ONE_MISSING":"Rhowch y dydd Llun cyntaf y byddai'n well gennych ddechrau gwasanaeth rheithgor",
+    "DATE_ONE_MISSING_OB":"Rhowch y dydd Llun cyntaf y byddai'n well ganddynt ddechrau gwasanaeth rheithgor",
+    "DATE_TWO_MISSING":"Rhowch yr ail ddewis o ddydd Llun y byddai'n well gennych ddechrau gwasanaeth rheithgor",
+    "DATE_TWO_MISSING_OB":"Rhowch yr ail ddydd Llun y byddai'n well ganddynt ddechrau gwasanaeth rheithgor",
+    "DATE_THREE_MISSING":"Rhowch y trydydd dewis o ddydd Llun y byddai'n well gennych ddechrau gwasanaeth rheithgor",
+    "DATE_THREE_MISSING_OB":"Rhowch y trydydd dydd Llun y byddai'n well ganddynt ddechrau gwasanaeth rheithgor",
+
+    "DATE_ONE_RANGE": "Rhaid i'ch dewis cyntaf fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+    "DATE_ONE_RANGE_OB": "Rhaid i'w dewis cyntaf fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+    "DATE_TWO_RANGE": "Rhaid i'ch ail ddewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+    "DATE_TWO_RANGE_OB": "Rhaid i'w hail ddewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+    "DATE_THREE_RANGE": "Rhaid i'ch trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+    "DATE_THREE_RANGE_OB": "Rhaid i'w trydydd dewis fod yn ddydd Llun rhwng [earliestDate] a [latestDate]",
+
+    "DATE_ONE_FORMAT":"Nodwch y dydd Llun cyntaf y byddai'n well gennych gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
+    "DATE_ONE_FORMAT_OB":"Nodwch y dydd Llun cyntaf y byddai'n well ganddynt gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
+    "DATE_TWO_FORMAT":"Nodwch yr ail ddydd Llun y byddai'n well gennych gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
+    "DATE_TWO_FORMAT_OB":"Nodwch yr ail ddydd Llun y byddai'n well ganddynt gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
+    "DATE_THREE_FORMAT":"Nodwch y trydydd dydd Llun y byddai'n well gennych gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
+    "DATE_THREE_FORMAT_OB":"Nodwch y trydydd dydd Llun y byddai'n well ganddynt gychwyn y gwasanaeth rheithgor, gan ddefnyddio'r fformat dd/mm/bbbb",
+
+    "DATE_UNIQUE": "Nodwch ddyddiad sy'n wahanol i'ch dewisiadau eraill",
+    "DATE_UNIQUE_OB": "Rhowch ddyddiad sy'n wahanol i'r dewisiadau eraill",
+    
+    "DATE_AGE": "Darparwch ddyddiad arall. Byddwch yn hŷn na 76 oed ar y dyddiad hwn ac ni fyddwch yn gymwys i wasanaethu ar reithgor",
+    "DATE_AGE_OB": "Darparwch ddyddiad arall. Bydd yr unigolyn yn hŷn na 76 oed ar y dyddiad hwn ac ni fydd yn gymwys i wasanaethu ar reithgor",
 
     "CHECK_DATES_PROCEED": "Cadarnhewch a ydych am fwrw ymlaen â'r dyddiadau hyn",
     "CHECK_DATES_PROCEED_OB": "Dewiswch a ydych am fwrw ymlaen â'r dyddiadau hyn ai peidio"
