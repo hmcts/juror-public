@@ -41,7 +41,7 @@
     "express-rate-limit": "^7.2.0",
     "express-session": "^1.14.0",
     "fs-extra": "^11.0.0",
-    "govuk-frontend": "^4.8.0",
+    "govuk-frontend": "^5.0.0",
     "helmet": "^3.9.0",
     "i18n-express": "^1.0.4",
     "ip": "^2.0.1",
