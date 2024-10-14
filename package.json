@@ -24,7 +24,8 @@
     "nsp": "nsp check"
   },
   "dependencies": {
-    "@hmcts/properties-volume": "^1.0.0",
+    "@azure/identity": "^4.2.1",
+    "@hmcts/properties-volume": "^1.1.0",
     "applicationinsights": "^2.9.4",
     "axios": "^1.7.4",
     "basic-auth": "^2.0.0",
@@ -34,10 +35,10 @@
     "connect-redis": "^7.1.0",
     "cookie-parser": "^1.4.3",
     "crypto-js": "^4.1.1",
-    "csurf": "^1.9.0",
+    "csurf": "^1.11.0",
     "errorhandler": "^1.4.3",
-    "express": "^4.21.0",
-    "express-nunjucks": "3.1.2",
+    "express": "^4.21.1",
+    "express-nunjucks": "^3.1.2",
     "express-rate-limit": "^7.2.0",
     "express-session": "^1.14.0",
     "fs-extra": "^11.0.0",
@@ -67,7 +68,6 @@
   },
   "devDependencies": {
     "@scottish-government/pattern-library": "0.0.381",
-    "browser-sync": "^3.0.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-things": "^0.2.0",
