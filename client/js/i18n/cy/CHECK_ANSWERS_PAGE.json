@@ -119,6 +119,7 @@
   "YES_ASSISTANCE": "Oes",
   "NO_ASSISTANCE": "Nac oes",
 
+  "WARNING_ICON_TEXT": "Rhybudd",
   "WARNING_TEXT": "Gallwch gael eich barnu'n euog a chael dirwy o hyd at £1000 os byddwch yn darparu gwybodaeth anwireddus i osgoi gwasanaethu ar reithgor. Mae hyn hefyd yn berthnasol os byddwch yn methu â darparu'r wybodaeth yr ydym ei hangen i benderfynu a ydych yn gymwys i wasanaethu ar reithgor ai peidio.",
   "OB_WARNING_TEXT": "Efallai y cewch eich euogfarnu ac y cewch ddirwy o hyd at £1000 os byddwch yn rhoi gwybodaeth ffug ar gyfer yr unigolyn a gafodd wŷs i osgoi gwasanaethu ar reithgor. Mae hyn hefyd yn berthnasol os byddwch yn methu â rhoi'r wybodaeth sydd ei hangen arnom i benderfynu a yw'r unigolyn sydd wedi cael gwŷs yn gymwys i wasanaethu ar reithgor.",
   "JUROR_CONFIRM_TRUE": "Mae'r wybodaeth a roddais uchod yn wir hyd eithaf fy ngwybodaeth.",

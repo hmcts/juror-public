@@ -2,6 +2,7 @@
 
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 
 {% block pageTitle %}
   {% include "../../includes/title-error.njk" %}
@@ -852,17 +853,16 @@
 
         <br/>
 
-        <div class="govuk-warning-text">
-          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-          <strong class="govuk-warning-text__text">
-            <span class="govuk-warning-text__icon govuk-warning-text__assistive">{{ texts.CHECK_ANSWERS_PAGE.WARNING }}</span>
-              {% if user.thirdParty == 'Yes' %}
-                {{ texts.CHECK_ANSWERS_PAGE.OB_WARNING_TEXT }}
-              {% else %}
-                {{ texts.CHECK_ANSWERS_PAGE.WARNING_TEXT }}
-              {% endif %}
-          </strong>
-        </div>
+        {% if user.thirdParty == 'Yes' %}
+          {% set  warningText = texts.CHECK_ANSWERS_PAGE.OB_WARNING_TEXT %}
+        {% else %}
+          {% set  warningText = texts.CHECK_ANSWERS_PAGE.WARNING_TEXT %}
+        {% endif %}
+
+        {{ govukWarningText({
+          text: warningText,
+          iconFallbackText: texts.CHECK_ANSWERS_PAGE.WARNING_ICON_TEXT
+        }) }}
 
         {# Confirm panel #}
         <div class="{% if errors.items['informationConfirmed'] %} panel panel-border-narrow govuk-error {% endif %}" id="informationConfirmedGroup">
