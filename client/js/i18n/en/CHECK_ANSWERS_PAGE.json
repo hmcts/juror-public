@@ -119,6 +119,7 @@
   "YES_ASSISTANCE": "Yes",
   "NO_ASSISTANCE": "No",
 
+  "WARNING_ICON_TEXT": "Warning",
   "WARNING_TEXT": "You may be convicted and fined up to £1000 if you give false information to evade jury service. This also applies if you fail to give us the information we need to decide if you’re eligible to do jury service.",
   "OB_WARNING_TEXT": "You may be convicted and fined up to £1000 if you give false information for the person summoned to evade jury service. This also applies if you fail to give us the information we need to decide if the person summoned is eligible to do jury service.",
   "JUROR_CONFIRM_TRUE": "The information I have given is true to the best of my knowledge.",

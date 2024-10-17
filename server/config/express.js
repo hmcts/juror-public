@@ -174,7 +174,7 @@
     // Setup templating engine
     app.set('view engine', 'njk');
     app.set('views', [
-      'node_modules/govuk-frontend/',
+      'node_modules/govuk-frontend/dist',
       path.join(app.get('appPath'), 'templates'),
     ]);
 

@@ -24,7 +24,8 @@ const copyClientCode = new CopyWebpackPlugin({
       },
     },
 
-    { from: 'node_modules/govuk-frontend/govuk/all.js', to: '../client/js/govuk' },
+    { from: 'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js', to: '../client/js/govuk' },
+    { from: 'node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js.map', to: '../client/js/govuk' },
 
     { from: 'config/', to: '../config' },
     { from: 'package.json', to: '../' },
@@ -37,7 +38,7 @@ const copyClientCode = new CopyWebpackPlugin({
       to: '../client/assets/fonts',
     },
     {
-      context: 'node_modules/govuk-frontend/govuk/assets/fonts/',
+      context: 'node_modules/govuk-frontend/dist/govuk/assets/fonts/',
       from: '*.*',
       to: '../client/assets/fonts',
     },
@@ -52,7 +53,7 @@ const copyClientCode = new CopyWebpackPlugin({
       to: '../client/assets/images',
     },
     {
-      context: 'node_modules/govuk-frontend/govuk/assets/images/',
+      context: 'node_modules/govuk-frontend/dist/govuk/assets/images/',
       from: '*.*',
       to: '../client/assets/images',
     },
