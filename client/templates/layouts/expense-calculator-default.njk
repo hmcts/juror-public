@@ -2,13 +2,8 @@
 
 
 {% block head %}
-  <!--[if !IE 8]><!-->
-    <!--
-    <link href="{{ assetPath }}css/govuk-frontend.css" rel="stylesheet" />
-    <link href="{{ assetPath }}css/jd-style.css" rel="stylesheet" />
-    -->
-    <link href="{{ assetPath }}css/style.css" rel="stylesheet" />
-  <!--<![endif]-->
+
+  <link href="{{ assetPath }}css/style.css" rel="stylesheet" />
 
   <script type="text/javascript" src="{{ assetPath }}js/html5shiv.min.js"></script>
   <script type="text/javascript" src="{{ assetPath }}js/respond.min.js"></script>
@@ -29,7 +24,6 @@
   <p>{{cookieText | safe }}</p>
 {% endblock %}
 
-
 {% block content %}
   <h1 class="govuk-heading-xl">Default page template</h1>
 {% endblock %}
@@ -38,13 +32,6 @@
   {# Run JavaScript at end of the <body>, to avoid blocking the initial render. #}
   
   {% include "../includes/scripts-gds.njk" %}
-  
-  <!-- Init GDS toolkit =-->
-  <script nonce="{{ nonce }}">
-    $(document).ready(function () {
-      window.GOVUKFrontend.initAll();
-    })
-  </script>
 
 {% endblock %}
 
