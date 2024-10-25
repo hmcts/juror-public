@@ -18,6 +18,11 @@
     app.get('/steps/login/summons-date/tp', 'steps.login.summons-date.tp.get',
       utils.checkPageAccess(app, 2), controller.getSummonsDate(app));
 
+    app.get('/steps/login/locked', 'steps.login.locked.get',
+      utils.checkPageAccess(app, 2), controller.getLoginLocked(app));
+    app.get('/steps/login/locked/tp', 'steps.login.locked.tp.get',
+      utils.checkPageAccess(app, 2), controller.getLoginLocked(app));
+
     app.post('/steps/login', 'steps.login.post', controller.create(app));
   };
 

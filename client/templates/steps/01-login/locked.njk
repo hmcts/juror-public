@@ -1,0 +1,48 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% block pageTitle %}
+  {{ texts.LOGIN_PAGE.LOCKED_TITLE }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Login Locked{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {{- texts.LOGIN_PAGE.LOCKED_TITLE -}}
+      </h1>
+
+      <p class="govuk-body">
+        {%- if user.thirdParty == 'Yes' -%}
+          {{- texts.LOGIN_PAGE.LOCKED_PARA_1_1_OB }}
+        {%- else -%}
+          {{- texts.LOGIN_PAGE.LOCKED_PARA_1_1 }}
+        {% endif %}
+        <a href="/steps/login">{{ texts.LOGIN_PAGE.LOCKED_PARA_1_2 }}</a>{{ texts.LOGIN_PAGE.LOCKED_PARA_1_3 -}}
+      </p>
+
+      <p class="govuk-body">
+        {%- if user.thirdParty == 'Yes' -%}
+          {{- texts.LOGIN_PAGE.LOCKED_PARA_2_OB -}}
+        {%- else -%}
+          {{- texts.LOGIN_PAGE.LOCKED_PARA_2 -}}
+        {%- endif -%}
+      </p>
+
+      <p class="govuk-body">
+        {{- texts.LOGIN_PAGE.LOCKED_PARA_3 -}}
+      </p>
+
+      <p class="govuk-body govuk-inset-text">
+        {% include "../../includes/contact-details.njk" %}
+      </p>
+      
+      <input type="hidden" name="_csrf" id="_csrf" value="{{ csrftoken }}">
+
+  </div>
+</div>
+
+{% endblock %}
