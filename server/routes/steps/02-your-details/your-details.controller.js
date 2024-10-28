@@ -1,14 +1,14 @@
-;(function(){
+;(function () {
   'use strict';
 
-  var _ = require('lodash')
-    , moment = require('moment')
-    , validate = require('validate.js')
-    , filters = require('../../../components/filters')
-    , texts_en = require('../../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , jurorDetails = require('../../../objects/juror').jurorDetails
-    , utils = require('../../../lib/utils');
+  const _ = require('lodash');
+  const moment = require('moment');
+  const validate = require('validate.js');
+  const filters = require('../../../components/filters');
+  const texts_en = require('../../../../client/js/i18n/en.json');
+  const texts_cy = require('../../../../client/js/i18n/cy.json');
+  const jurorDetails = require('../../../objects/juror').jurorDetails;
+  const utils = require('../../../lib/utils');
 
   module.exports.index = function(app) {
     return function(req, res) {
@@ -89,7 +89,6 @@
         , tmpErrors
         , mergedUser
         , backLinkUrl;
-
 
       if (typeof req.session.errors !== 'undefined') {
         nameError = (
@@ -177,7 +176,6 @@
         , mergedUser
         , backLinkUrl;
 
-
       if (typeof req.session.errors !== 'undefined') {
         nameError = (
           typeof req.session.errors['title'] !== 'undefined' ||
@@ -217,13 +215,13 @@
   module.exports.createNameChange = function(app) {
     return function(req, res) {
       var nameRender = [
-          req.body['title'],
-          req.body['firstName'],
-          req.body['lastName']
-        ].filter(function(val) {
-          return val;
-        }).join(' ')
-        , validatorResult;
+        req.body['title'],
+        req.body['firstName'],
+        req.body['lastName']
+      ].filter(function(val) {
+        return val;
+      }).join(' ')
+      , validatorResult;
 
       // Reset error and saved field sessions
       delete req.session.errors;
@@ -267,21 +265,20 @@
   // Address Functions
   //
 
-  module.exports.changeAddress = function(app){
-    return function(req, res){
+  module.exports.changeAddress = function (app) {
+    return function (req, res) {
       req.session.change = true;
       res.redirect(app.namedRoutes.build('steps.your.details.address-change.get'));
     };
   };
 
   // Address confirm/change pages
-  module.exports.getAddressConfirm = function(app){
-    return function(req, res) {
-      var addressError
-        , tmpErrors
-        , mergedUser
-        , backLinkUrl;
-
+  module.exports.getAddressConfirm = function (app) {
+    return function (req, res) {
+      let addressError;
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
       if (typeof req.session.errors !== 'undefined') {
         addressError = (
@@ -303,7 +300,7 @@
       delete req.session.formFields;
 
       // Set back link URL
-      if (req.session.change === true){
+      if (req.session.change === true) {
         backLinkUrl = 'steps.confirm.information.get';
       } else {
         backLinkUrl = 'steps.your.details.name.get';
@@ -323,11 +320,10 @@
     };
   };
 
-  module.exports.createAddressConfirm = function(app) {
-    return function(req, res) {
-      var validatorResult
-        , redirectPage;
-
+  module.exports.createAddressConfirm = function (app) {
+    return function (req, res) {
+      let validatorResult;
+      let redirectPage;
 
       // Reset error and saved field sessions
       delete req.session.errors;
@@ -346,7 +342,7 @@
 
       if (req.session.change === true) {
         //check if further questions still to be completed
-        if (typeof(req.session.user.qualify) !== 'undefined' || req.session.user['ineligibleAge'] === true){
+        if (typeof(req.session.user.qualify) !== 'undefined' || req.session.user['ineligibleAge'] === true) {
           return res.redirect(app.namedRoutes.build('steps.confirm.information.get'));
         }
 
@@ -356,23 +352,41 @@
       }
 
       // Redirect
-      if (req.body['addressConfirm'] === 'No'){
+      if (req.body['addressConfirm'] === 'No') {
         redirectPage = 'steps.your.details.address-change.get';
       } else {
-        redirectPage = 'steps.your.details.phone.get';
+
+        // Check that address is valid
+        let addressDetails = {
+          addressLineOne: req.session.user['addressLineOne'],
+          addressLineTwo: req.session.user['addressLineTwo'],
+          addressLineThree: req.session.user['addressLineThree'],
+          addressTown: req.session.user['addressTown'],
+          addressCounty: req.session.user['addressCounty'],
+          addressPostcode: req.session.user['addressPostcode'],
+        };
+
+        validatorResult = validate(addressDetails, require('../../../config/validation/your-details-address.js')(req));
+
+        if (typeof validatorResult !== 'undefined') {
+          req.session.errors = validatorResult;
+          redirectPage = 'steps.your.details.address-change.get';
+        } else {
+          redirectPage = 'steps.your.details.phone.get';
+        }
       }
+
       return res.redirect(app.namedRoutes.build(redirectPage));
-      
+
     };
   };
 
-  module.exports.getAddressChange = function(app){
-    return function(req, res) {
-      var addressError
-        , tmpErrors
-        , mergedUser
-        , backLinkUrl;
-
+  module.exports.getAddressChange = function (app) {
+    return function (req, res) {
+      let addressError;
+      let tmpErrors;
+      let mergedUser;
+      let backLinkUrl;
 
       if (typeof req.session.errors !== 'undefined') {
         addressError = (
@@ -394,7 +408,7 @@
       delete req.session.formFields;
 
       // Set back link URL
-      if (req.session.change === true){
+      if (req.session.change === true) {
         backLinkUrl = 'steps.confirm.information.get';
       } else {
         backLinkUrl = 'steps.your.details.address.get';
@@ -407,32 +421,30 @@
           message: '',
           count: typeof tmpErrors !== 'undefined' ? Object.keys(tmpErrors).length : 0,
           items: tmpErrors,
-          addressError: addressError
+          addressError: addressError,
         },
-        backLinkUrl: backLinkUrl
+        backLinkUrl: backLinkUrl,
       });
     };
   };
 
-  module.exports.createAddressChange = function(app) {
-    return function(req, res) {
-      var addressRender = [
-          req.body['addressLineOne'],
-          req.body['addressLineTwo'],
-          req.body['addressLineThree'],
-          req.body['addressTown'],
-          req.body['addressCounty'],
-          req.body['addressPostcode']
-        ].filter(function(val) {
-          return val;
-        }).join('<br>')
-        , validatorResult;
-
+  module.exports.createAddressChange = function (app) {
+    return function (req, res) {
+      let addressRender = [
+        req.body['addressLineOne'],
+        req.body['addressLineTwo'],
+        req.body['addressLineThree'],
+        req.body['addressTown'],
+        req.body['addressCounty'],
+        req.body['addressPostcode'],
+      ].filter(function (val) {
+        return val;
+      }).join('<br>');
+      let validatorResult;
 
       // Reset error and saved field sessions
       delete req.session.errors;
       delete req.session.formFields;
-
 
       // Validate form submission
       req.body.addressPostcode = req.body.addressPostcode.trim();
@@ -446,7 +458,6 @@
         return res.redirect(app.namedRoutes.build('steps.your.details.address-change.get'));
       }
 
-
       // Update address
       req.session.user['addressLineOne'] = req.body['addressLineOne'];
       req.session.user['addressLineTwo'] = req.body['addressLineTwo'];
@@ -457,10 +468,9 @@
 
       req.session.user['addressRender'] = addressRender;
 
-
       if (req.session.change === true) {
         //check if further questions still to be completed
-        if (typeof(req.session.user.qualify) !== 'undefined' || req.session.user['ineligibleAge'] === true){
+        if (typeof(req.session.user.qualify) !== 'undefined' || req.session.user['ineligibleAge'] === true) {
           return res.redirect(app.namedRoutes.build('steps.confirm.information.get'));
         }
 
