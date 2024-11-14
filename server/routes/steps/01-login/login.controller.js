@@ -137,6 +137,11 @@
           // eslint-disable-next-line max-len
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login.summons-date', req.session.user.thirdParty)));
         }
+        // Too many login attempts - account locked - redirect to locked info page
+        if (err.statusCode === 403 && err.error.startsWith('Juror account is locked')) {
+          // eslint-disable-next-line max-len
+          return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login.locked', req.session.user.thirdParty)));
+        }
 
         // Response already submitted - redirect to information page
         if (err.statusCode === 409) {
@@ -190,6 +195,21 @@
       delete req.session.errors;
 
       return res.render('steps/01-login/summons-date.njk', {
+        user: req.session.user,
+      });
+    };
+  };
+
+  module.exports.getLoginLocked = function () {
+    return function (req, res) {
+
+      // Reset user session data
+      req.session.user = {
+        thirdParty: req.session.user.thirdParty,
+      };
+      delete req.session.errors;
+
+      return res.render('steps/01-login/locked.njk', {
         user: req.session.user,
       });
     };

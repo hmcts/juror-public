@@ -48,5 +48,14 @@
   "ALREADY_REPLIED_INSET": "You cannot tell us extra information through this digital service.",
 
   "SUMMONS_DATE_PASSED_TITLE": "You can no longer complete this summons reply online",
-  "SUMMONS_DATE_PASSED_GUIDANCE": "This is because the summons date has passed.  You must contact us by phone or email."
+  "SUMMONS_DATE_PASSED_GUIDANCE": "This is because the summons date has passed.  You must contact us by phone or email.",
+
+  "LOCKED_TITLE": "You've tried to sign in too many times",
+  "LOCKED_PARA_1_1": "Your summons reply is now locked.",
+  "LOCKED_PARA_1_1_OB": "The summons reply is now locked.",
+  "LOCKED_PARA_1_2": "Try again",
+  "LOCKED_PARA_1_3": " in 30 minutes.",
+  "LOCKED_PARA_2": "Enter your name and postcode exactly as shown on your summons letter, even if they're incorrect. You can correct them later.",
+  "LOCKED_PARA_2_OB": "Enter the person's name and postcode exactly as shown on their summons letter, even if they're incorrect. You can correct them later.",
+  "LOCKED_PARA_3": "If you still have problems, contact us."
 }

@@ -330,9 +330,30 @@
       if (req.body['addressConfirm'] === 'No') {
         redirectPage = 'branches.third.party.personal.details.address-change.get';
       } else {
-        redirectPage = 'branches.third.party.personal.details.date-of-birth.get';
-      }
+
+        // Check that address is valid
+        let addressDetails = {
+          addressLineOne: req.session.user['addressLineOne'],
+          addressLineTwo: req.session.user['addressLineTwo'],
+          addressLineThree: req.session.user['addressLineThree'],
+          addressTown: req.session.user['addressTown'],
+          addressCounty: req.session.user['addressCounty'],
+          addressPostcode: req.session.user['addressPostcode'],
+        };
+
+        validatorResult = validate(addressDetails, require('../../../config/validation/your-details-address.js')(req));
+
+        if (typeof validatorResult !== 'undefined') {
+          req.session.errors = validatorResult;
+          redirectPage = 'branches.third.party.personal.details.address-change.get';
+        } else {
+          redirectPage = 'branches.third.party.personal.details.date-of-birth.get';
+        }
+
+      };
+
       return res.redirect(app.namedRoutes.build(redirectPage));
+
     };
   };
 
