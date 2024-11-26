@@ -19,7 +19,7 @@
         Placeholder for webchat launch button / webchat status message.
         If no button has been configured in the chat script, it will not show up nor take any space.
       -->
-      <div id="__8x8-chat-button-container-script_30142320647759e09fcf50.58043359"></div>
+      <div id="__8x8-chat-button-container-{{webChatUUID}}"></div>
     </p>
 
     {# Email details #}
@@ -61,23 +61,23 @@
   <script type="text/javascript" nonce="{{ nonce }}">
 
     window.__8x8Chat = {
-        uuid: "script_30142320647759e09fcf50.58043359",
-        tenant: "aG1jdHN4MTAx",
-        channel: "JCSB Webchat",
-        channelUuid: "-gQ6XyBuR02jGgGRk_Mazw",
+        uuid: "{{webChatUUID}}",
+        tenant: "{{webChatTenant}}",
+        channel: "{{webChatChannel}}",
+        channelUuid: "{{webChatChannelUUID}}",
         domain: "https://vcc-eu4.8x8.com",
         path: "/.",
-        buttonContainerId: "__8x8-chat-button-container-script_30142320647759e09fcf50.58043359",
+        buttonContainerId: "__8x8-chat-button-container-{{webChatUUID}}",
         align: "right",
         draggable: true
     };
-
+ 
     (function() {
         var se = document.createElement("script");
         se.type = "text/javascript";
         se.async = true;
         se.src = window.__8x8Chat.domain + window.__8x8Chat.path + "/CHAT/common/js/chat.js";
-
+ 
         var os = document.getElementsByTagName("script")[0];
         os.parentNode.insertBefore(se, os);
     })();

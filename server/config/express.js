@@ -53,12 +53,12 @@
 
       helmet.contentSecurityPolicy({
         directives: {
-          defaultSrc: ['\'self\'', 'https://vcc-eu4.8x8.com', '*.google-analytics.com'],
-          styleSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://fonts.googleapis.com', 'https://vcc-eu4.8x8.com'],
-          scriptSrc: ['\'self\'', `'nonce-${nonce}'`, 'cdnjs.cloudflare.com', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://vcc-eu4.8x8.com', 'https://*.dynatrace.com'],
+          defaultSrc: ['\'self\'', 'https://vcc-eu4.8x8.com', 'https://vcc-eu4-cf.8x8.com/', '*.google-analytics.com'],
+          styleSrc: ['\'self\'', `'nonce-${nonce}'`, '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://fonts.googleapis.com', 'https://vcc-eu4.8x8.com', 'https://vcc-eu4-cf.8x8.com'],
+          scriptSrc: ['\'self\'', `'nonce-${nonce}'`, 'cdnjs.cloudflare.com', '*.google-analytics.com', '*.googletagmanager.com', 'https://tagmanager.google.com', 'https://vcc-eu4.8x8.com', 'https://vcc-eu4-cf.8x8.com', 'https://*.dynatrace.com'],
           fontSrc: ['\'self\'', 'https://fonts.gstatic.com', 'data:'],
-          imgSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://ssl.gstatic.com', 'https://www.gstatic.com', 'https://vcc-eu4.8x8.com', 'https://fonts.gstatic.com', 'data:'],
-          connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net', 'https://*.dynatrace.com'],
+          imgSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://ssl.gstatic.com', 'https://www.gstatic.com', 'https://vcc-eu4.8x8.com', 'https://vcc-eu4-cf.8x8.com', 'https://fonts.gstatic.com', 'data:'],
+          connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net', 'https://*.dynatrace.com', 'https://cloud8-cc-geo.8x8.com'],
         },
       })(req, res, next);
     });
