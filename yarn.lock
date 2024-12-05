@@ -4127,7 +4127,7 @@ __metadata:
     nodemon: ^3.1.2
     nunjucks: 3.2.4
     nunjucks-async-loader: 1.1.5
-    oracledb: ^5.0.0
+    oracledb: ^6.0.0
     pdfmake: ^0.2.0
     rate-limit-redis: 4.2.0
     redis: ^4.6.12
@@ -5107,10 +5107,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oracledb@npm:^5.0.0":
-  version: 5.5.0
-  resolution: "oracledb@npm:5.5.0"
-  checksum: 6f4112e0303397017229d7508bfaf557fa7a31b5f5fa9abf5384d20252761d41add80c42fc5efa2e232b28e54699c88287671ff31dd3c74b0608f3f13556a73c
+"oracledb@npm:^6.0.0":
+  version: 6.7.0
+  resolution: "oracledb@npm:6.7.0"
+  checksum: f4424e30afc85256a09a23a0772e59ce551a6cbc9d12559d572a944e1278d9420fc537b5783617955e187904a6f6319ed58ef8ae7319253cdcebb01a15d8250a
   languageName: node
   linkType: hard
 
