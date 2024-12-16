@@ -56,7 +56,6 @@
     "rate-limit-redis": "4.2.0",
     "redis": "^4.6.12",
     "referrer-policy": "^1.0.0",
-    "request": "^2.88.2",
     "semver": "^5.7.2",
     "serve-favicon": "^2.3.0",
     "underscore": "^1.8.3",
