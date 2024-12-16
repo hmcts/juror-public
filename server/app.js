@@ -12,9 +12,11 @@
   const ageSettings = require('./objects/ageSettings').ageSettings;
   const app = express();
   const server = http.createServer(app);
-  const versionStr = process.env.npm_package_name + ' v' + process.env.npm_package_version;
   const { AppInsights } = require('./lib/appinsights');
   const { Logger } = require('./components/logger');
+
+  const pkg = require(__dirname + '/../package.json');
+  const versionStr = pkg.name + ' v' + pkg.version;
 
   const upperAgeLimitValue = 76;
   const lowerAgeLimitValue = 18;
@@ -30,16 +32,14 @@
   require('./config/express')(app);
   require('./routes')(app);
 
-  if (config.logConsole !== false) {
-    console.info('\n\n');
-    console.info(_.pad('###########', versionStr.length + 12, '#'));
-    console.info('##    '+versionStr+'    ##');
-    console.info(_.pad('###########', versionStr.length + 12, '#'));
-    console.info('\n\n');
-  }
+  console.info('\n\n');
+  console.info(_.pad('###########', versionStr.length + 12, '#'));
+  console.info('##    '+versionStr+'    ##');
+  console.info(_.pad('###########', versionStr.length + 12, '#'));
+  console.info('\n\n');
 
-  console.info('app name: ' + process.env.npm_package_name);
-  console.info('app version: ' + process.env.npm_package_version);
+  console.info('app name: ' + pkg.name);
+  console.info('app version: ' + pkg.version);
 
   // Control server
   function startServer () {
