@@ -9,8 +9,7 @@ module.exports = [
       'client/',
       // tmp while we refactor codes
       'Gruntfile.js',
-      'mocha.conf.js',
-      'server/**/*.js',
+      //'server/**/*.js',
       ...require('./eslint.unignore.js'),
     ],
   },
