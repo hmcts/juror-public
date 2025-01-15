@@ -1,0 +1,11 @@
+{
+  "UNDER_LIMIT": {
+    "ONE": "You have 1 character remaining",
+    "OTHER": "You have %{count} characters remaining"
+  },
+  "AT_LIMIT": "You have 0 characters remaining",
+  "OVER_LIMIT": {
+    "ONE": "You have 1 character too many",
+    "OTHER": "You have %{count} characters too many"
+  }
+}
