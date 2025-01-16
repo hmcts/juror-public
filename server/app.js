@@ -6,18 +6,17 @@
   'use strict';
 
   const express = require('express');
-  const path = require('path');
   const _ = require('lodash');
   const config = require('./config/environment')();
   const http = require('http');
   const ageSettings = require('./objects/ageSettings').ageSettings;
   const app = express();
   const server = http.createServer(app);
-  const appTitle = require(path.resolve(__dirname, '../', 'package.json')).name;
-  const releaseVersion = require(path.resolve(__dirname, '../', 'package.json')).version;
-  const versionStr = appTitle + ' v' + releaseVersion;
   const { AppInsights } = require('./lib/appinsights');
   const { Logger } = require('./components/logger');
+
+  const pkg = require(__dirname + '/../package.json');
+  const versionStr = pkg.name + ' v' + pkg.version;
 
   const upperAgeLimitValue = 76;
   const lowerAgeLimitValue = 18;
@@ -33,13 +32,14 @@
   require('./config/express')(app);
   require('./routes')(app);
 
-  if (config.logConsole !== false) {
-    console.info('\n\n');
-    console.info(_.pad('###########', versionStr.length + 12, '#'));
-    console.info('##    '+versionStr+'    ##');
-    console.info(_.pad('###########', versionStr.length + 12, '#'));
-    console.info('\n\n');
-  }
+  console.info('\n\n');
+  console.info(_.pad('###########', versionStr.length + 12, '#'));
+  console.info('##    '+versionStr+'    ##');
+  console.info(_.pad('###########', versionStr.length + 12, '#'));
+  console.info('\n\n');
+
+  console.info('app name: ' + pkg.name);
+  console.info('app version: ' + pkg.version);
 
   // Control server
   function startServer () {
