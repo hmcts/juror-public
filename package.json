@@ -1,7 +1,8 @@
 {
   "name": "juror-public",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "private": true,
+  "description": "Reply To Jury Summons frontend application",
   "engines": {
     "node": ">=20"
   },
