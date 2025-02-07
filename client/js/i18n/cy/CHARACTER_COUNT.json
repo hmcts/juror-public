@@ -1,0 +1,11 @@
+{
+  "UNDER_LIMIT": {
+    "ONE": "Mae gennych 1 nod yn weddill",
+    "OTHER": "Mae gennych %{count} o nodau yn weddill"
+  },
+  "AT_LIMIT": "Nid oes gennych unrhyw nodau yn weddill",
+  "OVER_LIMIT": {
+    "ONE": "Mae gennych 1 nod yn ormod",
+    "OTHER": "Mae gennych %{count} nod yn ormod"
+  }
+}
