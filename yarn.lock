@@ -1230,14 +1230,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.4":
-  version: 1.7.4
-  resolution: "axios@npm:1.7.4"
+"axios@npm:^1.8.3":
+  version: 1.8.3
+  resolution: "axios@npm:1.8.3"
   dependencies:
     follow-redirects: ^1.15.6
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 0c17039a9acfe6a566fca8431ba5c1b455c83d30ea6157fec68a6722878fcd30f3bd32d172f6bee0c51fe75ca98e6414ddcd968a87b5606b573731629440bfaf
+  checksum: 85fc8ad7d968e43ea9da5513310637d29654b181411012ee14cc0a4b3662782e6c81ac25eea40b5684f86ed2d8a01fa6fc20b9b48c4da14ef4eaee848fea43bc
   languageName: node
   linkType: hard
 
@@ -2879,10 +2879,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^5.7.1":
-  version: 5.7.1
-  resolution: "govuk-frontend@npm:5.7.1"
-  checksum: 720098385758667ca4a2a9b408daf58c6f3a079256a5f6dfe1bd9d0975946a7182d7db444b7465d2ae1fb98bbc3e7109061c7d41bbb90ef1d397844a3509fdba
+"govuk-frontend@npm:^5.8.0":
+  version: 5.9.0
+  resolution: "govuk-frontend@npm:5.9.0"
+  checksum: cfff85041038bd2161b6e718589239205ac020e6bc867dbf77ccbc7615b4af3c64ad6eb883f9c2f2f12bf4808c3f7bbccdc7c5d3210adc1b428863fab1cdbc08
   languageName: node
   linkType: hard
 
@@ -3566,7 +3566,7 @@ __metadata:
     "@hmcts/properties-volume": ^1.1.0
     "@scottish-government/pattern-library": 0.0.381
     applicationinsights: ^2.9.4
-    axios: ^1.7.4
+    axios: ^1.8.3
     basic-auth: ^2.0.0
     body-parser: ^1.20.3
     chai: ^4.1.2
@@ -3587,7 +3587,7 @@ __metadata:
     express-rate-limit: ^7.2.0
     express-session: ^1.14.0
     fs-extra: ^11.0.0
-    govuk-frontend: ^5.7.1
+    govuk-frontend: ^5.8.0
     helmet: ^3.9.0
     i18n-express: ^1.0.4
     istanbul: ^0.4.4
