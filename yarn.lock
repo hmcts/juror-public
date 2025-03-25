@@ -2879,7 +2879,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^5.8.0":
+"govuk-frontend@npm:^5.9.0":
   version: 5.9.0
   resolution: "govuk-frontend@npm:5.9.0"
   checksum: cfff85041038bd2161b6e718589239205ac020e6bc867dbf77ccbc7615b4af3c64ad6eb883f9c2f2f12bf4808c3f7bbccdc7c5d3210adc1b428863fab1cdbc08
@@ -3587,7 +3587,7 @@ __metadata:
     express-rate-limit: ^7.2.0
     express-session: ^1.14.0
     fs-extra: ^11.0.0
-    govuk-frontend: ^5.8.0
+    govuk-frontend: ^5.9.0
     helmet: ^3.9.0
     i18n-express: ^1.0.4
     istanbul: ^0.4.4
