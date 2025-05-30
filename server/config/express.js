@@ -305,7 +305,20 @@
         return next(err);
       }
 
-      app.logger.crit('CSRF token error', { error: err });
+      const csrfError = {
+        statusCode: 403,
+        error: err,
+        url: req.url,
+        jurorNumber: 'unknown',
+      };
+
+      if (req.session) {
+        if (req.session.user) {
+          csrfError.jurorNumber = req.session.user.jurorNumber;
+        }
+      }
+
+      app.logger.crit('CSRF token error', csrfError);
 
       // Ensure any template global variables needed are available.
       res.locals.assetPath = '/';
