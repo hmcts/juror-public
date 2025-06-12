@@ -1,5 +1,8 @@
 // Import GOV.UK frontend toolkit and some base styles.
 
+$govuk-colours-organisations: govuk-organisation-colours;
+$govuk-new-organisation-colours: true !default;
+
 @import "node_modules/govuk-frontend/dist/govuk/index.scss";
 @import "./custom-components/index.scss"; 
 @import "jd-main.scss";
