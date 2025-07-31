@@ -5844,11 +5844,11 @@ __metadata:
   linkType: hard
 
 "webpack-shell-plugin-next@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "webpack-shell-plugin-next@npm:2.3.1"
+  version: 2.3.3
+  resolution: "webpack-shell-plugin-next@npm:2.3.3"
   peerDependencies:
     webpack: ^5.18.0
-  checksum: a5976d01281ba68e9f86ad8e48c70fe5088c1e69638a97e4ed215f5dd5f50372ca4735f92ac295ad1973612f6fd98df7829adf4afbbee669529e7c9c36b99207
+  checksum: 7025415e7af98095a0a8c4014166d86441d690a4a81e8563bc7dedf45aeaf669662fb74381ded73a8cb793212df1a2ed26b309845e6210b706790e8df12bc950
   languageName: node
   linkType: hard
 
