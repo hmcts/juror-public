@@ -1,11 +1,12 @@
 ;(function(){
   'use strict';
 
-  var controller = require('./total.controller');
+  const controller = require('./total.controller');
+  const auth = require('../../../components/auth');
 
   module.exports = function(app) {
-    app.get('/expense-calculator/total', 'expense.calculator.total.get', controller.index(app));
-    app.post('/expense-calculator/total', 'expense.calculator.total.post', controller.create(app));
+    app.get('/expense-calculator/total', 'expense.calculator.total.get', auth.validExpenseCalcSession, controller.index(app));
+    app.post('/expense-calculator/total', 'expense.calculator.total.post', auth.validExpenseCalcSession, controller.create(app));
 
   };
 
