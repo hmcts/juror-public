@@ -125,6 +125,17 @@
       }
 
       return next();
+    }
+
+    , validExpenseCalcSession = function(req, res, next) {
+      // Check if the user session is valid for expense calculator requests
+      if (req.session && req.session.user) {
+        return next();
+      }
+
+      // No valid session data - redirect to start
+      req.app.logger.info('Expense calculator session invalid, redirect to start. Request url: ' + req.url);
+      return res.redirect(req.app.namedRoutes.build('start-expense-calculator.get'));
     };
 
 
@@ -134,5 +145,6 @@
   module.exports.verify = verify;
   module.exports.getToken = getToken;
   module.exports.completeCheck = completeCheck;
+  module.exports.validExpenseCalcSession = validExpenseCalcSession;
 
 })();
