@@ -31,6 +31,17 @@
   const sessionExpires = 10 * (60 * 60);
   const sessionName = 'juror_summons_reply_session';
 
+  const ignoreUrls = [
+    '/cookie-settings',
+    '/cookie-banner',
+  ];
+
+  const assetUrls = [
+    '/assets/',
+    '/js/',
+    '/css/',
+  ];
+
   // Grab environment variables to enable/disable certain services
   const pkg = require(__dirname + '/../../package.json');
   const releaseVersion = pkg.version;
@@ -185,6 +196,14 @@
       filters: filters,
       loader: njk.FileSystemLoader, // Use synchronous loader templates
     });
+  }
+
+  function isIgnoreUrl(url) {
+    return ignoreUrls.some(ignoreUrl => url.includes(ignoreUrl));
+  }
+
+  function isAssetUrl(url) {
+    return assetUrls.some(assetUrl => url.includes(assetUrl));
   }
 
 
@@ -346,16 +365,15 @@
     // Check cookie preferences
     app.use(function(req, res, next) {
       // check if client sent cookie
-      var cookie = req.cookies.cookies_policy,
-        objCookie = null,
-        ignoreUrls = ['/cookie-settings', '/cookie-banner', '/js/govuk/all.js.map'];
+      let cookie = req.cookies.cookies_policy;
+      let objCookie = null;
 
       // store return url used on cookie-settings page
-      if (!(ignoreUrls.find(urlItem => urlItem === req.url))){
+      if ((!isAssetUrl(req.url)) && (!isIgnoreUrl(req.url))) {
         req.session.cookieReturnUrl = req.url;
       }
 
-      if (typeof cookie === 'undefined'){
+      if (typeof cookie === 'undefined') {
         // consent cookie does not currently exist - show the cookie banner
         res.locals.showCookieBanner = true;
         res.locals.allowAnalytics = false;
@@ -366,8 +384,8 @@
 
         objCookie = JSON.parse(cookie);
 
-        if (objCookie){
-          if (objCookie['usage']){
+        if (objCookie) {
+          if (objCookie['usage']) {
             res.locals.allowAnalytics = true;
           } else {
             res.locals.allowAnalytics = false;
