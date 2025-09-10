@@ -168,7 +168,7 @@
         { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
       expenseCalculatorObj.post(app, jwtToken, expenseData)
-        .then(createExpenseCalculatorSuccess, createExpenseCalculatorFailure)
+        .then(createExpenseCalculatorSuccess)
         .catch(createExpenseCalculatorFailure);
     };
   };
