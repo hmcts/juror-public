@@ -47,7 +47,6 @@
           // Log the response regarding juror details
           app.logger.info('Fetched and parsed summoned juror details on first person route', {
             jurorNumber: req.session.user.jurorNumber,
-            jwt: req.session.authToken,
             response: response
           });
 
@@ -58,7 +57,6 @@
         , getDetailsError = function(err) {
           app.logger.crit('Failed to fetch and parse summoned juror details on first person route: ' + err.response.status, {
               jurorNumber: req.session.user.jurorNumber,
-              jwt: req.session.authToken,
               error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
           });
 

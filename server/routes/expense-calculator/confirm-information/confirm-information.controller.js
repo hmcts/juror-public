@@ -64,7 +64,6 @@
         , index
         , createExpenseCalculatorSuccess = function(response) {
           app.logger.info('Expense calculator submission succeeded', {
-            jwt: req.session.authToken,
             response: response,
           });
 
@@ -88,7 +87,6 @@
         , createExpenseCalculatorFailure = function(err) {
           if (err.response.status === 409 || err.response.status === 304) {
             app.logger.info('Expense Calculation submission detected a conflict', {
-              jwt: jwtToken,
               error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
             });
 
@@ -97,7 +95,6 @@
 
           // Catch error
           app.logger.crit('Expense Calculation submission failed with error ' + err.response.status, {
-            jwt: jwtToken,
             error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
           });
 

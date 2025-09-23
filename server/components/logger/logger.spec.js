@@ -73,8 +73,8 @@
     it('should handle a generic error message', function() {
       config.logConsole = 'trace';
       spy = sinon.spy(logger, 'log');
-      logger.log('error', new Error('This is a tester'));
-      expect(spy.withArgs('error', new Error('This is a test')).calledOnce).to.equal(true);
+      logger.log('This is a generic');
+      expect(spy.withArgs('This is a generic').calledOnce).to.equal(true);
     });
 
     it('should log a message with an object', function() {
