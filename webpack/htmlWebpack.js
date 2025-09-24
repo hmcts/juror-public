@@ -67,6 +67,11 @@ const copyClientCode = new CopyWebpackPlugin({
       from: '*.*',
       to: '../client/assets/images/icons',
     },
+    {
+      context: 'node_modules/govuk-frontend/dist/govuk/assets/images/',
+      from: '*.*',
+      to: '../client/assets/images',
+    },
   ],
 });
 
