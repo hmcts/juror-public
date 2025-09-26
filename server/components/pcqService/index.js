@@ -37,17 +37,12 @@
         paramString = JSON.stringify(params)
 
         app.logger.info('PCQ Create token');
-        app.logger.info('PCQ Token key:',tokenKey);
 
         key = crypto.scryptSync(tokenKey, 'salt', keyLen);
         cipher = crypto.createCipheriv(algorithm, key, iv);
         encryptedToken = cipher.update(paramString, 'utf8', 'hex');
         encryptedToken += cipher.final('hex');
-
         authTag = cipher.getAuthTag().toString('base64');
-
-        app.logger.info('PCQ authTag:', authTag);
-
       }
 
       return encryptedToken;

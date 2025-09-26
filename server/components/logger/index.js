@@ -21,6 +21,7 @@
     debug: 4,
     trace: 5,
   };
+  const { sanitiseLog } = require('./sanitiser');
 
   module.exports.Logger = class Logger {
     constructor(config) {
@@ -55,6 +56,14 @@
       if (app) {
         // attach to the app object
         app.logger = Logger.instance;
+      }
+
+      // attempt to attach sanitiser wrapper to app.logger and Logger.instance
+      try {
+        sanitiseLog(Logger.instance, levels, app);
+        sanitiseLog(Logger.instance, levels);
+      } catch (e) {
+        console.error('Logger sanitisation not applied:', e && e.message ? e.message : e);
       }
     }
   };

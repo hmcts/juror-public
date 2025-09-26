@@ -72,9 +72,6 @@
 
         app.logger.info('Login attempt for juror number "' + req.body.jurorNumber + '" succeeded.', {
           jurorNumber: req.body.jurorNumber,
-          jurorLastName: req.body.jurorLastName,
-          jurorPostcode: req.body.jurorPostcode,
-          jwt: req.session.authToken,
           response: resp,
         });
 
@@ -107,9 +104,6 @@
         // eslint-disable-next-line max-len
         app.logger.crit('Login attempt for juror number "' + req.body.jurorNumber + '" responded with ' + err.statusCode, {
           jurorNumber: req.body.jurorNumber,
-          jurorLastName: req.body.jurorLastName,
-          jurorPostcode: req.body.jurorPostcode,
-          jwt: req.session.authToken,
           error: (typeof err.originalError !== 'undefined') ? err.originalError : err,
         });
 
