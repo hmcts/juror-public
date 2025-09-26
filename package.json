@@ -54,7 +54,7 @@
     "nunjucks": "3.2.4",
     "nunjucks-async-loader": "1.1.5",
     "pdfmake": "^0.2.20",
-    "rate-limit-redis": "4.2.1",
+    "rate-limit-redis": "4.2.2",
     "redis": "^4.7.1",
     "referrer-policy": "^1.2.0",
     "semver": "^5.7.2",
