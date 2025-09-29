@@ -3737,6 +3737,7 @@ __metadata:
     mini-css-extract-plugin: ^2.9.4
     moment: ^2.30.1
     named-routes: ^2.0.7
+    nocache: ^4.0.0
     nodemon: ^3.1.10
     nunjucks: 3.2.4
     nunjucks-async-loader: ^2.1.3
@@ -4288,6 +4289,13 @@ __metadata:
     lolex: ^5.0.1
     path-to-regexp: ^1.7.0
   checksum: ec3af21345dcaf34650a6f5420a11e0fd21a836ac5960f5e8523c301ee98465abf88b958f7b3084ecc6e0a7133e5cf7963f4df176b90b423c4da4984f1ebd75e
+  languageName: node
+  linkType: hard
+
+"nocache@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "nocache@npm:4.0.0"
+  checksum: ba317f7a5b837069c3bf8616c9a25f61bd5ec63ad7aa2ce83e8425116df402ab5b4914bbdfb1ba54893c0f859886cb3ad9a375f1c45ba7a72a9712cf31392292
   languageName: node
   linkType: hard
 
