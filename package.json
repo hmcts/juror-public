@@ -77,7 +77,6 @@
     "istanbul": "^0.4.5",
     "mini-css-extract-plugin": "^2.9.4",
     "nodemon": "^3.1.10",
-    "oracledb": "^5.5.0",
     "sass": "^1.93.2",
     "sass-loader": "^14.2.1",
     "sinon": "^4.5.0",
