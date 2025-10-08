@@ -12,6 +12,7 @@
   const cookieParser = require('cookie-parser');
   const csrf = require('csurf');
   const helmet = require('helmet');
+  const nocache = require('nocache');
   const referrerPolicy = require('referrer-policy');
   const compression = require('compression');
   const bodyParser = require('body-parser');
@@ -78,7 +79,7 @@
     app.use(helmet.hidePoweredBy());
     app.use(helmet.hsts());
     app.use(helmet.ieNoOpen());
-    app.use(helmet.noCache());
+    app.use(nocache());
     app.use(helmet.noSniff());
     app.use(helmet.xssFilter());
     app.use(referrerPolicy());
