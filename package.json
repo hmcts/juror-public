@@ -1,6 +1,6 @@
 {
   "name": "juror-public",
-  "version": "5.14.0",
+  "version": "5.15.0",
   "private": true,
   "description": "Reply To Jury Summons frontend application",
   "engines": {
