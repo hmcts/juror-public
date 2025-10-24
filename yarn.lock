@@ -3734,7 +3734,7 @@ __metadata:
     nunjucks-async-loader: "npm:^2.1.3"
     oracledb: "npm:^5.5.0"
     pdfmake: "npm:^0.2.20"
-    rate-limit-redis: "npm:4.2.2"
+    rate-limit-redis: "npm:4.2.3"
     redis: "npm:^4.7.1"
     referrer-policy: "npm:^1.2.0"
     sass: "npm:^1.93.2"
@@ -4857,12 +4857,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rate-limit-redis@npm:4.2.2":
-  version: 4.2.2
-  resolution: "rate-limit-redis@npm:4.2.2"
+"rate-limit-redis@npm:4.2.3":
+  version: 4.2.3
+  resolution: "rate-limit-redis@npm:4.2.3"
   peerDependencies:
     express-rate-limit: ">= 6"
-  checksum: 10/17b81f0ce52107d38fdcaab646ab280a0f009a0faa2d2530eab4f20e7385b5fde9d3347634e33c302d63d2a597a3f2bc9adfb54b4015e7c0d859c542710d5639
+  checksum: 10/00c95868e48214b926272b2f01418695acd0487f766d36fec68992922037d43e67eeacc6854f38b8a511c69b9385b2de6994d08802a6aa422686dfd4c55e5ba0
   languageName: node
   linkType: hard
 
