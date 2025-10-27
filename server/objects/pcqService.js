@@ -2,7 +2,7 @@
   'use strict';
   
   const { axiosInstance } = require('./axios-instance');
-  const urljoin = require('url-join')
+  const urljoin = require('url-join').default;
   const secretsConfig = require('config');
   const jwt = require('jsonwebtoken');
 
