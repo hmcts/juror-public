@@ -297,7 +297,7 @@
       var bodyKey;
 
       if (!req.body) {
-        next();
+        return next();
       }
 
       for (bodyKey in req.body) {
