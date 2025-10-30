@@ -75,11 +75,11 @@
     "POSTCODE_MISSING_OB": "Enter the postcode",
     "POSTCODE_CHECK": "Check your postcode",
     "POSTCODE_CHECK_OB": "Check the postcode",
-    "MAIN_PHONE_CHECK": "Check your main phone number",
-    "MAIN_PHONE_CHECK_OB": "Check the main phone number",
+    "MAIN_PHONE_CHECK": "Enter your main phone number in the correct format",
+    "MAIN_PHONE_CHECK_OB": "Enter your main phone number in the correct format",
     "MAIN_PHONE_MISSING": "Enter your main phone number",
     "MAIN_PHONE_MISSING_OB": "Enter the main phone number",
-    "OTHER_PHONE_CHECK": "Check your other phone number",
+    "OTHER_PHONE_CHECK": "Enter your other phone number in the correct format",
     "EMAIL_CHECK": "Enter your email address",
     "EMAIL_CHECK_OB": "Enter the email address",
     "EMAIL_CHECK_MISSING": "Enter your email address",
@@ -274,10 +274,10 @@
 
       "MAIN_PHONE_CHECK": "Enter your main phone number",
       "MAIN_PHONE_CHECK_MISSING": "Enter your main phone number",
-      "MAIN_PHONE_CHECK_INVALID": "Check your main phone number",
+      "MAIN_PHONE_CHECK_INVALID": "Enter your main phone number in the correct format",
 
       "OTHER_PHONE_CHECK": "Check your other phone number",
-      "OTHER_PHONE_CHECK_INVALID": "Check your other phone number",
+      "OTHER_PHONE_CHECK_INVALID": "Enter your other phone number in the correct format",
 
       "EMAIL_CHECK": "Enter your email address",
       "EMAIL_CHECK_MISSING": "Enter your email address",
@@ -345,8 +345,8 @@
       "USE_PHONE_CHECK": "Select a phone number for us to use to contact you or the juror",
       "PHONE_NUMBER_CHECK": "Select a phone number for us to use to contact you or the juror",
       "PHONE_NUMBER_CHECK_MISSING": "Enter their main phone number",
-      "PHONE_NUMBER_CHECK_INVALID": "Check their main phone number",
-      "PHONE_NUMBER_OTHER_CHECK": "Check their other phone number",
+      "PHONE_NUMBER_CHECK_INVALID": "Enter their main phone number in the correct format",
+      "PHONE_NUMBER_OTHER_CHECK": "Enter their other phone number in the correct format",
       "PHONE_NUMBER_OTHER_CHECK_INVALID": "Check their other phone number",
 
       "USE_EMAIL_CHECK": "Select an email address for us to use to contact you or the juror",

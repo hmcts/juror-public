@@ -26,8 +26,11 @@
     "GUIDANCE_P2_OB": "Rhaid iddynt fod ar gael i wasanaethu am o leiaf pythefnos.",
 
     "DATE1_LABEL": "Dewis cyntaf",
+    "DATE1_HIDDEN_LABEL": "wFirst choice date",
     "DATE2_LABEL": "Ail ddewis",
+    "DATE2_HIDDEN_LABEL": "wSecond choice date",
     "DATE3_LABEL": "Trydydd dewis",
+    "DATE3_HIDDEN_LABEL": "wThird choice date",
     "DATE_EXAMPLE_HINT": "Defnyddiwch fformat dd/mm/bbbb.  Er enghraifft, "
   },
 
