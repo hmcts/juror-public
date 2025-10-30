@@ -26,8 +26,11 @@
     "GUIDANCE_P2_OB": "They must be available to serve at least 2 weeks.",
   
     "DATE1_LABEL": "First choice",
+    "DATE1_HIDDEN_LABEL": "First choice date",
     "DATE2_LABEL": "Second choice",
+    "DATE2_HIDDEN_LABEL": "Second choice date",
     "DATE3_LABEL": "Third choice",
+    "DATE3_HIDDEN_LABEL": "Third choice date",
     "DATE_EXAMPLE_HINT": "Use dd/mm/yyyy format.  For example, "
   },
 
