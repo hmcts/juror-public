@@ -13,6 +13,8 @@ class DSDatePicker {
 
     this.datePickerParent = el;
     this.inputElement = this.datePickerParent.querySelector('input');
+    //const labelText = document.querySelector(`label[for="${this.inputElement.id}"]`)?.textContent?.trim();
+    const hiddenLabel = this.inputElement.dataset.hiddenlabel;
 
     this.currentDate = new Date();
     this.currentDate.setHours(0, 0, 0, 0);
@@ -23,6 +25,12 @@ class DSDatePicker {
       this.lang = this.inputElement.dataset.lang;
     } else {
       this.lang = 'en';
+    }
+
+    if (this.inputElement.dataset.hiddenlabel) {
+      this.hiddenlabel = this.inputElement.dataset.hiddenlabel;
+    } else {
+      this.hiddenlabel = 'Choose Date';
     }
 
     if (this.lang === 'cy'){
@@ -45,7 +53,7 @@ class DSDatePicker {
       this.dayLabelsAbbr = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
       this.monthLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       this.guidanceText = 'You can use the arrow keys to select a date';
-      this.chooseDate = 'Choose date';
+      this.chooseDate = 'Test';
       this.selectedDate = 'Selected date is';
       this.selectLabel = 'Select';
       this.cancelLabel = 'Cancel';
@@ -168,7 +176,7 @@ class DSDatePicker {
 
   buttonTemplate() {
     return `<button class="ds_button  ds_button--icon-only  js-calendar-button" aria-expanded="false">
-          <span class="visually-hidden">${this.chooseDate}</span>
+          <span class="visually-hidden">${this.hiddenlabel}</span>
           <svg class="ds_icon" aria-hidden="true" role="img">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0z" fill="none"/>

@@ -3,6 +3,9 @@
 $govuk-colours-organisations: govuk-organisation-colours;
 $govuk-new-organisation-colours: true !default;
 
+// Overriding link colour for Contrast Enhanced
+$govuk-link-colour: #003078;
+
 @import "node_modules/govuk-frontend/dist/govuk/index.scss";
 @import "./custom-components/index.scss"; 
 @import "jd-main.scss";
