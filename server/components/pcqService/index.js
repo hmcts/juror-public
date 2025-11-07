@@ -7,7 +7,7 @@
     , pcqServiceObj = require('../../objects/pcqService').pcqService
     , { v4: uuidv4 } = require('uuid')
     , crypto = require('crypto')
-    , urlJoin = require('url-join')
+    , urlJoin = require('url-join').default
     , utils = require('../../lib/utils')
 
     , createToken = function(req, app, params) {
