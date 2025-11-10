@@ -346,8 +346,8 @@
       "PHONE_NUMBER_CHECK": "Select a phone number for us to use to contact you or the juror",
       "PHONE_NUMBER_CHECK_MISSING": "Enter their main phone number",
       "PHONE_NUMBER_CHECK_INVALID": "Enter their main phone number in the correct format",
-      "PHONE_NUMBER_OTHER_CHECK": "Enter their other phone number in the correct format",
-      "PHONE_NUMBER_OTHER_CHECK_INVALID": "Check their other phone number",
+      "PHONE_NUMBER_OTHER_CHECK": "Check their other phone number",
+      "PHONE_NUMBER_OTHER_CHECK_INVALID": "Enter their other phone number in the correct format",
 
       "USE_EMAIL_CHECK": "Select an email address for us to use to contact you or the juror",
       "EMAIL_CHECK": "Select an email address for us to use to contact you or the juror",
