@@ -22,122 +22,120 @@
 
 {% block content %}
   <div class="govuk-form-group {%if params.dateError%}govuk-form-group--error{% endif %}">
-    <fieldset class="govuk-fieldset" role="group" aria-describedby="{{params.datepickerId}}-group-hint">
-      <input type="hidden" name="_lang" id="_lang" value="{{ ulang }}">
+    <input type="hidden" name="_lang" id="_lang" value="{{ ulang }}">
 
-        {% include "../../includes/errors-gds.njk" %}
+      {% include "../../includes/errors-gds.njk" %}
 
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
 
-          <form action="{{ url('steps.confirm.date.deferral-dates.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+        <form action="{{ url('steps.confirm.date.deferral-dates.post') }}" method="post" {% if not IS_PRODUCTION %}novalidate{% endif %}>
+          
+          <div class="govuk-form-group ">
             
-            <div class="govuk-form-group ">
-              
-              <h1 class="govuk-heading-l">
-                {% if user.thirdParty == 'Yes' %}
-                  {{- texts.DEFERRAL_PAGE.DATES.HEADING_OB -}}
-                {% else %}
-                  {{- texts.DEFERRAL_PAGE.DATES.HEADING -}}
-                {% endif %}
-              </h1>
+            <h1 class="govuk-heading-l">
+              {% if user.thirdParty == 'Yes' %}
+                {{- texts.DEFERRAL_PAGE.DATES.HEADING_OB -}}
+              {% else %}
+                {{- texts.DEFERRAL_PAGE.DATES.HEADING -}}
+              {% endif %}
+            </h1>
 
-              <p class="govuk-body">{{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P1 }} {{deferralDateRange.earliestDateShort | translateDate("D MM YYYY", "D MMMM YYYY", texts.INTERFACE.HTML_LANG)}} {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_AND }} {{deferralDateRange.latestDateShort | translateDate("D MM YYYY", "D MMMM YYYY", texts.INTERFACE.HTML_LANG)}}</p>
+            <p class="govuk-body">{{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P1 }} {{deferralDateRange.earliestDateShort | translateDate("D MM YYYY", "D MMMM YYYY", texts.INTERFACE.HTML_LANG)}} {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_AND }} {{deferralDateRange.latestDateShort | translateDate("D MM YYYY", "D MMMM YYYY", texts.INTERFACE.HTML_LANG)}}</p>
 
-              <p class="govuk-body govuk-!-margin-bottom-6">
-                {% if user.thirdParty == 'Yes' %}
-                  {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P2_OB }}
-                {% else %}
-                  {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P2 }}
-                {% endif %}
-              </p>
-            
-              <div class="{% if errors.items['dates'] %}govuk-error{% endif %}" id="datesGroup">
+            <p class="govuk-body govuk-!-margin-bottom-6">
+              {% if user.thirdParty == 'Yes' %}
+                {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P2_OB }}
+              {% else %}
+                {{ texts.DEFERRAL_PAGE.DATES.GUIDANCE_P2 }}
+              {% endif %}
+            </p>
+          
+            <div class="{% if errors.items['dates'] %}govuk-error{% endif %}" id="datesGroup">
 
-                {% set date1Error = undefined %}
-                {% if errors.items['date1'] %}
-                  {% set date1Error = errors.items['date1'][0].summary %}
-                {% endif %}
+              {% set date1Error = undefined %}
+              {% if errors.items['date1'] %}
+                {% set date1Error = errors.items['date1'][0].summary %}
+              {% endif %}
 
-                {% set date2Error = undefined %}
-                {% if errors.items['date2'] %}
-                  {% set date2Error = errors.items['date2'][0].summary %}
-                {% endif %}
+              {% set date2Error = undefined %}
+              {% if errors.items['date2'] %}
+                {% set date2Error = errors.items['date2'][0].summary %}
+              {% endif %}
 
-                {% set date3Error = undefined %}
-                {% if errors.items['date3'] %}
-                  {% set date3Error = errors.items['date3'][0].summary %}
-                {% endif %}
-            
-                <div class="govuk-grid-row">
-                  <div class="govuk-grid-column-full">
-                    {{ datePicker({
-                      id: "deferDate1",
-                      lang: texts.INTERFACE.HTML_LANG,
-                      label: texts.DEFERRAL_PAGE.DATES.DATE1_LABEL,
-                      hiddenLabel: texts.DEFERRAL_PAGE.DATES.DATE1_HIDDEN_LABEL,
-                      hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
-                      dateMin: deferralDateRange.earliestDateShort,
-                      dateMax: deferralDateRange.latestDateShort,
-                      dateValue: user["deferDate1"],
-                      dateError: date1Error
-                    }) }}
-                  </div>
+              {% set date3Error = undefined %}
+              {% if errors.items['date3'] %}
+                {% set date3Error = errors.items['date3'][0].summary %}
+              {% endif %}
+          
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                  {{ datePicker({
+                    id: "deferDate1",
+                    lang: texts.INTERFACE.HTML_LANG,
+                    label: texts.DEFERRAL_PAGE.DATES.DATE1_LABEL,
+                    hiddenLabel: texts.DEFERRAL_PAGE.DATES.DATE1_HIDDEN_LABEL,
+                    hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
+                    dateMin: deferralDateRange.earliestDateShort,
+                    dateMax: deferralDateRange.latestDateShort,
+                    dateValue: user["deferDate1"],
+                    dateError: date1Error
+                  }) }}
                 </div>
+              </div>
 
-                <div class="govuk-grid-row">
-                  <div class="govuk-grid-column-full">
-                    {{ datePicker({
-                      id: "deferDate2",
-                      lang: texts.INTERFACE.HTML_LANG,
-                      label: texts.DEFERRAL_PAGE.DATES.DATE2_LABEL,
-                      hiddenLabel: texts.DEFERRAL_PAGE.DATES.DATE2_HIDDEN_LABEL,
-                      hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
-                      dateMin: deferralDateRange.earliestDateShort,
-                      dateMax: deferralDateRange.latestDateShort,
-                      dateValue: user["deferDate2"],
-                      dateError: date2Error
-                    }) }}
-                  </div>
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                  {{ datePicker({
+                    id: "deferDate2",
+                    lang: texts.INTERFACE.HTML_LANG,
+                    label: texts.DEFERRAL_PAGE.DATES.DATE2_LABEL,
+                    hiddenLabel: texts.DEFERRAL_PAGE.DATES.DATE2_HIDDEN_LABEL,
+                    hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
+                    dateMin: deferralDateRange.earliestDateShort,
+                    dateMax: deferralDateRange.latestDateShort,
+                    dateValue: user["deferDate2"],
+                    dateError: date2Error
+                  }) }}
                 </div>
+              </div>
 
-                <div class="govuk-grid-row">
-                  <div class="govuk-grid-column-full">
-                    {{ datePicker({
-                      id: "deferDate3",
-                      lang: texts.INTERFACE.HTML_LANG,
-                      label: texts.DEFERRAL_PAGE.DATES.DATE3_LABEL,
-                      hiddenLabel: texts.DEFERRAL_PAGE.DATES.DATE3_HIDDEN_LABEL,
-                      hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
-                      dateMin: deferralDateRange.earliestDateShort,
-                      dateMax: deferralDateRange.latestDateShort,
-                      dateValue: user["deferDate3"],
-                      dateError: date3Error
-                    }) }}
-                  </div>
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                  {{ datePicker({
+                    id: "deferDate3",
+                    lang: texts.INTERFACE.HTML_LANG,
+                    label: texts.DEFERRAL_PAGE.DATES.DATE3_LABEL,
+                    hiddenLabel: texts.DEFERRAL_PAGE.DATES.DATE3_HIDDEN_LABEL,
+                    hint: texts.DEFERRAL_PAGE.DATES.DATE_EXAMPLE_HINT + deferralDateRange.earliestDateShort,
+                    dateMin: deferralDateRange.earliestDateShort,
+                    dateMax: deferralDateRange.latestDateShort,
+                    dateValue: user["deferDate3"],
+                    dateError: date3Error
+                  }) }}
                 </div>
-
               </div>
 
             </div>
 
-            {# guidance details sections #}
-            {% include "./defer-guidance-1.njk" %}
+          </div>
 
-            {% include "./defer-guidance-2.njk" %}
+          {# guidance details sections #}
+          {% include "./defer-guidance-1.njk" %}
 
-            {# Submit form #}
-            {{ govukButton({
-                text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
-            }) }}
+          {% include "./defer-guidance-2.njk" %}
 
-            <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+          {# Submit form #}
+          {{ govukButton({
+              text: texts.INTERFACE.BUTTON_TEXT_CONTINUE
+          }) }}
 
-          </form>
+          <input type="hidden" name="_csrf" value="{{ csrftoken }}">
 
-        </div>
+        </form>
+
       </div>
-    </fieldset>
+    </div>
   </div>
 
 
