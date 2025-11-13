@@ -21,7 +21,7 @@
   const path = require('path');
   const i18n = require('i18n-express');
   const { createClient } = require('redis');
-  const RedisStore = require('connect-redis').default;
+  const { RedisStore } = require('connect-redis');
   const filters = require('../components/filters');
   const textsEN = require('../../client/js/i18n/en.json');
   const textsCY = require('../../client/js/i18n/cy.json');
