@@ -3,7 +3,7 @@
 
   const { axiosInstance } = require('./axios-instance');
 
-  var urljoin = require('url-join');
+  let urljoin = require('url-join');
 
   const jurorDetails = {
     resource: 'public/juror',
