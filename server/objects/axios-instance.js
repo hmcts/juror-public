@@ -52,7 +52,7 @@
     }
 
     client.interceptors.request.use(function(request) {
-      app.logger.debug('Sending request to API: ', {
+      app.logger.debug('Sending request to API: ' + request.url, {
         baseUrl: request.baseURL,
         url: request.url,
         headers: request.headers,
