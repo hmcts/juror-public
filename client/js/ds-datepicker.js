@@ -13,7 +13,6 @@ class DSDatePicker {
 
     this.datePickerParent = el;
     this.inputElement = this.datePickerParent.querySelector('input');
-
     this.currentDate = new Date();
     this.currentDate.setHours(0, 0, 0, 0);
     this.calendarDays = [];
@@ -23,6 +22,12 @@ class DSDatePicker {
       this.lang = this.inputElement.dataset.lang;
     } else {
       this.lang = 'en';
+    }
+
+    if (this.inputElement.dataset.hiddenlabel) {
+      this.hiddenLabel = this.inputElement.dataset.hiddenlabel;
+    } else {
+      this.hiddenLabel = 'Choose Date';
     }
 
     if (this.lang === 'cy'){
@@ -168,7 +173,7 @@ class DSDatePicker {
 
   buttonTemplate() {
     return `<button class="ds_button  ds_button--icon-only  js-calendar-button" aria-expanded="false">
-          <span class="visually-hidden">${this.chooseDate}</span>
+          <span class="visually-hidden">${this.hiddenLabel}</span>
           <svg class="ds_icon" aria-hidden="true" role="img">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0z" fill="none"/>
@@ -439,7 +444,7 @@ class DSDatePicker {
   }
 
   selectDate(date) {
-    this.calendarButtonElement.querySelector('span').innerText = `${this.chooseDate}. ${this.selectedDate} ${this.formattedDateHuman(date)}`;
+    this.calendarButtonElement.querySelector('span').innerText = `${this.hiddenLabel}. ${this.selectedDate} ${this.formattedDateHuman(date)}`;
     this.inputElement.value = `${this.leadingZeroes(date.getDate())}/${this.leadingZeroes(date.getMonth() + 1)}/${date.getFullYear()}`;
 
     //this.dayInputElement.value = date.getDate();

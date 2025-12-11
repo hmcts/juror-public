@@ -27,7 +27,7 @@
   "dependencies": {
     "@azure/identity": "^4.13.0",
     "@hmcts/properties-volume": "^1.2.0",
-    "applicationinsights": "2.9.4",
+    "applicationinsights": "^2.9.8",
     "axios": "^1.13.0",
     "basic-auth": "^2.0.1",
     "body-parser": "^2.2.1",
