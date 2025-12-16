@@ -1,6 +1,6 @@
 {
   "name": "juror-public",
-  "version": "5.16.0",
+  "version": "5.17.0",
   "private": true,
   "description": "Reply To Jury Summons frontend application",
   "engines": {
@@ -30,7 +30,7 @@
     "applicationinsights": "^2.9.8",
     "axios": "^1.13.0",
     "basic-auth": "^2.0.1",
-    "body-parser": "^2.2.0",
+    "body-parser": "^2.2.1",
     "compression": "^1.8.1",
     "config": "^4.1.1",
     "connect-redis": "^8.0.0",
@@ -38,7 +38,7 @@
     "crypto-js": "^4.2.0",
     "csurf": "^1.11.0",
     "errorhandler": "^1.5.1",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "express-nunjucks": "^3.1.2",
     "express-rate-limit": "^8.1.0",
     "express-session": "^1.18.2",

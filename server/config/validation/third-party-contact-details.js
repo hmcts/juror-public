@@ -71,7 +71,7 @@
         format: {
           pattern: phoneRegEx,
           message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
+            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
             details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
           },
         },
