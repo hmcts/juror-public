@@ -71,6 +71,7 @@
           fontSrc: ['\'self\'', 'https://fonts.gstatic.com', 'data:'],
           imgSrc: ['\'self\'', '*.google-analytics.com', '*.googletagmanager.com', 'https://ssl.gstatic.com', 'https://www.gstatic.com', 'https://vcc-eu4.8x8.com', 'https://vcc-eu4-cf.8x8.com', 'https://fonts.gstatic.com', 'data:'],
           connectSrc: ['\'self\'', 'ws://localhost:*', '*.google-analytics.com', '*.analytics.google.com', '*.googletagmanager.com', '*.g.doubleclick.net', 'https://*.dynatrace.com', 'https://cloud8-cc-geo.8x8.com'],
+          formAction: ['\'self\'', 'https://pcq.aat.platform.hmcts.net', 'https://pcq.demo.platform.hmcts.net', 'https://equality-and-diversity.platform.hmcts.net'],
         },
       })(req, res, next);
     });
