@@ -59,8 +59,8 @@
   "SECTION_7": {
     "HEADING": "Compliance status",
     "GUIDANCE_1": "This website is fully compliant with the",
-    "WCAG_LINK": "Web Content Accessibility Guidelines version 2.1",
-    "WCAG_URL": "https://www.w3.org/TR/WCAG21/",
+    "WCAG_LINK": "Web Content Accessibility Guidelines version 2.2",
+    "WCAG_URL": "https://www.w3.org/WAI/standards-guidelines/wcag/",
     "GUIDANCE_2": "AA standard."
 
   },
