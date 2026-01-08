@@ -102,6 +102,7 @@
         , checkPCQSuccess = function(proceedWithPCQ) {
 
           if (proceedWithPCQ){
+            app.logger.info('Proceed with PCQ');
             return pcqService.invokePCQ(req, app, res);
           }
 
@@ -110,7 +111,7 @@
         }
 
         , checkPCQFailure = function(resp) {
-          app.logger.info('Skip PCQ');
+          app.logger.info('Unable to proceed with PCQ');
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.confirm.information', req.session.user.thirdParty)));
         };
 

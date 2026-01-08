@@ -59,16 +59,16 @@
   "SECTION_7": {
     "HEADING": "Compliance status",
     "GUIDANCE_1": "This website is fully compliant with the",
-    "WCAG_LINK": "Web Content Accessibility Guidelines version 2.1",
-    "WCAG_URL": "https://www.w3.org/TR/WCAG21/",
+    "WCAG_LINK": "Web Content Accessibility Guidelines version 2.2",
+    "WCAG_URL": "https://www.w3.org/WAI/standards-guidelines/wcag/",
     "GUIDANCE_2": "AA standard."
 
   },
 
   "SECTION_8": {
     "HEADING": "Preparation of this accessibility statement",
-    "GUIDANCE_1": "This statement was prepared on 27 August 2020. It was last reviewed on 14 June 2023.",
-    "GUIDANCE_2": "This website was last tested on 8 June 2023. The test was carried out by Digital Accessibility Centre Ltd.",
+    "GUIDANCE_1": "This statement was prepared on 27 August 2020. It was last reviewed on 17 December 2025.",
+    "GUIDANCE_2": "This website was last tested on 15 December 2025. The test was carried out by Digital Accessibility Centre Ltd.",
     
     "REPORT_PDF_GUIDANCE": "You can",
     "REPORT_PDF_LINK": "read the full accessibility test report",
