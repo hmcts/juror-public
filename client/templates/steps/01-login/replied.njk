@@ -21,12 +21,12 @@
         {{ texts.LOGIN_PAGE.ALREADY_REPLIED_GUIDANCE }}
       </p>
 
-      <p class="govuk-body">
+      <div class="govuk-body bureau-contact-details">
         {% include "../../includes/contact-details.njk" %}
-      </p>
-      <p class="govuk-body">
+      </div>
+      <div class="govuk-body bureau-contact-details">
         {% include "../../includes/contact-address.njk" %}
-      </p>
+      </div>
 
       {{ govukInsetText({
         text: texts.LOGIN_PAGE.ALREADY_REPLIED_INSET
