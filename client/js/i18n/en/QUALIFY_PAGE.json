@@ -19,13 +19,13 @@
   "CAPTION": "Eligibility",
   "CAPTION_OB": "Eligibility",
 
-  "RESIDENCY_TITLE": "Since you turned 13, has your main address been in the UK, Channel Islands or Isle of Man for any period of at least 5 years?",
+  "RESIDENCY_TITLE": "Have you lived in the UK, Channel Islands or Isle of Man for more than five consecutive years, since your 13th birthday?",
   "RESIDENCY_TITLE_OB": "Since they turned 13, has their main address been in the UK, Channel Islands or Isle of Man for any period of at least 5 years?",
   "RESIDENCY_YES": "Yes",
   "RESIDENCY_YES_OB": "Yes",
   "RESIDENCY_NO": "No",
   "RESIDENCY_NO_OB": "No",
-  "RESIDENCY_DETAILS_LABEL": "Provide details about where you have lived since your 13th birthday",
+  "RESIDENCY_DETAILS_LABEL": "I have not lived in the UK, Channel Islands or Isle of Man for more than five consecutive years, since my 13th birthday because",
   "RESIDENCY_DETAILS_LABEL_OB": "Provide details about where the person you are answering for has lived since their 13th birthday",
   
   "MENTAL_HEALTH_SECTIONED_TITLE": "Are you being detained, looked after or treated under the Mental Health Act?",
