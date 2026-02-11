@@ -19,8 +19,8 @@
   "CAPTION": "Cymhwysedd",
   "CAPTION_OB": "Cymhwysedd",
   
-  "RESIDENCY_TITLE": "Ers i chi droi'n 13 oed, a yw eich prif gyfeiriad wedi bod yn y DU, Ynysoedd y Sianel neu Ynys Manaw am unrhyw gyfnod o 5 mlynedd o leiaf?",
-  "RESIDENCY_TITLE_OB": "Ers iddynt droi'n 13 oed, a yw eu prif gyfeiriad wedi bod yn y DU, Ynysoedd y Sianel neu Ynys Manaw am unrhyw gyfnod o 5 mlynedd o leiaf?",
+  "RESIDENCY_TITLE": "A ydych chi wedi byw yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw am gyfnod parhaus o bum mlynedd neu fwy ers eich pen-blwydd yn 13 oed?",
+  "RESIDENCY_TITLE_OB": "A ydynt wedi byw yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw am gyfnod parhaus o bum mlynedd neu fwy ers eu pen-blwydd yn 13 oed?",
   "RESIDENCY_YES": "Do",
   "RESIDENCY_YES_OB": "Do",
   "RESIDENCY_NO": "Naddo",
