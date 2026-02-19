@@ -19,8 +19,8 @@
   "CAPTION": "Eligibility",
   "CAPTION_OB": "Eligibility",
 
-  "RESIDENCY_TITLE": "Since you turned 13, has your main address been in the UK, Channel Islands or Isle of Man for any period of at least 5 years?",
-  "RESIDENCY_TITLE_OB": "Since they turned 13, has their main address been in the UK, Channel Islands or Isle of Man for any period of at least 5 years?",
+  "RESIDENCY_TITLE": "Have you lived in the UK, Channel Islands or Isle of Man for more than five consecutive years, since your 13th birthday?",
+  "RESIDENCY_TITLE_OB": "Have they lived in the UK, Channel Islands or Isle of Man for more than five consecutive years, since their 13th birthday?",
   "RESIDENCY_YES": "Yes",
   "RESIDENCY_YES_OB": "Yes",
   "RESIDENCY_NO": "No",
