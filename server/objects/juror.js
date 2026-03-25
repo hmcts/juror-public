@@ -2,6 +2,7 @@
   'use strict';
 
   const { axiosInstance } = require('./axios-instance');
+  const { basicDataTransform2 } = require('../lib/utils');
 
   let urljoin = require('url-join');
 
@@ -11,7 +12,7 @@
 
       let url = urljoin(this.resource, jurorNumber);
 
-      let options = {'method': 'get'};
+      let options = {'method': 'get', transform: basicDataTransform2};
 
       options.transformer = 'getSingle';
 
