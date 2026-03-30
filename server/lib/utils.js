@@ -699,7 +699,7 @@
     req.session.user['courtName'] = apiResponse['locCourtName'];
     req.session.user['hearingTime'] = apiResponse['courtAttendTime'];
 
-
+    
     // Extract the time value when the hearing datetime is coming from the UNIQUE_POOL table
     if (moment(req.session.user['hearingTime'], 'YYYY-MM-DD HH:mm:ss').isValid()) {
       req.session.user['hearingTime'] = moment(req.session.user['hearingTime'], 'YYYY-MM-DD HH:mm:ss').format('H:mma');
@@ -707,8 +707,8 @@
     // Extract the time value when the hearing datetime is coming from the COURT_LOCATION table
       req.session.user['hearingTime'] = moment(req.session.user['hearingTime'], 'HH:mm').format('H:mma');
     }
-
-
+    
+    
     // Join parts of address
     req.session.user['courtAddress'] = [
       apiResponse['locCourtName'],
@@ -831,52 +831,5 @@
     return dates;
 
   }
-
-  /**
-  * Recursively calls the function to replace each key,
-    if objects are contained within an array it replaces these too
-    looping through until every object key is replaced using the string conversion function
-  * @param {object} obj the object that you want to convert keys for
-  * @param {function} getNewKey the string conversion function to change keys by
-                      (i.e. filters (capitialise(),...) or lodash string conversion methods (_.toCamelCase(),...))
-  * @returns {object} the given object with all its keys replaced using the supplied string conversion function
-    @example
-    * // returns {
-          ID: 1,
-          'A B C': { 'D E F': { GHI: 'ghi', JKL: 'jkl' } },
-          MNO: [ { ONM: 'onm' }, { NOM: 'nom' } ],
-          'P Q R': 'pqr',
-          STU: { VWX: 'vwx', Y: { Z: 'z' } },
-        }
-    * modUtils.replaceAllObjKeys({
-        id: 1,
-        'a b C': { 'd e f': { ghi: 'ghi', jkL: 'jkl' } },
-        mno: [ { onm: 'onm' }, { nOm: 'nom' } ],
-        'p q r': 'pqr',
-        Stu: { vwx: 'vwx', y: { Z: 'z' }},
-      }, capitalise);
-  */
-  const replaceAllObjKeys = (obj, getNewKey) => {
-    if (Array.isArray(obj)) {
-      for (let i = 0; i < obj.length; i++) {
-        replaceAllObjKeys(obj[i], getNewKey);
-      }
-    } else if (typeof obj === 'object') {
-      // eslint-disable-next-line guard-for-in
-      for (const key in obj) {
-        const newKey = getNewKey(key);
-
-        obj[newKey] = obj[key];
-        if (key !== newKey) {
-          delete obj[key];
-        }
-        replaceAllObjKeys(obj[newKey], getNewKey);
-      }
-    }
-
-    return obj;
-  };
-
-  module.exports.replaceAllObjKeys = replaceAllObjKeys;
-
+  
 })();
