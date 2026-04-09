@@ -40,6 +40,7 @@
 
   console.info('app name: ' + pkg.name);
   console.info('app version: ' + pkg.version);
+  console.info('node version: ' + process.version);
 
   // Control server
   function startServer () {
