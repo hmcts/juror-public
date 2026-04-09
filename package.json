@@ -68,8 +68,8 @@
   },
   "devDependencies": {
     "@scottish-government/pattern-library": "0.0.381",
-    "chai": "^4.5.0",
-    "chai-as-promised": "^7.1.2",
+    "chai": "5.3.3",
+    "chai-as-promised": "^8.0.2",
     "chai-things": "^0.2.0",
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.4",
