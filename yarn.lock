@@ -3477,7 +3477,7 @@ __metadata:
     style-loader: "npm:^4.0.0"
     underscore: "npm:^1.13.8"
     url-join: "npm:4.0.1"
-    uuid: "npm:11.0.0"
+    uuid: "npm:11.1.0"
     validate.js: "npm:^0.13.1"
     webpack: "npm:^5.106.0"
     webpack-cli: "npm:^7.0.2"
@@ -5395,12 +5395,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:11.0.0":
-  version: 11.0.0
-  resolution: "uuid@npm:11.0.0"
+"uuid@npm:11.1.0":
+  version: 11.1.0
+  resolution: "uuid@npm:11.1.0"
   bin:
     uuid: dist/esm/bin/uuid
-  checksum: 10/ce68ce5031aa385efc4a7d8bf7d32904aeec778d4b3fa4164d09f5de64d91c42a3d36a27f82859b7a320875b8b88fdd48aa2e7746be2ace749f3461e528b1325
+  checksum: 10/d2da43b49b154d154574891ced66d0c83fc70caaad87e043400cf644423b067542d6f3eb641b7c819224a7cd3b4c2f21906acbedd6ec9c6a05887aa9115a9cf5
   languageName: node
   linkType: hard
 
