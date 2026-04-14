@@ -6,7 +6,7 @@
 {# specify absolute url for the static assets folder e.g. http://wwww.domain.com/assets #}
 {%- set assetUrl = assetUrl | default(assetPath) -%}
 <!DOCTYPE html>
-<html lang="{{ texts.INTERFACE.HTML_LANG|default('en') }}" class="govuk-template--rebranded {{ htmlClasses }}">
+<html lang="{{ texts.INTERFACE.HTML_LANG|default('en') }}" class="{{ htmlClasses }}">
   <head>
     <meta charset="utf-8" />
     <title>{% block pageTitle %}GOV.UK - The best place to find government services and information{% endblock %}</title>
@@ -32,11 +32,11 @@
     {% endif %}
     
     {% block headIcons %}
-      <link rel="icon" sizes="48x48" href="{{ assetPath | default('/assets') }}assets/rebrand/images/favicon.ico">
-      <link rel="icon" sizes="any" href="{{ assetPath | default('/assets') }}assets/rebrand/images/favicon.svg" type="image/svg+xml" />
-      <link rel="mask-icon" href="{{ assetPath | default('/assets') }}assets/rebrand/images/govuk-icon-mask.svg" color="#1d70b8">
-      <link rel="apple-touch-icon" href="{{ assetPath | default('/assets') }}assets/rebrand/images/govuk-icon-180.png">
-      <meta property="og:image" content="{{ assetPath | default('/assets') }}assets/rebrand/images/govuk-opengraph-image.png">
+      <link rel="icon" sizes="48x48" href="{{ assetPath | default('/assets') }}images/favicon.ico">
+      <link rel="icon" sizes="any" href="{{ assetPath | default('/assets') }}images/favicon.svg" type="image/svg+xml" />
+      <link rel="mask-icon" href="{{ assetPath | default('/assets') }}govuk-icon-mask.svg" color="#1d70b8">
+      <link rel="apple-touch-icon" href="{{ assetPath | default('/assets') }}images/govuk-icon-180.png">
+      <meta property="og:image" content="{{ assetPath | default('/assets') }}images/govuk-opengraph-image.png">
     {% endblock %}
 
     {% if showCookieBanner %}
@@ -51,7 +51,7 @@
     <meta name="pageIdentifier" content="{% block page_identifier %}{% endblock %}">
     <meta name="robots" content="noindex, nofollow">
 
-    {% block skipLink %}
+    {% block govukSkipLink %}
       {{ govukSkipLink({
         href: '#main-content',
         text: texts.INTERFACE.SKIP_TO_MAIN_CONTENT
@@ -74,10 +74,9 @@
 
     {% block bodyStart %}{% endblock %}
 
-    {% block header %}
+    {% block govukHeader %}
       
       {{ govukHeader({
-        rebrand: true,
         homepageUrl: homepage_url|default('https://www.gov.uk')
       }) }}
 
@@ -96,18 +95,18 @@
    
     {% endblock %}
 
-    {% block main %}
+    {% block container %}
       <div class="govuk-width-container">
-        {% block beforeContent %}{% endblock %}
+        {% block containerStart %}{% endblock %}
         <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main">
             {% block content %}{% endblock %}
         </main>
+        {% block containerEnd %} {% endblock %}
       </div>
     {% endblock %}
 
     {% block footer %}
       {{ govukFooter({
-        rebrand: true,
         meta: {
           items: [
             {
