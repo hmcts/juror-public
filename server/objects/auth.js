@@ -3,7 +3,6 @@
 
   const _ = require('lodash');
   const { axiosInstance } = require('./axios-instance');
-  const { replaceAllObjKeys, basicDataTransform2 } = require('../lib/utils');
 
   module.exports.auth = {
     resource: 'auth/juror',
@@ -11,9 +10,9 @@
     post: function(app, jwtToken, userDetails) {
 
       let url = this.resource;
-      let options = {'method': 'post', transform: basicDataTransform2};
+      let options = {'method': 'post'};
 
-      options.data = replaceAllObjKeys(userDetails, _.snakeCase);
+      options.data = userDetails;
 
       return axiosInstance(url, app, jwtToken, options);
     },
