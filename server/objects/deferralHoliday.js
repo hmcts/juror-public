@@ -3,14 +3,16 @@
 
   const _ = require('lodash');
   const { axiosInstance } = require('./axios-instance');
-  const { replaceAllObjKeys, basicDataTransform2 } = require('../lib/utils');
+  const { replaceAllObjKeys } = require('../lib/utils');
 
   const deferralHoliday = {
     resource: 'public/deferral-dates',
     post: function(app, deferralDates, jwtToken) {
 
       let url = this.resource;
-      let options = {'method': 'post', transform: basicDataTransform2};
+      let options = {'method': 'post', transformer: 'camelCase' };
+
+      console.log('Deferral dates being sent to API:', deferralDates);
 
       options.data = replaceAllObjKeys(deferralDates, _.snakeCase);
 

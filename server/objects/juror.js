@@ -12,7 +12,7 @@
 
       let url = urljoin(this.resource, jurorNumber);
 
-      let options = {'method': 'get', transform: basicDataTransform2};
+      let options = {'method': 'get'};
 
       options.transformer = 'getSingle';
 
