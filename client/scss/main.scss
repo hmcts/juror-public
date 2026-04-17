@@ -3,8 +3,9 @@
 $govuk-colours-organisations: govuk-organisation-colours;
 $govuk-new-organisation-colours: true !default;
 
-// Overriding link colour for Contrast Enhanced
-$govuk-link-colour: #003078;
+// Overriding link colour for Enhanced Contrast (DAC compliant)
+// Blue shade 25% (#16548a)
+$govuk-functional-colours: (link: 	#16548a);
 
 @import "node_modules/govuk-frontend/dist/govuk/index.scss";
 @import "./custom-components/index.scss"; 
