@@ -1,3 +1,5 @@
+const { replaceAllObjKeys } = require('../lib/utils');
+
 (function() {
   'use strict';
 
@@ -20,6 +22,9 @@
       };
 
       return returnData;
+    },
+    camelCase: (response) => {
+      return replaceAllObjKeys(response.data, _.camelCase);
     },
   };
 
