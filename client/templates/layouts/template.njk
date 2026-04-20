@@ -95,15 +95,15 @@
    
     {% endblock %}
 
-    {% block main %}
-      <div class="govuk-width-container">
-        {% block containerStart %}{% endblock %}
-        <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main">
-            {% block content %}{% endblock %}
-        </main>
-        {% block containerEnd %} {% endblock %}
-      </div>
-    {% endblock %}
+    <div class="govuk-width-container">
+      {% block containerStart %}{% endblock %}
+      {% block container %}
+      <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main">
+          {% block content %}{% endblock %}
+      </main>
+      {% endblock %}
+      {% block containerEnd %}{% endblock %}
+    </div>
 
     {% block footer %}
       {{ govukFooter({
