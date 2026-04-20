@@ -7,7 +7,7 @@
 {# specify absolute url for the static assets folder e.g. http://wwww.domain.com/assets #}
 {%- set assetUrl = assetUrl | default(assetPath) -%}
 <!DOCTYPE html>
-<html lang="{{ texts.INTERFACE.HTML_LANG|default('en') }}" class="govuk-template--rebranded {{ htmlClasses }}">
+<html lang="{{ texts.INTERFACE.HTML_LANG|default('en') }}" class="{{ htmlClasses }}">
   <head>
     <meta charset="utf-8" />
     <title>{% block pageTitle %}GOV.UK - The best place to find government services and information{% endblock %}</title>
@@ -52,7 +52,7 @@
     <meta name="pageIdentifier" content="{% block page_identifier %}{% endblock %}">
     <meta name="robots" content="noindex, nofollow">
 
-    {% block skipLink %}
+    {% block govukSkipLink %}
       {{ govukSkipLink({
         href: '#main-content',
         text: texts.INTERFACE.SKIP_TO_MAIN_CONTENT
@@ -72,7 +72,7 @@
     <script nonce="{{ nonce }}">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
     {% block bodyStart %}{% endblock %}
 
-    {% block header %}
+    {% block govukHeader %}
 
       {{ govukHeader({
           homepageUrl: homepage_url|default('https://www.gov.uk')
@@ -102,7 +102,7 @@
       {% block containerEnd %}{% endblock %}
     </div>
 
-    {% block footer %}
+    {% block govukFooter %}
       {{ govukFooter({
         meta: {
           items: [
