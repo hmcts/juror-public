@@ -85,7 +85,7 @@
           var redirectUrl;
 
           app.logger.crit('Error calling Holiday Dates API: ', {
-            error: (typeof err.response.data !== 'undefined') ? err.response.data : err,
+            error: (typeof err.response?.data !== 'undefined') ? err.response?.data : err,
           });
 
           req.session.user.deferral['deferralDatesPublicHoliday'] = false;
