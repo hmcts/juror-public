@@ -10,3 +10,8 @@ $govuk-functional-colours: (link: 	#16548a);
 @import "node_modules/govuk-frontend/dist/govuk/index.scss";
 @import "./custom-components/index.scss"; 
 @import "jd-main.scss";
+
+// Overridden font-size for alignment issues
+.govuk-footer {
+  font-size: 16px;
+};
