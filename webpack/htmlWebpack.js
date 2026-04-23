@@ -43,19 +43,14 @@ const copyClientCode = new CopyWebpackPlugin({
       to: '../client/assets/fonts',
     },
     {
-      context: 'node_modules/govuk-frontend/dist/govuk/assets/rebrand/',
-      from: '**/*.*',
-      to: '../client/assets/rebrand',
+      context: 'node_modules/govuk-frontend/dist/govuk/assets/images/',
+      from: '**/*',
+      to: '../client/assets/images',
     },
     {
       context: 'client/assets/documents/',
       from: '*.pdf',
       to: '../client/assets/documents',
-    },
-    {
-      context: 'node_modules/govuk-frontend/dist/govuk/assets/rebrand/',
-      from: '*.*',
-      to: '../client/assets/rebrand',
     },
     {
       context: 'client/assets/images/',
