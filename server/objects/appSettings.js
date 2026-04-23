@@ -12,7 +12,7 @@
       let url = this.resource;
       let jwtToken = jwt.sign({}, secretsConfig.get('secrets.juror.public-jwtNoAuthKey'), { expiresIn: secretsConfig.get('secrets.juror.public-jwtTTL') });
 
-      return axiosInstance(url, app, jwtToken, null);
+      return axiosInstance(url, app, jwtToken, { transformer: 'camelCase' });
     },
   };
 
