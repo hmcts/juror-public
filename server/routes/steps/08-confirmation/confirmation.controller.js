@@ -110,7 +110,7 @@ var _ = require('lodash')
         , docDef;
 
 
-      printer = new pdfMake(fonts);
+      pdfMake.addFonts(fonts);
 
       if (req.session.user.ineligibleDeceased) {
         if (!req.session.user.hearingDateShort){
@@ -125,18 +125,13 @@ var _ = require('lodash')
         docDef = pdfExport.getPdfDocumentDescription(req.session.user, (req.session.ulang === 'cy' ? welshLanguageText.PDF : englishLanguageText.PDF));
       }
 
-      pdfDoc = printer.createPdfKitDocument(docDef);
 
-      pdfDoc.on('data', function(data) {
-        chunks.push(data);
-      });
-
-      pdfDoc.on('end', function() {
-        result = Buffer.concat(chunks);
+      pdfMake.createPdf(docDef).getBuffer().then((buffer) => {
         res.contentType('application/pdf');
-        res.send(result);
-      })
-      pdfDoc.end();
+        res.send(buffer);
+      }, err => {
+        return reject(err);
+      });
     }
   }
 
