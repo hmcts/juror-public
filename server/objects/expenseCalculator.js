@@ -15,7 +15,7 @@
         transform: basicDataTransform2,
       };
 
-      options.data = expenseData;
+      options.data = replaceAllObjKeys(expenseData, _.snakeCase);
 
       return axiosInstance(url, app, jwtToken, options);
     },
