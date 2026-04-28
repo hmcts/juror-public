@@ -3,7 +3,7 @@
 
   const _ = require('lodash');
   const { axiosInstance } = require('./axios-instance');
-  const { replaceAllObjKeys, basicDataTransform2 } = require('../lib/utils');
+  const { replaceAllObjKeys } = require('../lib/utils');
 
   const expenseCalculator = {
     resource: 'bureau/expenseCalculator/estimate',
@@ -12,7 +12,7 @@
       let url = this.resource;
       let options = {
         'method': 'post',
-        transform: basicDataTransform2,
+        transformer: 'camelCase',
       };
 
       options.data = replaceAllObjKeys(expenseData, _.snakeCase);
