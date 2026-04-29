@@ -150,8 +150,8 @@ __metadata:
   linkType: hard
 
 "@azure/identity@npm:^4.13.0":
-  version: 4.13.0
-  resolution: "@azure/identity@npm:4.13.0"
+  version: 4.13.1
+  resolution: "@azure/identity@npm:4.13.1"
   dependencies:
     "@azure/abort-controller": "npm:^2.0.0"
     "@azure/core-auth": "npm:^1.9.0"
@@ -160,11 +160,11 @@ __metadata:
     "@azure/core-tracing": "npm:^1.0.0"
     "@azure/core-util": "npm:^1.11.0"
     "@azure/logger": "npm:^1.0.0"
-    "@azure/msal-browser": "npm:^4.2.0"
-    "@azure/msal-node": "npm:^3.5.0"
+    "@azure/msal-browser": "npm:^5.5.0"
+    "@azure/msal-node": "npm:^5.1.0"
     open: "npm:^10.1.0"
     tslib: "npm:^2.2.0"
-  checksum: 10/8b97154ac85bb33abc0216ac7f45f41ccebaa8516db2173fbe029bbdd6c4dd227a83d7a6da6bb51c28b9189944a26cf6322bc52d79cbe4e75389e74266abc4b0
+  checksum: 10/f07734f811d734d29b49ad7f8345a53d680b90d075dcd9bfbc28e2e18bda3f1688de4faf44cc4727302c9aa91c13d4444ac2de6edb88a79c99c9efc660137609
   languageName: node
   linkType: hard
 
@@ -214,30 +214,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@azure/msal-browser@npm:^4.2.0":
-  version: 4.30.0
-  resolution: "@azure/msal-browser@npm:4.30.0"
+"@azure/msal-browser@npm:^5.5.0":
+  version: 5.9.0
+  resolution: "@azure/msal-browser@npm:5.9.0"
   dependencies:
-    "@azure/msal-common": "npm:15.17.0"
-  checksum: 10/a39aa9e29b3983f1866b169aabac09de129a33e7c55b9e9bd18c8b05808087b6d667008fd23317f12f24ffbfbcbe69e76d6cfee99de8cbf74b33341af62a2b3a
+    "@azure/msal-common": "npm:16.5.2"
+  checksum: 10/20e560606133f3650b99fdc81dba55a0a0db91bfff0606837edc7ed462ee9e3d1105afecb39b6529cd7f9d6700200a368d21d91d4b5c60bfb2fb1707327c8de3
   languageName: node
   linkType: hard
 
-"@azure/msal-common@npm:15.17.0":
-  version: 15.17.0
-  resolution: "@azure/msal-common@npm:15.17.0"
-  checksum: 10/ca0c040a236744f0d648ab1444b0eed6406b41311b4271feaefb7f845a198d3fc8d182b0c5297790ba8ce1341a9928f8832d2f05c86a37e85cb444e5d66dee5e
+"@azure/msal-common@npm:16.5.2":
+  version: 16.5.2
+  resolution: "@azure/msal-common@npm:16.5.2"
+  checksum: 10/9ba2ffb035a72696908a0e33ed816366577d67e7971a4c376305c6bc2dc3b14381151389b296febff1e293d13610ad85f2b75630f4fcf6182e27f725650ebe31
   languageName: node
   linkType: hard
 
-"@azure/msal-node@npm:^3.5.0":
-  version: 3.8.10
-  resolution: "@azure/msal-node@npm:3.8.10"
+"@azure/msal-node@npm:^5.1.0":
+  version: 5.1.5
+  resolution: "@azure/msal-node@npm:5.1.5"
   dependencies:
-    "@azure/msal-common": "npm:15.17.0"
+    "@azure/msal-common": "npm:16.5.2"
     jsonwebtoken: "npm:^9.0.0"
-    uuid: "npm:^8.3.0"
-  checksum: 10/bdd9746c25f288af5eca8ff2703ebd7265607b26d6e7605f64c45e58e5cdef61a095d706403cb8e651f83fcb0326d345fff0968081f4b802f70350d4cf7f939e
+  checksum: 10/06eac7ae5529e634804f5f579af1653b0715e8d18c1c1879340f662f2fdaf419196fd5c737a744f6dc2750ede810378d253ae835dd108ec16d2395db4a3c634c
   languageName: node
   linkType: hard
 
@@ -5655,15 +5654,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 10/474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^8.3.0":
-  version: 8.3.2
-  resolution: "uuid@npm:8.3.2"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 10/9a5f7aa1d6f56dd1e8d5f2478f855f25c645e64e26e347a98e98d95781d5ed20062d6cca2eecb58ba7c84bc3910be95c0451ef4161906abaab44f9cb68ffbdd1
   languageName: node
   linkType: hard
 
