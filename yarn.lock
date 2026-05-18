@@ -4193,13 +4193,13 @@ __metadata:
   linkType: hard
 
 "pdfmake@npm:^0.3.7":
-  version: 0.3.7
-  resolution: "pdfmake@npm:0.3.7"
+  version: 0.3.8
+  resolution: "pdfmake@npm:0.3.8"
   dependencies:
     linebreak: "npm:^1.1.0"
     pdfkit: "npm:^0.18.0"
     xmldoc: "npm:^2.0.3"
-  checksum: 10/93ed4bbb8a1866e3a60f37c17f11388ae6b3a6a0902f9ef1f033f18c36e7c4e0bfed6b143695e3743cf4eafb98aaee4e2a84324628da3518a89f4f5199886a47
+  checksum: 10/97cafdfdac07b2be9ee720fe4acd65dd4425c3b833ff3783f4c24b559d6577c9a0517412176c5681a237dfe0f4b9079d58ca18ac2c084364639779c48a6660b3
   languageName: node
   linkType: hard
 
