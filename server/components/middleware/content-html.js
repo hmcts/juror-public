@@ -37,9 +37,9 @@ module.exports.detectHtmlContent = function (req, res, next) {
   }
   const scanResults = [];
 
-  htmlScan(req.body, "body", scanResults);
-  htmlScan(req.query, "query", scanResults);
-  htmlScan(req.params, "params", scanResults);
+  htmlScan(req.body, 'body', scanResults);
+  htmlScan(req.query, 'query', scanResults);
+  htmlScan(req.params, 'params', scanResults);
 
   if (scanResults.length > 0) {
     Logger.instance.crit(`XSS detected in ${req.method} ${req.originalUrl} -> ${scanResults[0].path}: ${scanResults[0].value}`);
