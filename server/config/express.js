@@ -32,6 +32,9 @@
   const sessionExpires = 10 * (60 * 60);
   const sessionName = 'juror_summons_reply_session';
 
+  const validateContentType = require('../components/middleware/content-type').validateContentType;
+  const detectHtmlContent = require('../components/middleware/content-html').detectHtmlContent;
+
   const ignoreUrls = [
     '/cookie-settings',
     '/cookie-banner',
@@ -317,6 +320,9 @@
       app.use(utils.basicAuth(app.logger, basicAuthUsername, basicAuthPassword, require('basic-auth')));
     }
 
+    // Custom middleware to detect invalid content type and html content
+    app.use(validateContentType);
+    app.use(detectHtmlContent);
 
     // error handler
     app.use(function (err, req, res, next) {
