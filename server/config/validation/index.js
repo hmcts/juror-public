@@ -3,8 +3,6 @@
 
   require('./custom-validation');
 
-  module.exports.login = require('./login');
-  module.exports.responderTYpe = require('./responder-type');
   module.exports.yourDetails = require('./your-details');
   module.exports.yourDetailsConfirm = require('././your-details-confirm');
   module.exports.qualify = require('./residency');
