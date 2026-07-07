@@ -6,6 +6,7 @@
   const filters = require('../../../components/filters');
   const texts_en = require('../../../../client/js/i18n/en.json');
   const texts_cy = require('../../../../client/js/i18n/cy.json');
+  const validateBail = require('../../../config/joi-validation/bail');
   const utils = require('../../../lib/utils');
 
   // Landing page functions
@@ -554,7 +555,7 @@
 
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/bail')(req));
+      validatorResult = validateBail(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

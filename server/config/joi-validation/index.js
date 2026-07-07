@@ -53,7 +53,5 @@ const applySummaryLinks = (errors, summaryLinks) => {
 module.exports.validateJoiSchema = (schema, body, summaryLinks) => {
   const validationResult = schema.validate(body, validationOptions);
 
-  console.log('validationResult', validationResult);
-
   return applySummaryLinks(validationResultToErrorMap(validationResult), summaryLinks);
 };

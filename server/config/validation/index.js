@@ -7,7 +7,6 @@
   module.exports.yourDetailsConfirm = require('././your-details-confirm');
   module.exports.qualify = require('./residency');
   module.exports.qualify = require('./mental-health');
-  module.exports.qualify = require('./bail');
   module.exports.qualify = require('./convictions');
   module.exports.confirmDate = require('./confirm-date');
   module.exports.deferral = require('./deferral');
