@@ -4,6 +4,10 @@
   const _ = require('lodash');
   const validate = require('validate.js');
   const filters = require('../../../components/filters');
+  const validateResidency = require('../../../config/joi-validation/residency');
+  const validateMentalHealthSectioned = require('../../../config/joi-validation/mental-health-sectioned');
+  const validateMentalHealthCapacity = require('../../../config/joi-validation/mental-health-capacity');
+  const validateConvictions = require('../../../config/joi-validation/convictions');
   const texts_en = require('../../../../client/js/i18n/en.json');
   const texts_cy = require('../../../../client/js/i18n/cy.json');
   const validateBail = require('../../../config/joi-validation/bail');
@@ -94,7 +98,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/residency')(req));
+      validatorResult = validateResidency(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -340,7 +344,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/mental-health-sectioned')(req));
+      validatorResult = validateMentalHealthSectioned(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -425,7 +429,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/mental-health-capacity')(req));
+      validatorResult = validateMentalHealthCapacity(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -640,7 +644,7 @@
 
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/convictions')(req));
+      validatorResult = validateConvictions(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

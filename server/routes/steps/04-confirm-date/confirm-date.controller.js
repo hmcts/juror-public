@@ -7,8 +7,8 @@
   'use strict';
 
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../components/filters')
+    , validateConfirmDate = require('../../../config/joi-validation/confirm-date')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
@@ -58,7 +58,7 @@
 
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/confirm-date')(req));
+      validatorResult = validateConfirmDate(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         /*req.session.errors = {
           confirmedDate: [

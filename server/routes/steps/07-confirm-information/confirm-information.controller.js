@@ -8,9 +8,9 @@
 
   const _ = require('lodash');
   const jurorResponse = require('../../../objects/response').jurorResponse;
-  const validate = require('validate.js');
   const moment = require('moment');
   const filters = require('../../../components/filters');
+  const validateConfirmInformation = require('../../../config/joi-validation/confirm-information');
   const textsEN = require('../../../../client/js/i18n/en.json');
   const textsCY = require('../../../../client/js/i18n/cy.json');
   const utils = require('../../../lib/utils');
@@ -450,7 +450,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/confirm-information')(req));
+      validatorResult = validateConfirmInformation(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
