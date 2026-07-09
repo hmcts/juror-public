@@ -29,6 +29,8 @@ module.exports = function (req, body) {
   });
 
   return validateJoiSchema(schema, body, {
-    mentalHealthSectioned: 'mentalHealthSectioned-Yes',
+    summaryLinks: {
+      mentalHealthSectioned: 'mentalHealthSectioned-Yes',
+    },
   });
 };

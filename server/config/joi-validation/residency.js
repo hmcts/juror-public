@@ -29,6 +29,8 @@ module.exports = function (req, body) {
   });
 
   return validateJoiSchema(schema, body, {
-    livedConsecutive: 'livedConsecutive-Yes',
+    summaryLinks: {
+      livedConsecutive: 'livedConsecutive-Yes',
+    },
   });
 };

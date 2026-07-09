@@ -1,0 +1,107 @@
+const Joi = require('joi');
+const textsEn = require('../../../client/js/i18n/en.json');
+const textsCy = require('../../../client/js/i18n/cy.json');
+const { message, validateJoiSchema } = require('./index');
+
+const cjsEmployerValues = [
+  'Police Force',
+  'HM Prison Service',
+  'National Crime Agency',
+  'Judiciary',
+  'HMCTS',
+  'Other',
+];
+
+module.exports = function (req, body) {
+  const yesValue = (req.session.ulang === 'cy' ? textsCy.EMPLOYED_PAGE.YES : textsEn.EMPLOYED_PAGE.YES);
+
+  const employerSchema = Joi.object({
+    cjsEmployed: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.EMPLOYED', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.CJS_EMPLOYED.EMPLOYED', req.session.user.thirdParty),
+      }),
+
+    cjsEmployer: Joi.array()
+      .items(Joi.string().valid(...cjsEmployerValues))
+      .single()
+      .when('cjsEmployed', {
+        is: yesValue,
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.CHOOSE_ONE_OR_MORE', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.CJS_EMPLOYED.CHOOSE_ONE_OR_MORE', req.session.user.thirdParty),
+      }),
+  });
+
+  const detailsSchema = Joi.object({
+    cjsPoliceDetails: Joi.string()
+      .empty('')
+      .max(1000)
+      .when('cjsEmployer', {
+        is: (value) => (Array.isArray(value)
+          ? value.includes('Police Force')
+          : value === 'Police Force'),
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.POLICE', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.CJS_EMPLOYED.POLICE_DETAILS_LENGTH', req.session.user.thirdParty),
+      }),
+
+    cjsPrisonDetails: Joi.string()
+      .empty('')
+      .max(1000)
+      .when('cjsEmployer', {
+        is: (value) => (Array.isArray(value)
+          ? value.includes('HM Prison Service')
+          : value === 'HM Prison Service'),
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.PRISON_SERVICE', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.CJS_EMPLOYED.PRISON_SERVICE_LENGTH', req.session.user.thirdParty),
+      }),
+
+    cjsEmployed: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.EMPLOYED', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.CJS_EMPLOYED.EMPLOYED', req.session.user.thirdParty),
+      }),
+
+    cjsEmployerDetails: Joi.string()
+      .empty('')
+      .max(1000)
+      .when('cjsEmployer', {
+        is: (value) => (Array.isArray(value)
+          ? value.includes('Other')
+          : value === 'Other'),
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.OTHER', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.CJS_EMPLOYED.OTHER_LENGTH', req.session.user.thirdParty),
+      }),
+  });
+
+  const employerValidation = validateJoiSchema(employerSchema, body, {
+    errorMessageSummary: {
+      cjsEmployer: message(req, 'VALIDATION.CJS_EMPLOYED.WORKED_FOR', req.session.user.thirdParty),
+    },
+    summaryLinks: {
+      cjsEmployed: 'employedCjs-Yes',
+      cjsEmployer: 'cjsEmployer-police',
+    }
+  });
+
+  if (typeof employerValidation !== 'undefined') {
+    return employerValidation;
+  }
+
+  return validateJoiSchema(detailsSchema, body);
+};

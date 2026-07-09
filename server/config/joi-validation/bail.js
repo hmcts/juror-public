@@ -30,6 +30,8 @@ module.exports = function (req, body) {
   });
 
   return validateJoiSchema(schema, body, {
-    onBail: 'onBail-Yes',
+    summaryLinks: {
+      onBail: 'onBail-Yes',
+    },
   });
 };

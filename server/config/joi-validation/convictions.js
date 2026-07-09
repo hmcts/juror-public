@@ -29,6 +29,8 @@ module.exports = function (req, body) {
   });
 
   return validateJoiSchema(schema, body, {
-    convicted: 'convicted-Yes',
+    summaryLinks: {
+      convicted: 'convicted-Yes',
+    },
   });
 };

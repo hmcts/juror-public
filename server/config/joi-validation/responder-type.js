@@ -12,6 +12,8 @@ module.exports = function (req, body) {
   });
 
   return validateJoiSchema(schema, body, {
-    thirdParty: 'thirdParty_No',
+    summaryLinks: {
+      thirdParty: 'thirdParty_No',
+    },
   });
 };
