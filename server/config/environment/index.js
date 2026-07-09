@@ -40,6 +40,9 @@
         // If anything other than false, logs will be output in terminal using the provided log level as minimum level
         logConsole: false,
 
+        // If true, log sanitisation is disabled and raw fields will be logged
+        logSanitisationDisabled: process.env.LOG_SANITISATION_DISABLED === 'true' || process.env.NODE_ENV === 'development',
+
         // rate limiting - defaults to 1 mil requests per minute
         rateLimitEnabled: true,
         rateLimit: {
