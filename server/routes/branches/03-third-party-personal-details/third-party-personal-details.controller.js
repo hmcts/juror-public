@@ -7,7 +7,6 @@
   'use strict';
 
   const _ = require('lodash');
-  const validate = require('validate.js');
   const moment = require('moment');
   const filters = require('../../../components/filters');
   const textsEn = require('../../../../client/js/i18n/en.json');
@@ -121,8 +120,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(
-        req.body, require('../../../config/validation/third-party-personal-details-name-confirm')(req));
+      validatorResult = require('../../../config/joi-validation/third-party-personal-details-name-confirm')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -210,8 +208,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body,
-        require('../../../config/validation/third-party-personal-details-name')(req));
+      validatorResult = require('../../../config/joi-validation/third-party-personal-details-name')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -309,8 +306,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body,
-        require('../../../config/validation/third-party-personal-details-address-confirm')(req));
+      validatorResult = require('../../../config/joi-validation/third-party-personal-details-address-confirm')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -339,7 +335,7 @@
           addressPostcode: req.session.user['addressPostcode'],
         };
 
-        validatorResult = validate(addressDetails, require('../../../config/validation/your-details-address.js')(req));
+        validatorResult = require('../../../config/joi-validation/your-details-address')(req, addressDetails);
 
         if (typeof validatorResult !== 'undefined') {
           req.session.errors = validatorResult;
@@ -425,8 +421,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(
-        req.body, require('../../../config/validation/third-party-personal-details-address')(req));
+      validatorResult = require('../../../config/joi-validation/third-party-personal-details-address')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -521,8 +516,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(
-        req.body, require('../../../config/validation/third-party-personal-details-date-of-birth')(req));
+      validatorResult = require('../../../config/joi-validation/third-party-personal-details-date-of-birth')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
 
         // Only show 1 error at a time for the DOB

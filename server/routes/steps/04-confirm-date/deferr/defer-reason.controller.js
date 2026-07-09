@@ -7,7 +7,6 @@
   'use strict';
 
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../../components/filters')
     , texts_en = require('../../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../../client/js/i18n/cy.json')
@@ -76,7 +75,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../../config/validation/deferral')(req));
+      validatorResult = require('../../../../config/joi-validation/deferral')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

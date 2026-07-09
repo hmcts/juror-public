@@ -7,7 +7,6 @@
   'use strict';
 
   const _ = require('lodash');
-  const validate = require('validate.js');
   const filters = require('../../../components/filters');
   const textsEn = require('../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../client/js/i18n/cy.json');
@@ -63,7 +62,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-reason')(req));
+      validatorResult = require('../../../config/joi-validation/third-party-reason')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

@@ -8,7 +8,6 @@
 
   var moment = require('moment')
     , _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../../components/filters')
     , texts_en = require('../../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../../client/js/i18n/cy.json')
@@ -70,7 +69,7 @@
       }
 
       // Perform validation
-      validatorResult = validate(req.body, require('../../../../config/validation/your-details-confirm')(req));
+      validatorResult = require('../../../../config/joi-validation/your-details-confirm')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
 
         req.session.errors = validatorResult;
