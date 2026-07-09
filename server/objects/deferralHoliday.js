@@ -10,7 +10,7 @@
     post: function(app, deferralDates, jwtToken) {
 
       let url = this.resource;
-      let options = {'method': 'post', transformer: 'camelCase' };
+      let options = {'method': 'post'};
 
       console.log('Deferral dates being sent to API:', deferralDates);
 

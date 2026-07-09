@@ -9,19 +9,19 @@ const { replaceAllObjKeys } = require('../lib/utils');
 
   const transformers = {
     default: (response) => {
-      return response.data;
+      return replaceAllObjKeys(response.data, _.camelCase);
     },
     withHeaders: (response) => {
-      return { 'headers': response.headers, 'data': response.data };
+      return { 'headers': response.headers, 'data': replaceAllObjKeys(response.data, _.camelCase) };
     },
     getSingle: (response) => {
-      var returnData = response.data;
+      let returnData = response.data;
 
       if (_.isArray(returnData)) {
-        returnData = returnData.data[0];
+        returnData =  replaceAllObjKeys(returnData.data[0], _.camelCase);
       };
 
-      return returnData;
+      return  replaceAllObjKeys(returnData, _.camelCase);
     },
     camelCase: (response) => {
       return replaceAllObjKeys(response.data, _.camelCase);

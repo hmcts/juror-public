@@ -8,7 +8,7 @@
     create: function(app, jwtToken, responseData) {
 
       let url = 'public/juror/respond';
-      let options = {'method': 'post', transformer: 'camelCase'};
+      let options = {'method': 'post'};
 
       options.data = _.mapKeys(responseData, (value, key) => _.snakeCase(key));
 
