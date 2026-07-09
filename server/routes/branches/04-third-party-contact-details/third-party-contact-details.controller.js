@@ -82,7 +82,7 @@
       }
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/third-party-contact-details')(req, req.body.validate);
+      validatorResult = require('../../../config/validation/third-party-contact-details')(req, req.body.validate);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

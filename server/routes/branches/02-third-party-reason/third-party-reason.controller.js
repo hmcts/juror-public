@@ -62,7 +62,7 @@
       }
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/third-party-reason')(req, req.body);
+      validatorResult = require('../../../config/validation/third-party-reason')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

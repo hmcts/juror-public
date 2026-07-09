@@ -10,7 +10,7 @@
   const jurorResponse = require('../../../objects/response').jurorResponse;
   const moment = require('moment');
   const filters = require('../../../components/filters');
-  const validateConfirmInformation = require('../../../config/joi-validation/confirm-information');
+  const validateConfirmInformation = require('../../../config/validation/confirm-information');
   const textsEN = require('../../../../client/js/i18n/en.json');
   const textsCY = require('../../../../client/js/i18n/cy.json');
   const utils = require('../../../lib/utils');

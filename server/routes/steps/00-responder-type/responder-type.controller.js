@@ -8,7 +8,7 @@
   var filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
-    , validateResponderType = require('../../../config/joi-validation/responder-type')
+    , validateResponderType = require('../../../config/validation/responder-type')
     , utils = require('../../../lib/utils');
 
   module.exports.index = function() {

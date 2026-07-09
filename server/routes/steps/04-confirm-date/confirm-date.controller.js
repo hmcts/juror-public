@@ -8,7 +8,7 @@
 
   var _ = require('lodash')
     , filters = require('../../../components/filters')
-    , validateConfirmDate = require('../../../config/joi-validation/confirm-date')
+    , validateConfirmDate = require('../../../config/validation/confirm-date')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');

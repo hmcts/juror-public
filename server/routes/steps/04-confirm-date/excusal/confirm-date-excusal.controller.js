@@ -8,7 +8,7 @@
 
   var _ = require('lodash')
     , filters = require('../../../../components/filters')
-    , validateExcusal = require('../../../../config/joi-validation/excusal')
+    , validateExcusal = require('../../../../config/validation/excusal')
     , texts_en = require('../../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../../client/js/i18n/cy.json')
     , utils = require('../../../../lib/utils');

@@ -113,7 +113,7 @@
       req.session.user.deferral['deferralDatesPublicHoliday'] = false;
 
       // Validate form submission
-      validatorResult = require('../../../../config/joi-validation/deferral-dates-check')(req, req.body);
+      validatorResult = require('../../../../config/validation/deferral-dates-check')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

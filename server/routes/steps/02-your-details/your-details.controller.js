@@ -133,7 +133,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/your-details-name-confirm')(req, req.body);
+      validatorResult = require('../../../config/validation/your-details-name-confirm')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -225,7 +225,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/your-details-name')(req, req.body);
+      validatorResult = require('../../../config/validation/your-details-name')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -327,7 +327,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/your-details-address-confirm')(req, req.body);
+      validatorResult = require('../../../config/validation/your-details-address-confirm')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -363,7 +363,7 @@
           addressPostcode: req.session.user['addressPostcode'],
         };
 
-        validatorResult = require('../../../config/joi-validation/your-details-address')(req, addressDetails);
+        validatorResult = require('../../../config/validation/your-details-address')(req, addressDetails);
 
         if (typeof validatorResult !== 'undefined') {
           req.session.errors = validatorResult;
@@ -445,7 +445,7 @@
 
       // Validate form submission
       req.body.addressPostcode = req.body.addressPostcode.trim();
-      validatorResult = require('../../../config/joi-validation/your-details-address')(req, req.body);
+      validatorResult = require('../../../config/validation/your-details-address')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -549,7 +549,7 @@
       }
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/your-details-date-of-birth')(req, req.body);
+      validatorResult = require('../../../config/validation/your-details-date-of-birth')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
 
@@ -662,7 +662,7 @@
       }
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/your-details-phone')(req, req.body.validate);
+      validatorResult = require('../../../config/validation/your-details-phone')(req, req.body.validate);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -742,7 +742,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/your-details-email')(req, req.body);
+      validatorResult = require('../../../config/validation/your-details-email')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;

@@ -12,7 +12,7 @@
   const textsEn = require('../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../client/js/i18n/cy.json');
   const authComponent = require('../../../components/auth');
-  const validateLogin = require('../../../config/joi-validation/login');
+  const validateLogin = require('../../../config/validation/login');
   const msgMappingsEn = require('../../../components/errors/message-mapping_en');
   const msgMappingsCy = require('../../../components/errors/message-mapping_cy');
   const utils = require('../../../lib/utils');

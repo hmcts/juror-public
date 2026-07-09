@@ -130,7 +130,7 @@
       }
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/reasonable-adjustment')(req, req.body);
+      validatorResult = require('../../../config/validation/reasonable-adjustment')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

@@ -69,7 +69,7 @@
       }
 
       // Perform validation
-      validatorResult = require('../../../../config/joi-validation/your-details-confirm')(req, req.body);
+      validatorResult = require('../../../../config/validation/your-details-confirm')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
 
         req.session.errors = validatorResult;

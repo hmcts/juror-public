@@ -64,7 +64,7 @@
       req.body.thirdPartyDetails.emailAddressConfirmation = req.body.emailAddressConfirmation;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/third-party-details')(req, req.body);
+      validatorResult = require('../../../config/validation/third-party-details')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -209,7 +209,7 @@
       req.body.thirdPartyDetails.lastName = req.body.lastName;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/third-party-details-name')(req, req.body);
+      validatorResult = require('../../../config/validation/third-party-details-name')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -297,7 +297,7 @@
       req.body.thirdPartyDetails.relationship = req.body.relationship;
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/third-party-details-relationship')(req, req.body);
+      validatorResult = require('../../../config/validation/third-party-details-relationship')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -400,7 +400,7 @@
 
 
       // Validate form submission
-      validatorResult = require('../../../config/joi-validation/third-party-details-contact')(req, req.body.validate);
+      validatorResult = require('../../../config/validation/third-party-details-contact')(req, req.body.validate);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

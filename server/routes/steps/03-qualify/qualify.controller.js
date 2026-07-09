@@ -3,14 +3,14 @@
 
   const _ = require('lodash');
   const filters = require('../../../components/filters');
-  const validateResidency = require('../../../config/joi-validation/residency');
-  const validateMentalHealthSectioned = require('../../../config/joi-validation/mental-health-sectioned');
-  const validateMentalHealthCapacity = require('../../../config/joi-validation/mental-health-capacity');
-  const validateConvictions = require('../../../config/joi-validation/convictions');
-  const validateCjsEmployed = require('../../../config/joi-validation/cjs-employed');
+  const validateResidency = require('../../../config/validation/residency');
+  const validateMentalHealthSectioned = require('../../../config/validation/mental-health-sectioned');
+  const validateMentalHealthCapacity = require('../../../config/validation/mental-health-capacity');
+  const validateConvictions = require('../../../config/validation/convictions');
+  const validateCjsEmployed = require('../../../config/validation/cjs-employed');
   const texts_en = require('../../../../client/js/i18n/en.json');
   const texts_cy = require('../../../../client/js/i18n/cy.json');
-  const validateBail = require('../../../config/joi-validation/bail');
+  const validateBail = require('../../../config/validation/bail');
   const utils = require('../../../lib/utils');
 
   // Landing page functions

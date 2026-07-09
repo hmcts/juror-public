@@ -104,7 +104,7 @@
       };
 
       // Validate form submission
-      validatorResult = require('../../../../config/joi-validation/deferral-dates')(req, validateParams);
+      validatorResult = require('../../../../config/validation/deferral-dates')(req, validateParams);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

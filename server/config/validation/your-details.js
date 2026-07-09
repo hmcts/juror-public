@@ -1,7 +1,7 @@
 const Joi = require('joi');
-const moment = require('moment');
 const { message, validateJoiSchema } = require('./index');
 const { name, postcode, phone, phoneSpaces } = require('./legacy-patterns');
+const { buildPastDateSchema } = require('./date-validation');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
@@ -51,17 +51,11 @@ module.exports = function (req, body) {
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', req.session.user.thirdParty),
     }),
-    dateOfBirth: Joi.any().custom((value, helpers) => {
-      if (!value) {
-        return value;
-      }
-      const dob = moment(value);
-      if (!dob.isValid() || dob.diff(moment(), 'days') >= 0) {
-        return helpers.error('any.custom');
-      }
-      return value;
-    }).messages({
-      'any.custom': message(req, 'VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK', req.session.user.thirdParty),
+    dateOfBirth: buildPastDateSchema(req, {
+      thirdParty: false,
+      required: true,
+      requiredMessageKey: 'VALIDATION.YOUR_DETAILS.DATETIME_CHECK',
+      messageKey: 'VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK',
     }),
     primaryPhone: Joi.string().empty('').required().pattern(phoneSpaces).messages({
       'any.required': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
@@ -95,9 +89,5 @@ module.exports = function (req, body) {
     }),
   });
 
-  return validateJoiSchema(schema, body, {
-    summaryLinks: {
-      addressConfirm: 'addressConfirm-Yes',
-    },
-  });
+  return validateJoiSchema(schema, body);
 };

@@ -1,7 +1,7 @@
 const Joi = require('joi');
-const moment = require('moment');
 const { message, validateJoiSchema } = require('./index');
 const { name, postcode } = require('./legacy-patterns');
+const { buildPastDateSchema } = require('./date-validation');
 
 module.exports = function (req, body) {
   const isThirdParty = req.session.user.thirdParty;
@@ -82,27 +82,13 @@ module.exports = function (req, body) {
         'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_MISSING', isThirdParty),
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_INVALID', isThirdParty),
       }),
-    dateOfBirth: Joi.any()
-      .custom((value, helpers) => {
-        if (!value) {
-          return value;
-        }
-
-        const dob = moment(value);
-        if (!dob.isValid() || dob.diff(moment(), 'days') >= 0) {
-          return helpers.error('any.custom');
-        }
-
-        return value;
-      })
-      .messages({
-        'any.custom': message(req, 'VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK', isThirdParty),
-      }),
+    dateOfBirth: buildPastDateSchema(req, {
+      thirdParty: false,
+      required: true,
+      requiredMessageKey: 'VALIDATION.DATETIME_OB',
+      messageKey: 'VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK',
+    }),
   });
 
-  return validateJoiSchema(schema, body, {
-    summaryLinks: {
-      dateOfBirth: 'dobDay',
-    },
-  });
+  return validateJoiSchema(schema, body);
 };
