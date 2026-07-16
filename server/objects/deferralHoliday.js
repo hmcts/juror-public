@@ -12,8 +12,6 @@
       let url = this.resource;
       let options = {'method': 'post'};
 
-      console.log('Deferral dates being sent to API:', deferralDates);
-
       options.data = replaceAllObjKeys(deferralDates, _.snakeCase);
 
       return axiosInstance(url, app, jwtToken, options);
