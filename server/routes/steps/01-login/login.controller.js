@@ -15,6 +15,7 @@
   const authComponent = require('../../../components/auth');
   const msgMappingsEn = require('../../../components/errors/message-mapping_en');
   const msgMappingsCy = require('../../../components/errors/message-mapping_cy');
+  const jurorDetails = require('../../../objects/juror').jurorDetails;
   const utils = require('../../../lib/utils');
 
   module.exports.index = function (app) {
@@ -90,11 +91,6 @@
             jurorLastName: req.body['jurorLastName'],
             jurorPostcode: req.body['jurorPostcode'],
             digitalDefault: resp.digitalByDefault === true,
-            digitalSummons: {
-              summonsDate: resp.summonsDate,
-              courtName: resp.courtName,
-              courtLocCode: resp.courtLocCode,
-            },
           });
 
           if (req.session.user.digitalDefault === true) {
@@ -178,6 +174,8 @@
   module.exports.getDigitalSummons = function (app) {
     return function (req, res) {
       let startResponseRoute;
+      let getDetailsSuccess;
+      let getDetailsError;
 
       if (typeof req.session.user === 'undefined') {
         return res.redirect(app.namedRoutes.build('steps.responder.type.get'));
@@ -191,10 +189,39 @@
         return res.redirect(app.namedRoutes.build(startResponseRoute));
       }
 
-      return res.render('steps/01-login/digital-summons.njk', {
-        user: req.session.user,
-        startResponseUrl: app.namedRoutes.build(startResponseRoute),
-      });
+      getDetailsSuccess = function (response) {
+        app.logger.info('Fetched digital summons details', {
+          jurorNumber: req.session.user.jurorNumber,
+          response: response,
+        });
+
+        return res.render('steps/01-login/digital-summons.njk', {
+          user: req.session.user,
+          digitalSummons: {
+            summonsDate: response.serviceStartDate,
+            courtName: response.locCourtName,
+          },
+          startResponseUrl: app.namedRoutes.build(startResponseRoute),
+        });
+      };
+
+      getDetailsError = function (err) {
+        app.logger.crit('Failed to fetch digital summons details', {
+          jurorNumber: req.session.user.jurorNumber,
+          statusCode: err.response ? err.response.status : err.statusCode,
+          error: err.response && typeof err.response.data !== 'undefined' ? err.response.data : err.message || err,
+        });
+
+        return res.render('steps/01-login/digital-summons.njk', {
+          user: req.session.user,
+          digitalSummons: {},
+          startResponseUrl: app.namedRoutes.build(startResponseRoute),
+        });
+      };
+
+      return jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
+        .then(getDetailsSuccess, getDetailsError)
+        .catch(getDetailsError);
     };
   };
 

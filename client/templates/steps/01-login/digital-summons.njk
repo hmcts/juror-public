@@ -14,13 +14,13 @@
   {% set notAvailable = "Not available" %}
 
   {% set summonsDate = "" %}
-  {% if user.digitalSummons and user.digitalSummons.summonsDate %}
-    {% set summonsDate = user.digitalSummons.summonsDate %}
+  {% if digitalSummons and digitalSummons.summonsDate %}
+    {% set summonsDate = digitalSummons.summonsDate %}
   {% endif %}
 
   {% set courtName = notAvailable %}
-  {% if user.digitalSummons and user.digitalSummons.courtName %}
-    {% set courtName = user.digitalSummons.courtName %}
+  {% if digitalSummons and digitalSummons.courtName %}
+    {% set courtName = digitalSummons.courtName %}
   {% endif %}
 
   {% set guidanceCards = [
@@ -68,7 +68,7 @@
       </h1>
 
       <p class="govuk-body-l">
-        You are signed in. You can read the information that would normally be included in a printed summons pack before you start your response.
+        You are signed in. You can read the information that would normally be included in a printed summons pack, then start your response.
       </p>
 
       {% call govukInsetText() %}
