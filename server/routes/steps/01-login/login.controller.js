@@ -89,7 +89,18 @@
             jurorNumber: req.body['jurorNumber'],
             jurorLastName: req.body['jurorLastName'],
             jurorPostcode: req.body['jurorPostcode'],
+            digitalDefault: resp.digitalByDefault === true,
+            digitalSummons: {
+              summonsDate: resp.summonsDate,
+              courtName: resp.courtName,
+              courtLocCode: resp.courtLocCode,
+            },
           });
+
+          if (req.session.user.digitalDefault === true) {
+            return res.redirect(app.namedRoutes.build('steps.digital.summons.get'));
+          }
+
           // redirect to confirmation of replying on behalf of someone`
           // if selected, otherwise move on to your details.
           if (req.session.user['thirdParty'] === 'Yes') {
@@ -161,6 +172,29 @@
       // Send login to backend, callbacks will return as required
       authComponent.authenticate(req, app, authSuccess, authFailure);
 
+    };
+  };
+
+  module.exports.getDigitalSummons = function (app) {
+    return function (req, res) {
+      let startResponseRoute;
+
+      if (typeof req.session.user === 'undefined') {
+        return res.redirect(app.namedRoutes.build('steps.responder.type.get'));
+      }
+
+      startResponseRoute = req.session.user.thirdParty === 'Yes'
+        ? 'branches.third.party.details.name.get'
+        : 'steps.your.details.get';
+
+      if (req.session.user.digitalDefault !== true) {
+        return res.redirect(app.namedRoutes.build(startResponseRoute));
+      }
+
+      return res.render('steps/01-login/digital-summons.njk', {
+        user: req.session.user,
+        startResponseUrl: app.namedRoutes.build(startResponseRoute),
+      });
     };
   };
 

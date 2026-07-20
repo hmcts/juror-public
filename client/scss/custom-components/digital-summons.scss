@@ -1,0 +1,54 @@
+.digital-summons-cards {
+  margin-top: govuk-spacing(2);
+}
+
+.digital-summons-card {
+  border: 1px solid govuk-colour("mid-grey");
+  border-left: 5px solid govuk-colour("blue");
+  box-sizing: border-box;
+  color: govuk-colour("black");
+  display: block;
+  height: 100%;
+  min-height: 130px;
+  padding: govuk-spacing(3);
+  text-decoration: none;
+}
+
+.digital-summons-card:visited {
+  color: govuk-colour("black");
+}
+
+.digital-summons-card__title {
+  color: govuk-colour("blue");
+  margin-bottom: govuk-spacing(2);
+  text-decoration: underline;
+}
+
+.digital-summons-card__description {
+  color: govuk-colour("dark-grey");
+  margin-bottom: 0;
+}
+
+.digital-summons-card:hover {
+  border-color: govuk-colour("blue");
+  box-shadow: 0 0 0 3px govuk-colour("blue");
+}
+
+.digital-summons-card:hover .digital-summons-card__title {
+  text-decoration-thickness: 3px;
+}
+
+.digital-summons-card:focus {
+  background-color: govuk-colour("yellow");
+  box-shadow: 0 -2px govuk-colour("yellow"), 0 4px govuk-colour("black");
+  outline: 3px solid transparent;
+}
+
+.digital-summons-card:focus .digital-summons-card__title {
+  color: govuk-colour("black");
+  text-decoration: none;
+}
+
+.digital-summons-card:focus .digital-summons-card__description {
+  color: govuk-colour("black");
+}
