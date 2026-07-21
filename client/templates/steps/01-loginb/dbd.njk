@@ -4,26 +4,26 @@
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block pageTitle %}
-  {{ texts.DIGITAL_SUMMONS.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+  {{ texts.DBD.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
 {% endblock %}
 
-{% block page_identifier %}{{ texts.DIGITAL_SUMMONS.PAGE_IDENTIFIER }}{% endblock %}
+{% block page_identifier %}{{ texts.DBD.PAGE_IDENTIFIER }}{% endblock %}
 
 {% block content %}
-  {% set pageHeading = texts.DIGITAL_SUMMONS.HEADING %}
-  {% set notAvailable = texts.DIGITAL_SUMMONS.NOT_AVAILABLE %}
+  {% set pageHeading = texts.DBD.HEADING %}
+  {% set notAvailable = texts.DBD.NOT_AVAILABLE %}
 
   {% set summonsDate = "" %}
-  {% if digitalSummons and digitalSummons.summonsDate %}
-    {% set summonsDate = digitalSummons.summonsDate %}
+  {% if dbd and dbd.summonsDate %}
+    {% set summonsDate = dbd.summonsDate %}
   {% endif %}
 
   {% set courtName = notAvailable %}
-  {% if digitalSummons and digitalSummons.courtName %}
-    {% set courtName = digitalSummons.courtName %}
+  {% if dbd and dbd.courtName %}
+    {% set courtName = dbd.courtName %}
   {% endif %}
 
-  {% set guidanceCards = texts.DIGITAL_SUMMONS.GUIDANCE_CARDS %}
+  {% set guidanceCards = texts.DBD.GUIDANCE_CARDS %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -32,12 +32,12 @@
       </h1>
 
       <p class="govuk-body-l">
-        {{ texts.DIGITAL_SUMMONS.INTRO }}
+        {{ texts.DBD.INTRO }}
       </p>
 
       {% call govukInsetText() %}
         <p class="govuk-body">
-          <strong>{{ texts.DIGITAL_SUMMONS.SUMMONS_DATE_LABEL }}:</strong>
+          <strong>{{ texts.DBD.SUMMONS_DATE_LABEL }}:</strong>
           {% if summonsDate %}
             {{ summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }}
           {% else %}
@@ -45,27 +45,27 @@
           {% endif %}
         </p>
         <p class="govuk-body">
-          <strong>{{ texts.DIGITAL_SUMMONS.COURT_LABEL }}:</strong> {{ courtName }}
+          <strong>{{ texts.DBD.COURT_LABEL }}:</strong> {{ courtName }}
         </p>
       {% endcall %}
 
       {{ govukButton({
-        text: texts.DIGITAL_SUMMONS.START_RESPONSE,
+        text: texts.DBD.START_RESPONSE,
         href: startResponseUrl
       }) }}
 
       <h2 class="govuk-heading-l">
-        {{ texts.DIGITAL_SUMMONS.INFORMATION_HEADING }}
+        {{ texts.DBD.INFORMATION_HEADING }}
       </h2>
 
-      <div class="govuk-grid-row digital-summons-cards">
+      <div class="govuk-grid-row dbd-cards">
         {% for card in guidanceCards %}
           <div class="govuk-grid-column-one-half govuk-!-margin-bottom-4">
-            <a class="digital-summons-card" href="?guidance={{ card.id }}">
-              <h3 class="govuk-heading-s digital-summons-card__title">
+            <a class="dbd-card" href="?guidance={{ card.id }}">
+              <h3 class="govuk-heading-s dbd-card__title">
                 {{ card.title }}
               </h3>
-              <p class="govuk-body digital-summons-card__description">
+              <p class="govuk-body dbd-card__description">
                 {{ card.description }}
               </p>
             </a>

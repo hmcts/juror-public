@@ -1,5 +1,5 @@
 /**
- * Digital by default summons information hub.
+ * Digital by default information hub.
  */
 
 ;(function () {
@@ -27,36 +27,36 @@
       }
 
       getDetailsSuccess = function (response) {
-        app.logger.info('Fetched digital summons details', {
+        app.logger.info('Fetched DBD information', {
           jurorNumber: req.session.user.jurorNumber,
           response: response,
         });
 
-        return res.render('steps/01-loginb/digital-summons.njk', {
+        return res.render('steps/01-loginb/dbd.njk', {
           user: req.session.user,
-          digitalSummons: {
+          dbd: {
             summonsDate: response.serviceStartDate,
-            courtName: response.locCourtName,
+            courtName: response.courtName,
           },
           startResponseUrl: app.namedRoutes.build(startResponseRoute),
         });
       };
 
       getDetailsError = function (err) {
-        app.logger.crit('Failed to fetch digital summons details', {
+        app.logger.crit('Failed to fetch DBD information', {
           jurorNumber: req.session.user.jurorNumber,
           statusCode: err.response ? err.response.status : err.statusCode,
           error: err.response && typeof err.response.data !== 'undefined' ? err.response.data : err.message || err,
         });
 
-        return res.render('steps/01-loginb/digital-summons.njk', {
+        return res.render('steps/01-loginb/dbd.njk', {
           user: req.session.user,
-          digitalSummons: {},
+          dbd: {},
           startResponseUrl: app.namedRoutes.build(startResponseRoute),
         });
       };
 
-      return jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
+      return jurorDetails.getDBDInformation(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };

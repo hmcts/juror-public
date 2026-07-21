@@ -1,11 +1,11 @@
 ;(function () {
   'use strict';
 
-  const controller = require('./digital-summons.controller');
+  const controller = require('./dbd.controller');
   const auth = require('../../../components/auth');
 
   module.exports = function (app) {
-    app.get('/steps/digital-summons', 'steps.digital.summons.get',
+    app.get('/steps/dbd', 'steps.dbd.get',
       auth.verify, auth.completeCheck, controller.index(app));
   };
 
