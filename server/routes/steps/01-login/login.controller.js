@@ -9,13 +9,13 @@
   const validate = require('validate.js');
   const _ = require('lodash');
   const secretsConfig = require('config');
+  const environmentConfig = require('../../../config/environment')();
   const filters = require('../../../components/filters');
   const textsEn = require('../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../client/js/i18n/cy.json');
   const authComponent = require('../../../components/auth');
   const msgMappingsEn = require('../../../components/errors/message-mapping_en');
   const msgMappingsCy = require('../../../components/errors/message-mapping_cy');
-  const jurorDetails = require('../../../objects/juror').jurorDetails;
   const utils = require('../../../lib/utils');
 
   module.exports.index = function (app) {
@@ -90,7 +90,7 @@
             jurorNumber: req.body['jurorNumber'],
             jurorLastName: req.body['jurorLastName'],
             jurorPostcode: req.body['jurorPostcode'],
-            digitalDefault: resp.digitalByDefault === true,
+            digitalDefault: environmentConfig.digitalByDefaultEnabled && resp.digitalByDefault === true,
           });
 
           if (req.session.user.digitalDefault === true) {
@@ -168,60 +168,6 @@
       // Send login to backend, callbacks will return as required
       authComponent.authenticate(req, app, authSuccess, authFailure);
 
-    };
-  };
-
-  module.exports.getDigitalSummons = function (app) {
-    return function (req, res) {
-      let startResponseRoute;
-      let getDetailsSuccess;
-      let getDetailsError;
-
-      if (typeof req.session.user === 'undefined') {
-        return res.redirect(app.namedRoutes.build('steps.responder.type.get'));
-      }
-
-      startResponseRoute = req.session.user.thirdParty === 'Yes'
-        ? 'branches.third.party.details.name.get'
-        : 'steps.your.details.get';
-
-      if (req.session.user.digitalDefault !== true) {
-        return res.redirect(app.namedRoutes.build(startResponseRoute));
-      }
-
-      getDetailsSuccess = function (response) {
-        app.logger.info('Fetched digital summons details', {
-          jurorNumber: req.session.user.jurorNumber,
-          response: response,
-        });
-
-        return res.render('steps/01-login/digital-summons.njk', {
-          user: req.session.user,
-          digitalSummons: {
-            summonsDate: response.serviceStartDate,
-            courtName: response.locCourtName,
-          },
-          startResponseUrl: app.namedRoutes.build(startResponseRoute),
-        });
-      };
-
-      getDetailsError = function (err) {
-        app.logger.crit('Failed to fetch digital summons details', {
-          jurorNumber: req.session.user.jurorNumber,
-          statusCode: err.response ? err.response.status : err.statusCode,
-          error: err.response && typeof err.response.data !== 'undefined' ? err.response.data : err.message || err,
-        });
-
-        return res.render('steps/01-login/digital-summons.njk', {
-          user: req.session.user,
-          digitalSummons: {},
-          startResponseUrl: app.namedRoutes.build(startResponseRoute),
-        });
-      };
-
-      return jurorDetails.get(app, req.session.user.jurorNumber, req.session.authToken)
-        .then(getDetailsSuccess, getDetailsError)
-        .catch(getDetailsError);
     };
   };
 

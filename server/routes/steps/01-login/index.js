@@ -2,7 +2,6 @@
   'use strict';
 
   const controller = require('./login.controller');
-  const auth = require('../../../components/auth');
   const utils = require('../../../lib/utils');
 
   module.exports = function (app) {
@@ -23,9 +22,6 @@
       utils.checkPageAccess(app, 2), controller.getLoginLocked(app));
     app.get('/steps/login/locked/tp', 'steps.login.locked.tp.get',
       utils.checkPageAccess(app, 2), controller.getLoginLocked(app));
-
-    app.get('/steps/digital-summons', 'steps.digital.summons.get',
-      auth.verify, auth.completeCheck, controller.getDigitalSummons(app));
 
     app.post('/steps/login', 'steps.login.post', controller.create(app));
   };

@@ -26,6 +26,7 @@
 
     require('./steps/00-responder-type')(app);
     require('./steps/01-login')(app);
+    require('./steps/01-loginb')(app);
     require('./steps/02-your-details')(app);
     require('./steps/03-qualify')(app);
     require('./steps/04-confirm-date')(app);
