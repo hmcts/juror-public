@@ -4,14 +4,14 @@
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block pageTitle %}
-  Your jury summons information is online - Reply to a jury summons - GOV.UK
+  {{ texts.DIGITAL_SUMMONS.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
 {% endblock %}
 
-{% block page_identifier %}Digital Summons{% endblock %}
+{% block page_identifier %}{{ texts.DIGITAL_SUMMONS.PAGE_IDENTIFIER }}{% endblock %}
 
 {% block content %}
-  {% set pageHeading = "Your jury summons information is online" %}
-  {% set notAvailable = "Not available" %}
+  {% set pageHeading = texts.DIGITAL_SUMMONS.HEADING %}
+  {% set notAvailable = texts.DIGITAL_SUMMONS.NOT_AVAILABLE %}
 
   {% set summonsDate = "" %}
   {% if digitalSummons and digitalSummons.summonsDate %}
@@ -23,43 +23,7 @@
     {% set courtName = digitalSummons.courtName %}
   {% endif %}
 
-  {% set guidanceCards = [
-    {
-      id: "what",
-      title: "What jury service involves",
-      description: "What happens before you attend, how jurors are selected, and what to expect."
-    },
-    {
-      id: "attend",
-      title: "When and where to attend",
-      description: "Your date, court address, arrival time, security, travel, and parking."
-    },
-    {
-      id: "expenses",
-      title: "Claiming expenses",
-      description: "Travel, food, loss of earnings, childcare, and other financial support."
-    },
-    {
-      id: "work",
-      title: "Employment and time off work",
-      description: "Information for employees, employers, self-employed jurors, and students."
-    },
-    {
-      id: "date",
-      title: "Ask to change your dates",
-      description: "When you may be able to defer jury service and what evidence you might need."
-    },
-    {
-      id: "support",
-      title: "Support and accessibility",
-      description: "Request reasonable adjustments, language support, or help with health needs."
-    },
-    {
-      id: "eligibility",
-      title: "Juror eligibility",
-      description: "Read the eligibility questions you will be asked as part of your reply."
-    }
-  ] %}
+  {% set guidanceCards = texts.DIGITAL_SUMMONS.GUIDANCE_CARDS %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -68,30 +32,30 @@
       </h1>
 
       <p class="govuk-body-l">
-        You are signed in. You can read the information that would normally be included in a printed summons pack, then start your response.
+        {{ texts.DIGITAL_SUMMONS.INTRO }}
       </p>
 
       {% call govukInsetText() %}
         <p class="govuk-body">
-          <strong>Summons date:</strong>
+          <strong>{{ texts.DIGITAL_SUMMONS.SUMMONS_DATE_LABEL }}:</strong>
           {% if summonsDate %}
-            {{ summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", "en") }}
+            {{ summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }}
           {% else %}
             {{ notAvailable }}
           {% endif %}
         </p>
         <p class="govuk-body">
-          <strong>Court:</strong> {{ courtName }}
+          <strong>{{ texts.DIGITAL_SUMMONS.COURT_LABEL }}:</strong> {{ courtName }}
         </p>
       {% endcall %}
 
       {{ govukButton({
-        text: "Start your response",
+        text: texts.DIGITAL_SUMMONS.START_RESPONSE,
         href: startResponseUrl
       }) }}
 
       <h2 class="govuk-heading-l">
-        Jury service information
+        {{ texts.DIGITAL_SUMMONS.INFORMATION_HEADING }}
       </h2>
 
       <div class="govuk-grid-row digital-summons-cards">

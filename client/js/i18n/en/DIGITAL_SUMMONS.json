@@ -1,0 +1,47 @@
+{
+  "PAGE_IDENTIFIER": "Digital Summons",
+  "HEADING": "Your jury summons information is online",
+  "INTRO": "You are signed in. You can read the information that would normally be included in a printed summons pack, then start your response.",
+  "NOT_AVAILABLE": "Not available",
+  "SUMMONS_DATE_LABEL": "Summons date",
+  "COURT_LABEL": "Court",
+  "START_RESPONSE": "Start your response",
+  "INFORMATION_HEADING": "Jury service information",
+  "GUIDANCE_CARDS": [
+    {
+      "id": "what",
+      "title": "What jury service involves",
+      "description": "What happens before you attend, how jurors are selected, and what to expect."
+    },
+    {
+      "id": "attend",
+      "title": "When and where to attend",
+      "description": "Your date, court address, arrival time, security, travel, and parking."
+    },
+    {
+      "id": "expenses",
+      "title": "Claiming expenses",
+      "description": "Travel, food, loss of earnings, childcare, and other financial support."
+    },
+    {
+      "id": "work",
+      "title": "Employment and time off work",
+      "description": "Information for employees, employers, self-employed jurors, and students."
+    },
+    {
+      "id": "date",
+      "title": "Ask to change your dates",
+      "description": "When you may be able to defer jury service and what evidence you might need."
+    },
+    {
+      "id": "support",
+      "title": "Support and accessibility",
+      "description": "Request reasonable adjustments, language support, or help with health needs."
+    },
+    {
+      "id": "eligibility",
+      "title": "Juror eligibility",
+      "description": "Read the eligibility questions you will be asked as part of your reply."
+    }
+  ]
+}
