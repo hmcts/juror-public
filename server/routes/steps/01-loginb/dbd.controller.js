@@ -10,7 +10,6 @@
 
   module.exports.index = function (app) {
     return function (req, res) {
-      let startResponseRoute;
       let getDetailsSuccess;
       let getDetailsError;
 
@@ -18,11 +17,11 @@
         return res.redirect(app.namedRoutes.build('steps.responder.type.get'));
       }
 
-      startResponseRoute = req.session.user.thirdParty === 'Yes'
+      const startResponseRoute = req.session.user.thirdParty === 'Yes'
         ? 'branches.third.party.details.name.get'
         : 'steps.your.details.get';
 
-      if (!environmentConfig.digitalByDefaultEnabled || req.session.user.digitalDefault !== true) {
+      if (!environmentConfig.featureFlags.digitalByDefault || req.session.user.digitalByDefault !== true) {
         return res.redirect(app.namedRoutes.build(startResponseRoute));
       }
 

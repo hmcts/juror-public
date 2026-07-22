@@ -38,8 +38,9 @@
         trackingCode: process.env.TRACKING_CODE || '',
 
         // If true, digital by default jurors can access the summons information hub
-        digitalByDefaultEnabled: process.env.DIGITAL_BY_DEFAULT === 'true',
-
+        featureFlags: {
+          digitalByDefault: process.env.DIGITAL_BY_DEFAULT === 'true',
+        },
         // If anything other than false, logs will be output in terminal using the provided log level as minimum level
         logConsole: false,
 

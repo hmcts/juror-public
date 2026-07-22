@@ -90,12 +90,12 @@
             jurorNumber: req.body['jurorNumber'],
             jurorLastName: req.body['jurorLastName'],
             jurorPostcode: req.body['jurorPostcode'],
-            digitalDefault: environmentConfig.digitalByDefaultEnabled && resp.digitalByDefault === true,
+            digitalByDefault: environmentConfig.featureFlags.digitalByDefault && resp.digitalByDefault === true,
           });
 
-          if (req.session.user.digitalDefault === true) {
+          if (req.session.user.digitalByDefault === true) {
             return res.redirect(app.namedRoutes.build('steps.dbd.get'));
-          }
+          } 
 
           // redirect to confirmation of replying on behalf of someone`
           // if selected, otherwise move on to your details.
