@@ -3215,7 +3215,6 @@ __metadata:
     underscore: "npm:^1.13.8"
     url-join: "npm:4.0.1"
     uuid: "npm:^11.1.1"
-    validate.js: "npm:^0.13.1"
     webpack: "npm:^5.106.2"
     webpack-cli: "npm:^7.0.2"
     webpack-node-externals: "npm:^3.0.0"
@@ -4863,13 +4862,6 @@ __metadata:
   bin:
     uuid: dist/esm/bin/uuid
   checksum: 10/16411d3dc12a08d6691616c09a75e66a7f900ba1beef6628a76fe0602f82fae2ee537b564d0b7bc95c24f58d059ca9b58c75a1e806118efb50e17822ff00ddd2
-  languageName: node
-  linkType: hard
-
-"validate.js@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "validate.js@npm:0.13.1"
-  checksum: 10/9a4cfba50c7500f25f12f018250f72056434ef544803427c397cb177dff8790fbc49b892e8689a250c1940dd67953778f9601933bad7038988e04dcaabaaa1fe
   languageName: node
   linkType: hard
 
