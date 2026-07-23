@@ -29,53 +29,53 @@ const createDobPartSchema = ({
   });
 
 const buildDateOfBirthSchemas = (req, { missingPrefix = 'VALIDATION.YOUR_DETAILS_CONFIRM', thirdParty }) => Joi.object({
-    dobDay: createDobPartSchema({
-      req,
-      thirdParty,
-      max: 31,
-      requiredKey: `${missingPrefix}.DAY_MISSING`,
-      invalidKey: `${missingPrefix}.DAY_INVALID`,
+  dobDay: createDobPartSchema({
+    req,
+    thirdParty,
+    max: 31,
+    requiredKey: `${missingPrefix}.DAY_MISSING`,
+    invalidKey: `${missingPrefix}.DAY_INVALID`,
+  }),
+  dobMonth: createDobPartSchema({
+    req,
+    thirdParty,
+    max: 12,
+    requiredKey: `${missingPrefix}.MONTH_MISSING`,
+    invalidKey: `${missingPrefix}.MONTH_INVALID`,
+  }),
+  dobYear: Joi.string()
+    .empty('')
+    .required()
+    .custom((value, helpers) => {
+      if (!yearPattern.test(value)) {
+        return helpers.error('string.pattern.base');
+      }
+      return value;
+    })
+    .messages({
+      'any.required': message(req, `${missingPrefix}.YEAR_MISSING`, thirdParty),
+      'any.only': message(req, `${missingPrefix}.YEAR_MISSING`, thirdParty),
+      'string.pattern.base': message(req, `${missingPrefix}.YEAR_INVALID`, thirdParty),
+      'string.empty': message(req, `${missingPrefix}.YEAR_MISSING`, thirdParty),
     }),
-    dobMonth: createDobPartSchema({
-      req,
-      thirdParty,
-      max: 12,
-      requiredKey: `${missingPrefix}.MONTH_MISSING`,
-      invalidKey: `${missingPrefix}.MONTH_INVALID`,
+  dateOfBirth: Joi.any()
+    .custom((value, helpers) => {
+      if (!value) {
+        return value;
+      }
+
+      const dob = moment(value);
+      const body = helpers.state.ancestors[0] || {};
+      if (!dob.isValid() || dob.diff(moment(), 'days') >= 0 || !body.dobDay || !body.dobMonth || !body.dobYear) {
+        return helpers.error('any.custom');
+      }
+
+      return value;
+    })
+    .messages({
+      'any.custom': message(req, `${missingPrefix}.INVALID_DATE`, thirdParty),
     }),
-    dobYear: Joi.string()
-      .empty('')
-      .required()
-      .custom((value, helpers) => {
-        if (!yearPattern.test(value)) {
-          return helpers.error('string.pattern.base');
-        }
-        return value;
-      })
-      .messages({
-        'any.required': message(req, `${missingPrefix}.YEAR_MISSING`, thirdParty),
-        'any.only': message(req, `${missingPrefix}.YEAR_MISSING`, thirdParty),
-        'string.pattern.base': message(req, `${missingPrefix}.YEAR_INVALID`, thirdParty),
-        'string.empty': message(req, `${missingPrefix}.YEAR_MISSING`, thirdParty),
-      }),
-    dateOfBirth: Joi.any()
-      .custom((value, helpers) => {
-        if (!value) {
-          return value;
-        }
-
-        const dob = moment(value);
-        const body = helpers.state.ancestors[0] || {};
-        if (!dob.isValid() || dob.diff(moment(), 'days') >= 0 || !body.dobDay || !body.dobMonth || !body.dobYear) {
-          return helpers.error('any.custom');
-        }
-
-        return value;
-      })
-      .messages({
-        'any.custom': message(req, `${missingPrefix}.INVALID_DATE`, thirdParty),
-      }),
-  });
+});
 
 const buildPastDateSchema = (req, {
   thirdParty,
@@ -90,23 +90,23 @@ const buildPastDateSchema = (req, {
   }
 
   return schema
-  .custom((value, helpers) => {
-    if (!value) {
+    .custom((value, helpers) => {
+      if (!value) {
+        return value;
+      }
+
+      const dob = moment(value);
+      if (!dob.isValid() || dob.diff(moment(), 'days') >= 0) {
+        return helpers.error('any.custom');
+      }
+
       return value;
-    }
-
-    const dob = moment(value);
-    if (!dob.isValid() || dob.diff(moment(), 'days') >= 0) {
-      return helpers.error('any.custom');
-    }
-
-    return value;
-  })
-  .messages({
-    'any.required': message(req, requiredMessageKey || messageKey, thirdParty),
-    'any.only': message(req, requiredMessageKey || messageKey, thirdParty),
-    'any.custom': message(req, messageKey, thirdParty),
-  });
+    })
+    .messages({
+      'any.required': message(req, requiredMessageKey || messageKey, thirdParty),
+      'any.only': message(req, requiredMessageKey || messageKey, thirdParty),
+      'any.custom': message(req, messageKey, thirdParty),
+    });
 };
 
 const buildDeferralDateSchema = (req, {
