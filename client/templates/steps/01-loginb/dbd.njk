@@ -58,20 +58,20 @@
         {{ texts.DBD.INFORMATION_HEADING }}
       </h2>
 
-      <div class="govuk-grid-row dbd-cards">
+      <ul class="govuk-grid-row card-group">
         {% for card in guidanceCards %}
-          <div class="govuk-grid-column-one-half govuk-!-margin-bottom-4">
-            <a class="dbd-card" href="?guidance={{ card.id }}">
-              <h3 class="govuk-heading-s dbd-card__title">
-                {{ card.title }}
+          <li class="govuk-grid-column-one-half card-group__item">
+            <div class="card card--clickable" data-test="dbd-{{ card.id }}">
+              <h3 class="govuk-heading-s card__heading">
+                <a class="govuk-link card__link govuk-link--no-visited-state" href="?guidance={{ card.id }}">
+                  {{ card.title }}
+                </a>
               </h3>
-              <p class="govuk-body dbd-card__description">
-                {{ card.description }}
-              </p>
-            </a>
-          </div>
+              <p class="govuk-body card__description">{{ card.description }}</p>
+            </div>
+          </li>
         {% endfor %}
-      </div>
+      </ul>
     </div>
   </div>
 {% endblock %}
