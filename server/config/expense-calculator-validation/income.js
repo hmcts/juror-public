@@ -1,22 +1,15 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { validateJoiSchema } = require('../validation');
+const { buildRequiredChoiceSchema } = require('./shared');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    incomeAffected: buildRequiredChoiceSchema(req, 'EXPENSE_CALCULATOR.EARNINGS.ERROR_SUMMARY'),
+  });
 
-  module.exports = function(req) {
-    return {
-      incomeAffected: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('EXPENSE_CALCULATOR.INCOME.ERROR_SUMMARY', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('EXPENSE_CALCULATOR.INCOME.ERROR_DETAIL', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'incomeAffectedYes'
-          }
-        },
-      },
-    };
-  };
-})();
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      incomeAffected: 'incomeAffectedYes',
+    },
+  });
+};

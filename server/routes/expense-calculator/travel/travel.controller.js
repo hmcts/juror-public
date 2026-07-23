@@ -6,11 +6,17 @@
 ;(function(){
   'use strict';
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
+  const validateTravel = require('../../../config/joi-expense-calculator-validation/travel');
+  const validateTravelBicycle = require('../../../config/joi-expense-calculator-validation/travel-bicycle');
+  const validateTravelCar = require('../../../config/joi-expense-calculator-validation/travel-car');
+  const validateTravelMotorcycle = require('../../../config/joi-expense-calculator-validation/travel-motorcycle');
+  const validateTravelPublicTransport = require('../../../config/joi-expense-calculator-validation/travel-public-transport');
+  const validateTravelParking = require('../../../config/joi-expense-calculator-validation/travel-parking');
+  const validateTravelParkingAmount = require('../../../config/joi-expense-calculator-validation/travel-parking-amount');
 
   module.exports.index = function() {
     return function(req, res) {
@@ -93,7 +99,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel')(req));
+      validatorResult = validateTravel(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -232,7 +238,7 @@
       req.session.user['bicycleMiles'] = req.body['bicycleMiles'];
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel-bicycle')(req));
+      validatorResult = validateTravelBicycle(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 
@@ -321,7 +327,7 @@
       req.session.user['carMiles'] = req.body['carMiles'];
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel-car')(req));
+      validatorResult = validateTravelCar(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 
@@ -404,7 +410,7 @@
       req.session.user['motorcycleMiles'] = req.body['motorcycleMiles'];
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel-motorcycle')(req));
+      validatorResult = validateTravelMotorcycle(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 
@@ -484,7 +490,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel-public-transport')(req));
+      validatorResult = validateTravelPublicTransport(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 
@@ -575,7 +581,7 @@
       delete req.session.errors;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel-parking')(req));
+      validatorResult = validateTravelParking(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 
@@ -639,7 +645,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/travel-parking-amount')(req));
+      validatorResult = validateTravelParkingAmount(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 

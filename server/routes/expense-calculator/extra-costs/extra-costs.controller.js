@@ -6,11 +6,12 @@
 ;(function(){
   'use strict';
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
+  const validateExtraCosts = require('../../../config/joi-expense-calculator-validation/extra-costs');
+  const validateExtraCostsAmount = require('../../../config/joi-expense-calculator-validation/extra-costs-amount');
 
   module.exports.index = function() {
     return function(req, res) {
@@ -58,7 +59,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/extra-costs')(req));
+      validatorResult = validateExtraCosts(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -180,7 +181,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/extra-costs-amount')(req));
+      validatorResult = validateExtraCostsAmount(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
