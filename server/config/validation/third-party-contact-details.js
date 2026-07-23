@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { phone } = require('./legacy-patterns');
+const { phone } = require('./regex-patterns');
 
 module.exports = function (req, body) {
   const thirdParty = req.session.user.thirdParty;
@@ -76,11 +76,11 @@ module.exports = function (req, body) {
     emailAddressConfirmation: Joi.string()
       .empty('')
       .custom((value, helpers) => {
-        const body = helpers.state.ancestors[0] || {};
-        if (body.useJurorEmailDetails !== 'Yes' || typeof body.emailAddress === 'undefined' || body.emailAddress === '') {
+        const formBody = helpers.state.ancestors[0] || {};
+        if (formBody.useJurorEmailDetails !== 'Yes' || typeof formBody.emailAddress === 'undefined' || formBody.emailAddress === '') {
           return value;
         }
-        if (value !== body.emailAddress) {
+        if (value !== formBody.emailAddress) {
           return helpers.error('any.only');
         }
         return value;

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name, postcode, phone, phoneSpaces } = require('./legacy-patterns');
+const { name, postcode, phone, phoneSpaces } = require('./regex-patterns');
 const { buildPastDateSchema } = require('./date-validation');
 
 module.exports = function (req, body) {

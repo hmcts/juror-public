@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { phoneSpaces, phone } = require('./legacy-patterns');
+const { phoneSpaces, phone } = require('./regex-patterns');
 
 module.exports = function (req, body) {
   const schema = Joi.object({

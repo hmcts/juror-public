@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name, phoneSpaces } = require('./legacy-patterns');
+const { phoneSpaces } = require('./regex-patterns');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
@@ -78,11 +78,11 @@ module.exports = function (req, body) {
         otherwise: Joi.optional(),
       })
       .custom((value, helpers) => {
-        const body = helpers.state.ancestors[0] || {};
-        if (body.contactEmail !== 'By email' || typeof body.emailAddress === 'undefined' || body.emailAddress === '') {
+        const formBody = helpers.state.ancestors[0] || {};
+        if (formBody.contactEmail !== 'By email' || typeof formBody.emailAddress === 'undefined' || formBody.emailAddress === '') {
           return value;
         }
-        if (value !== body.emailAddress) {
+        if (value !== formBody.emailAddress) {
           return helpers.error('any.only');
         }
         return value;
