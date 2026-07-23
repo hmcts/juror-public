@@ -10,9 +10,9 @@
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
-  const validateEarnings = require('../../../config/joi-expense-calculator-validation/earnings');
-  const validateEarningsThreshold = require('../../../config/joi-expense-calculator-validation/earnings-threshold');
-  const validateEarningsAmount = require('../../../config/joi-expense-calculator-validation/earnings-amount');
+  const validateEarnings = require('../../../config/expense-calculator-validation/earnings');
+  const validateEarningsThreshold = require('../../../config/expense-calculator-validation/earnings-threshold');
+  const validateEarningsAmount = require('../../../config/expense-calculator-validation/earnings-amount');
 
   module.exports.index = function() {
     return function(req, res) {

@@ -10,8 +10,8 @@
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
-  const validateExtraCosts = require('../../../config/joi-expense-calculator-validation/extra-costs');
-  const validateExtraCostsAmount = require('../../../config/joi-expense-calculator-validation/extra-costs-amount');
+  const validateExtraCosts = require('../../../config/expense-calculator-validation/extra-costs');
+  const validateExtraCostsAmount = require('../../../config/expense-calculator-validation/extra-costs-amount');
 
   module.exports.index = function() {
     return function(req, res) {

@@ -10,13 +10,13 @@
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
-  const validateTravel = require('../../../config/joi-expense-calculator-validation/travel');
-  const validateTravelBicycle = require('../../../config/joi-expense-calculator-validation/travel-bicycle');
-  const validateTravelCar = require('../../../config/joi-expense-calculator-validation/travel-car');
-  const validateTravelMotorcycle = require('../../../config/joi-expense-calculator-validation/travel-motorcycle');
-  const validateTravelPublicTransport = require('../../../config/joi-expense-calculator-validation/travel-public-transport');
-  const validateTravelParking = require('../../../config/joi-expense-calculator-validation/travel-parking');
-  const validateTravelParkingAmount = require('../../../config/joi-expense-calculator-validation/travel-parking-amount');
+  const validateTravel = require('../../../config/expense-calculator-validation/travel');
+  const validateTravelBicycle = require('../../../config/expense-calculator-validation/travel-bicycle');
+  const validateTravelCar = require('../../../config/expense-calculator-validation/travel-car');
+  const validateTravelMotorcycle = require('../../../config/expense-calculator-validation/travel-motorcycle');
+  const validateTravelPublicTransport = require('../../../config/expense-calculator-validation/travel-public-transport');
+  const validateTravelParking = require('../../../config/expense-calculator-validation/travel-parking');
+  const validateTravelParkingAmount = require('../../../config/expense-calculator-validation/travel-parking-amount');
 
   module.exports.index = function() {
     return function(req, res) {
