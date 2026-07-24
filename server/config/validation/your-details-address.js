@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name, postcode } = require('./regex-patterns');
+const { name, postcode } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
@@ -15,16 +16,14 @@ module.exports = function (req, body) {
         'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', req.session.user.thirdParty),
         'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', req.session.user.thirdParty),
       }),
-    addressLineTwo: Joi.string()
-      .empty('')
+    addressLineTwo: optionalString()
       .max(35)
       .pattern(name)
       .messages({
         'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', req.session.user.thirdParty),
         'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', req.session.user.thirdParty),
       }),
-    addressLineThree: Joi.string()
-      .empty('')
+    addressLineThree: optionalString()
       .max(35)
       .pattern(name)
       .messages({
@@ -42,8 +41,7 @@ module.exports = function (req, body) {
         'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', req.session.user.thirdParty),
         'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', req.session.user.thirdParty),
       }),
-    addressCounty: Joi.string()
-      .empty('')
+    addressCounty: optionalString()
       .max(35)
       .pattern(name)
       .messages({

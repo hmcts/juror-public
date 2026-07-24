@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name } = require('./regex-patterns');
+const { name } = require('./custom-validation').regexPatterns;
 
 module.exports = function (req, body) {
   const schema = Joi.object({

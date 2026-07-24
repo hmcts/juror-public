@@ -1,11 +1,12 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name, postcode, phone, phoneSpaces } = require('./regex-patterns');
+const { name, postcode, phone, phoneSpaces } = require('./custom-validation').regexPatterns;
 const { buildPastDateSchema } = require('./date-validation');
+const { optionalString } = require('./custom-validation');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
-    title: Joi.string().empty('').max(10).pattern(name).messages({
+    title: optionalString().max(10).pattern(name).messages({
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', req.session.user.thirdParty),
     }),
@@ -27,11 +28,11 @@ module.exports = function (req, body) {
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', req.session.user.thirdParty),
     }),
-    addressLineTwo: Joi.string().empty('').max(35).pattern(name).messages({
+    addressLineTwo: optionalString().max(35).pattern(name).messages({
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', req.session.user.thirdParty),
     }),
-    addressLineThree: Joi.string().empty('').max(35).pattern(name).messages({
+    addressLineThree: optionalString().max(35).pattern(name).messages({
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', req.session.user.thirdParty),
     }),
@@ -41,7 +42,7 @@ module.exports = function (req, body) {
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', req.session.user.thirdParty),
     }),
-    addressCounty: Joi.string().empty('').max(35).pattern(name).messages({
+    addressCounty: optionalString().max(35).pattern(name).messages({
       'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', req.session.user.thirdParty),
     }),
@@ -62,7 +63,7 @@ module.exports = function (req, body) {
       'any.only': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', req.session.user.thirdParty),
     }),
-    secondaryPhone: Joi.string().empty('').pattern(phone).messages({
+    secondaryPhone: optionalString().pattern(phone).messages({
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', req.session.user.thirdParty),
     }),
     emailAddress: Joi.string().empty('').required().email().messages({
@@ -70,7 +71,7 @@ module.exports = function (req, body) {
       'any.only': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
       'string.email': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_INVALID', req.session.user.thirdParty),
     }),
-    emailAddressConfirmation: Joi.string().empty('').when('emailAddress', {
+    emailAddressConfirmation: optionalString().when('emailAddress', {
       is: Joi.exist(),
       then: Joi.required(),
       otherwise: Joi.optional(),

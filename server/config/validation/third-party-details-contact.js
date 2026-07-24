@@ -1,11 +1,11 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { phone } = require('./regex-patterns');
+const { phone } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
-    contactPhone: Joi.string()
-      .empty('')
+    contactPhone: optionalString()
       .when('contactEmail', {
         is: Joi.exist(),
         then: Joi.optional(),
@@ -14,8 +14,7 @@ module.exports = function (req, body) {
       .messages({
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.CONTACT_CHECK_MISSING', req.session.user.thirdParty),
       }),
-    mainPhone: Joi.string()
-      .empty('')
+    mainPhone: optionalString()
       .when('contactPhone', {
         is: 'By phone',
         then: Joi.required(),
@@ -26,14 +25,12 @@ module.exports = function (req, body) {
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_MISSING', req.session.user.thirdParty),
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_INVALID', req.session.user.thirdParty),
       }),
-    otherPhone: Joi.string()
-      .empty('')
+    otherPhone: optionalString()
       .pattern(phone)
       .messages({
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.OTHER_PHONE_CHECK_INVALID', req.session.user.thirdParty),
       }),
-    emailAddress: Joi.string()
-      .empty('')
+    emailAddress: optionalString()
       .when('contactEmail', {
         is: 'By email',
         then: Joi.required().email(),
@@ -43,8 +40,7 @@ module.exports = function (req, body) {
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
         'string.email': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_INVALID', req.session.user.thirdParty),
       }),
-    emailAddressConfirmation: Joi.string()
-      .empty('')
+    emailAddressConfirmation: optionalString()
       .when('contactEmail', {
         is: 'By email',
         then: Joi.required(),

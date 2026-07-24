@@ -1,13 +1,13 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { phone } = require('./regex-patterns');
+const { phone } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
 module.exports = function (req, body) {
   const thirdParty = req.session.user.thirdParty;
 
   const schema = Joi.object({
-    useJurorPhoneDetails: Joi.string()
-      .empty('')
+    useJurorPhoneDetails: optionalString()
       .valid('Yes', 'No')
       .when('useJurorEmailDetails', {
         is: Joi.exist(),
@@ -25,8 +25,7 @@ module.exports = function (req, body) {
         'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', thirdParty),
         'any.invalid': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_PHONE_INLINE', thirdParty),
       }),
-    primaryPhone: Joi.string()
-      .empty('')
+    primaryPhone: optionalString()
       .when('useJurorPhoneDetails', {
         is: 'Yes',
         then: Joi.required(),
@@ -37,14 +36,12 @@ module.exports = function (req, body) {
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_MISSING', thirdParty),
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_INVALID', thirdParty),
       }),
-    secondaryPhone: Joi.string()
-      .empty('')
+    secondaryPhone: optionalString()
       .pattern(phone)
       .messages({
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK_INVALID', thirdParty),
       }),
-    useJurorEmailDetails: Joi.string()
-      .empty('')
+    useJurorEmailDetails: optionalString()
       .valid('Yes', 'No')
       .when('useJurorPhoneDetails', {
         is: Joi.exist(),
@@ -62,8 +59,7 @@ module.exports = function (req, body) {
         'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', thirdParty),
         'any.invalid': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_EMAIL_INLINE', thirdParty),
       }),
-    emailAddress: Joi.string()
-      .empty('')
+    emailAddress: optionalString()
       .when('useJurorEmailDetails', {
         is: 'Yes',
         then: Joi.required().email(),
@@ -73,8 +69,7 @@ module.exports = function (req, body) {
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_MISSING', thirdParty),
         'string.email': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_INVALID', thirdParty),
       }),
-    emailAddressConfirmation: Joi.string()
-      .empty('')
+    emailAddressConfirmation: optionalString()
       .custom((value, helpers) => {
         const formBody = helpers.state.ancestors[0] || {};
         if (formBody.useJurorEmailDetails !== 'Yes' || typeof formBody.emailAddress === 'undefined' || formBody.emailAddress === '') {

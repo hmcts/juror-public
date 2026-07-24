@@ -1,14 +1,14 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name, postcode } = require('./regex-patterns');
+const { name, postcode } = require('./custom-validation').regexPatterns;
 const { buildPastDateSchema } = require('./date-validation');
+const { optionalString } = require('./custom-validation');
 
 module.exports = function (req, body) {
   const isThirdParty = req.session.user.thirdParty;
 
   const schema = Joi.object({
-    title: Joi.string()
-      .empty('')
+    title: optionalString()
       .max(10)
       .pattern(name)
       .messages({
@@ -46,14 +46,12 @@ module.exports = function (req, body) {
         'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_MISSING', isThirdParty),
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_CHECK_INVALID', isThirdParty),
       }),
-    addressLineTwo: Joi.string()
-      .empty('')
+    addressLineTwo: optionalString()
       .pattern(name)
       .messages({
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_TWO_CHECK_INVALID', isThirdParty),
       }),
-    addressLineThree: Joi.string()
-      .empty('')
+    addressLineThree: optionalString()
       .pattern(name)
       .messages({
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_THREE_CHECK_INVALID', isThirdParty),
@@ -67,8 +65,7 @@ module.exports = function (req, body) {
         'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_MISSING', isThirdParty),
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_INVALID', isThirdParty),
       }),
-    addressCounty: Joi.string()
-      .empty('')
+    addressCounty: optionalString()
       .pattern(name)
       .messages({
         'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_COUNTY_CHECK_INVALID', isThirdParty),
