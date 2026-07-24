@@ -4,7 +4,7 @@ const { message } = require('../validation');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
-    earningThreshold: Joi.string()
+    earningsThreshold: Joi.string()
       .trim()
       .empty('')
       .required()
