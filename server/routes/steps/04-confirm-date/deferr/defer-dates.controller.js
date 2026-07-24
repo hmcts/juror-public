@@ -101,6 +101,7 @@
         'earliestDate': req.session.user.deferral.dateRange.earliestMoment,
         'latestDate': req.session.user.deferral.dateRange.latestMoment,
         'ageLimit': app.ageSettings.upperAgeLimit,
+        'jurorDOB': req.session.user.dateOfBirth,
       };
 
       // Validate form submission

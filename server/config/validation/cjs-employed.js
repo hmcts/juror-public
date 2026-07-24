@@ -2,6 +2,7 @@ const Joi = require('joi');
 const textsEn = require('../../../client/js/i18n/en.json');
 const textsCy = require('../../../client/js/i18n/cy.json');
 const { message, validateJoiSchema } = require('./index');
+const { optionalString } = require('./custom-validation');
 
 const cjsEmployerValues = [
   'Police Force',
@@ -11,6 +12,11 @@ const cjsEmployerValues = [
   'HMCTS',
   'Other',
 ];
+
+const employerIncludes = (employerValue) => Joi.alternatives().try(
+  Joi.string().valid(employerValue),
+  Joi.array().has(Joi.valid(employerValue)),
+);
 
 module.exports = function (req, body) {
   const yesValue = (req.session.ulang === 'cy' ? textsCy.EMPLOYED_PAGE.YES : textsEn.EMPLOYED_PAGE.YES);
@@ -38,28 +44,24 @@ module.exports = function (req, body) {
   });
 
   const detailsSchema = Joi.object({
-    cjsPoliceDetails: Joi.string()
-      .empty('')
+    cjsPoliceDetails: optionalString()
       .max(1000)
       .when('cjsEmployer', {
-        is: (value) => (Array.isArray(value)
-          ? value.includes('Police Force')
-          : value === 'Police Force'),
+        is: employerIncludes('Police Force'),
         then: Joi.required(),
+        otherwise: Joi.optional(),
       })
       .messages({
         'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.POLICE', req.session.user.thirdParty),
         'string.max': message(req, 'VALIDATION.CJS_EMPLOYED.POLICE_DETAILS_LENGTH', req.session.user.thirdParty),
       }),
 
-    cjsPrisonDetails: Joi.string()
-      .empty('')
+    cjsPrisonDetails: optionalString()
       .max(1000)
       .when('cjsEmployer', {
-        is: (value) => (Array.isArray(value)
-          ? value.includes('HM Prison Service')
-          : value === 'HM Prison Service'),
+        is: employerIncludes('HM Prison Service'),
         then: Joi.required(),
+        otherwise: Joi.optional(),
       })
       .messages({
         'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.PRISON_SERVICE', req.session.user.thirdParty),
@@ -74,14 +76,12 @@ module.exports = function (req, body) {
         'any.only': message(req, 'VALIDATION.CJS_EMPLOYED.EMPLOYED', req.session.user.thirdParty),
       }),
 
-    cjsEmployerDetails: Joi.string()
-      .empty('')
+    cjsEmployerDetails: optionalString()
       .max(1000)
       .when('cjsEmployer', {
-        is: (value) => (Array.isArray(value)
-          ? value.includes('Other')
-          : value === 'Other'),
+        is: employerIncludes('Other'),
         then: Joi.required(),
+        otherwise: Joi.optional(),
       })
       .messages({
         'any.required': message(req, 'VALIDATION.CJS_EMPLOYED.OTHER', req.session.user.thirdParty),
@@ -96,7 +96,7 @@ module.exports = function (req, body) {
     summaryLinks: {
       cjsEmployed: 'employedCjs-Yes',
       cjsEmployer: 'cjsEmployer-police',
-    }
+    },
   });
 
   if (typeof employerValidation !== 'undefined') {
