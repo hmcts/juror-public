@@ -4,15 +4,12 @@ const { message } = require('../validation');
 
 module.exports = function (req, body) {
   const schema = Joi.object({
-    travelType: Joi.string()
-      .trim()
-      .empty('')
+    travelType: Joi.array()
+      .single()
       .required()
       .messages({
-        'any.required': message(req, 'EXPENSE_CALCULATOR.TRAVEL.ERROR_SUMMARY'),
-        'any.only': message(req, 'EXPENSE_CALCULATOR.TRAVEL.ERROR_SUMMARY'),
-        'string.base': message(req, 'EXPENSE_CALCULATOR.TRAVEL.ERROR_SUMMARY'),
-        'string.empty': message(req, 'EXPENSE_CALCULATOR.TRAVEL.ERROR_SUMMARY'),
+        'any.required': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_SUMMARY'),
+        'any.only': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_SUMMARY'),
       }),
   });
 
