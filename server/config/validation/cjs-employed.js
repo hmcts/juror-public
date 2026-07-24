@@ -103,5 +103,7 @@ module.exports = function (req, body) {
     return employerValidation;
   }
 
-  return validateJoiSchema(detailsSchema, body);
+  if (body.cjsEmployed === yesValue) {
+    return validateJoiSchema(detailsSchema, body);
+  }
 };

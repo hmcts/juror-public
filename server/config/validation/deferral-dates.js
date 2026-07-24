@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { validateJoiSchema } = require('./index');
-const { buildDeferralDateSchema } = require('./date-validation');
+const { buildDeferralDateSchema } = require('./deferral-date-validation');
 
 module.exports = function (req, body) {
   const isThirdParty = req.session.user.thirdParty;
