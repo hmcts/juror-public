@@ -8,8 +8,8 @@ module.exports = function (req, body) {
       .single()
       .required()
       .messages({
-        'any.required': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_SUMMARY'),
-        'any.only': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_SUMMARY'),
+        'any.required': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_DETAIL'),
+        'any.only': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_DETAIL'),
       }),
   });
 

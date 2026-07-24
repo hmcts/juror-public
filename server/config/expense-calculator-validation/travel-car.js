@@ -6,8 +6,8 @@ module.exports = function (req, body) {
   const schema = Joi.object({
     carMiles: buildCurrencyAmountSchema(
       req,
-      'EXPENSE_CALCULATOR.TRAVEL_CAR.ERROR_SUMMARY_MISSING',
-      'EXPENSE_CALCULATOR.TRAVEL_CAR.ERROR_SUMMARY_INVALID',
+      'EXPENSE_CALCULATOR.TRAVEL_CAR.ERROR_DETAIL_MISSING',
+      'EXPENSE_CALCULATOR.TRAVEL_CAR.ERROR_DETAIL_INVALID',
     ),
   });
 

@@ -9,10 +9,10 @@ module.exports = function (req, body) {
       .empty('')
       .required()
       .messages({
-        'any.required': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_SUMMARY'),
-        'any.only': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_SUMMARY'),
-        'string.base': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_SUMMARY'),
-        'string.empty': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_SUMMARY'),
+        'any.required': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_DETAIL'),
+        'any.only': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_DETAIL'),
+        'string.base': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_DETAIL'),
+        'string.empty': message(req, 'EXPENSE_CALCULATOR.EARNINGS_THRESHOLD.ERROR_DETAIL'),
       }),
   });
 

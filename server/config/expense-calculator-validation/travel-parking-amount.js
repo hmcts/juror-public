@@ -6,7 +6,7 @@ module.exports = function (req, body) {
   const schema = Joi.object({
     parkingAmount: buildCurrencyAmountSchema(
       req,
-      'EXPENSE_CALCULATOR.TRAVEL_PARKING_AMOUNT.ERROR_SUMMARY',
+      'EXPENSE_CALCULATOR.TRAVEL_PARKING_AMOUNT.ERROR_DETAIL',
       'EXPENSE_CALCULATOR.TRAVEL_PARKING_AMOUNT.ERROR_DETAIL',
     ),
   });

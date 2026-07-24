@@ -6,8 +6,8 @@ module.exports = function (req, body) {
   const schema = Joi.object({
     earningsAmount: buildCurrencyAmountSchema(
       req,
-      'EXPENSE_CALCULATOR.EARNINGS_AMOUNT.ERROR_SUMMARY_MISSING',
-      'EXPENSE_CALCULATOR.EARNINGS_AMOUNT.ERROR_SUMMARY_INVALID',
+      'EXPENSE_CALCULATOR.EARNINGS_AMOUNT.ERROR_DETAIL_MISSING',
+      'EXPENSE_CALCULATOR.EARNINGS_AMOUNT.ERROR_DETAIL_INVALID',
     ),
   });
 

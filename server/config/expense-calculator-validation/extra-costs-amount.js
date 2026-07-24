@@ -6,8 +6,8 @@ module.exports = function (req, body) {
   const schema = Joi.object({
     extraCostsAmount: buildCurrencyAmountSchema(
       req,
-      'EXPENSE_CALCULATOR.EXTRA_COSTS_AMOUNT.ERROR_SUMMARY_MISSING',
-      'EXPENSE_CALCULATOR.EXTRA_COSTS_AMOUNT.ERROR_SUMMARY_INVALID',
+      'EXPENSE_CALCULATOR.EXTRA_COSTS_AMOUNT.ERROR_DETAIL_MISSING',
+      'EXPENSE_CALCULATOR.EXTRA_COSTS_AMOUNT.ERROR_DETAIL_INVALID',
     ),
   });
 

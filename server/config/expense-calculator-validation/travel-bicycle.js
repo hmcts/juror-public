@@ -6,8 +6,8 @@ module.exports = function (req, body) {
   const schema = Joi.object({
     bicycleMiles: buildCurrencyAmountSchema(
       req,
-      'EXPENSE_CALCULATOR.TRAVEL_BICYCLE.ERROR_SUMMARY_MISSING',
-      'EXPENSE_CALCULATOR.TRAVEL_BICYCLE.ERROR_SUMMARY_INVALID',
+      'EXPENSE_CALCULATOR.TRAVEL_BICYCLE.ERROR_DETAIL_MISSING',
+      'EXPENSE_CALCULATOR.TRAVEL_BICYCLE.ERROR_DETAIL_INVALID',
     ),
   });
 
