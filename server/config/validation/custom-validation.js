@@ -7,6 +7,7 @@ module.exports.regexPatterns = {
   phoneSpaces: /^[0-9 +]{8,15}$/,
   year: /^[0-9]{4}$/,
   dayMonth: /^[0-9]{1,2}$/,
+  date: /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/,
 };
 
 module.exports.optionalString = () => Joi.string()

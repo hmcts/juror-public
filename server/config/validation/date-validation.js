@@ -1,9 +1,7 @@
 const Joi = require('joi');
 const moment = require('moment');
 const { message } = require('./index');
-
-const dayMonthPattern = /^[0-9]{1,2}$/;
-const yearPattern = /^[0-9]{4}$/;
+const { dayMonth: dayMonthPattern, year: yearPattern } = require('./custom-validation').regexPatterns;
 
 const createDobPartSchema = ({
   req,
