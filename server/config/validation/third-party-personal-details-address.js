@@ -1,89 +1,53 @@
-/* eslint-disable max-len */
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
+const { name, postcode } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    addressLineOne: Joi.string()
+      .empty('')
+      .required()
+      .pattern(name)
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_MISSING', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    addressLineTwo: optionalString()
+      .pattern(name)
+      .messages({
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_TWO_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    addressLineThree: optionalString()
+      .pattern(name)
+      .messages({
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_THREE_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    addressTown: Joi.string()
+      .empty('')
+      .required()
+      .pattern(name)
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_MISSING', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    addressCounty: optionalString()
+      .pattern(name)
+      .messages({
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_COUNTY_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    addressPostcode: Joi.string()
+      .empty('')
+      .required()
+      .pattern(postcode)
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_MISSING', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+  });
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
-
-  module.exports = function(req) {
-    return {
-      addressLineOne: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_ONE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-      addressLineTwo: {
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_TWO_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_TWO_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-      addressLineThree: {
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_THREE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_LINE_THREE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-      addressTown: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_TOWN_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-      addressCounty: {
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_COUNTY_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_COUNTY_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-      addressPostcode: {
-        format: {
-          pattern: '^$|(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_PERSONAL_DETAILS.ADDRESS_POSTCODE_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      }
-    };
-  };
-})();
+  return validateJoiSchema(schema, body);
+};

@@ -6,13 +6,13 @@
 ;(function () {
   'use strict';
 
-  const validate = require('validate.js');
   const _ = require('lodash');
   const secretsConfig = require('config');
   const filters = require('../../../components/filters');
   const textsEn = require('../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../client/js/i18n/cy.json');
   const authComponent = require('../../../components/auth');
+  const validateLogin = require('../../../config/validation/login');
   const msgMappingsEn = require('../../../components/errors/message-mapping_en');
   const msgMappingsCy = require('../../../components/errors/message-mapping_cy');
   const utils = require('../../../lib/utils');
@@ -63,7 +63,7 @@
   };
 
   module.exports.create = function (app) {
-    return function (req, res) {
+    return async function (req, res) {
       let validatorResult;
       let tmpSession;
 
@@ -152,7 +152,7 @@
 
       // Validate form submission
       req.body.jurorPostcode = req.body.jurorPostcode.trim();
-      validatorResult = validate(req.body, require('../../../config/validation/login')(req));
+      validatorResult = await validateLogin(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));

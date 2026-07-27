@@ -1,78 +1,40 @@
-;(function () {
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
+const { name } = require('./custom-validation').regexPatterns;
 
-  let filters = require('../../components/filters');
-  let texts_en = require('../../../client/js/i18n/en.json');
-  let texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    title: Joi.string()
+      .empty('')
+      .max(10)
+      .pattern(name)
+      .messages({
+        'string.max': message(req, 'VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    firstName: Joi.string()
+      .empty('')
+      .required()
+      .max(20)
+      .pattern(name)
+      .messages({
+        'any.required': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', req.session.user.thirdParty),
+      }),
+    lastName: Joi.string()
+      .empty('')
+      .required()
+      .max(25)
+      .pattern(name)
+      .messages({
+        'any.required': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', req.session.user.thirdParty),
+      }),
+  });
 
-  require('./custom-validation');
-
-  module.exports = function (req) {
-    return {
-      title: {
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 10,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-
-      firstName: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 20,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-
-      lastName: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 25,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-    };
-  };
-})();
+  return validateJoiSchema(schema, body);
+};

@@ -2,10 +2,15 @@
   'use strict';
 
   const _ = require('lodash');
-  const validate = require('validate.js');
   const filters = require('../../../components/filters');
+  const validateResidency = require('../../../config/validation/residency');
+  const validateMentalHealthSectioned = require('../../../config/validation/mental-health-sectioned');
+  const validateMentalHealthCapacity = require('../../../config/validation/mental-health-capacity');
+  const validateConvictions = require('../../../config/validation/convictions');
+  const validateCjsEmployed = require('../../../config/validation/cjs-employed');
   const texts_en = require('../../../../client/js/i18n/en.json');
   const texts_cy = require('../../../../client/js/i18n/cy.json');
+  const validateBail = require('../../../config/validation/bail');
   const utils = require('../../../lib/utils');
 
   // Landing page functions
@@ -93,7 +98,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/residency')(req));
+      validatorResult = validateResidency(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -184,9 +189,6 @@
 
       // Validate form submission
       var validatorResult
-        , validatorResultTmp
-        , validatorRules
-        , validatorKey
         , cjsTmpArr
         , redirectUrl;
 
@@ -222,8 +224,7 @@
       }
 
       // Validate form submission
-      validatorRules = require('../../../config/validation/cjs-employed')(req);
-      validatorResult = validate(req.body, validatorRules);
+      validatorResult = validateCjsEmployed(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -339,7 +340,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/mental-health-sectioned')(req));
+      validatorResult = validateMentalHealthSectioned(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -424,7 +425,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/mental-health-capacity')(req));
+      validatorResult = validateMentalHealthCapacity(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -554,7 +555,7 @@
 
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/bail')(req));
+      validatorResult = validateBail(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -639,7 +640,7 @@
 
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/convictions')(req));
+      validatorResult = validateConvictions(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

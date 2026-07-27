@@ -6,11 +6,13 @@
 ;(function(){
   'use strict';
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , utils = require('../../../lib/utils');
+  const validateEarnings = require('../../../config/expense-calculator-validation/earnings');
+  const validateEarningsThreshold = require('../../../config/expense-calculator-validation/earnings-threshold');
+  const validateEarningsAmount = require('../../../config/expense-calculator-validation/earnings-amount');
 
   module.exports.index = function() {
     return function(req, res) {
@@ -58,7 +60,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/earnings')(req));
+      validatorResult = validateEarnings(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -153,7 +155,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/earnings-threshold')(req));
+      validatorResult = validateEarningsThreshold(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -246,7 +248,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/expense-calculator-validation/earnings-amount')(req));
+      validatorResult = validateEarningsAmount(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

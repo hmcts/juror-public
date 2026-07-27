@@ -1,39 +1,36 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const textsEn = require('../../../client/js/i18n/en');
+const textsCy = require('../../../client/js/i18n/cy');
+const { message, validateJoiSchema } = require('./index');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const noValue = (req.session.ulang === 'cy' ? textsCy.QUALIFY_PAGE.NO : textsEn.QUALIFY_PAGE.NO);
 
-  module.exports = function(req) {
-    return {
-      livedConsecutive: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.QUALIFY.WHERE_YOU_LIVE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.QUALIFY.WHERE_YOU_LIVE' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'livedConsecutive-Yes'
-          }
-        },
-      },
-      livedConsecutiveDetails: {
-        presenceIf: {
-          field: 'livedConsecutive',
-          value: (req.session.ulang === 'cy' ? texts_cy.QUALIFY_PAGE.NO : texts_en.QUALIFY_PAGE.NO),
-          message: {
-            summary: filters.translate('VALIDATION.QUALIFY.WHERE_YOU_LIVE_DETAILS' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.QUALIFY.WHERE_YOU_LIVE_DETAILS' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          },
-        },
-        length: {
-          maximum: 1000,
-          message: {
-            summary: filters.translate('VALIDATION.QUALIFY.WHERE_YOU_LIVE_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.QUALIFY.WHERE_YOU_LIVE_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        }
-      },
-    };
-  };
-})();
+  const schema = Joi.object({
+    livedConsecutive: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.QUALIFY.WHERE_YOU_LIVE', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.QUALIFY.WHERE_YOU_LIVE', req.session.user.thirdParty),
+      }),
+
+    livedConsecutiveDetails: Joi.string()
+      .empty('')
+      .max(1000)
+      .when('livedConsecutive', {
+        is: noValue,
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.QUALIFY.WHERE_YOU_LIVE_DETAILS', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.QUALIFY.WHERE_YOU_LIVE_LENGTH', req.session.user.thirdParty),
+      }),
+  });
+
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      livedConsecutive: 'livedConsecutive-Yes',
+    },
+  });
+};

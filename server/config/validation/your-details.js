@@ -1,287 +1,94 @@
-;(function () {
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
+const { name, postcode, phone, phoneSpaces } = require('./custom-validation').regexPatterns;
+const { buildPastDateSchema } = require('./date-validation');
+const { optionalString } = require('./custom-validation');
 
-  let moment = require('moment');
-  let filters = require('../../components/filters');
-  let texts_en = require('../../../client/js/i18n/en.json');
-  let texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    title: optionalString().max(10).pattern(name).messages({
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', req.session.user.thirdParty),
+    }),
+    firstName: Joi.string().empty('').required().max(20).pattern(name).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', req.session.user.thirdParty),
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', req.session.user.thirdParty),
+    }),
+    lastName: Joi.string().empty('').required().max(25).pattern(name).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', req.session.user.thirdParty),
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', req.session.user.thirdParty),
+    }),
+    addressLineOne: Joi.string().empty('').required().max(35).pattern(name).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_MISSING', req.session.user.thirdParty),
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', req.session.user.thirdParty),
+    }),
+    addressLineTwo: optionalString().max(35).pattern(name).messages({
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', req.session.user.thirdParty),
+    }),
+    addressLineThree: optionalString().max(35).pattern(name).messages({
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', req.session.user.thirdParty),
+    }),
+    addressTown: Joi.string().empty('').required().max(35).pattern(name).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_MISSING', req.session.user.thirdParty),
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', req.session.user.thirdParty),
+    }),
+    addressCounty: optionalString().max(35).pattern(name).messages({
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', req.session.user.thirdParty),
+    }),
+    addressPostcode: Joi.string().empty('').required().max(8).pattern(postcode).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.POSTCODE_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.POSTCODE_MISSING', req.session.user.thirdParty),
+      'string.max': message(req, 'VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', req.session.user.thirdParty),
+    }),
+    dateOfBirth: buildPastDateSchema(req, {
+      thirdParty: false,
+      required: true,
+      requiredMessageKey: 'VALIDATION.YOUR_DETAILS.DATETIME_CHECK',
+      messageKey: 'VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK',
+    }),
+    primaryPhone: Joi.string().empty('').required().pattern(phoneSpaces).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', req.session.user.thirdParty),
+    }),
+    secondaryPhone: optionalString().pattern(phone).messages({
+      'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', req.session.user.thirdParty),
+    }),
+    emailAddress: Joi.string().empty('').required().email().messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
+      'string.email': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_INVALID', req.session.user.thirdParty),
+    }),
+    emailAddressConfirmation: optionalString().when('emailAddress', {
+      is: Joi.exist(),
+      then: Joi.required(),
+      otherwise: Joi.optional(),
+    }).custom((value, helpers) => {
+      const bodyValue = helpers.state.ancestors[0] || {};
+      if (!bodyValue.emailAddress) {
+        return value;
+      }
+      if (value !== bodyValue.emailAddress) {
+        return helpers.error('any.only');
+      }
+      return value;
+    }).messages({
+      'any.required': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CONFIRM_MISSING', req.session.user.thirdParty),
+      'any.only': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_EQUALITY', req.session.user.thirdParty),
+    }),
+  });
 
-  require('./custom-validation');
-
-  module.exports = function (req) {
-    return {
-      title: {
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 10,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.TITLE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      firstName: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 20,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.FIRST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      lastName: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 25,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.LAST_NAME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-
-      address: {
-        addressGroup: {
-          texts: req.session.ulang === 'cy' ? texts_cy : texts_en,
-          group: [
-            'addressLineOne',
-            'addressLineTwo',
-            'addressLineThree',
-          ],
-        },
-      },
-      addressLineOne: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 35,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_ONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      addressLineTwo: {
-        length: {
-          maximum: 35,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_TWO_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      addressLineThree: {
-        length: {
-          maximum: 35,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      addressTown: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 35,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      addressCounty: {
-        length: {
-          maximum: 35,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_TOWN_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^$|^[^|"]+$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-      addressPostcode: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.POSTCODE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          // eslint-disable-next-line max-len
-          pattern: '^$|(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.POSTCODE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        length: {
-          maximum: 8,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.POSTCODE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        // comment to sort out syntax highlighting
-      },
-
-      dateOfBirth: {
-        dateOfBirth: req,
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.DATETIME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.DATETIME_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        datetime: {
-          latest: moment.utc().subtract(1, 'day'),
-          earliest: moment.utc().subtract(125, 'years'),
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.DATETIME_PAST_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-
-      primaryPhone: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: '^[0-9 +]{8,15}$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-
-      secondaryPhone: {
-        format: {
-          pattern: '^([0-9 +]{8,15}|)$',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-
-          },
-        },
-      },
-
-      emailAddress: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        email: {
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-
-      emailAddressConfirmation: {
-        presenceIf: {
-          field: 'emailAddress',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CONFIRM_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        equality: {
-          attribute: 'emailAddress',
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.EMAIL_CHECK_EQUALITY', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-    };
-  };
-})();
+  return validateJoiSchema(schema, body);
+};

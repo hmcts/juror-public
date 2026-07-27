@@ -1,22 +1,21 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { validateJoiSchema } = require('../validation');
+const { message } = require('../validation');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    travelType: Joi.array()
+      .single()
+      .required()
+      .messages({
+        'any.required': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_DETAIL'),
+        'any.only': message(req, 'EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_DETAIL'),
+      }),
+  });
 
-  module.exports = function(req) {
-    return {
-      travelType: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_SUMMARY', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('EXPENSE_CALCULATOR.TRAVEL_TYPE.ERROR_DETAIL', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'travelTypeBicycle'
-          }
-        },
-      },
-    };
-  };
-})();
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      travelType: 'travelTypeBicycle',
+    },
+  });
+};

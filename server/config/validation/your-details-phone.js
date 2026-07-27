@@ -1,44 +1,25 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
+const { phoneSpaces, phone } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
-  var moment = require('moment')
-    , filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    primaryPhone: Joi.string()
+      .empty('')
+      .required()
+      .pattern(phoneSpaces)
+      .messages({
+        'any.required': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', req.session.user.thirdParty),
+      }),
+    secondaryPhone: optionalString()
+      .pattern(phone)
+      .messages({
+        'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', req.session.user.thirdParty),
+      }),
+  });
 
-  require('./custom-validation');
-
-  module.exports = function(req) {
-    var phoneRegExOld = '^[0-9 ]{10,15}$'
-      , phoneRegEx = '^$|^(0[012345689][0-9]{8,9})$|(07[0-9]{9})$';
-
-    return {
-      primaryPhone: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-        format: {
-          pattern: phoneRegEx,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-
-      secondaryPhone: {
-        format: {
-          pattern: phoneRegEx,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-      },
-    };
-  };
-})();
+  return validateJoiSchema(schema, body);
+};
