@@ -1,64 +1,50 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const isThirdParty = req.session.user.thirdParty;
 
-  module.exports = function(req) {
-    return {
-      assistanceNeeded: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ASSISTANCE.ASSISTANCE_REQUIRED' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ASSISTANCE.ASSISTANCE_REQUIRED' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'assistanceNeeded-Yes'
-          }
-        },
-      },
+  const schema = Joi.object({
+    assistanceNeeded: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.ASSISTANCE.ASSISTANCE_REQUIRED', isThirdParty),
+        'any.only': message(req, 'VALIDATION.ASSISTANCE.ASSISTANCE_REQUIRED', isThirdParty),
+      }),
+    assistanceType: Joi.string()
+      .empty('')
+      .when('assistanceNeeded', {
+        is: 'Yes',
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ASSISTANCE.DISSABILITY_OR_IMPAIRMENT', isThirdParty),
+        'any.only': message(req, 'VALIDATION.ASSISTANCE.DISSABILITY_OR_IMPAIRMENT', isThirdParty),
+      }),
+    assistanceTypeDetails: Joi.string()
+      .empty('')
+      .max(1000)
+      .when('assistanceType', {
+        is: 'Other',
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ASSISTANCE.ASSISTANCE_GIVE_DETAILS', isThirdParty),
+        'string.max': message(req, 'VALIDATION.ASSISTANCE.ASSISTANCE_OTHER_LENGTH', isThirdParty),
+      }),
+    assistanceSpecialArrangements: Joi.string()
+      .empty('')
+      .max(1000)
+      .messages({
+        'string.max': message(req, 'VALIDATION.ASSISTANCE.SPECIAL_ARRANGEMENTS_LENGTH', isThirdParty),
+      }),
+  });
 
-      assistanceType: {
-        presenceIf: {
-          field: 'assistanceNeeded',
-          value: 'Yes',
-          message: {
-            summary: filters.translate('VALIDATION.ASSISTANCE.DISSABILITY_OR_IMPAIRMENT' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ASSISTANCE.DISSABILITY_OR_IMPAIRMENT' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'assistanceType-mobility'
-          }
-        }
-      },
-
-      assistanceTypeDetails: {
-        presenceIf: {
-          field: 'assistanceType',
-          value: 'Other',
-          message: {
-            summary: filters.translate('VALIDATION.ASSISTANCE.ASSISTANCE_GIVE_DETAILS' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ASSISTANCE.ASSISTANCE_GIVE_DETAILS' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-        length: {
-          maximum: 1000,
-          message: {
-            summary: filters.translate('VALIDATION.ASSISTANCE.ASSISTANCE_OTHER_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB': ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ASSISTANCE.ASSISTANCE_OTHER_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB': ''), (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        }
-      },
-
-      assistanceSpecialArrangements: {
-        length: {
-          maximum: 1000,
-          message: {
-            summary: filters.translate('VALIDATION.ASSISTANCE.SPECIAL_ARRANGEMENTS_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB': ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ASSISTANCE.SPECIAL_ARRANGEMENTS_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB': ''), (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        }
-      }
-
-    };
-  }
-
-})();
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      assistanceNeeded: 'assistanceNeeded-Yes',
+      assistanceType: 'assistanceType-mobility',
+    },
+  });
+};

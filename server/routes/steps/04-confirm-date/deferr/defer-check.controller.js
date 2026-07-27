@@ -2,7 +2,6 @@
   'use strict';
 
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../../components/filters')
     , textsEn = require('../../../../../client/js/i18n/en.json')
     , textsCy = require('../../../../../client/js/i18n/cy.json')
@@ -114,7 +113,7 @@
       req.session.user.deferral['deferralDatesPublicHoliday'] = false;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../../config/validation/deferral-dates-check')(req));
+      validatorResult = require('../../../../config/validation/deferral-dates-check')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

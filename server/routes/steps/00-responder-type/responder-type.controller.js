@@ -5,10 +5,10 @@
 
 ;(function(){
   'use strict';
-  var validate = require('validate.js')
-    , filters = require('../../../components/filters')
+  var filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
+    , validateResponderType = require('../../../config/validation/responder-type')
     , utils = require('../../../lib/utils');
 
   module.exports.index = function() {
@@ -27,8 +27,6 @@
   module.exports.create = function(app) {
     return function(req, res) {
       // Validate form submission
-      var validatorResult;
-
       // Reset error and saved field sessions
       delete req.session.errors;
 
@@ -37,7 +35,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/responder-type')(req));
+      var validatorResult = validateResponderType(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
 

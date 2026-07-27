@@ -1,39 +1,36 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const textsEn = require('../../../client/js/i18n/en');
+const textsCy = require('../../../client/js/i18n/cy');
+const { message, validateJoiSchema } = require('./index');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const yesValue = (req.session.ulang === 'cy' ? textsCy.QUALIFY_PAGE.YES : textsEn.QUALIFY_PAGE.YES);
 
-  module.exports = function(req) {
-    return {
-      convicted: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.QUALIFY.CONVICTION' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.QUALIFY.CONVICTION' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'convicted-Yes'
-          }
-        },
-      },
-      convictedDetails: {
-        presenceIf: {
-          field: 'convicted',
-          value: (req.session.ulang === 'cy' ? texts_cy.QUALIFY_PAGE.YES : texts_en.QUALIFY_PAGE.YES),
-          message: {
-            summary: filters.translate('VALIDATION.QUALIFY.CONVICTION_DETAILS' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.QUALIFY.CONVICTION_DETAILS' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          },
-        },
-        length: {
-          maximum: 1000,
-          message: {
-            summary: filters.translate('VALIDATION.QUALIFY.CONVICTION_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.QUALIFY.CONVICTION_LENGTH' + (req.session.user.thirdParty === 'Yes' ? '_OB' : ''), (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        }
-      },
-    };
-  };
-})();
+  const schema = Joi.object({
+    convicted: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.QUALIFY.CONVICTION', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.QUALIFY.CONVICTION', req.session.user.thirdParty),
+      }),
+
+    convictedDetails: Joi.string()
+      .empty('')
+      .max(1000)
+      .when('convicted', {
+        is: yesValue,
+        then: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.QUALIFY.CONVICTION_DETAILS', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.QUALIFY.CONVICTION_LENGTH', req.session.user.thirdParty),
+      }),
+  });
+
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      convicted: 'convicted-Yes',
+    },
+  });
+};

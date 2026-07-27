@@ -1,22 +1,16 @@
-;(function(){
-  'use strict';
+const { validateJoiSchema } = require('./index');
+const { buildDateOfBirthSchemas } = require('./date-validation');
 
-  require('./custom-validation');
-
-  module.exports = function(req) {
-    return {
-      dobDay: {
-        dateOfBirthDay: req
-      },
-      dobMonth: {
-        dateOfBirthMonth: req
-      },
-      dobYear: {
-        dateOfBirthYear: req
-      },
-      dateOfBirth: {
-        dateOfBirthLimits: req,
-      },
-    };
-  };
-})();
+module.exports = function (req, body) {
+  return validateJoiSchema(buildDateOfBirthSchemas(req, {
+    thirdParty: req.session.user.thirdParty,
+    missingPrefix: 'VALIDATION.YOUR_DETAILS_CONFIRM',
+  }), body, {
+    summaryLinks: {
+      dobDay: 'dobDay',
+      dobMonth: 'dobMonth',
+      dobYear: 'dobYear',
+      dateOfBirth: 'dobDay',
+    },
+  });
+};

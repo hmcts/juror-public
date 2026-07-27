@@ -1,24 +1,20 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    addressConfirm: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_CONFIRM_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_CONFIRM_MISSING', req.session.user.thirdParty),
+      }),
+  });
 
-  require('./custom-validation');
-
-  module.exports = function(req) {
-    return {
-      addressConfirm: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_CONFIRM_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.YOUR_DETAILS.ADDRESS_CONFIRM_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'addressConfirm-Yes'
-          }
-        },
-      },
-    };
-  };
-})();
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      addressConfirm: 'addressConfirm-Yes',
+    },
+  });
+};

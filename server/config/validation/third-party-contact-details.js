@@ -1,139 +1,89 @@
-/* eslint-disable max-len */
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
+const { phone } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const thirdParty = req.session.user.thirdParty;
 
-  require('./custom-validation');
+  const schema = Joi.object({
+    useJurorPhoneDetails: optionalString()
+      .valid('Yes', 'No')
+      .when('useJurorEmailDetails', {
+        is: Joi.exist(),
+        then: Joi.optional(),
+        otherwise: Joi.required(),
+      })
+      .custom((value, helpers) => {
+        if (value === 'No' && req.session.user.thirdPartyDetails.contactPhone === 'By phone') {
+          return helpers.error('any.invalid');
+        }
+        return value;
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', thirdParty),
+        'any.invalid': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_PHONE_INLINE', thirdParty),
+      }),
+    primaryPhone: optionalString()
+      .when('useJurorPhoneDetails', {
+        is: 'Yes',
+        then: Joi.required(),
+        otherwise: Joi.optional(),
+      })
+      .pattern(phone)
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_MISSING', thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_INVALID', thirdParty),
+      }),
+    secondaryPhone: optionalString()
+      .pattern(phone)
+      .messages({
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK_INVALID', thirdParty),
+      }),
+    useJurorEmailDetails: optionalString()
+      .valid('Yes', 'No')
+      .when('useJurorPhoneDetails', {
+        is: Joi.exist(),
+        then: Joi.optional(),
+        otherwise: Joi.required(),
+      })
+      .custom((value, helpers) => {
+        if (value === 'No' && req.session.user.thirdPartyDetails.contactEmail === 'By email') {
+          return helpers.error('any.invalid');
+        }
+        return value;
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', thirdParty),
+        'any.invalid': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_EMAIL_INLINE', thirdParty),
+      }),
+    emailAddress: optionalString()
+      .when('useJurorEmailDetails', {
+        is: 'Yes',
+        then: Joi.required().email(),
+        otherwise: Joi.optional().email(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_MISSING', thirdParty),
+        'string.email': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_INVALID', thirdParty),
+      }),
+    emailAddressConfirmation: optionalString()
+      .custom((value, helpers) => {
+        const formBody = helpers.state.ancestors[0] || {};
+        if (formBody.useJurorEmailDetails !== 'Yes' || typeof formBody.emailAddress === 'undefined' || formBody.emailAddress === '') {
+          return value;
+        }
+        if (value !== formBody.emailAddress) {
+          return helpers.error('any.only');
+        }
+        return value;
+      })
+      .messages({
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CONFIRMATION_CHECK_INVALID', thirdParty),
+      }),
+  });
 
-  module.exports = function(req) {
-    var phoneRegExOld = '^([0-9 +]{8,15}|)$'
-      , phoneRegEx = '^$|^(0[012345689][0-9]{8,9})$|(07[0-9]{9})$';
-
-    return {
-      useJurorPhoneDetails: {
-        ifValueMatch: {
-          ifValue: 'No',
-          actualValue: req.session.user.thirdPartyDetails.contactPhone,
-          expectedValue: 'By phone',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_PHONE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_PHONE_INLINE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'phoneNumber_existing'
-          },
-        },
-        presenceIfSet: {
-          field: 'useJurorEmailDetails',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'phoneNumber_existing'
-          },
-        },
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_PHONE_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'phoneNumber_existing'
-          },
-        },
-      },
-
-      primaryPhone: {
-        presenceIf: {
-          field: 'useJurorPhoneDetails',
-          value: 'Yes',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        presenceMainPhone: {
-          thirdPartyMainPhone: req.session.user.thirdPartyDetails.mainPhone,
-          thirdPartyEmail: req.session.user.thirdPartyDetails.emailAddress,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        format: {
-          pattern: phoneRegEx,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          },
-        },
-      },
-      secondaryPhone: {
-        format: {
-          pattern: phoneRegEx,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.PHONE_NUMBER_OTHER_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          },
-        },
-      },
-
-      useJurorEmailDetails: {
-        ifValueMatch: {
-          ifValue: 'No',
-          actualValue: req.session.user.thirdPartyDetails.contactEmail,
-          expectedValue: 'By email',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_EMAIL', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.CANNOT_USE_OWN_EMAIL_INLINE', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'emailAddress_existing',
-          },
-        },
-        presenceIfSet: {
-          field: 'useJurorPhoneDetails',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'emailAddress_existing',
-          },
-        },
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.USE_EMAIL_CHECK', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'emailAddress_existing',
-          },
-        },
-      },
-
-      emailAddress: {
-        presenceIf: {
-          field: 'useJurorEmailDetails',
-          value: 'Yes',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          },
-        },
-        emailIf: {
-          field: 'useJurorEmailDetails',
-          value: 'Yes',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-
-      emailAddressConfirmation: {
-        equality: {
-          attribute: 'emailAddress',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CONFIRMATION_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CONFIRMATION_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      }
-    }
-  }
-})();
+  return validateJoiSchema(schema, body);
+};

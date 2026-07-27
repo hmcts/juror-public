@@ -6,7 +6,6 @@
 ;(function(){
   'use strict';
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')

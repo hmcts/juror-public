@@ -1,31 +1,18 @@
-/* eslint-disable max-len */
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    relationship: Joi.string()
+      .empty('')
+      .required()
+      .max(50)
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_MISSING', req.session.user.thirdParty),
+        'string.max': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+  });
 
-  module.exports = function(req) {
-    return {
-
-      relationship: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          },
-        },
-        length: {
-          maximum: 50,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.RELATIONSHIP_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        },
-      }
-
-    };
-  };
-})();
+  return validateJoiSchema(schema, body);
+};
