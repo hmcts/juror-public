@@ -19,7 +19,6 @@ nodejs:
     API_ENDPOINT: https://juror-api.{{ .Values.global.environment }}.platform.hmcts.net/api/v1
     USE_AUTH: false
     TRACKING_CODE: ''
-    DIGITAL_BY_DEFAULT: false
     SMARTSURVEY_API_ENDPOINT: https://api.smartsurvey.io/v1/surveys
     SMARTSURVEY_ID_V1: 301219
     SMARTSURVEY_ID_V2: 652997

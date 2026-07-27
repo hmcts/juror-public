@@ -9,39 +9,39 @@
   "INFORMATION_HEADING": "Jury service information",
   "GUIDANCE_CARDS": [
     {
-      "id": "what",
-      "title": "What jury service involves",
-      "description": "What happens before you attend, how jurors are selected, and what to expect."
+      "ID": "what",
+      "TITLE": "What jury service involves",
+      "DESCRIPTION": "What happens before you attend, how jurors are selected, and what to expect."
     },
     {
-      "id": "attend",
-      "title": "When and where to attend",
-      "description": "Your date, court address, arrival time, security, travel, and parking."
+      "ID": "attend",
+      "TITLE": "When and where to attend",
+      "DESCRIPTION": "Your date, court address, arrival time, security, travel, and parking."
     },
     {
-      "id": "expenses",
-      "title": "Claiming expenses",
-      "description": "Travel, food, loss of earnings, childcare, and other financial support."
+      "ID": "expenses",
+      "TITLE": "Claiming expenses",
+      "DESCRIPTION": "Travel, food, loss of earnings, childcare, and other financial support."
     },
     {
-      "id": "work",
-      "title": "Employment and time off work",
-      "description": "Information for employees, employers, self-employed jurors, and students."
+      "ID": "work",
+      "TITLE": "Employment and time off work",
+      "DESCRIPTION": "Information for employees, employers, self-employed jurors, and students."
     },
     {
-      "id": "date",
-      "title": "Ask to change your dates",
-      "description": "When you may be able to defer jury service and what evidence you might need."
+      "ID": "date",
+      "TITLE": "Ask to change your dates",
+      "DESCRIPTION": "When you may be able to defer jury service and what evIDence you might need."
     },
     {
-      "id": "support",
-      "title": "Support and accessibility",
-      "description": "Request reasonable adjustments, language support, or help with health needs."
+      "ID": "support",
+      "TITLE": "Support and accessibility",
+      "DESCRIPTION": "Request reasonable adjustments, language support, or help with health needs."
     },
     {
-      "id": "eligibility",
-      "title": "Juror eligibility",
-      "description": "Read the eligibility questions you will be asked as part of your reply."
+      "ID": "eligibility",
+      "TITLE": "Juror eligibility",
+      "DESCRIPTION": "Read the eligibility questions you will be asked as part of your reply."
     }
   ]
 }
