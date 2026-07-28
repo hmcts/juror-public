@@ -17,12 +17,12 @@
         return res.redirect(app.namedRoutes.build('steps.responder.type.get'));
       }
 
-      const startResponseRoute = req.session.user.thirdParty === 'Yes'
+      const responseStartRoute = req.session.user.thirdParty === 'Yes'
         ? 'branches.third.party.details.name.get'
         : 'steps.your.details.get';
 
       if (!environmentConfig.featureFlags.digitalByDefault || req.session.user.digitalByDefault !== true) {
-        return res.redirect(app.namedRoutes.build(startResponseRoute));
+        return res.redirect(app.namedRoutes.build(responseStartRoute));
       }
 
       getDetailsSuccess = function (response) {
@@ -31,13 +31,13 @@
           response: response,
         });
 
-        return res.render('steps/01-response-start/dbd.njk', {
+        return res.render('steps/01-response-start/response-start.njk', {
           user: req.session.user,
           dbd: {
             summonsDate: response.serviceStartDate,
             courtName: response.courtName,
           },
-          startResponseUrl: app.namedRoutes.build(startResponseRoute),
+          responseStartUrl: app.namedRoutes.build(responseStartRoute),
         });
       };
 
@@ -48,10 +48,10 @@
           error: err.response && typeof err.response.data !== 'undefined' ? err.response.data : err.message || err,
         });
 
-        return res.render('steps/01-response-start/dbd.njk', {
+        return res.render('steps/01-response-start/response-start.njk', {
           user: req.session.user,
           dbd: {},
-          startResponseUrl: app.namedRoutes.build(startResponseRoute),
+          responseStartUrl: app.namedRoutes.build(responseStartRoute),
         });
       };
 

@@ -94,7 +94,7 @@
           });
 
           if (req.session.user.digitalByDefault === true) {
-            return res.redirect(app.namedRoutes.build('steps.dbd.get'));
+            return res.redirect(app.namedRoutes.build('steps.response-start.get'));
           } 
 
           // redirect to confirmation of replying on behalf of someone`
