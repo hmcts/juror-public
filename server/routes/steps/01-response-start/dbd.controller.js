@@ -31,7 +31,7 @@
           response: response,
         });
 
-        return res.render('steps/01-loginb/dbd.njk', {
+        return res.render('steps/01-response-start/dbd.njk', {
           user: req.session.user,
           dbd: {
             summonsDate: response.serviceStartDate,
@@ -48,7 +48,7 @@
           error: err.response && typeof err.response.data !== 'undefined' ? err.response.data : err.message || err,
         });
 
-        return res.render('steps/01-loginb/dbd.njk', {
+        return res.render('steps/01-response-start/dbd.njk', {
           user: req.session.user,
           dbd: {},
           startResponseUrl: app.namedRoutes.build(startResponseRoute),

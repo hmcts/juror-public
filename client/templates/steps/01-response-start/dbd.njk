@@ -61,13 +61,13 @@
       <ul class="govuk-grid-row card-group">
         {% for card in guidanceCards %}
           <li class="govuk-grid-column-one-half card-group__item">
-            <div class="card card--clickable" data-test="dbd-{{ card.id }}">
+            <div class="card card--clickable" data-test="dbd-{{ card.ID }}">
               <h3 class="govuk-heading-s card__heading">
-                <a class="govuk-link card__link govuk-link--no-visited-state" href="?guidance={{ card.id }}">
-                  {{ card.title }}
+                <a class="govuk-link card__link govuk-link--no-visited-state" href="?guidance={{ card.ID }}">
+                  {{ card.TITLE }}
                 </a>
               </h3>
-              <p class="govuk-body card__description">{{ card.description }}</p>
+              <p class="govuk-body card__description">{{ card.DESCRIPTION }}</p>
             </div>
           </li>
         {% endfor %}
