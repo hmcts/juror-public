@@ -1,0 +1,46 @@
+{
+  "HEADING": "Your jury summons information is online",
+  "INTRO": "You are signed in. You can read the information that would normally be included in a printed summons pack, then start your response.",
+  "NOT_AVAILABLE": "Not available",
+  "SUMMONS_DATE_LABEL": "You are summoned to start jury service on",
+  "COURT_LABEL": "at",
+  "START_RESPONSE": "Start your response",
+  "INFORMATION_HEADING": "Jury service information",
+  "GUIDANCE_CARDS": [
+    {
+      "ID": "what",
+      "TITLE": "What jury service involves",
+      "DESCRIPTION": "What happens before you attend, how jurors are selected, and what to expect."
+    },
+    {
+      "ID": "attend",
+      "TITLE": "When and where to attend",
+      "DESCRIPTION": "Your date, court address, arrival time, security, travel, and parking."
+    },
+    {
+      "ID": "expenses",
+      "TITLE": "Claiming expenses",
+      "DESCRIPTION": "Travel, food, loss of earnings, childcare, and other financial support."
+    },
+    {
+      "ID": "work",
+      "TITLE": "Employment and time off work",
+      "DESCRIPTION": "Information for employees, employers, self-employed jurors, and students."
+    },
+    {
+      "ID": "date",
+      "TITLE": "Ask to change your dates",
+      "DESCRIPTION": "When you may be able to defer jury service and what evidence you might need."
+    },
+    {
+      "ID": "support",
+      "TITLE": "Support and accessibility",
+      "DESCRIPTION": "Request reasonable adjustments, language support, or help with health needs."
+    },
+    {
+      "ID": "eligibility",
+      "TITLE": "Juror eligibility",
+      "DESCRIPTION": "Read the eligibility questions you will be asked as part of your reply."
+    }
+  ]
+}

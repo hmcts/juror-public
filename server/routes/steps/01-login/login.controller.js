@@ -8,6 +8,7 @@
 
   const _ = require('lodash');
   const secretsConfig = require('config');
+  const environmentConfig = require('../../../config/environment')();
   const filters = require('../../../components/filters');
   const textsEn = require('../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../client/js/i18n/cy.json');
@@ -89,7 +90,13 @@
             jurorNumber: req.body['jurorNumber'],
             jurorLastName: req.body['jurorLastName'],
             jurorPostcode: req.body['jurorPostcode'],
+            digitalByDefault: environmentConfig.featureFlags.digitalByDefault && resp.digitalByDefault === true,
           });
+
+          if (req.session.user.digitalByDefault === true) {
+            return res.redirect(app.namedRoutes.build('steps.response-start.get'));
+          } 
+
           // redirect to confirmation of replying on behalf of someone`
           // if selected, otherwise move on to your details.
           if (req.session.user['thirdParty'] === 'Yes') {
