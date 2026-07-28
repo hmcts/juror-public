@@ -17,7 +17,7 @@
 
       return axiosInstance(url, app, jwtToken, options);
     },
-    getDBDInformation: function(app, jurorNumber, jwtToken) {
+    getResponseStartInformation: function(app, jurorNumber, jwtToken) {
 
       let url = urljoin(this.resource, jurorNumber, 'dbd-information');
 

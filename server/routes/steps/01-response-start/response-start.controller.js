@@ -33,7 +33,7 @@
 
         return res.render('steps/01-response-start/response-start.njk', {
           user: req.session.user,
-          dbd: {
+          responseStart: {
             summonsDate: response.serviceStartDate,
             courtName: response.courtName,
           },
@@ -50,12 +50,12 @@
 
         return res.render('steps/01-response-start/response-start.njk', {
           user: req.session.user,
-          dbd: {},
+          responseStart: {},
           responseStartUrl: app.namedRoutes.build(responseStartRoute),
         });
       };
 
-      return jurorDetails.getDBDInformation(app, req.session.user.jurorNumber, req.session.authToken)
+      return jurorDetails.getResponseStartInformation(app, req.session.user.jurorNumber, req.session.authToken)
         .then(getDetailsSuccess, getDetailsError)
         .catch(getDetailsError);
     };
