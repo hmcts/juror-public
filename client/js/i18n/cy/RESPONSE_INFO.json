@@ -1,0 +1,21 @@
+{
+  "COMMON": {
+    "START_RESPONSE": "Start your response"
+  },
+  "JURY_SERVICE": {
+    "PAGE_IDENTIFIER": "Response information - Jury Service",
+    "HEADING": "Sut Mae Gwasanaeth Rheithgor yn Gweithio",
+    "INTRO": "Beth yw gwasanaeth rheithgor a phwy all gael eu galw.",
+    "WHAT_IS_JURY_SERVICE": {
+      "TITLE": "Beth yw gwasanaeth rheithgor?",
+      "CONTENT": "JMae gwasanaethu ar reithgor yn ddyletswydd gyhoeddus bwysig. Byddwch chi ac fel arfer 11 o bobl eraill yn ffurfio rheithgor. Gyda’ch gilydd, byddwch yn penderfynu canlyniad treial troseddol mewn Llys y Goron."
+    },
+    "WHO_CAN_BE_CALLED": {
+      "TITLE": "Pwy all gael ei alw i wasanaethu ar reithgor?",
+      "CONTENT_1": "Gall bob oedolyn rhwng 18 a 75 mlwydd oed sy’n byw yn y DU gael ei ddewis ar hap o’r rhestr etholiadol i wasanaethu ar reithgor.",
+      "CONTENT_2": "Os byddwch yn iau na 18 neu’n hŷn na 76 ar ddiwrnod cyntaf eich gwasanaeth rheithgor, ni fyddwch yn gallu gwasanaethu ond mae'n rhaid i chi dal ymateb i'ch gwŷs.",
+      "CONTENT_3": "Mae mwy o wybodaeth ar gael yn",
+      "LINK": "www.gov.uk/gwasanaeth-rheithgor"
+    }
+  }
+}  

@@ -1,0 +1,21 @@
+{
+  "COMMON": {
+    "START_RESPONSE": "Start your response"
+  },
+  "JURY_SERVICE": {
+    "PAGE_IDENTIFIER": "Response information - Jury Service",
+    "HEADING": "How jury service works",
+    "INTRO": "What jury service is and who can be called.",
+    "WHAT_IS_JURY_SERVICE": {
+      "TITLE": "What is jury service?",
+      "CONTENT": "Jury service is an important public duty. You and usually 11 other people will form a jury. Together, you’ll decide the result of a criminal trial in the Crown court."
+    },
+    "WHO_CAN_BE_CALLED": {
+      "TITLE": "Who can be called for jury service?",
+      "CONTENT_1": "Every adult aged 18 to 75 years that lives in the UK can be picked at random for jury service from the electoral roll.",
+      "CONTENT_2": "If you are going to be under 18 or over 76 on the first day of your jury service, you will be unable to serve but you must still reply to your summons.",
+      "CONTENT_3": "There is more information at",
+      "LINK": "www.gov.uk/jury-service"
+    }
+  }
+}  
