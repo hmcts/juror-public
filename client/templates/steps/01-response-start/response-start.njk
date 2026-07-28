@@ -9,6 +9,11 @@
 
 {% block page_identifier %}{{ texts.RESPONSE_START.PAGE_IDENTIFIER }}{% endblock %}
 
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
 {% block content %}
   {% set pageHeading = texts.RESPONSE_START.HEADING %}
   {% set notAvailable = texts.RESPONSE_START.NOT_AVAILABLE %}
@@ -20,7 +25,7 @@
 
   {% set courtName = notAvailable %}
   {% if responseStart and responseStart.courtName %}
-    {% set courtName = responseStart.courtName %}
+    {% set courtName = responseStart.courtName | transformCourtName %}
   {% endif %}
 
   {% set guidanceCards = texts.RESPONSE_START.GUIDANCE_CARDS %}
@@ -37,15 +42,11 @@
 
       {% call govukInsetText() %}
         <p class="govuk-body">
-          <strong>{{ texts.RESPONSE_START.SUMMONS_DATE_LABEL }}:</strong>
           {% if summonsDate %}
-            {{ summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }}
+            {{ texts.RESPONSE_START.SUMMONS_DATE_LABEL }} {{ summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }} {{ texts.RESPONSE_START.COURT_LABEL }} {{ courtName }}
           {% else %}
             {{ notAvailable }}
           {% endif %}
-        </p>
-        <p class="govuk-body">
-          <strong>{{ texts.RESPONSE_START.COURT_LABEL }}:</strong> {{ courtName }}
         </p>
       {% endcall %}
 

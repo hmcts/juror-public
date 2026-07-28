@@ -9,6 +9,7 @@
   const texts_cy = require('../../../../client/js/i18n/cy.json');
   const jurorDetails = require('../../../objects/juror').jurorDetails;
   const utils = require('../../../lib/utils');
+  const environmentConfig = require('../../../config/environment')();
 
   module.exports.index = function(app) {
     return function(req, res) {
@@ -106,6 +107,8 @@
       // Set back link URL
       if (req.session.change === true){
         backLinkUrl = utils.getRedirectUrl('steps.confirm.information', req.session.user.thirdParty);
+      } else if (environmentConfig.featureFlags.digitalByDefault && req.session.user.digitalByDefault === true) {
+        backLinkUrl = 'steps.response-start.get';
       } else {
         backLinkUrl = utils.getRedirectUrl('steps.login', req.session.user.thirdParty);
       }

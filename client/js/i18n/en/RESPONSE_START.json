@@ -3,8 +3,8 @@
   "HEADING": "Your jury summons information is online",
   "INTRO": "You are signed in. You can read the information that would normally be included in a printed summons pack, then start your response.",
   "NOT_AVAILABLE": "Not available",
-  "SUMMONS_DATE_LABEL": "Summons date",
-  "COURT_LABEL": "Court",
+  "SUMMONS_DATE_LABEL": "You are summoned to start jury service on",
+  "COURT_LABEL": "at",
   "START_RESPONSE": "Start your response",
   "INFORMATION_HEADING": "Jury service information",
   "GUIDANCE_CARDS": [

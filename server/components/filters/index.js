@@ -78,6 +78,34 @@
 
     },
 
+    transformCourtName: function(court) {
+      let courtName;
+
+      if (!court) {
+        return court;
+      }
+
+      if (typeof court === 'string') {
+        courtName = court;
+      } else {
+        courtName = court.locationName || court.name || court.courtName;
+      }
+
+      if (!courtName) {
+        return '';
+      }
+
+      return courtName
+        .toLowerCase()
+        .split(' ')
+        .map(function(part) {
+          return part.trim().charAt(0).toUpperCase() + part.trim().slice(1);
+        })
+        .join(' ')
+        .trim()
+        .replace(',', '');
+    },
+
   };
 
 })();

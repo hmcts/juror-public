@@ -7,6 +7,7 @@
 
   const environmentConfig = require('../../../config/environment')();
   const jurorDetails = require('../../../objects/juror').jurorDetails;
+  const utils = require('../../../lib/utils');
 
   module.exports.index = function (app) {
     return function (req, res) {
@@ -20,6 +21,7 @@
       const responseStartRoute = req.session.user.thirdParty === 'Yes'
         ? 'branches.third.party.details.name.get'
         : 'steps.your.details.get';
+      const backLinkUrl = utils.getRedirectUrl('steps.login', req.session.user.thirdParty);
 
       if (!environmentConfig.featureFlags.digitalByDefault || req.session.user.digitalByDefault !== true) {
         return res.redirect(app.namedRoutes.build(responseStartRoute));
@@ -38,6 +40,7 @@
             courtName: response.courtName,
           },
           responseStartUrl: app.namedRoutes.build(responseStartRoute),
+          backLinkUrl: backLinkUrl,
         });
       };
 
@@ -52,6 +55,7 @@
           user: req.session.user,
           responseStart: {},
           responseStartUrl: app.namedRoutes.build(responseStartRoute),
+          backLinkUrl: backLinkUrl,
         });
       };
 
