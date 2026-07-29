@@ -4,6 +4,7 @@
   const responseInfoIds = [
     'jury-service',
     'employment',
+    'change-dates',
   ];
 
   module.exports.index = (app) => (req, res) => {
