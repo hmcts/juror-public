@@ -66,7 +66,7 @@ module.exports = function (req, body) {
     secondaryPhone: optionalString().pattern(phone).messages({
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', req.session.user.thirdParty),
     }),
-    emailAddress: Joi.string().empty('').required().email().messages({
+    emailAddress: Joi.string().empty('').email().required().messages({
       'any.required': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
       'any.only': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
       'string.email': message(req, 'VALIDATION.YOUR_DETAILS.EMAIL_CHECK_INVALID', req.session.user.thirdParty),

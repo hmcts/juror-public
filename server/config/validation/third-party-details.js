@@ -60,8 +60,8 @@ module.exports = function (req, body) {
     emailAddress: optionalString()
       .when('contactEmail', {
         is: 'By email',
-        then: Joi.required().email(),
-        otherwise: Joi.optional().email(),
+        then: Joi.string().email().required(),
+        otherwise: Joi.string().email().optional(),
       })
       .messages({
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
@@ -70,8 +70,8 @@ module.exports = function (req, body) {
     emailAddressConfirmation: optionalString()
       .when('contactEmail', {
         is: 'By email',
-        then: Joi.required(),
-        otherwise: Joi.optional(),
+        then: Joi.string().required(),
+        otherwise: Joi.string().optional(),
       })
       .custom((value, helpers) => {
         const formBody = helpers.state.ancestors[0] || {};
