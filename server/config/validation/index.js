@@ -8,10 +8,23 @@ const defaultValidationOptions = {
   stripUnknown: true,
 };
 
-module.exports.message = (req, key, thirdParty = false) => filters.translate(
-  key + (thirdParty === 'Yes' ? '_OB' : ''),
-  (req.session.ulang === 'cy' ? textsCy : textsEn),
-);
+module.exports.message = (req, key, thirdParty = false) => {
+  let translation;
+
+  translation = filters.translate(
+    key + (thirdParty === 'Yes' ? '_OB' : ''),
+    (req.session.ulang === 'cy' ? textsCy : textsEn),
+  );
+
+  if (!translation || translation === '') {
+    translation = filters.translate(
+      key,
+      (req.session.ulang === 'cy' ? textsCy : textsEn),
+    );
+  }
+  
+  return translation;
+};
 
 const validationResultToErrorMap = (validationResult) => {
   if (!validationResult.error) {

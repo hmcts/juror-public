@@ -9,11 +9,7 @@ module.exports = function (req, body) {
   const schema = Joi.object({
     useJurorPhoneDetails: optionalString()
       .valid('Yes', 'No')
-      .when('useJurorEmailDetails', {
-        is: Joi.exist(),
-        then: Joi.optional(),
-        otherwise: Joi.required(),
-      })
+      .required()
       .custom((value, helpers) => {
         if (value === 'No' && req.session.user.thirdPartyDetails.contactPhone === 'By phone') {
           return helpers.error('any.invalid');
@@ -43,11 +39,7 @@ module.exports = function (req, body) {
       }),
     useJurorEmailDetails: optionalString()
       .valid('Yes', 'No')
-      .when('useJurorPhoneDetails', {
-        is: Joi.exist(),
-        then: Joi.optional(),
-        otherwise: Joi.required(),
-      })
+      .required()
       .custom((value, helpers) => {
         if (value === 'No' && req.session.user.thirdPartyDetails.contactEmail === 'By email') {
           return helpers.error('any.invalid');
@@ -62,8 +54,8 @@ module.exports = function (req, body) {
     emailAddress: optionalString()
       .when('useJurorEmailDetails', {
         is: 'Yes',
-        then: Joi.required().email(),
-        otherwise: Joi.optional().email(),
+        then: Joi.string().email().required(),
+        otherwise: Joi.string().email().optional(),
       })
       .messages({
         'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_CONTACT.EMAIL_CHECK_MISSING', thirdParty),
