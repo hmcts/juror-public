@@ -1,0 +1,55 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.EMPLOYMENT.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.EMPLOYMENT.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+      
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.EMPLOYMENT.HEADING }}</h1>
+
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INTRO }}</p>
+
+        <h2 class="govuk-heading-l">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.TITLE }}</h2>
+
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_1 }}</p>
+
+        {% set content_2_link %}
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_2_LINK }}" target="_blank">
+            {{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_2_LINK }}
+          </a>
+        {% endset %}
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_2 | replace("[link]", content_2_link) | safe }}</p>
+
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_3 }}</p>
+
+        {% set content_4_link %}
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_4_LINK }}" target="_blank">
+            {{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_4_LINK }}
+          </a>
+        {% endset %}
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_4 | replace("[link]", content_4_link) | safe }}</p>
+
+        {{ govukButton({
+          text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+          href: responseStartUrl
+        }) }}
+
+      </h1>
+    </div>
+  </div>
+
+{% endblock %}
