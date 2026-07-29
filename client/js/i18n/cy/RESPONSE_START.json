@@ -8,9 +8,9 @@
   "INFORMATION_HEADING": "Jury service information",
   "GUIDANCE_CARDS": [
     {
-      "ID": "what",
-      "TITLE": "What jury service involves",
-      "DESCRIPTION": "What happens before you attend, how jurors are selected, and what to expect."
+      "ID": "jury-service",
+      "TITLE": "How jury service works",
+      "DESCRIPTION": "What jury service is, who can be called, and what it means to serve."
     },
     {
       "ID": "attend",
