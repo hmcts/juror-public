@@ -12,8 +12,8 @@ module.exports = function (req, body) {
         'any.required': message(req, 'VALIDATION.ASSISTANCE.ASSISTANCE_REQUIRED', isThirdParty),
         'any.only': message(req, 'VALIDATION.ASSISTANCE.ASSISTANCE_REQUIRED', isThirdParty),
       }),
-    assistanceType: Joi.string()
-      .empty('')
+    assistanceType: Joi.array()
+      .single()
       .when('assistanceNeeded', {
         is: 'Yes',
         then: Joi.required(),
@@ -26,7 +26,10 @@ module.exports = function (req, body) {
       .empty('')
       .max(1000)
       .when('assistanceType', {
-        is: 'Other',
+        is: Joi.alternatives().try(
+          Joi.string().valid('Other'),
+          Joi.array().has(Joi.valid('Other')),
+        ),
         then: Joi.required(),
       })
       .messages({
