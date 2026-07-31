@@ -5,6 +5,7 @@
     'jury-service',
     'employment',
     'change-dates',
+    'eligibility',
   ];
 
   module.exports.index = (app) => (req, res) => {
