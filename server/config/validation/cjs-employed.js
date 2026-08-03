@@ -1,6 +1,4 @@
 const Joi = require('joi');
-const textsEn = require('../../../client/js/i18n/en.json');
-const textsCy = require('../../../client/js/i18n/cy.json');
 const { message, validateJoiSchema } = require('./index');
 const { optionalString } = require('./custom-validation');
 
@@ -19,7 +17,7 @@ const employerIncludes = (employerValue) => Joi.alternatives().try(
 );
 
 module.exports = function (req, body) {
-  const yesValue = (req.session.ulang === 'cy' ? textsCy.EMPLOYED_PAGE.YES : textsEn.EMPLOYED_PAGE.YES);
+  const yesValue = message(req, 'EMPLOYED_PAGE.YES', req.session.user.thirdParty);
 
   const employerSchema = Joi.object({
     cjsEmployed: Joi.string()
