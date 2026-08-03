@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { name, postcode, phone, phoneSpaces } = require('./custom-validation').regexPatterns;
+const { name, postcode, phoneSpaces } = require('./custom-validation').regexPatterns;
 const { buildPastDateSchema } = require('./date-validation');
 const { optionalString } = require('./custom-validation');
 
@@ -63,7 +63,7 @@ module.exports = function (req, body) {
       'any.only': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_CHECK', req.session.user.thirdParty),
     }),
-    secondaryPhone: optionalString().pattern(phone).messages({
+    secondaryPhone: optionalString().pattern(phoneSpaces).messages({
       'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.OTHER_PHONE_CHECK', req.session.user.thirdParty),
     }),
     emailAddress: Joi.string().empty('').email().required().messages({

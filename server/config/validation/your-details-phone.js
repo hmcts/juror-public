@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { message, validateJoiSchema } = require('./index');
-const { phoneSpaces, phone } = require('./custom-validation').regexPatterns;
+const { phone } = require('./custom-validation').regexPatterns;
 const { optionalString } = require('./custom-validation');
 
 module.exports = function (req, body) {
@@ -8,7 +8,7 @@ module.exports = function (req, body) {
     primaryPhone: Joi.string()
       .empty('')
       .required()
-      .pattern(phoneSpaces)
+      .pattern(phone)
       .messages({
         'any.required': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
         'any.only': message(req, 'VALIDATION.YOUR_DETAILS.MAIN_PHONE_MISSING', req.session.user.thirdParty),
