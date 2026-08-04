@@ -28,9 +28,9 @@
       "DESCRIPTION": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig."
     },
     {
-      "ID": "date",
-      "TITLE": "Ask to change your dates",
-      "DESCRIPTION": "When you may be able to defer jury service and what evidence you might need."
+      "ID": "change-dates",
+      "TITLE": "Asking to change your dates or be excused",
+      "DESCRIPTION": "When you can ask for different dates or ask to be excused from jury service."
     },
     {
       "ID": "support",

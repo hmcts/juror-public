@@ -30,5 +30,19 @@
       "CONTENT_4": "Gwiriwch yr wybodaeth yn yr adran ‘hawlio treuliau’ neu yn [link] i gael mwy o fanylion.",
       "CONTENT_4_LINK": "www.gov.uk/gwasanaeth-rheithgor"
     }
+  },
+  "CHANGE_DATES": {
+    "PAGE_IDENTIFIER": "Response information - Change dates",
+    "HEADING": "Gofyn am newid y dyddiad neu gael eich esgusodi",
+    "INTRO": "Pan fyddwch yn ymateb i'ch gwŷs, gallwch ofyn i newid eich dyddiadau neu gael eich esgusodi o'ch gwasanaeth rheithgor.",
+    "CHANGING_YOUR_DATES": {
+      "CONTENT_1": "Gallwch ond newid dyddiadau eich gwasanaeth unwaith, a rhaid i chi roi rheswm i ni. Fe ofynnir i chi ddarparu dyddiadau amgen o fewn y 12 mis nesaf pan fyddwch yn gallu gwasanaethu."
+    },
+    "BEING_EXCUSED": {
+      "CONTENT_1": "Mae esgusodiadau ond yn cael eu cymeradwyo mewn amgylchiadau eithriadol pan na allwch wasanaethu ar unrhyw adeg yn y 12 mis nesaf.",
+      "CONTENT_2": "Efallai y gofynnir i chi ddarparu tystiolaeth, ond ni fydd rhaid i chi gynnwys hyn pan fyddwch yn ymateb; byddwn yn cysylltu â chi ac yn rhoi amser i chi gasglu unrhyw beth rydyn ni ei angen.",
+      "CONTENT_3": "Os oes arnoch angen mwy o wybodaeth, gweler [link].",
+      "CONTENT_3_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi"
+    }
   }
 }  
