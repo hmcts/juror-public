@@ -17,5 +17,18 @@
       "CONTENT_3": "Mae mwy o wybodaeth ar gael yn",
       "LINK": "www.gov.uk/gwasanaeth-rheithgor"
     }
+  },
+  "EMPLOYMENT": {
+    "PAGE_IDENTIFIER": "Response information - Employment",
+    "HEADING": "Cyflogaeth a chael amser i ffwrdd o'r gwaith",
+    "TIME_OFF_WORK": {
+      "TITLE": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig",
+      "CONTENT_1": "Mae'n rhaid i'ch cyflogwr adael i chi wneud eich gwasanaeth rheithgor - dyma yw'r gyfraith, ond gallant ofyn i chi wneud cais i newid y dyddiadau i amser mwy cyfleus (gallwch ond gwneud hyn unwaith).",
+      "CONTENT_2": "Gweler yr wybodaeth am ofyn i gael newid eich dyddiadau neu gael eich esgusodi. neu gwiriwch [link] i gael mwy o fanylion.",
+      "CONTENT_2_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
+      "CONTENT_3": "Gall eich cyflogwr ddewis eich talu neu beidio eich talu yn ystod eich gwasanaeth. Os na fyddant yn eich talu, gallwch wneud cais i’r llys am golli enillion, sy'n destun uchafswm dyddiol. Os ydych yn hunangyflogedig, mae gennych yr hawl i hawlio’r un treuliau â phetaech yn weithiwr cyflogedig.",
+      "CONTENT_4": "Gwiriwch yr wybodaeth yn yr adran ‘hawlio treuliau’ neu yn [link] i gael mwy o fanylion.",
+      "CONTENT_4_LINK": "www.gov.uk/gwasanaeth-rheithgor"
+    }
   }
 }  
