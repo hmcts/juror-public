@@ -20,10 +20,9 @@
   },
   "EMPLOYMENT": {
     "PAGE_IDENTIFIER": "Response information - Employment",
-    "HEADING": "Employment and time off work",
-    "INTRO": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig",
+    "HEADING": "Cyflogaeth a chael amser i ffwrdd o'r gwaith",
     "TIME_OFF_WORK": {
-      "TITLE": "Time off work",
+      "TITLE": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig",
       "CONTENT_1": "Mae'n rhaid i'ch cyflogwr adael i chi wneud eich gwasanaeth rheithgor - dyma yw'r gyfraith, ond gallant ofyn i chi wneud cais i newid y dyddiadau i amser mwy cyfleus (gallwch ond gwneud hyn unwaith).",
       "CONTENT_2": "Gweler yr wybodaeth am ofyn i gael newid eich dyddiadau neu gael eich esgusodi. neu gwiriwch [link] i gael mwy o fanylion.",
       "CONTENT_2_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
