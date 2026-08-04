@@ -2,10 +2,10 @@
   'use strict';
 
   const responseInfoIds = [
-    'jury-service',
-    'employment',
     'change-dates',
     'eligibility',
+    'employment',
+    'jury-service',
   ];
 
   module.exports.index = (app) => (req, res) => {
