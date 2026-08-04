@@ -47,5 +47,39 @@
       "CONTENT_3": "If you need more information, please see [link].",
       "CONTENT_3_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
     }
+  },
+  "ELIGIBILITY": {
+    "PAGE_IDENTIFIER": "Response information - Eligibility",
+    "HEADING": "Who is eligible to serve on a jury?",
+    "INTRO": "As part of your response, you'll be asked questions to help us decide whether you can do jury service.",
+    "QUALIFY": {
+      "TITLE": "You qualify for jury service if",
+      "BULLET_1": "you will be at least 18 years old, and under 76 years old, on the day that you start your jury service",
+      "BULLET_2": "you are registered as a parliamentary or local government elector",
+      "BULLET_3": "you have lived in the United Kingdom, the Channel Islands or the Isle of Man for any period of at least five years since you were 13 years old"
+    },
+    "MENTAL_DISORDERS": {
+      "TITLE": "Mental disorders",
+      "CONTENT_1": "Under the Mental Health Act 1983, some people cannot do jury service.",
+      "CONTENT_2": "If you are detained, sometimes called being sectioned, in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you cannot be on a jury.",
+      "CONTENT_3": "If you suffer from a mental disorder, including depression and anxiety, but you are not being detained, looked after or treated under the Mental Health Act, you can still be on a jury."
+    },
+    "MENTAL_CAPACITY": {
+      "TITLE": "Mental capacity",
+      "CONTENT_1": "If you lack the mental capacity to serve as a juror, you cannot be on a jury. Mental capacity means being able to make a decision for yourself.",
+      "CONTENT_2": "To be on a jury, a person must be able to understand, remember, weigh up and communicate information relating to a decision.",
+      "CONTENT_3": "If you are not sure if you can do jury service because of a mental disorder or lack of mental capacity, you can phone us on 0300 456 1024 for advice."
+    },
+    "BAIL": {
+      "TITLE": "Bail",
+      "CONTENT_1": "If you are on bail in criminal proceedings, you cannot do jury service."
+    },
+    "CONVICTIONS": {
+      "TITLE": "Convictions",
+      "CONTENT_1": "You can do jury service if you have points on your driving licence, speeding fines or have been to a speed awareness course, as long as you have not received one of the sentences below.",
+      "CONTENT_2": "You cannot do jury service if you have ever had a sentence of imprisonment for life, detention for life, custody for life, imprisonment for public protection, detention for public protection, an extended sentence, or a term of imprisonment or detention of five years or more.",
+      "CONTENT_3": "You cannot do jury service if, in the last 10 years, you have served any part of a sentence of imprisonment or detention, received a suspended sentence, or had a community order in England and Wales.",
+      "CONTENT_4": "You also cannot do jury service if in the last 10 years you have had any similar order under the law of Scotland, Northern Ireland, Isle of Man, any of the Channel Islands, or a community or overseas community order under the Armed Forces Act 2006."
+    }
   }
 }  
