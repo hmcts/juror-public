@@ -1,0 +1,99 @@
+.card {
+  background: govuk-colour("white");
+  border: 1px solid #d9dadb;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+  padding: 25px;
+  position: relative;
+  width: 100%;
+}
+
+.card__heading {
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.card__description {
+  margin-bottom: 0;
+}
+
+.card--clickable {
+  border-bottom-width: 5px;
+}
+
+.card--clickable:hover,
+.card--clickable:active {
+  cursor: pointer;
+}
+
+.card--clickable:hover,
+.card--clickable:active {
+  border-color: #b1b4b6;
+}
+
+.card--clickable:active {
+  bottom: -1px;
+}
+
+.card--clickable:hover .card__heading a,
+.card--clickable:hover .card__link,
+.card--clickable:active .card__heading a,
+.card--clickable:active .card__link {
+  color: #003078;
+  text-decoration: none;
+}
+
+.card--clickable:hover .card__heading a:focus,
+.card--clickable:hover .card__link:focus,
+.card--clickable:active .card__heading a:focus,
+.card--clickable:active .card__link:focus {
+  background-color: govuk-colour("yellow");
+  box-shadow: 0 -2px govuk-colour("yellow"), 0 4px govuk-colour("black");
+  color: govuk-colour("black");
+  outline: 3px solid transparent;
+  text-decoration: none;
+}
+
+.card__link::after {
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.card-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  padding: 0;
+}
+
+.card-group__item {
+  display: flex;
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+.card-group__item .card {
+  margin-bottom: 25px;
+}
+
+@media (max-width: 48.0525em) {
+  .card-group {
+    margin-bottom: 30px;
+  }
+
+  .card-group__item {
+    flex: 0 0 100%;
+  }
+
+  .card-group__item .card {
+    margin-bottom: 15px;
+  }
+
+  .card-group__item:last-child .card {
+    margin-bottom: 0;
+  }
+}

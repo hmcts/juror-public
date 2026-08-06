@@ -7,7 +7,6 @@
   'use strict';
 
   var _ = require('lodash')
-    , validate = require('validate.js')
     , filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
@@ -65,7 +64,7 @@
       req.body.thirdPartyDetails.emailAddressConfirmation = req.body.emailAddressConfirmation;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-details')(req));
+      validatorResult = require('../../../config/validation/third-party-details')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -210,7 +209,7 @@
       req.body.thirdPartyDetails.lastName = req.body.lastName;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-details-name')(req));
+      validatorResult = require('../../../config/validation/third-party-details-name')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -298,7 +297,7 @@
       req.body.thirdPartyDetails.relationship = req.body.relationship;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/third-party-details-relationship')(req));
+      validatorResult = require('../../../config/validation/third-party-details-relationship')(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;
@@ -401,7 +400,7 @@
 
 
       // Validate form submission
-      validatorResult = validate(req.body.validate, require('../../../config/validation/third-party-details-contact')(req));
+      validatorResult = require('../../../config/validation/third-party-details-contact')(req, req.body.validate);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

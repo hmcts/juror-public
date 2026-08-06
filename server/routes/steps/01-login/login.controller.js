@@ -6,13 +6,14 @@
 ;(function () {
   'use strict';
 
-  const validate = require('validate.js');
   const _ = require('lodash');
   const secretsConfig = require('config');
+  const environmentConfig = require('../../../config/environment')();
   const filters = require('../../../components/filters');
   const textsEn = require('../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../client/js/i18n/cy.json');
   const authComponent = require('../../../components/auth');
+  const validateLogin = require('../../../config/validation/login');
   const msgMappingsEn = require('../../../components/errors/message-mapping_en');
   const msgMappingsCy = require('../../../components/errors/message-mapping_cy');
   const utils = require('../../../lib/utils');
@@ -63,7 +64,7 @@
   };
 
   module.exports.create = function (app) {
-    return function (req, res) {
+    return async function (req, res) {
       let validatorResult;
       let tmpSession;
 
@@ -89,7 +90,13 @@
             jurorNumber: req.body['jurorNumber'],
             jurorLastName: req.body['jurorLastName'],
             jurorPostcode: req.body['jurorPostcode'],
+            digitalByDefault: environmentConfig.featureFlags.digitalByDefault && resp.digitalByDefault === true,
           });
+
+          if (req.session.user.digitalByDefault === true) {
+            return res.redirect(app.namedRoutes.build('steps.response-start.get'));
+          } 
+
           // redirect to confirmation of replying on behalf of someone`
           // if selected, otherwise move on to your details.
           if (req.session.user['thirdParty'] === 'Yes') {
@@ -152,7 +159,7 @@
 
       // Validate form submission
       req.body.jurorPostcode = req.body.jurorPostcode.trim();
-      validatorResult = validate(req.body, require('../../../config/validation/login')(req));
+      validatorResult = await validateLogin(req, req.body);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login', req.session.user.thirdParty)));

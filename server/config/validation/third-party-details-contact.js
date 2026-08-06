@@ -1,96 +1,66 @@
-/* eslint-disable max-len */
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
+const { phone } = require('./custom-validation').regexPatterns;
+const { optionalString } = require('./custom-validation');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json');
-
-  module.exports = function(req) {
-    var phoneRegExOld = '^[0-9 +]{8,15}$'
-      , phoneRegEx = '^$|^(0[012345689][0-9]{8,9})$|(07[0-9]{9})$';
-
-    return {
-
-      contactPhone: {
-        checkboxGroup: {
-          fields: ['contactPhone', 'contactEmail'],
-          req: req,
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.CONTACT_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.CONTACT_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    contactPhone: optionalString()
+      .when('contactEmail', {
+        is: Joi.exist(),
+        then: Joi.optional(),
+        otherwise: Joi.required(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.CONTACT_CHECK_MISSING', req.session.user.thirdParty),
+      }),
+    mainPhone: optionalString()
+      .when('contactPhone', {
+        is: 'By phone',
+        then: Joi.required(),
+        otherwise: Joi.optional(),
+      })
+      .pattern(phone)
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_MISSING', req.session.user.thirdParty),
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    otherPhone: optionalString()
+      .pattern(phone)
+      .messages({
+        'string.pattern.base': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.OTHER_PHONE_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    emailAddress: optionalString()
+      .when('contactEmail', {
+        is: 'By email',
+        then: Joi.string().email().required(),
+        otherwise: Joi.string().email().optional(),
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_MISSING', req.session.user.thirdParty),
+        'string.email': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+    emailAddressConfirmation: optionalString()
+      .when('contactEmail', {
+        is: 'By email',
+        then: Joi.string().required(),
+        otherwise: Joi.string().optional(),
+      })
+      .custom((value, helpers) => {
+        const formBody = helpers.state.ancestors[0] || {};
+        if (formBody.contactEmail !== 'By email' || typeof formBody.emailAddress === 'undefined' || formBody.emailAddress === '') {
+          return value;
         }
-      },
+        if (value !== formBody.emailAddress) {
+          return helpers.error('any.only');
+        }
+        return value;
+      })
+      .messages({
+        'any.required': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CONFIRMATION_CHECK_MISSING', req.session.user.thirdParty),
+        'any.only': message(req, 'VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CONFIRMATION_CHECK_INVALID', req.session.user.thirdParty),
+      }),
+  });
 
-      mainPhone: {
-        presenceIf: {
-          field: 'contactPhone',
-          value: 'By phone',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        },
-        formatIf: {
-          pattern: phoneRegEx,
-          field: 'contactPhone',
-          value: 'By phone',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.MAIN_PHONE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        },
-      },
-
-      otherPhone: {
-        formatIf: {
-          pattern: phoneRegEx,
-          field: 'contactPhone',
-          value: 'By phone',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.OTHER_PHONE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.OTHER_PHONE_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        },
-      },
-
-      emailAddress: {
-        presenceIf: {
-          field: 'contactEmail',
-          value: 'By email',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          }
-        },
-        emailIf: {
-          field: 'contactEmail',
-          value: 'By email',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-      },
-
-      emailAddressConfirmation: {
-        presenceIf: {
-          field: 'contactEmail',
-          value: 'By email',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CONFIRMATION_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CONFIRMATION_CHECK_MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-          }
-        },
-        equality: {
-          attribute: 'emailAddress',
-          message: {
-            summary: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CONFIRMATION_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.ON_BEHALF.THIRD_PARTY_DETAILS.EMAIL_CONFIRMATION_CHECK_INVALID', (req.session.ulang === 'cy' ? texts_cy : texts_en))
-          },
-        },
-      }
-    };
-  };
-})();
+  return validateJoiSchema(schema, body);
+};

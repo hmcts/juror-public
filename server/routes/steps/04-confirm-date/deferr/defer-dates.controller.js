@@ -7,7 +7,6 @@
   'use strict';
 
   const _ = require('lodash');
-  const validate = require('validate.js');
   const filters = require('../../../../components/filters');
   const textsEn = require('../../../../../client/js/i18n/en.json');
   const textsCy = require('../../../../../client/js/i18n/cy.json');
@@ -102,10 +101,11 @@
         'earliestDate': req.session.user.deferral.dateRange.earliestMoment,
         'latestDate': req.session.user.deferral.dateRange.latestMoment,
         'ageLimit': app.ageSettings.upperAgeLimit,
+        'jurorDOB': req.session.user.dateOfBirth,
       };
 
       // Validate form submission
-      validatorResult = validate(validateParams, require('../../../../config/validation/deferral-dates')(req));
+      validatorResult = require('../../../../config/validation/deferral-dates')(req, validateParams);
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
         req.session.formFields = req.body;

@@ -3,12 +3,12 @@
 
   const _ = require('lodash');
   const moment = require('moment');
-  const validate = require('validate.js');
   const filters = require('../../../components/filters');
   const texts_en = require('../../../../client/js/i18n/en.json');
   const texts_cy = require('../../../../client/js/i18n/cy.json');
   const jurorDetails = require('../../../objects/juror').jurorDetails;
   const utils = require('../../../lib/utils');
+  const environmentConfig = require('../../../config/environment')();
 
   module.exports.index = function(app) {
     return function(req, res) {
@@ -106,6 +106,8 @@
       // Set back link URL
       if (req.session.change === true){
         backLinkUrl = utils.getRedirectUrl('steps.confirm.information', req.session.user.thirdParty);
+      } else if (environmentConfig.featureFlags.digitalByDefault && req.session.user.digitalByDefault === true) {
+        backLinkUrl = 'steps.response-start.get';
       } else {
         backLinkUrl = utils.getRedirectUrl('steps.login', req.session.user.thirdParty);
       }
@@ -134,7 +136,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/your-details-name-confirm')(req));
+      validatorResult = require('../../../config/validation/your-details-name-confirm')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -226,7 +228,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/your-details-name.js')(req));
+      validatorResult = require('../../../config/validation/your-details-name')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -328,7 +330,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/your-details-address-confirm.js')(req));
+      validatorResult = require('../../../config/validation/your-details-address-confirm')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -364,7 +366,7 @@
           addressPostcode: req.session.user['addressPostcode'],
         };
 
-        validatorResult = validate(addressDetails, require('../../../config/validation/your-details-address.js')(req));
+        validatorResult = require('../../../config/validation/your-details-address')(req, addressDetails);
 
         if (typeof validatorResult !== 'undefined') {
           req.session.errors = validatorResult;
@@ -446,7 +448,7 @@
 
       // Validate form submission
       req.body.addressPostcode = req.body.addressPostcode.trim();
-      validatorResult = validate(req.body, require('../../../config/validation/your-details-address.js')(req));
+      validatorResult = require('../../../config/validation/your-details-address')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -550,7 +552,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/your-details-date-of-birth.js')(req));
+      validatorResult = require('../../../config/validation/your-details-date-of-birth')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
 
@@ -663,7 +665,7 @@
       }
 
       // Validate form submission
-      validatorResult = validate(req.body.validate, require('../../../config/validation/your-details-phone.js')(req));
+      validatorResult = require('../../../config/validation/your-details-phone')(req, req.body.validate);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;
@@ -743,7 +745,7 @@
       delete req.session.formFields;
 
       // Validate form submission
-      validatorResult = validate(req.body, require('../../../config/validation/your-details-email.js')(req));
+      validatorResult = require('../../../config/validation/your-details-email')(req, req.body);
 
       if (typeof validatorResult !== 'undefined') {
         req.session.errors = validatorResult;

@@ -1,23 +1,19 @@
-;(function(){
-  'use strict';
+const Joi = require('joi');
+const { message, validateJoiSchema } = require('./index');
 
-  var filters = require('../../components/filters')
-    , texts_en = require('../../../client/js/i18n/en.json')
-    , texts_cy = require('../../../client/js/i18n/cy.json')
+module.exports = function (req, body) {
+  const schema = Joi.object({
+    thirdParty: Joi.string()
+      .empty('')
+      .required()
+      .messages({
+        'any.required': message(req, 'VALIDATION.RESPONDER_TYPE.MISSING'),
+      }),
+  });
 
-  module.exports = function(req) {
-    return {
-      thirdParty: {
-        presence: {
-          allowEmpty: false,
-          message: {
-            summary: filters.translate('VALIDATION.RESPONDER_TYPE.MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            details: filters.translate('VALIDATION.RESPONDER_TYPE.MISSING', (req.session.ulang === 'cy' ? texts_cy : texts_en)),
-            summaryLink: 'thirdParty_No'
-          }
-        },
-      },
-    }
-  };
-
-})();
+  return validateJoiSchema(schema, body, {
+    summaryLinks: {
+      thirdParty: 'thirdParty_No',
+    },
+  });
+};

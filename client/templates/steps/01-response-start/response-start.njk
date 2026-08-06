@@ -1,0 +1,78 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_START.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}Response Start{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% set pageHeading = texts.RESPONSE_START.HEADING %}
+  {% set notAvailable = texts.RESPONSE_START.NOT_AVAILABLE %}
+
+  {% set summonsDate = "" %}
+  {% if responseStart and responseStart.summonsDate %}
+    {% set summonsDate = responseStart.summonsDate %}
+  {% endif %}
+
+  {% set courtName = notAvailable %}
+  {% if responseStart and responseStart.courtName %}
+    {% set courtName = responseStart.courtName | transformCourtName %}
+  {% endif %}
+
+  {% set guidanceCards = texts.RESPONSE_START.GUIDANCE_CARDS %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+        {{ pageHeading }}
+      </h1>
+
+      <p class="govuk-body-l">
+        {{ texts.RESPONSE_START.INTRO }}
+      </p>
+
+      {% call govukInsetText() %}
+        <p class="govuk-body">
+          {% if summonsDate %}
+            {{ texts.RESPONSE_START.SUMMONS_DATE_LABEL }} {{ summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }} {{ texts.RESPONSE_START.COURT_LABEL }} {{ courtName }}
+          {% else %}
+            {{ notAvailable }}
+          {% endif %}
+        </p>
+      {% endcall %}
+
+      {{ govukButton({
+        text: texts.RESPONSE_START.START_RESPONSE,
+        href: responseStartUrl
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        {{ texts.RESPONSE_START.INFORMATION_HEADING }}
+      </h2>
+
+      <ul class="govuk-grid-row card-group">
+        {% for card in guidanceCards %}
+          <li class="govuk-grid-column-one-half card-group__item">
+            <div class="card card--clickable" data-test="response-start-{{ card.ID }}">
+              <h3 class="govuk-heading-s card__heading">
+                <a class="govuk-link card__link govuk-link--no-visited-state" href="?guidance={{ card.ID }}">
+                  {{ card.TITLE }}
+                </a>
+              </h3>
+              <p class="govuk-body card__description">{{ card.DESCRIPTION }}</p>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
