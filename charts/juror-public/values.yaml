@@ -7,14 +7,23 @@ nodejs:
     juror:
       secrets:
         - name: public-sessionSecret
+          alias: public-sessionSecret
         - name: public-jwtKey
+          alias: public-jwtKey
         - name: public-jwtNoAuthKey
+          alias: public-jwtNoAuthKey
         - name: public-jwtKeyBureau
+          alias: public-jwtKeyBureau
         - name: public-jwtTTL
+          alias: public-jwtTTL
         - name: public-pcqTokenKey
-        - name: public-redisConnection
+          alias: public-pcqTokenKey
+        - name: public-managedRedisConnection
+          alias: public-redisConnection
         - name: public-dynatraceScriptUrl
+          alias: public-dynatraceScriptUrl
         - name: app-insights-connection-string
+          alias: app-insights-connection-string
   environment:
     API_ENDPOINT: https://juror-api.{{ .Values.global.environment }}.platform.hmcts.net/api/v1
     USE_AUTH: false
@@ -27,3 +36,4 @@ nodejs:
     RATE_LIMIT_ENABLED: true
     RATE_LIMIT_TIME: 300000 # 5 minutes
     RATE_LIMIT_MAX: 1000000 # 1 mil requests
+    REDIS_CLUSTER_ENABLED: true
