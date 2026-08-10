@@ -91,5 +91,17 @@
       "CONTENT_4": "Ni allwch wasanaethu ar reithgor os ydych yn ystod y 10 mlynedd diwethaf yng Nghymru a Lloegr wedi cael gorchymyn cymunedol (gan gynnwys gorchymyn adsefydlu cymunedol, gorchymyn cosbi cymunedol, gorchymyn cosbi cymunedol ac adsefydlu, gorchymyn trin cyffuriau a phrofi, neu orchymyn ymatal rhag cyffuriau).",
       "CONTENT_5": "Hefyd, NI ALLWCH wasanaethu ar reithgor os ydych chi, yn y 10 mlynedd diwethaf, wedi bod yn destun unrhyw orchymyn cyfatebol dan gyfraith Yr Alban, Gogledd Iwerddon, Ynys Manaw, unrhyw un o Ynysoedd y Sianel, neu orchymyn cymunedol neu orchymyn cymunedol tramor dan Ddeddf Lluoedd Arfog 2006."
     }
+  },
+  "ATTENDANCE": {
+    "PAGE_IDENTIFIER": "Response information - Attendance",
+    "HEADING": "Pryd a ble i fynychu",
+    "INTRO": "Rydych wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar ",
+    "INTRO_AT": "yn",
+    "SECURITY": {
+      "TITLE": "Court security",
+      "CONTENT_1": "Caniatewch amser ychwanegol i fynd trwy'r drefn ddiogelwch yn y llys.",
+      "CONTENT_2": "Gallwch ddod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
+      "SECURITY_LINK": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
+    }
   }
 }  

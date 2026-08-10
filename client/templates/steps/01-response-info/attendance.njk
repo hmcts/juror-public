@@ -1,0 +1,51 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.EXPENSES.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.EXPENSES.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% set welsh = texts.INTERFACE.HTML_LANG == "cy" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.ATTENDANCE.HEADING }}</h1>
+
+        <div class="govuk-body">
+          <p>{{ texts.RESPONSE_INFO.ATTENDANCE.INTRO }}</p>  
+          <p class="govuk-body-m">
+            {{ user.responseStartInfo.summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }}
+            {{ user.responseStartInfo.courtAttendTime }}
+          </p>
+          <p>{{ texts.RESPONSE_INFO.ATTENDANCE.INTRO_AT }}</p>  
+          {{ user.responseStartInfo.courtName | transformCourtName }}<br>
+          {{ user.responseStartInfo.courtAddress | safe}}
+        </div>
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-8">{{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY.TITLE }}</h2>
+        <div class="govuk-body govuk-!-margin-bottom-8">
+          <p>{{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY.CONTENT_1 }}</p>
+          <p>{{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY.CONTENT_2 }}
+            <a href="{{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY.SECURITY_LINK }}">{{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY.SECURITY_LINK }}</a>.
+          </p>
+        </div>
+
+        {{ govukButton({
+          text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+          href: responseStartUrl
+        }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

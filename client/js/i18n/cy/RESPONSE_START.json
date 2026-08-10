@@ -13,9 +13,9 @@
       "DESCRIPTION": "What jury service is, who can be called, and what it means to serve."
     },
     {
-      "ID": "attend",
-      "TITLE": "When and where to attend",
-      "DESCRIPTION": "Your date, court address, arrival time, security, travel, and parking."
+      "ID": "attendance",
+      "TITLE": "Pryd a ble i fynychu",
+      "DESCRIPTION": "Eich dyddiad cychwyn, cyfeiriad y llys, amser cyrraedd a gwybodaeth ddiogelwch."
     },
     {
       "ID": "expenses",

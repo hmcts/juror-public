@@ -81,5 +81,17 @@
       "CONTENT_3": "You cannot do jury service if, in the last 10 years, you have served any part of a sentence of imprisonment or detention, received a suspended sentence, or had a community order in England and Wales.",
       "CONTENT_4": "You also cannot do jury service if in the last 10 years you have had any similar order under the law of Scotland, Northern Ireland, Isle of Man, any of the Channel Islands, or a community or overseas community order under the Armed Forces Act 2006."
     }
+  },
+  "ATTENDANCE": {
+    "PAGE_IDENTIFIER": "Response information - Attendance",
+    "HEADING": "When and where to attend",
+    "INTRO": "You are summond to start jury service on ",
+    "INTRO_AT": "at",
+    "SECURITY": {
+      "TITLE": "Court security",
+      "CONTENT_1": "You should allow extra time to go through security at court.",
+      "CONTENT_2": "Information on what you can and can't take into a court or tribunal building is available at ",
+      "SECURITY_LINK": "https://www.gov.uk/entering-court-or-tribunal-building"
+    }
   }
 }  
