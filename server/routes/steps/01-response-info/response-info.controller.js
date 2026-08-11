@@ -8,6 +8,7 @@
     'jury-service',
     'attendance',
     'support',
+    'expenses',
   ];
 
   module.exports.index = (app) => (req, res) => {
