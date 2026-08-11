@@ -32,19 +32,12 @@
   },
   "CHANGE_DATES": {
     "PAGE_IDENTIFIER": "Response information - Change dates",
-    "HEADING": "Asking to change your dates or to be excused",
-    "INTRO": "When you respond to your summons, you can ask to change your dates or to be excused from your jury service.",
-    "CHANGING_YOUR_DATES": {
-      "TITLE": "Changing your dates",
-      "CONTENT_1": "You can only change the dates of your service once and you'll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve."
-    },
-    "BEING_EXCUSED": {
-      "TITLE": "Being excused",
-      "CONTENT_1": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months.",
-      "CONTENT_2": "You may be asked to provide evidence, but you won't need to include this when you respond. We'll contact you and give you time to gather anything we need.",
-      "CONTENT_3": "If you need more information, please see [link].",
-      "CONTENT_3_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
-    }
+    "HEADING": "Asking to change the dates or to be excused",
+    "CONTENT_1": "When you respond to your summons, you can ask to change your dates or to be excused from your jury service.",
+    "CONTENT_2": "You can only change the dates of your service once and you’ll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve.",
+    "CONTENT_3": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months. You may be asked to provide evidence, but you won’t need to include this when you respond; we’ll contact you and give you time to gather anything we need.",
+    "CONTENT_4": "If you need more information, please see [link].",
+    "CONTENT_4_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
   },
   "ELIGIBILITY": {
     "PAGE_IDENTIFIER": "Response information - Eligibility",
