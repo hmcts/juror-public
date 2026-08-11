@@ -102,5 +102,71 @@
     "CONTENT_1": "Os oes gennych anabledd ac mae arnoch angen i ni wneud addasiadau rhesymol i'ch helpu yn ystod eich gwasanaeth rheithgor, gallwch ddweud wrthym fel rhan o'ch ymateb.",
     "CONTENT_2": "Am ragor o wybodaeth ewch i: ",
     "SUPPORT_LINK": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-addasiadau-rhesymol"
+  },
+  "EXPENSES": {
+    "PAGE_IDENTIFIER": "Response information - Expenses",
+    "HEADING": "Claiming expenses",
+    "INTRO_1": "You do not get paid for doing jury service but you can claim some money back towards loss of earnings, childcare, travel, and food and drink costs.",
+    "INTRO_2": "The rates are set out on ",
+    "INTRO_3": "and there's also a calculator to help you work out what you may be able to claim from the court: ",
+    "RATES_LINK_TEXT": "www.gov.uk/jury-service",
+    "RATES_LINK_URL": "https://www.gov.uk/jury-service",
+    "CALCULATOR_LINK_TEXT": "www.gov.uk/check-juror-claims",
+    "CALCULATOR_LINK_URL": "https://www.gov.uk/check-juror-claims",
+    "LOSS_OF_EARNINGS_1": {
+      "TITLE": "Loss of earnings and extra childcare or care costs",
+      "CONTENT_1": "We can reimburse you a single maximum daily amount to cover both:",
+      "BULLET_1": "Loss of earnings",
+      "BULLET_2": "Additional care costs due to jury service"
+    },
+    "LOSS_OF_EARNINGS_2": {
+      "TITLE": "Loss of earnings",
+      "CONTENT_1": "You can claim for loss of earnings if you're either:",
+      "BULLET_1": "employed and your employer will not pay you during jury service",
+      "BULLET_2": "self-employed or a paid company director",
+      "CONTENT_2": "The maximum rates you can claim are shown on ",
+      "CONTENT_3": "You cannot claim more if your full pay is higher than these rates.",
+      "CONTENT_4": "If you work part time you can only claim for days you normally work, even if you spend a full week in court.",
+      "CONTENT_5": "For example, if you normally work 3 days a week, you can only claim loss of earnings for those 3 days, as you've not lost earnings on the other 2 days.",
+      "CONTENT_6": "You cannot claim for weekends or bank holidays because the court is closed."
+
+    },
+    "CHILDCARE_OR_CARE_COSTS": {
+      "TITLE": "Childcare or care costs",
+      "CONTENT_1": "You cannot claim for care costs you normally have, for example as part of your usual working week. But if you'll have additional care costs that are only due to jury service, you can claim some money towards these.",
+      "CONTENT_2": "You must be within the combined maximum daily allowance for loss of earnings and caring costs.",
+      "CONTENT_3": "For example, if you're claiming £64.95 for extra care costs, you'll have used up all this allowance and cannot claim any more on top for loss of earnings."
+    },
+    "CLAIM_BENEFITS": {
+      "TITLE": "If you claim benefits",
+      "CONTENT_1": "Your benefits will not be affected for at least 8 weeks, as long as you tell your benefits officer or work coach about your jury service. If you're asked to serve on a longer trial, when you arrive at court, you'll need to speak with the jury manager to find out how your benefits will be affected."
+    },
+    "TRAVEL_COSTS": {
+      "TITLE": "Travel costs",
+      "CONTENT_1": "How much you can claim depends on how you travel to court. You cannot claim any travel or accommodation expenses from abroad. Information on how much you can claim is available from ",
+      "CONTENT_2": "You must check with your jury manager at the court that you can claim for parking before you pay for it."      
+    },
+    "TRAVEL_TICKETS": {
+      "TITLE": "Travel tickets",
+      "CONTENT_1": "Only buy daily travel tickets unless the court tells you otherwise when you start jury service.",
+      "CONTENT_2": "Keep copies of your tickets or receipts, to submit with your claim. If you do not keep these, we may not be able to pay you back."
+    },
+    "FOOD_AND_DRINK": {
+      "TITLE": "Food and drink costs",
+      "CONTENT_1": "You can claim these amounts even if you bring your own food and drink. The rates are set out on "
+    },
+    "WHEN_TO_CLAIM": {
+      "TITLE": "When to claim",
+      "CONTENT_1": "Submit your claim at the end of jury service. You'll usually be paid 7 to 10 working days after submitting your claim form. The court may be able to pay your expenses during the trial if it's likely to last a long time or if you're facing financial hardship. Check with the jury manager at your court when you start."
+    },
+    "QUESTIONS": {
+      "TITLE": "If you have questions",
+      "CONTENT_1": "Up to a week before jury service starts please contact:",
+      "CONTENT_2": "Contact the Jury Central Summoning Bureau",
+      "CONTENT_3": "Phone: 0300 456 1024 or email ",
+      "BUREAU_EMAIL": "jurysummoning@justice.gov.uk",
+      "CONTENT_4": "Hours are Monday to Thursday 9am to 5pm, Fridays 9am to 3pm.",
+      "CONTENT_5": "In the week before jury service and any point after that, contact the court where you'll be doing jury service. You'll be sent contact details nearer the time."
+    }   
   }
 }  
