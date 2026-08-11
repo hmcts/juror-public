@@ -97,5 +97,12 @@
       "CONTENT_2": "Gallwch ddod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
       "SECURITY_LINK": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
     }
+  },
+  "SUPPORT": {
+    "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
+    "HEADING": "Cefnogaeth a hygyrchedd",
+    "CONTENT_1": "Os oes gennych anabledd ac mae arnoch angen i ni wneud addasiadau rhesymol i'ch helpu yn ystod eich gwasanaeth rheithgor, gallwch ddweud wrthym fel rhan o'ch ymateb.",
+    "CONTENT_2": "Am ragor o wybodaeth ewch i: ",
+    "SUPPORT_LINK": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-addasiadau-rhesymol"
   }
 }  

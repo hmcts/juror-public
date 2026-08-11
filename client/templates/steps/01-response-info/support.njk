@@ -1,0 +1,42 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.SUPPORT.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.SUPPORT.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% set welsh = texts.INTERFACE.HTML_LANG == "cy" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.SUPPORT.HEADING }}</h1>
+
+        <div class="govuk-body">
+          <p>{{ texts.RESPONSE_INFO.SUPPORT.CONTENT_1 }}</p>  
+        </div>
+
+        <div class="govuk-body govuk-!-margin-bottom-8">
+          <p>{{ texts.RESPONSE_INFO.SUPPORT.CONTENT_2 }}
+            <a href="{{ texts.RESPONSE_INFO.SUPPORT.SUPPORT_LINK }}">{{ texts.RESPONSE_INFO.SUPPORT.SUPPORT_LINK }}</a>.
+          </p>
+        </div>
+
+        {{ govukButton({
+          text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+          href: responseStartUrl
+        }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

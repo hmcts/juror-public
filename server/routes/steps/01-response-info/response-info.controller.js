@@ -7,6 +7,7 @@
     'employment',
     'jury-service',
     'attendance',
+    'support',
   ];
 
   module.exports.index = (app) => (req, res) => {
