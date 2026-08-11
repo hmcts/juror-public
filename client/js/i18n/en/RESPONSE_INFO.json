@@ -21,15 +21,13 @@
   "EMPLOYMENT": {
     "PAGE_IDENTIFIER": "Response information - Employment",
     "HEADING": "Employment and time off work",
-    "INTRO": "Information for employees, employers, self-employed jurors, and students.",
-    "TIME_OFF_WORK": {
-      "TITLE": "Time off work",
-      "CONTENT_1": "Your employer has to let you do jury service - it's the law, but they can ask you to apply to change the dates to a more convenient time. You can only do this once.",
-      "CONTENT_2": "See the information about asking to change your dates or be excused, or check [link] for more details.",
-      "CONTENT_2_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
-      "CONTENT_3": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum.",
-      "CONTENT_4": "If you are self-employed, you have the right to claim the same allowances as if you were an employee. Check the claiming expenses section or [link] for more details.",
-      "CONTENT_4_LINK": "www.gov.uk/jury-service"
+    "INFORMATION": {
+      "TITLE": "Information for employees and self-employed jurors",
+      "CONTENT_1": "Your employer has to let you do jury service – it’s the law, but they can ask you to apply to change the dates to a more convenient time (you can only do this once). See the information about asking to change your dates or be excused, or check [link] for more details.",
+      "CONTENT_1_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+      "CONTENT_2": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum. If you are self-employed, you have the right to claim the same allowances as if you were an employee.",
+      "CONTENT_3": "Check the information in the ‘claiming expenses’ section or at [link] for more details.",
+      "CONTENT_3_LINK": "www.gov.uk/jury-service"
     }
   },
   "CHANGE_DATES": {
