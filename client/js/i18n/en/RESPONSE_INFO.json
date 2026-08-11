@@ -97,5 +97,12 @@
       "CONTENT_2": "Information on what you can and can't take into a court or tribunal building is available at ",
       "SECURITY_LINK": "https://www.gov.uk/entering-court-or-tribunal-building"
     }
+  },
+  "SUPPORT": {
+    "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
+    "HEADING": "Support and accessibility",
+    "CONTENT_1": "If you have a disability and need us to make reasonable adjustments to help you during your jury service, you can tell us as part of your response.",
+    "CONTENT_2": "For more information, please visit: ",
+    "SUPPORT_LINK": "https://www.gov.uk/jury-service/request-reasonable-adjustments"
   }
 }  
