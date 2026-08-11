@@ -22,29 +22,23 @@
       
       <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.EMPLOYMENT.HEADING }}</h1>
 
-      {% if not welsh %}
-        <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INTRO }}</p>
-      {% endif %}
+      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.TITLE }}</h2>
 
-      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.TITLE }}</h2>
-
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_1 }}</p>
-
-      {% set content_2_link %}
-        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_2_LINK }}" target="_blank">
-          {{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_2_LINK }}
+      {% set content_1_link %}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK }}" target="_blank">
+          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK }}
         </a>
       {% endset %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_2 | replace("[link]", content_2_link) | safe }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1 | replace("[link]", content_1_link) | safe }}</p>
 
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_3 }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_2 }}</p>
 
-      {% set content_4_link %}
-        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_4_LINK }}" target="_blank">
-          {{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_4_LINK }}
+      {% set content_3_link %}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK }}" target="_blank">
+          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK }}
         </a>
       {% endset %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.TIME_OFF_WORK.CONTENT_4 | replace("[link]", content_4_link) | safe }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3 | replace("[link]", content_3_link) | safe }}</p>
 
       {{ govukButton({
         text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,

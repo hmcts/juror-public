@@ -21,40 +21,34 @@
   "EMPLOYMENT": {
     "PAGE_IDENTIFIER": "Response information - Employment",
     "HEADING": "Cyflogaeth a chael amser i ffwrdd o'r gwaith",
-    "TIME_OFF_WORK": {
+    "INFORMATION": {
       "TITLE": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig",
-      "CONTENT_1": "Mae'n rhaid i'ch cyflogwr adael i chi wneud eich gwasanaeth rheithgor - dyma yw'r gyfraith, ond gallant ofyn i chi wneud cais i newid y dyddiadau i amser mwy cyfleus (gallwch ond gwneud hyn unwaith).",
-      "CONTENT_2": "Gweler yr wybodaeth am ofyn i gael newid eich dyddiadau neu gael eich esgusodi. neu gwiriwch [link] i gael mwy o fanylion.",
-      "CONTENT_2_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
-      "CONTENT_3": "Gall eich cyflogwr ddewis eich talu neu beidio eich talu yn ystod eich gwasanaeth. Os na fyddant yn eich talu, gallwch wneud cais i’r llys am golli enillion, sy'n destun uchafswm dyddiol. Os ydych yn hunangyflogedig, mae gennych yr hawl i hawlio’r un treuliau â phetaech yn weithiwr cyflogedig.",
-      "CONTENT_4": "Gwiriwch yr wybodaeth yn yr adran ‘hawlio treuliau’ neu yn [link] i gael mwy o fanylion.",
-      "CONTENT_4_LINK": "www.gov.uk/gwasanaeth-rheithgor"
+      "CONTENT_1": "Mae'n rhaid i'ch cyflogwr adael i chi wneud eich gwasanaeth rheithgor - dyma yw'r gyfraith, ond gallant ofyn i chi wneud cais i newid y dyddiadau i amser mwy cyfleus (gallwch ond gwneud hyn unwaith). Gweler yr wybodaeth am ofyn i gael newid eich dyddiadau neu gael eich esgusodi. neu gwiriwch [link] i gael mwy o fanylion.",
+      "CONTENT_1_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
+      "CONTENT_2": "Gall eich cyflogwr ddewis eich talu neu beidio eich talu yn ystod eich gwasanaeth. Os na fyddant yn eich talu, gallwch wneud cais i’r llys am golli enillion, sy'n destun uchafswm dyddiol. Os ydych yn hunangyflogedig, mae gennych yr hawl i hawlio’r un treuliau â phetaech yn weithiwr cyflogedig.",
+      "CONTENT_3": "Gwiriwch yr wybodaeth yn yr adran ‘hawlio treuliau’ neu yn [link] i gael mwy o fanylion.",
+      "CONTENT_3_LINK": "www.gov.uk/gwasanaeth-rheithgor"
     }
   },
   "CHANGE_DATES": {
     "PAGE_IDENTIFIER": "Response information - Change dates",
     "HEADING": "Gofyn am newid y dyddiad neu gael eich esgusodi",
-    "INTRO": "Pan fyddwch yn ymateb i'ch gwŷs, gallwch ofyn i newid eich dyddiadau neu gael eich esgusodi o'ch gwasanaeth rheithgor.",
-    "CHANGING_YOUR_DATES": {
-      "CONTENT_1": "Gallwch ond newid dyddiadau eich gwasanaeth unwaith, a rhaid i chi roi rheswm i ni. Fe ofynnir i chi ddarparu dyddiadau amgen o fewn y 12 mis nesaf pan fyddwch yn gallu gwasanaethu."
-    },
-    "BEING_EXCUSED": {
-      "CONTENT_1": "Mae esgusodiadau ond yn cael eu cymeradwyo mewn amgylchiadau eithriadol pan na allwch wasanaethu ar unrhyw adeg yn y 12 mis nesaf.",
-      "CONTENT_2": "Efallai y gofynnir i chi ddarparu tystiolaeth, ond ni fydd rhaid i chi gynnwys hyn pan fyddwch yn ymateb; byddwn yn cysylltu â chi ac yn rhoi amser i chi gasglu unrhyw beth rydyn ni ei angen.",
-      "CONTENT_3": "Os oes arnoch angen mwy o wybodaeth, gweler [link].",
-      "CONTENT_3_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi"
-    }
+    "CONTENT_1": "Pan fyddwch yn ymateb i'ch gwŷs, gallwch ofyn i newid eich dyddiadau neu gael eich esgusodi o'ch gwasanaeth rheithgor.",
+    "CONTENT_2": "Gallwch ond newid dyddiadau eich gwasanaeth unwaith, a rhaid i chi roi rheswm i ni. Fe ofynnir i chi ddarparu dyddiadau amgen o fewn y 12 mis nesaf pan fyddwch yn gallu gwasanaethu.",
+    "CONTENT_3": "Mae esgusodiadau ond yn cael eu cymeradwyo mewn amgylchiadau eithriadol pan na allwch wasanaethu ar unrhyw adeg yn y 12 mis nesaf.  Efallai y gofynnir i chi ddarparu tystiolaeth, ond ni fydd rhaid i chi gynnwys hyn pan fyddwch yn ymateb; byddwn yn cysylltu â chi ac yn rhoi amser i chi gasglu unrhyw beth rydyn ni ei angen.",
+    "CONTENT_4": "Os oes arnoch angen mwy o wybodaeth, gweler [link].",
+    "CONTENT_4_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi"
   },
   "ELIGIBILITY": {
     "PAGE_IDENTIFIER": "Response information - Eligibility",
     "HEADING": "Pwy sy'n gymwys i wasanaethu ar reithgor?",
-    "INTRO": "Fel rhan o'ch ymateb, gofynnir cwestiynau i chi i'n helpu i benderfynu a allwch wasanaethu ar reithgor.",
-    "QUALIFY": {
-      "TITLE": "Rydych yn gymwys i wasanaethu ar reithgor:",
-      "BULLET_1": "os byddwch dros 18 oed, ac o dan 76 oed, ar y diwrnod y byddwch yn dechrau eich gwasanaeth rheithgor; ac",
-      "BULLET_2": "rydych wedi cofrestru fel etholwr ar gyfer etholiadau seneddol neu lywodraeth leol",
-      "BULLET_3": "rydych chi wedi byw yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw am unrhyw gyfnod o bum mlynedd fan leiaf ers i chi fod yn 13 oed",
-      "CONTENT_1": "Os oes unrhyw un o'r canlynol yn berthnasol i chi, nid ydych yn gymwys i wasanaethu ar reithgor:"
+    "INTRO": {
+      "CONTENT_1": "Fel rhan o'ch ymateb, gofynnir cwestiynau i chi i'n helpu i benderfynu a allwch wasanaethu ar reithgor.",
+      "CONTENT_2": "Rydych yn gymwys i wasanaethu ar reithgor:",
+      "BULLET_2_1": "os byddwch dros 18 oed, ac o dan 76 oed, ar y diwrnod y byddwch yn dechrau eich gwasanaeth rheithgor; ac",
+      "BULLET_2_2": "rydych wedi cofrestru fel etholwr ar gyfer etholiadau seneddol neu lywodraeth leol",
+      "BULLET_2_3": "rydych chi wedi byw yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw am unrhyw gyfnod o bum mlynedd fan leiaf ers i chi fod yn 13 oed.",
+      "CONTENT_3": "Os oes unrhyw un o'r canlynol yn berthnasol i chi, nid ydych yn gymwys i wasanaethu ar reithgor:"
     },
     "MENTAL_DISORDERS": {
       "TITLE": "Anhwylderau meddyliol",
@@ -79,12 +73,12 @@
     "CONVICTIONS": {
       "TITLE": "Euogfarnau",
       "CONTENT_1": "Gallwch wasanaethu ar reithgor os oes gennych bwyntiau ar eich trwydded yrru, dirwyon goryrru neu os ydych wedi mynychu cwrs ymwybyddiaeth cyflymder, cyn belled nad ydych wedi cael unrhyw un o'r dedfrydau isod.",
-      "CONTENT_2": "NI ALLWCH wasanaethu ar reithgor os ydych wedi cael unrhyw un o’r dedfrydau troseddol hyn yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw. Ni allwch wneud gwasanaeth rheithgor chwaith os ydych wedi cael un o'r dedfrydau troseddol hyn am drosedd gwasanaeth dan Ddeddf y Lluoedd Arfog 2006 unrhyw le yn y byd.",
-      "BULLET_2_1": "carchar am oes, cadw am oes neu y ddalfa am oes",
-      "BULLET_2_2": "cadw hyd y mynno Ei Fawrhydi neu hyd y mynno’r Ysgrifennydd Gwladol",
-      "BULLET_2_3": "carcharu er mwyn diogelu'r cyhoedd neu gadw er mwyn diogelu'r cyhoedd",
-      "BULLET_2_4": "dedfryd estynedig o dan adran 226A, 226B, 227 neu 228 Deddf Cyfiawnder Troseddol 2003 neu adran 254, 266 neu 279 Deddf Dedfrydu 2020 (gan gynnwys dedfryd o'r fath a roddwyd o ganlyniad i adran 219A, 220, 221A neu 222 Deddf y Lluoedd Arfog 2006) neu adran 210A Deddf Gweithdrefn Droseddol (Yr Alban) 1995",
-      "BULLET_2_5": "cyfnod o garchar o bum mlynedd neu fwy neu gyfnod o gadw am bum mlynedd neu fwy",
+      "CONTENT_2": "NI ALLWCH wasanaethu ar reithgor os ydych wedi cael unrhyw un o’r dedfrydau troseddol hyn yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw. Ni allwch wneud gwasanaeth rheithgor chwaith os ydych wedi cael un o’r dedfrydau troseddol hyn am drosedd gwasanaeth dan Ddeddf y Lluoedd Arfog 2006 unrhyw le yn y byd.",
+      "BULLET_2_1": "carchar am oes, cadw am oes neu y ddalfa am oes,",
+      "BULLET_2_2": "cadw hyd y mynno Ei Fawrhydi neu hyd y mynno’r Ysgrifennydd Gwladol,",
+      "BULLET_2_3": "carcharu er mwyn diogelu'r cyhoedd neu gadw er mwyn diogelu'r cyhoedd,",
+      "BULLET_2_4": "dedfryd estynedig o dan adran 226A, 226B, 227 neu 228 Deddf Cyfiawnder Troseddol 2003 neu adran 254, 266 neu 279 Deddf Dedfrydu 2020 (gan gynnwys dedfryd o'r fath a roddwyd o ganlyniad i adran 219A, 220, 221A neu 222 Deddf y Lluoedd Arfog 2006) neu adran 210A Deddf Gweithdrefn Droseddol (Yr Alban) 1995,",
+      "BULLET_2_5": "cyfnod o garchar o bum mlynedd neu fwy neu gyfnod o gadw am bum mlynedd neu fwy.",
       "CONTENT_3": "Hefyd, ni allwch wasanaethu ar reithgor os ydych wedi cael un o'r dedfrydau troseddol hyn yn ystod y 10 mlynedd diwethaf:",
       "BULLET_3_1": "wedi treulio unrhyw ran o ddedfryd o garchar neu gadw",
       "BULLET_3_2": "wedi cael dedfryd o garchar wedi'i gohirio neu orchymyn cadw wedi'i ohirio",

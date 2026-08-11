@@ -21,65 +21,69 @@
   "EMPLOYMENT": {
     "PAGE_IDENTIFIER": "Response information - Employment",
     "HEADING": "Employment and time off work",
-    "INTRO": "Information for employees, employers, self-employed jurors, and students.",
-    "TIME_OFF_WORK": {
-      "TITLE": "Time off work",
-      "CONTENT_1": "Your employer has to let you do jury service - it's the law, but they can ask you to apply to change the dates to a more convenient time. You can only do this once.",
-      "CONTENT_2": "See the information about asking to change your dates or be excused, or check [link] for more details.",
-      "CONTENT_2_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
-      "CONTENT_3": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum.",
-      "CONTENT_4": "If you are self-employed, you have the right to claim the same allowances as if you were an employee. Check the claiming expenses section or [link] for more details.",
-      "CONTENT_4_LINK": "www.gov.uk/jury-service"
+    "INFORMATION": {
+      "TITLE": "Information for employees and self-employed jurors",
+      "CONTENT_1": "Your employer has to let you do jury service – it’s the law, but they can ask you to apply to change the dates to a more convenient time (you can only do this once). See the information about asking to change your dates or be excused, or check [link] for more details.",
+      "CONTENT_1_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+      "CONTENT_2": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum. If you are self-employed, you have the right to claim the same allowances as if you were an employee.",
+      "CONTENT_3": "Check the information in the ‘claiming expenses’ section or at [link] for more details.",
+      "CONTENT_3_LINK": "www.gov.uk/jury-service"
     }
   },
   "CHANGE_DATES": {
     "PAGE_IDENTIFIER": "Response information - Change dates",
-    "HEADING": "Asking to change your dates or to be excused",
-    "INTRO": "When you respond to your summons, you can ask to change your dates or to be excused from your jury service.",
-    "CHANGING_YOUR_DATES": {
-      "TITLE": "Changing your dates",
-      "CONTENT_1": "You can only change the dates of your service once and you'll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve."
-    },
-    "BEING_EXCUSED": {
-      "TITLE": "Being excused",
-      "CONTENT_1": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months.",
-      "CONTENT_2": "You may be asked to provide evidence, but you won't need to include this when you respond. We'll contact you and give you time to gather anything we need.",
-      "CONTENT_3": "If you need more information, please see [link].",
-      "CONTENT_3_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
-    }
+    "HEADING": "Asking to change the dates or to be excused",
+    "CONTENT_1": "When you respond to your summons, you can ask to change your dates or to be excused from your jury service.",
+    "CONTENT_2": "You can only change the dates of your service once and you’ll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve.",
+    "CONTENT_3": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months. You may be asked to provide evidence, but you won’t need to include this when you respond; we’ll contact you and give you time to gather anything we need.",
+    "CONTENT_4": "If you need more information, please see [link].",
+    "CONTENT_4_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
   },
   "ELIGIBILITY": {
     "PAGE_IDENTIFIER": "Response information - Eligibility",
     "HEADING": "Who is eligible to serve on a jury?",
-    "INTRO": "As part of your response, you'll be asked questions to help us decide whether you can do jury service.",
-    "QUALIFY": {
-      "TITLE": "You qualify for jury service if",
-      "BULLET_1": "you will be at least 18 years old, and under 76 years old, on the day that you start your jury service",
-      "BULLET_2": "you are registered as a parliamentary or local government elector",
-      "BULLET_3": "you have lived in the United Kingdom, the Channel Islands or the Isle of Man for any period of at least five years since you were 13 years old"
+    "INTRO": {
+      "CONTENT_1": "As part of your response, you’ll be asked questions to help us decide whether you can do jury service.",
+      "CONTENT_2": "You qualify for jury service if:",
+      "BULLET_2_1": "you will be at least 18 years old, and under 76 years old, on the day that you start your jury service; and",
+      "BULLET_2_2": "you are registered as a parliamentary or local government elector",
+      "BULLET_2_3": "you have lived in the United Kingdom, the Channel Islands or the Isle of Man for any period of at least five years since you were 13 years old.",
+      "CONTENT_3": "If any of the following applies to you, you do not qualify for jury service:"
     },
     "MENTAL_DISORDERS": {
       "TITLE": "Mental disorders",
-      "CONTENT_1": "Under the Mental Health Act 1983, some people cannot do jury service.",
-      "CONTENT_2": "If you are detained, sometimes called being sectioned, in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you cannot be on a jury.",
-      "CONTENT_3": "If you suffer from a mental disorder, including depression and anxiety, but you are not being detained, looked after or treated under the Mental Health Act, you can still be on a jury."
+      "CONTENT_1": "Under the Mental Health Act 1983, some people can not do Jury Service.",
+      "CONTENT_2": "If you are detained (this is sometimes called being ‘sectioned’), in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you can not be on a jury.",
+      "CONTENT_3": "If you suffer from a mental disorder (including depression and anxiety) but you are not being detained, looked after or treated under the Mental Health Act, you can still be on a jury."
     },
     "MENTAL_CAPACITY": {
       "TITLE": "Mental capacity",
-      "CONTENT_1": "If you lack the mental capacity to serve as a juror, you cannot be on a jury. Mental capacity means being able to make a decision for yourself.",
-      "CONTENT_2": "To be on a jury, a person must be able to understand, remember, weigh up and communicate information relating to a decision.",
-      "CONTENT_3": "If you are not sure if you can do jury service because of a mental disorder or lack of mental capacity, you can phone us on 0300 456 1024 for advice."
+      "CONTENT_1": "If you lack the mental capacity to serve as a juror, you can not be on a jury. Mental capacity means being able to make a decision for yourself. People who cannot do this are said to lack capacity under the Mental Capacity Act 2005. The lack of capacity must be because of an impairment of or disturbance in the functioning of the mind or brain which may be due to illness, injury, learning disability, or mental health problems.",
+      "CONTENT_2": "To be on a jury, a person must be able to:",
+      "BULLET_2_1": "Understand the information that relates to the decision they want to make.",
+      "BULLET_2_2": "Remember the information long enough to be able to make the decision.",
+      "BULLET_2_3": "Weigh up the information available to make the decision.",
+      "BULLET_2_4": "Communicate the decision by any means.",
+      "CONTENT_3": "If you are not sure if you can do Jury Service because of a mental disorder or lack of mental capacity, you can phone us on 0300 456 1024 for advice."
     },
     "BAIL": {
       "TITLE": "Bail",
-      "CONTENT_1": "If you are on bail in criminal proceedings, you cannot do jury service."
+      "CONTENT_1": "If you are on bail in criminal proceedings, you can not do Jury Service."
     },
     "CONVICTIONS": {
       "TITLE": "Convictions",
-      "CONTENT_1": "You can do jury service if you have points on your driving licence, speeding fines or have been to a speed awareness course, as long as you have not received one of the sentences below.",
-      "CONTENT_2": "You cannot do jury service if you have ever had a sentence of imprisonment for life, detention for life, custody for life, imprisonment for public protection, detention for public protection, an extended sentence, or a term of imprisonment or detention of five years or more.",
-      "CONTENT_3": "You cannot do jury service if, in the last 10 years, you have served any part of a sentence of imprisonment or detention, received a suspended sentence, or had a community order in England and Wales.",
-      "CONTENT_4": "You also cannot do jury service if in the last 10 years you have had any similar order under the law of Scotland, Northern Ireland, Isle of Man, any of the Channel Islands, or a community or overseas community order under the Armed Forces Act 2006."
+      "CONTENT_1": "You can do jury service if you have points on your driving licence, speeding fines or have been to a speed awareness course, as long as you have not received any of the sentences below.",
+      "CONTENT_2": "You can not do jury service if you have ever had one of these criminal sentences in the United Kingdom, the Channel Islands or the Isle of Man. You also can not do jury service if you've had one of these criminal sentences for a service offence under the Armed Forces Act 2006 anywhere in the world.",
+      "BULLET_2_1": "to imprisonment for life, detention for life or custody for life,",
+      "BULLET_2_2": "to detention during his Majesty’s pleasure or during the pleasure of the Secretary of State,",
+      "BULLET_2_3": "to imprisonment for public protection or detention for public protection,",
+      "BULLET_2_4": "to an extended sentence under section 226A, 226B, 227 or 228 of the Criminal Justice Act 2003 or section 254, 266 or 279 of the Sentencing Act 2020 (including such a sentence imposed as a result of section 219A, 220, 221A or 222 of the Armed Forces Act 2006) or section 210A of the Criminal Procedure (Scotland) Act 1995,",
+      "BULLET_2_5": "to a term of imprisonment of five years or more or a term of detention of five years or more.",
+      "CONTENT_3": "Also, you can not do jury service if you have had one of these criminal sentences in the last 10 years:",
+      "BULLET_3_1": "served any part of a sentence of imprisonment or detention",
+      "BULLET_3_2": "received a suspended sentence of imprisonment or a suspended order for detention",
+      "CONTENT_4": "You can not do jury service if in the last 10 years in England and Wales you have had a community order (including a community rehabilitation order, community punishment order, community punishment and rehabilitation order, drug treatment and testing order, or a drug abstinence order).",
+      "CONTENT_5": "You can not do jury service if in the last 10 years you have had any similar order under the law of Scotland, Northern Ireland, Isle of Man, any of the Channel Islands, or a community or overseas community order under the Armed Forces Act 2006."
     }
   },
   "ATTENDANCE": {

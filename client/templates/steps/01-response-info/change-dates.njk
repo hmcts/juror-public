@@ -22,24 +22,15 @@
       
       <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.CHANGE_DATES.HEADING }}</h1>
 
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.INTRO }}</p>
-
-      {% if not welsh %}
-        <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.CHANGE_DATES.CHANGING_YOUR_DATES.TITLE }}</h2>
-      {% endif %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CHANGING_YOUR_DATES.CONTENT_1 }}</p>
-
-      {% if not welsh %}
-        <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.CHANGE_DATES.BEING_EXCUSED.TITLE }}</h2>
-      {% endif %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.BEING_EXCUSED.CONTENT_1 }}</p>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.BEING_EXCUSED.CONTENT_2 }}</p>
-      {% set content_3_link %}
-        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.CHANGE_DATES.BEING_EXCUSED.CONTENT_3_LINK }}" target="_blank">
-          {{ texts.RESPONSE_INFO.CHANGE_DATES.BEING_EXCUSED.CONTENT_3_LINK }}
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_1 }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_2 }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_3 }}</p>
+      {% set content_4_link %}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4_LINK }}" target="_blank">
+          {{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4_LINK }}
         </a>
       {% endset %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.BEING_EXCUSED.CONTENT_3 | replace("[link]", content_3_link) | safe }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4 | replace("[link]", content_4_link) | safe }}</p>
       
       {{ govukButton({
         text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
