@@ -89,14 +89,12 @@
   "ATTENDANCE": {
     "PAGE_IDENTIFIER": "Response information - Attendance",
     "HEADING": "Pryd a ble i fynychu",
-    "INTRO": "Rydych wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar ",
-    "INTRO_AT": "yn",
-    "SECURITY": {
-      "TITLE": "Court security",
-      "CONTENT_1": "Caniatewch amser ychwanegol i fynd trwy'r drefn ddiogelwch yn y llys.",
-      "CONTENT_2": "Gallwch ddod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
-      "SECURITY_LINK": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
-    }
+    "INTRO": "Eich dyddiad cychwyn, cyfeiriad y llys, amser cyrraedd a gwybodaeth ddiogelwch.",
+    "CONTENT_1": "Rydych wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar ",
+    "CONTENT_AT": "yn",
+    "CONTENT_2": "Caniatewch amser ychwanegol i fynd trwy'r drefn ddiogelwch yn y llys.",
+    "CONTENT_3": "Gallwch ddod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
+    "SECURITY_LINK": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
   },
   "SUPPORT": {
     "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
