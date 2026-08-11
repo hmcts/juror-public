@@ -89,14 +89,12 @@
   "ATTENDANCE": {
     "PAGE_IDENTIFIER": "Response information - Attendance",
     "HEADING": "When and where to attend",
-    "INTRO": "You are summond to start jury service on ",
-    "INTRO_AT": "at",
-    "SECURITY": {
-      "TITLE": "Court security",
-      "CONTENT_1": "You should allow extra time to go through security at court.",
-      "CONTENT_2": "Information on what you can and can't take into a court or tribunal building is available at ",
-      "SECURITY_LINK": "https://www.gov.uk/entering-court-or-tribunal-building"
-    }
+    "INTRO": "Your start date, court address, arrival time and security information.",
+    "CONTENT_1": "You are summond to start jury service on ",
+    "CONTENT_AT": "at",
+    "CONTENT_2": "You should allow extra time to go through security at court.",
+    "CONTENT_3": "Information on this and what you can and can't take it can be found here: ",
+    "SECURITY_LINK": "https://www.gov.uk/entering-court-or-tribunal-building"
   },
   "SUPPORT": {
     "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
