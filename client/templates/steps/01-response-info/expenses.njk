@@ -1,0 +1,157 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.EXPENSES.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.EXPENSES.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% set welsh = texts.INTERFACE.HTML_LANG == "cy" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.EXPENSES.HEADING }}</h1>
+
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.EXPENSES.INTRO_1 }}</p>
+        <p class="govuk-body">
+          {{ texts.RESPONSE_INFO.EXPENSES.INTRO_2 }}
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+            {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
+          </a>
+          {{ texts.RESPONSE_INFO.EXPENSES.INTRO_3 }}
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.CALCULATOR_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+            {{ texts.RESPONSE_INFO.EXPENSES.CALCULATOR_LINK_TEXT }}
+          </a>.
+        </p>
+
+        {# Loss of earnings and extra childcare or care costs #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_1.TITLE
+        }) %}
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_1.CONTENT_1 }}</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_1.BULLET_1 }}</li>
+            <li>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_1.BULLET_2 }}</li>
+          </ul>
+        {% endcall %}
+
+
+        {# Loss of earnings #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.TITLE
+        }) %}
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_1 }}</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.BULLET_1 }}</li>
+            <li>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.BULLET_2 }}</li>
+          </ul>
+          <p>
+            {{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_2 }}
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+              {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
+            </a>.
+            {{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_3 }}
+          </p>
+          <p>
+            {{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_4 }}<br/>
+            {{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_5 }}
+          </p>
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_6 }}</p>
+        {% endcall %}
+
+
+        {# Childcare or care costs #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.CHILDCARE_OR_CARE_COSTS.TITLE
+        }) %}
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.CHILDCARE_OR_CARE_COSTS.CONTENT_1 }}</p>
+          <p>
+            {{ texts.RESPONSE_INFO.EXPENSES.CHILDCARE_OR_CARE_COSTS.CONTENT_2 }}</br>
+            {{ texts.RESPONSE_INFO.EXPENSES.CHILDCARE_OR_CARE_COSTS.CONTENT_3 }}
+          </p>
+        {% endcall %}
+
+
+        {# If you claim benefits #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.CLAIM_BENEFITS.TITLE
+        }) %}
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.CLAIM_BENEFITS.CONTENT_1 }}</p>
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.CLAIM_BENEFITS.CONTENT_2 }}</p>
+        {% endcall %}
+
+
+        {# Travel costs #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.TRAVEL_COSTS.TITLE
+        }) %}
+          <p>
+            {{ texts.RESPONSE_INFO.EXPENSES.TRAVEL_COSTS.CONTENT_1 }}
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+              {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
+            </a>.
+          </p>
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.TRAVEL_COSTS.CONTENT_2 }}</p>
+        {% endcall %}
+
+
+        {# Travel tickets #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.TRAVEL_TICKETS.TITLE
+        }) %}
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.TRAVEL_TICKETS.CONTENT_1 }}</p>
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.TRAVEL_TICKETS.CONTENT_2 }}</p>
+        {% endcall %}
+
+        {# Food and drink costs #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.FOOD_AND_DRINK.TITLE
+        }) %}
+          <p>
+            {{ texts.RESPONSE_INFO.EXPENSES.FOOD_AND_DRINK.CONTENT_1 }}
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+              {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
+            </a>.
+          </p>
+        {% endcall %}
+
+
+        {# When to claim #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.WHEN_TO_CLAIM.TITLE
+        }) %}
+          <p>{{ texts.RESPONSE_INFO.EXPENSES.WHEN_TO_CLAIM.CONTENT_1 }}</p>
+        {% endcall %}
+
+        {# Questions #}
+        {% call govukDetails({
+          summaryText: texts.RESPONSE_INFO.EXPENSES.QUESTIONS.TITLE
+        }) %}
+          <p>
+            {{ texts.RESPONSE_INFO.EXPENSES.QUESTIONS.CONTENT_1 }}
+          </p>
+          <p>
+            {% include "../../includes/contact-details.njk" %}
+          </p>
+        {% endcall %}
+
+
+        {{ govukButton({
+          text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+          href: responseStartUrl
+        }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

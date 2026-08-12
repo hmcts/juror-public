@@ -1,0 +1,47 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.JURY_SERVICE.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.JURY_SERVICE.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+    
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.JURY_SERVICE.HEADING }}</h1>
+
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.JURY_SERVICE.INTRO }}</p>
+
+      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.JURY_SERVICE.WHAT_IS_JURY_SERVICE.TITLE }}</h2>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.JURY_SERVICE.WHAT_IS_JURY_SERVICE.CONTENT }}</p>
+
+      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.JURY_SERVICE.WHO_CAN_BE_CALLED.TITLE }}</h2>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.JURY_SERVICE.WHO_CAN_BE_CALLED.CONTENT_1 }}</p>
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.JURY_SERVICE.WHO_CAN_BE_CALLED.CONTENT_2 }}</p>
+      <div class="govuk-body govuk-!-margin-bottom-6">
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.JURY_SERVICE.WHO_CAN_BE_CALLED.CONTENT_3 }} 
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.JURY_SERVICE.WHO_CAN_BE_CALLED.LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+            {{ texts.RESPONSE_INFO.JURY_SERVICE.WHO_CAN_BE_CALLED.LINK_TEXT }}
+          </a>.
+        </p>
+      </div>
+
+      {{ govukButton({
+        text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+        href: responseStartUrl
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}
