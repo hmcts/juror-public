@@ -26,11 +26,13 @@
       <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_2 }}</p>
       <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_3 }}</p>
       {% set content_4_link %}
-        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4_LINK }}" target="_blank">
-          {{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4_LINK }}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+          {{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4_LINK_TEXT }}
         </a>
       {% endset %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4 | replace("[link]", content_4_link) | safe }}</p>
+      <div class="govuk-body govuk-!-margin-bottom-6">
+        <p>{{ texts.RESPONSE_INFO.CHANGE_DATES.CONTENT_4 | replace("[link]", content_4_link) | safe }}</p>
+      </div>
       
       {{ govukButton({
         text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,

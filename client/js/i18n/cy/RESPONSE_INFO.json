@@ -8,14 +8,15 @@
     "INTRO": "Beth yw gwasanaeth rheithgor a phwy all gael eu galw.",
     "WHAT_IS_JURY_SERVICE": {
       "TITLE": "Beth yw gwasanaeth rheithgor?",
-      "CONTENT": "JMae gwasanaethu ar reithgor yn ddyletswydd gyhoeddus bwysig. Byddwch chi ac fel arfer 11 o bobl eraill yn ffurfio rheithgor. Gyda’ch gilydd, byddwch yn penderfynu canlyniad treial troseddol mewn Llys y Goron."
+      "CONTENT": "JMae gwasanaethu ar reithgor yn ddyletswydd gyhoeddus bwysig. Byddwch chi ac fel arfer 11 o bobl eraill yn ffurfio rheithgor. Gyda'ch gilydd, byddwch yn penderfynu canlyniad treial troseddol mewn Llys y Goron."
     },
     "WHO_CAN_BE_CALLED": {
       "TITLE": "Pwy all gael ei alw i wasanaethu ar reithgor?",
-      "CONTENT_1": "Gall bob oedolyn rhwng 18 a 75 mlwydd oed sy’n byw yn y DU gael ei ddewis ar hap o’r rhestr etholiadol i wasanaethu ar reithgor.",
-      "CONTENT_2": "Os byddwch yn iau na 18 neu’n hŷn na 76 ar ddiwrnod cyntaf eich gwasanaeth rheithgor, ni fyddwch yn gallu gwasanaethu ond mae'n rhaid i chi dal ymateb i'ch gwŷs.",
+      "CONTENT_1": "Gall bob oedolyn rhwng 18 a 75 mlwydd oed sy'n byw yn y DU gael ei ddewis ar hap o'r rhestr etholiadol i wasanaethu ar reithgor.",
+      "CONTENT_2": "Os byddwch yn iau na 18 neu'n hŷn na 76 ar ddiwrnod cyntaf eich gwasanaeth rheithgor, ni fyddwch yn gallu gwasanaethu ond mae'n rhaid i chi dal ymateb i'ch gwŷs.",
       "CONTENT_3": "Mae mwy o wybodaeth ar gael yn",
-      "LINK": "www.gov.uk/gwasanaeth-rheithgor"
+      "LINK_TEXT": "www.gov.uk/gwasanaeth-rheithgor",
+      "LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor"
     }
   },
   "EMPLOYMENT": {
@@ -24,10 +25,12 @@
     "INFORMATION": {
       "TITLE": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig",
       "CONTENT_1": "Mae'n rhaid i'ch cyflogwr adael i chi wneud eich gwasanaeth rheithgor - dyma yw'r gyfraith, ond gallant ofyn i chi wneud cais i newid y dyddiadau i amser mwy cyfleus (gallwch ond gwneud hyn unwaith). Gweler yr wybodaeth am ofyn i gael newid eich dyddiadau neu gael eich esgusodi. neu gwiriwch [link] i gael mwy o fanylion.",
-      "CONTENT_1_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
-      "CONTENT_2": "Gall eich cyflogwr ddewis eich talu neu beidio eich talu yn ystod eich gwasanaeth. Os na fyddant yn eich talu, gallwch wneud cais i’r llys am golli enillion, sy'n destun uchafswm dyddiol. Os ydych yn hunangyflogedig, mae gennych yr hawl i hawlio’r un treuliau â phetaech yn weithiwr cyflogedig.",
-      "CONTENT_3": "Gwiriwch yr wybodaeth yn yr adran ‘hawlio treuliau’ neu yn [link] i gael mwy o fanylion.",
-      "CONTENT_3_LINK": "www.gov.uk/gwasanaeth-rheithgor"
+      "CONTENT_1_LINK_TEXT": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
+      "CONTENT_1_LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
+      "CONTENT_2": "Gall eich cyflogwr ddewis eich talu neu beidio eich talu yn ystod eich gwasanaeth. Os na fyddant yn eich talu, gallwch wneud cais i'r llys am golli enillion, sy'n destun uchafswm dyddiol. Os ydych yn hunangyflogedig, mae gennych yr hawl i hawlio'r un treuliau â phetaech yn weithiwr cyflogedig.",
+      "CONTENT_3": "Gwiriwch yr wybodaeth yn yr adran 'hawlio treuliau' neu yn [link] i gael mwy o fanylion.",
+      "CONTENT_3_LINK_TEXT": "www.gov.uk/gwasanaeth-rheithgor",
+      "CONTENT_3_LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor"
     }
   },
   "CHANGE_DATES": {
@@ -37,7 +40,8 @@
     "CONTENT_2": "Gallwch ond newid dyddiadau eich gwasanaeth unwaith, a rhaid i chi roi rheswm i ni. Fe ofynnir i chi ddarparu dyddiadau amgen o fewn y 12 mis nesaf pan fyddwch yn gallu gwasanaethu.",
     "CONTENT_3": "Mae esgusodiadau ond yn cael eu cymeradwyo mewn amgylchiadau eithriadol pan na allwch wasanaethu ar unrhyw adeg yn y 12 mis nesaf.  Efallai y gofynnir i chi ddarparu tystiolaeth, ond ni fydd rhaid i chi gynnwys hyn pan fyddwch yn ymateb; byddwn yn cysylltu â chi ac yn rhoi amser i chi gasglu unrhyw beth rydyn ni ei angen.",
     "CONTENT_4": "Os oes arnoch angen mwy o wybodaeth, gweler [link].",
-    "CONTENT_4_LINK": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi"
+    "CONTENT_4_LINK_TEXT": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
+    "CONTENT_4_LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi"
   },
   "ELIGIBILITY": {
     "PAGE_IDENTIFIER": "Response information - Eligibility",
@@ -54,16 +58,16 @@
       "TITLE": "Anhwylderau meddyliol",
       "CONTENT_1": "O dan Ddeddf Iechyd Meddwl 1983, ni all rhai pobl wneud Gwasanaeth Rheithgor.",
       "CONTENT_2": "Os ydych yn cael eich cadw dan y ddeddf yn yr ysbyty, o dan orchymyn gwarchodaeth neu o dan orchymyn triniaeth gymunedol oherwydd anhwylder meddyliol, ni allwch fod ar reithgor.",
-      "CONTENT_3": "Os ydych yn dioddef o anhwylder meddyliol (gan gynnwys iselder a gorbryder) ond nad ydych yn cael eich cadw, yn derbyn gofal neu’n cael eich trin o dan y Ddeddf Iechyd Meddwl, gallwch wasanaethu ar reithgor."
+      "CONTENT_3": "Os ydych yn dioddef o anhwylder meddyliol (gan gynnwys iselder a gorbryder) ond nad ydych yn cael eich cadw, yn derbyn gofal neu'n cael eich trin o dan y Ddeddf Iechyd Meddwl, gallwch wasanaethu ar reithgor."
     },
     "MENTAL_CAPACITY": {
       "TITLE": "Galluedd meddyliol",
       "CONTENT_1": "Os nad oes gennych y galluedd meddyliol i wasanaethu fel rheithiwr, ni allwch fod ar reithgor. Mae galluedd meddyliol yn golygu gallu gwneud penderfyniad drosoch eich hun. Dywedir nad oes gan bobl sy'n methu gwneud hyn gapasiti o dan Ddeddf Galluedd Meddyliol 2005. Rhaid i'r diffyg capasiti fod oherwydd nam neu ddiffyg ar weithrediad y meddwl neu'r ymennydd a allai fod oherwydd salwch, anaf, anabledd dysgu, neu broblemau iechyd meddwl.",
       "CONTENT_2": "I fod ar reithgor, mae'n rhaid i rywun allu:",
-      "BULLET_2_1": "Deall yr wybodaeth sy'n berthnasol i’r penderfyniad y maent eisiau ei wneud.",
-      "BULLET_2_2": "Cofio’r wybodaeth am gyfnod digon hir i allu gwneud penderfyniad.",
+      "BULLET_2_1": "Deall yr wybodaeth sy'n berthnasol i'r penderfyniad y maent eisiau ei wneud.",
+      "BULLET_2_2": "Cofio'r wybodaeth am gyfnod digon hir i allu gwneud penderfyniad.",
       "BULLET_2_3": "Ystyried yr wybodaeth sydd ar gael i wneud y penderfyniad.",
-      "BULLET_2_4": "Cyfathrebu’r penderfyniad drwy unrhyw fodd.",
+      "BULLET_2_4": "Cyfathrebu'r penderfyniad drwy unrhyw fodd.",
       "CONTENT_3": "Os nad ydych yn siŵr a allwch chi wasanaethu ar rheithgor oherwydd anhwylder meddyliol neu ddiffyg galluedd meddyliol, gallwch ein ffonio ar 0300 303 5172 i gael cyngor."
     },
     "BAIL": {
@@ -73,9 +77,9 @@
     "CONVICTIONS": {
       "TITLE": "Euogfarnau",
       "CONTENT_1": "Gallwch wasanaethu ar reithgor os oes gennych bwyntiau ar eich trwydded yrru, dirwyon goryrru neu os ydych wedi mynychu cwrs ymwybyddiaeth cyflymder, cyn belled nad ydych wedi cael unrhyw un o'r dedfrydau isod.",
-      "CONTENT_2": "NI ALLWCH wasanaethu ar reithgor os ydych wedi cael unrhyw un o’r dedfrydau troseddol hyn yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw. Ni allwch wneud gwasanaeth rheithgor chwaith os ydych wedi cael un o’r dedfrydau troseddol hyn am drosedd gwasanaeth dan Ddeddf y Lluoedd Arfog 2006 unrhyw le yn y byd.",
+      "CONTENT_2": "NI ALLWCH wasanaethu ar reithgor os ydych wedi cael unrhyw un o'r dedfrydau troseddol hyn yn y Deyrnas Unedig, Ynysoedd y Sianel neu Ynys Manaw. Ni allwch wneud gwasanaeth rheithgor chwaith os ydych wedi cael un o'r dedfrydau troseddol hyn am drosedd gwasanaeth dan Ddeddf y Lluoedd Arfog 2006 unrhyw le yn y byd.",
       "BULLET_2_1": "carchar am oes, cadw am oes neu y ddalfa am oes,",
-      "BULLET_2_2": "cadw hyd y mynno Ei Fawrhydi neu hyd y mynno’r Ysgrifennydd Gwladol,",
+      "BULLET_2_2": "cadw hyd y mynno Ei Fawrhydi neu hyd y mynno'r Ysgrifennydd Gwladol,",
       "BULLET_2_3": "carcharu er mwyn diogelu'r cyhoedd neu gadw er mwyn diogelu'r cyhoedd,",
       "BULLET_2_4": "dedfryd estynedig o dan adran 226A, 226B, 227 neu 228 Deddf Cyfiawnder Troseddol 2003 neu adran 254, 266 neu 279 Deddf Dedfrydu 2020 (gan gynnwys dedfryd o'r fath a roddwyd o ganlyniad i adran 219A, 220, 221A neu 222 Deddf y Lluoedd Arfog 2006) neu adran 210A Deddf Gweithdrefn Droseddol (Yr Alban) 1995,",
       "BULLET_2_5": "cyfnod o garchar o bum mlynedd neu fwy neu gyfnod o gadw am bum mlynedd neu fwy.",
@@ -89,19 +93,21 @@
   "ATTENDANCE": {
     "PAGE_IDENTIFIER": "Response information - Attendance",
     "HEADING": "Pryd a ble i fynychu",
-    "INTRO": "Eich dyddiad cychwyn, cyfeiriad y llys, amser cyrraedd a gwybodaeth ddiogelwch.",
+    "TITLE": "Eich dyddiad cychwyn, cyfeiriad y llys, amser cyrraedd a gwybodaeth ddiogelwch.",
     "CONTENT_1": "Rydych wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar ",
     "CONTENT_AT": "yn",
     "CONTENT_2": "Caniatewch amser ychwanegol i fynd trwy'r drefn ddiogelwch yn y llys.",
     "CONTENT_3": "Gallwch ddod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
-    "SECURITY_LINK": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
+    "SECURITY_LINK_TEXT": "www.gov.uk/mynd-i-lys-neu-dribiwnlys",
+    "SECURITY_LINK_URL": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
   },
   "SUPPORT": {
     "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
     "HEADING": "Cefnogaeth a hygyrchedd",
     "CONTENT_1": "Os oes gennych anabledd ac mae arnoch angen i ni wneud addasiadau rhesymol i'ch helpu yn ystod eich gwasanaeth rheithgor, gallwch ddweud wrthym fel rhan o'ch ymateb.",
-    "CONTENT_2": "Am ragor o wybodaeth ewch i: ",
-    "SUPPORT_LINK": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-addasiadau-rhesymol"
+    "CONTENT_2": "Am ragor o wybodaeth ewch i ",
+    "SUPPORT_LINK_TEXT": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-addasiadau-rhesymol",
+    "SUPPORT_LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-addasiadau-rhesymol"
   },
   "EXPENSES": {
     "PAGE_IDENTIFIER": "Response information - Expenses",

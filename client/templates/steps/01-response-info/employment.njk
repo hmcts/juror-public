@@ -25,8 +25,8 @@
       <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.TITLE }}</h2>
 
       {% set content_1_link %}
-        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK }}" target="_blank">
-          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK }}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK_TEXT }}
         </a>
       {% endset %}
       <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1 | replace("[link]", content_1_link) | safe }}</p>
@@ -34,11 +34,13 @@
       <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_2 }}</p>
 
       {% set content_3_link %}
-        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK }}" target="_blank">
-          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK }}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK_TEXT }}
         </a>
       {% endset %}
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3 | replace("[link]", content_3_link) | safe }}</p>
+      <div class="govuk-body govuk-!-margin-bottom-6">
+        <p>{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3 | replace("[link]", content_3_link) | safe }}</p>
+      </div>
 
       {{ govukButton({
         text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,

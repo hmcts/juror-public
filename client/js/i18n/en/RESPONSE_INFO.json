@@ -8,14 +8,15 @@
     "INTRO": "What jury service is and who can be called.",
     "WHAT_IS_JURY_SERVICE": {
       "TITLE": "What is jury service?",
-      "CONTENT": "Jury service is an important public duty. You and usually 11 other people will form a jury. Together, you’ll decide the result of a criminal trial in the Crown court."
+      "CONTENT": "Jury service is an important public duty. You and usually 11 other people will form a jury. Together, you'll decide the result of a criminal trial in the Crown court."
     },
     "WHO_CAN_BE_CALLED": {
       "TITLE": "Who can be called for jury service?",
       "CONTENT_1": "Every adult aged 18 to 75 years that lives in the UK can be picked at random for jury service from the electoral roll.",
       "CONTENT_2": "If you are going to be under 18 or over 76 on the first day of your jury service, you will be unable to serve but you must still reply to your summons.",
       "CONTENT_3": "There is more information at",
-      "LINK": "www.gov.uk/jury-service"
+      "LINK_TEXT": "www.gov.uk/jury-service",
+      "LINK_URL": "https://www.gov.uk/jury-service"
     }
   },
   "EMPLOYMENT": {
@@ -23,27 +24,30 @@
     "HEADING": "Employment and time off work",
     "INFORMATION": {
       "TITLE": "Information for employees and self-employed jurors",
-      "CONTENT_1": "Your employer has to let you do jury service – it’s the law, but they can ask you to apply to change the dates to a more convenient time (you can only do this once). See the information about asking to change your dates or be excused, or check [link] for more details.",
-      "CONTENT_1_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+      "CONTENT_1": "Your employer has to let you do jury service – it's the law, but they can ask you to apply to change the dates to a more convenient time (you can only do this once). See the information about asking to change your dates or be excused, or check [link] for more details.",
+      "CONTENT_1_LINK_TEXT": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+      "CONTENT_1_LINK_URL": "https://www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
       "CONTENT_2": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum. If you are self-employed, you have the right to claim the same allowances as if you were an employee.",
-      "CONTENT_3": "Check the information in the ‘claiming expenses’ section or at [link] for more details.",
-      "CONTENT_3_LINK": "www.gov.uk/jury-service"
+      "CONTENT_3": "Check the information in the 'claiming expenses' section or at [link] for more details.",
+      "CONTENT_3_LINK_TEXT": "www.gov.uk/jury-service",
+      "CONTENT_3_LINK_URL": "https://www.gov.uk/jury-service"
     }
   },
   "CHANGE_DATES": {
     "PAGE_IDENTIFIER": "Response information - Change dates",
     "HEADING": "Asking to change the dates or to be excused",
     "CONTENT_1": "When you respond to your summons, you can ask to change your dates or to be excused from your jury service.",
-    "CONTENT_2": "You can only change the dates of your service once and you’ll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve.",
-    "CONTENT_3": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months. You may be asked to provide evidence, but you won’t need to include this when you respond; we’ll contact you and give you time to gather anything we need.",
+    "CONTENT_2": "You can only change the dates of your service once and you'll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve.",
+    "CONTENT_3": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months. You may be asked to provide evidence, but you won't need to include this when you respond; we'll contact you and give you time to gather anything we need.",
     "CONTENT_4": "If you need more information, please see [link].",
-    "CONTENT_4_LINK": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
+    "CONTENT_4_LINK_TEXT": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+    "CONTENT_4_LINK_URL": "https://www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
   },
   "ELIGIBILITY": {
     "PAGE_IDENTIFIER": "Response information - Eligibility",
     "HEADING": "Who is eligible to serve on a jury?",
     "INTRO": {
-      "CONTENT_1": "As part of your response, you’ll be asked questions to help us decide whether you can do jury service.",
+      "CONTENT_1": "As part of your response, you'll be asked questions to help us decide whether you can do jury service.",
       "CONTENT_2": "You qualify for jury service if:",
       "BULLET_2_1": "you will be at least 18 years old, and under 76 years old, on the day that you start your jury service; and",
       "BULLET_2_2": "you are registered as a parliamentary or local government elector",
@@ -53,7 +57,7 @@
     "MENTAL_DISORDERS": {
       "TITLE": "Mental disorders",
       "CONTENT_1": "Under the Mental Health Act 1983, some people can not do Jury Service.",
-      "CONTENT_2": "If you are detained (this is sometimes called being ‘sectioned’), in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you can not be on a jury.",
+      "CONTENT_2": "If you are detained (this is sometimes called being 'sectioned'), in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you can not be on a jury.",
       "CONTENT_3": "If you suffer from a mental disorder (including depression and anxiety) but you are not being detained, looked after or treated under the Mental Health Act, you can still be on a jury."
     },
     "MENTAL_CAPACITY": {
@@ -75,7 +79,7 @@
       "CONTENT_1": "You can do jury service if you have points on your driving licence, speeding fines or have been to a speed awareness course, as long as you have not received any of the sentences below.",
       "CONTENT_2": "You can not do jury service if you have ever had one of these criminal sentences in the United Kingdom, the Channel Islands or the Isle of Man. You also can not do jury service if you've had one of these criminal sentences for a service offence under the Armed Forces Act 2006 anywhere in the world.",
       "BULLET_2_1": "to imprisonment for life, detention for life or custody for life,",
-      "BULLET_2_2": "to detention during his Majesty’s pleasure or during the pleasure of the Secretary of State,",
+      "BULLET_2_2": "to detention during his Majesty's pleasure or during the pleasure of the Secretary of State,",
       "BULLET_2_3": "to imprisonment for public protection or detention for public protection,",
       "BULLET_2_4": "to an extended sentence under section 226A, 226B, 227 or 228 of the Criminal Justice Act 2003 or section 254, 266 or 279 of the Sentencing Act 2020 (including such a sentence imposed as a result of section 219A, 220, 221A or 222 of the Armed Forces Act 2006) or section 210A of the Criminal Procedure (Scotland) Act 1995,",
       "BULLET_2_5": "to a term of imprisonment of five years or more or a term of detention of five years or more.",
@@ -89,19 +93,21 @@
   "ATTENDANCE": {
     "PAGE_IDENTIFIER": "Response information - Attendance",
     "HEADING": "When and where to attend",
-    "INTRO": "Your start date, court address, arrival time and security information.",
-    "CONTENT_1": "You are summond to start jury service on ",
+    "TITLE": "Your start date, court address, arrival time and security information.",
+    "CONTENT_1": "You are summoned to start jury service on ",
     "CONTENT_AT": "at",
     "CONTENT_2": "You should allow extra time to go through security at court.",
     "CONTENT_3": "Information on this and what you can and can't take it can be found here: ",
-    "SECURITY_LINK": "https://www.gov.uk/entering-court-or-tribunal-building"
+    "SECURITY_LINK_TEXT": "www.gov.uk/entering-court-or-tribunal-building",
+    "SECURITY_LINK_URL": "https://www.gov.uk/entering-court-or-tribunal-building"
   },
   "SUPPORT": {
     "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
     "HEADING": "Support and accessibility",
     "CONTENT_1": "If you have a disability and need us to make reasonable adjustments to help you during your jury service, you can tell us as part of your response.",
-    "CONTENT_2": "For more information, please visit: ",
-    "SUPPORT_LINK": "https://www.gov.uk/jury-service/request-reasonable-adjustments"
+    "CONTENT_2": "For more information, please visit ",
+    "SUPPORT_LINK_TEXT": "www.gov.uk/jury-service/request-reasonable-adjustments",
+    "SUPPORT_LINK_URL": "https://www.gov.uk/jury-service/request-reasonable-adjustments"
   },
   "EXPENSES": {
     "PAGE_IDENTIFIER": "Response information - Expenses",
