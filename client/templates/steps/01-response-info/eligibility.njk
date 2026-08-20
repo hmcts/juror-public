@@ -1,6 +1,7 @@
 {% extends "../../layouts/default-gds.njk" %}
 
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
 
 {% block pageTitle %}
   {{ texts.RESPONSE_INFO.ELIGIBILITY.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
@@ -31,44 +32,72 @@
       </ul>
       <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.INTRO.CONTENT_3 }}</p>
 
-      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.TITLE }}</h2>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.CONTENT_1 }}</p>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.CONTENT_2 }}</p>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.CONTENT_3 }}</p>
+      {# Mental Disorders #}
+      {% call govukDetails({
+        id: "mental-disorders-details",
+        summaryText: texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.TITLE
+      }) %}
+        {#<h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.TITLE }}</h2>#}
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.CONTENT_1 }}</p>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.CONTENT_2 }}</p>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_DISORDERS.CONTENT_3 }}</p>
+      {% endcall %}
 
-      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.TITLE }}</h2>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_1 }}</p>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_2 }}</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_1 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_2 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_3 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_4 }}</li>
-      </ul>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_3 }}</p>
+      {# Mental Capacity #}
+      {% set tel_no %}
+        <a class="govuk-link" href="tel:{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_TEL }}">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_TEL }}</a>
+      {% endset %}
 
-      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.BAIL.TITLE }}</h2>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.BAIL.CONTENT_1 }}</p>
+      {% call govukDetails({
+        id: "mental-capacity-details",
+        summaryText: texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.TITLE
+      }) %}
+        {#<h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.TITLE }}</h2>#}
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_1 }}</p>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_2 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_1 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_2 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_3 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.BULLET_2_4 }}</li>
+        </ul>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.MENTAL_CAPACITY.CONTENT_3 | replace('[tel_no]', tel_no) | safe }}</p>
+      {% endcall %}
 
-      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.TITLE }}</h2>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_1 }}</p>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_2 }}</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_1 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_2 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_3 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_4 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_5 }}</li>
-      </ul>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_3 }}</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_3_1 }}</li>
-        <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_3_2 }}</li>
-      </ul>
-      <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_4 }}</p>
-      <div class="govuk-body govuk-!-margin-bottom-6">
-        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_5 }}</p>
-      </div>
+      {# Bail #}
+      {% call govukDetails({
+        id: "bail-details",
+        summaryText: texts.RESPONSE_INFO.ELIGIBILITY.BAIL.TITLE
+      }) %}
+        {#<h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.BAIL.TITLE }}</h2>#}
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.BAIL.CONTENT_1 }}</p>
+      {% endcall %}
+
+      {# Convictions #}
+      {% call govukDetails({
+        id: "convictions-details",
+        summaryText: texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.TITLE
+      }) %}
+        {#<h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.TITLE }}</h2>#}
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_1 }}</p>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_2 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_1 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_2 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_3 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_4 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_2_5 }}</li>
+        </ul>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_3 }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_3_1 }}</li>
+          <li>{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.BULLET_3_2 }}</li>
+        </ul>
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_4 }}</p>
+        <div class="govuk-body govuk-!-margin-bottom-6">
+          <p class="govuk-body">{{ texts.RESPONSE_INFO.ELIGIBILITY.CONVICTIONS.CONTENT_5 }}</p>
+        </div>
+      {% endcall %}
 
       {{ govukButton({
         text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
