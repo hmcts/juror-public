@@ -22,20 +22,23 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.EXPENSES.HEADING }}</h1>
 
+        <p class="govuk-body">{{ texts.RESPONSE_INFO.COMMON.LINKS_OPEN_NEW_TAB }}</p>
+
         <p class="govuk-body">{{ texts.RESPONSE_INFO.EXPENSES.INTRO_1 }}</p>
         <p class="govuk-body">
           {{ texts.RESPONSE_INFO.EXPENSES.INTRO_2 }}
-          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB}}">
             {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
           </a>
           {{ texts.RESPONSE_INFO.EXPENSES.INTRO_3 }}
-          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.CALCULATOR_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+          <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.CALCULATOR_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB }}">
             {{ texts.RESPONSE_INFO.EXPENSES.CALCULATOR_LINK_TEXT }}
           </a>.
         </p>
 
         {# Loss of earnings and extra childcare or care costs #}
         {% call govukDetails({
+          id: "loss-of-earnings-details-1",
           summaryText: texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_1.TITLE
         }) %}
           <p>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_1.CONTENT_1 }}</p>
@@ -48,6 +51,7 @@
 
         {# Loss of earnings #}
         {% call govukDetails({
+          id: "loss-of-earnings-details-2",
           summaryText: texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.TITLE
         }) %}
           <p>{{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_1 }}</p>
@@ -57,7 +61,7 @@
           </ul>
           <p>
             {{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_2 }}
-            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB }}">
               {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
             </a>.
             {{ texts.RESPONSE_INFO.EXPENSES.LOSS_OF_EARNINGS_2.CONTENT_3 }}
@@ -84,6 +88,7 @@
 
         {# If you claim benefits #}
         {% call govukDetails({
+          id: "claim-benefits-details",
           summaryText: texts.RESPONSE_INFO.EXPENSES.CLAIM_BENEFITS.TITLE
         }) %}
           <p>{{ texts.RESPONSE_INFO.EXPENSES.CLAIM_BENEFITS.CONTENT_1 }}</p>
@@ -93,11 +98,12 @@
 
         {# Travel costs #}
         {% call govukDetails({
+          id: "travel-costs-details",
           summaryText: texts.RESPONSE_INFO.EXPENSES.TRAVEL_COSTS.TITLE
         }) %}
           <p>
             {{ texts.RESPONSE_INFO.EXPENSES.TRAVEL_COSTS.CONTENT_1 }}
-            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB }}">
               {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
             </a>.
           </p>
@@ -107,6 +113,7 @@
 
         {# Travel tickets #}
         {% call govukDetails({
+          id: "travel-tickets-details",
           summaryText: texts.RESPONSE_INFO.EXPENSES.TRAVEL_TICKETS.TITLE
         }) %}
           <p>{{ texts.RESPONSE_INFO.EXPENSES.TRAVEL_TICKETS.CONTENT_1 }}</p>
@@ -115,11 +122,12 @@
 
         {# Food and drink costs #}
         {% call govukDetails({
+          id: "food-and-drink-details",
           summaryText: texts.RESPONSE_INFO.EXPENSES.FOOD_AND_DRINK.TITLE
         }) %}
           <p>
             {{ texts.RESPONSE_INFO.EXPENSES.FOOD_AND_DRINK.CONTENT_1 }}
-            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB }}">
               {{ texts.RESPONSE_INFO.EXPENSES.RATES_LINK_TEXT }}
             </a>.
           </p>
@@ -128,6 +136,7 @@
 
         {# When to claim #}
         {% call govukDetails({
+          id: "when-to-claim-details",
           summaryText: texts.RESPONSE_INFO.EXPENSES.WHEN_TO_CLAIM.TITLE
         }) %}
           <p>{{ texts.RESPONSE_INFO.EXPENSES.WHEN_TO_CLAIM.CONTENT_1 }}</p>
@@ -135,6 +144,7 @@
 
         {# Questions #}
         {% call govukDetails({
+          id: "questions-details",
           summaryText: texts.RESPONSE_INFO.EXPENSES.QUESTIONS.TITLE
         }) %}
           <p>

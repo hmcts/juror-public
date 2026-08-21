@@ -1,6 +1,7 @@
 {
   "COMMON": {
-    "START_RESPONSE": "Start your response"
+    "START_RESPONSE": "Start your response",
+    "LINKS_OPEN_NEW_TAB": "Links will open in a new tab."    
   },
   "JURY_SERVICE": {
     "PAGE_IDENTIFIER": "Response information - Jury Service",
@@ -14,8 +15,8 @@
       "TITLE": "Who can be called for jury service?",
       "CONTENT_1": "Every adult aged 18 to 75 years that lives in the UK can be picked at random for jury service from the electoral roll.",
       "CONTENT_2": "If you are going to be under 18 or over 76 on the first day of your jury service, you will be unable to serve but you must still reply to your summons.",
-      "CONTENT_3": "There is more information at",
-      "LINK_TEXT": "www.gov.uk/jury-service",
+      "CONTENT_3": "There is more information available here: ",
+      "LINK_TEXT": "jury service",
       "LINK_URL": "https://www.gov.uk/jury-service"
     }
   },
@@ -25,11 +26,11 @@
     "INFORMATION": {
       "TITLE": "Information for employees and self-employed jurors",
       "CONTENT_1": "Your employer has to let you do jury service – it's the law, but they can ask you to apply to change the dates to a more convenient time (you can only do this once). See the information about asking to change your dates or be excused, or check [link] for more details.",
-      "CONTENT_1_LINK_TEXT": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+      "CONTENT_1_LINK_TEXT": "delaying or being excused from jury service",
       "CONTENT_1_LINK_URL": "https://www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
       "CONTENT_2": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum. If you are self-employed, you have the right to claim the same allowances as if you were an employee.",
       "CONTENT_3": "Check the information in the 'claiming expenses' section or at [link] for more details.",
-      "CONTENT_3_LINK_TEXT": "www.gov.uk/jury-service",
+      "CONTENT_3_LINK_TEXT": "jury service",
       "CONTENT_3_LINK_URL": "https://www.gov.uk/jury-service"
     }
   },
@@ -40,7 +41,7 @@
     "CONTENT_2": "You can only change the dates of your service once and you'll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve.",
     "CONTENT_3": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months. You may be asked to provide evidence, but you won't need to include this when you respond; we'll contact you and give you time to gather anything we need.",
     "CONTENT_4": "If you need more information, please see [link].",
-    "CONTENT_4_LINK_TEXT": "www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+    "CONTENT_4_LINK_TEXT": "delaying or being excused from jury service",
     "CONTENT_4_LINK_URL": "https://www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
   },
   "ELIGIBILITY": {
@@ -68,7 +69,8 @@
       "BULLET_2_2": "Remember the information long enough to be able to make the decision.",
       "BULLET_2_3": "Weigh up the information available to make the decision.",
       "BULLET_2_4": "Communicate the decision by any means.",
-      "CONTENT_3": "If you are not sure if you can do Jury Service because of a mental disorder or lack of mental capacity, you can phone us on 0300 456 1024 for advice."
+      "CONTENT_3": "If you are not sure if you can do Jury Service because of a mental disorder or lack of mental capacity, you can phone us on [tel_no] for advice.",
+      "CONTENT_TEL": "0300 456 1024"
     },
     "BAIL": {
       "TITLE": "Bail",
@@ -97,8 +99,8 @@
     "CONTENT_1": "You are summoned to start jury service on ",
     "CONTENT_AT": "at",
     "CONTENT_2": "You should allow extra time to go through security at court.",
-    "CONTENT_3": "Information on this and what you can and can't take it can be found here: ",
-    "SECURITY_LINK_TEXT": "www.gov.uk/entering-court-or-tribunal-building",
+    "CONTENT_3": "Information on this and what you can and can't take in can be found here: ",
+    "SECURITY_LINK_TEXT": "entering court or tribunal building",
     "SECURITY_LINK_URL": "https://www.gov.uk/entering-court-or-tribunal-building"
   },
   "SUPPORT": {
@@ -106,18 +108,18 @@
     "HEADING": "Support and accessibility",
     "CONTENT_1": "If you have a disability and need us to make reasonable adjustments to help you during your jury service, you can tell us as part of your response.",
     "CONTENT_2": "For more information, please visit ",
-    "SUPPORT_LINK_TEXT": "www.gov.uk/jury-service/request-reasonable-adjustments",
+    "SUPPORT_LINK_TEXT": "request reasonable adjustments",
     "SUPPORT_LINK_URL": "https://www.gov.uk/jury-service/request-reasonable-adjustments"
   },
   "EXPENSES": {
     "PAGE_IDENTIFIER": "Response information - Expenses",
     "HEADING": "Claiming expenses",
     "INTRO_1": "You do not get paid for doing jury service but you can claim some money back towards loss of earnings, childcare, travel, and food and drink costs.",
-    "INTRO_2": "The rates are set out on ",
+    "INTRO_2": "The rates are set out here: ",
     "INTRO_3": "and there's also a calculator to help you work out what you may be able to claim from the court: ",
-    "RATES_LINK_TEXT": "www.gov.uk/jury-service",
+    "RATES_LINK_TEXT": "jury service",
     "RATES_LINK_URL": "https://www.gov.uk/jury-service",
-    "CALCULATOR_LINK_TEXT": "www.gov.uk/check-juror-claims",
+    "CALCULATOR_LINK_TEXT": "check juror claims",
     "CALCULATOR_LINK_URL": "https://www.gov.uk/check-juror-claims",
     "LOSS_OF_EARNINGS_1": {
       "TITLE": "Loss of earnings and extra childcare or care costs",
@@ -130,7 +132,7 @@
       "CONTENT_1": "You can claim for loss of earnings if you're either:",
       "BULLET_1": "employed and your employer will not pay you during jury service",
       "BULLET_2": "self-employed or a paid company director",
-      "CONTENT_2": "The maximum rates you can claim are shown on ",
+      "CONTENT_2": "The maximum rates you can claim are shown here: ",
       "CONTENT_3": "You cannot claim more if your full pay is higher than these rates.",
       "CONTENT_4": "If you work part time you can only claim for days you normally work, even if you spend a full week in court.",
       "CONTENT_5": "For example, if you normally work 3 days a week, you can only claim loss of earnings for those 3 days, as you've not lost earnings on the other 2 days.",
@@ -149,7 +151,7 @@
     },
     "TRAVEL_COSTS": {
       "TITLE": "Travel costs",
-      "CONTENT_1": "How much you can claim depends on how you travel to court. You cannot claim any travel or accommodation expenses from abroad. Information on how much you can claim is available from ",
+      "CONTENT_1": "How much you can claim depends on how you travel to court. You cannot claim any travel or accommodation expenses from abroad. Information on how much you can claim is available here: ",
       "CONTENT_2": "You must check with your jury manager at the court that you can claim for parking before you pay for it."      
     },
     "TRAVEL_TICKETS": {
@@ -159,7 +161,7 @@
     },
     "FOOD_AND_DRINK": {
       "TITLE": "Food and drink costs",
-      "CONTENT_1": "You can claim these amounts even if you bring your own food and drink. The rates are set out on "
+      "CONTENT_1": "You can claim these amounts even if you bring your own food and drink. The rates are set out here: "
     },
     "WHEN_TO_CLAIM": {
       "TITLE": "When to claim",
@@ -168,10 +170,6 @@
     "QUESTIONS": {
       "TITLE": "If you have questions",
       "CONTENT_1": "Up to a week before jury service starts please contact:",
-      "CONTENT_2": "Contact the Jury Central Summoning Bureau",
-      "CONTENT_3": "Phone: 0300 456 1024 or email ",
-      "BUREAU_EMAIL": "jurysummoning@justice.gov.uk",
-      "CONTENT_4": "Hours are Monday to Thursday 9am to 5pm, Fridays 9am to 3pm.",
       "CONTENT_5": "In the week before jury service and any point after that, contact the court where you'll be doing jury service. You'll be sent contact details nearer the time."
     }   
   }
