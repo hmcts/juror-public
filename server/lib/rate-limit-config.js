@@ -1,7 +1,7 @@
 const secretsConfig = require('config');
-const { createClient } = require('redis');
 const rateLimit = require('express-rate-limit');
 const rateLimitRedisStore = require('rate-limit-redis').RedisStore;
+const { createRedisClient, isRedisClusterEnabled } = require('./redis-client');
 
 module.exports.RateLimitConfig = class RateLimitConfig {
   constructor() {
@@ -22,10 +22,18 @@ module.exports.RateLimitConfig = class RateLimitConfig {
     if (redisConnectionString) {
       this.redisClient(redisConnectionString);
 
-      config.store = new rateLimitRedisStore({
+      const redisStoreConfig = {
         prefix: 'JurorPublicRL',
-        sendCommand: async(...args) => this._redisClient.sendCommand(args),
-      });
+      };
+
+      if (isRedisClusterEnabled()) {
+        redisStoreConfig.sendCommandCluster = async({ key, isReadOnly, command }) =>
+          this._redisClient.sendCommand(key, isReadOnly, command);
+      } else {
+        redisStoreConfig.sendCommand = async(...args) => this._redisClient.sendCommand(args);
+      }
+
+      config.store = new rateLimitRedisStore(redisStoreConfig);
     } else {
       console.log('Redis connection string not defined, using default store for rate limiter');
     }
@@ -35,22 +43,15 @@ module.exports.RateLimitConfig = class RateLimitConfig {
     if (limiter){
       app.use(limiter);
 
-      console.log('Rate limiter settings: ' + JSON.stringify(config));
+      console.log('Rate limiter initialised');
     }
   }
 
   redisClient(redisConnectionUrl) {
 
-    this._redisClient = createClient({
-      url: redisConnectionUrl,
-      pingInterval: 5000,
-      socket: {
-        keepAlive: true,
-      },
-    });
+    this._redisClient = createRedisClient(redisConnectionUrl);
   
-    console.log('Attempting to connect to redis for rate limiter using connection string:');
-    console.log(redisConnectionUrl);
+    console.log('Attempting to connect to redis for rate limiter using connection string');
   
     this._redisClient.connect()
       .catch(function(error) {

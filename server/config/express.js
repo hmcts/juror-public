@@ -20,7 +20,6 @@
   const errorHandler = require('errorhandler');
   const path = require('path');
   const i18n = require('i18n-express');
-  const { createClient } = require('redis');
   const { RedisStore } = require('connect-redis');
   const filters = require('../components/filters');
   const textsEN = require('../../client/js/i18n/en.json');
@@ -31,6 +30,7 @@
   const menuBuilder = require(__dirname + '/../menubuilder');
   const sessionExpires = 10 * (60 * 60);
   const sessionName = 'juror_summons_reply_session';
+  const { createRedisClient } = require('../lib/redis-client');
 
   const validateContentType = require('../components/middleware/content-type').validateContentType;
   const detectHtmlContent = require('../components/middleware/content-html').detectHtmlContent;
@@ -131,16 +131,9 @@
     var redisClient;
 
     // Configure Redis connection
-    console.log('Attempting to connect to redis for user sessions using connection string: ');
-    console.log(redisConnectionString);
+    console.log('Attempting to connect to redis for user sessions using connection string');
 
-    redisClient = createClient({
-      url: redisConnectionString,
-      pingInterval: 5000,
-      socket: {
-        keepAlive: true,
-      },
-    });
+    redisClient = createRedisClient(redisConnectionString);
     redisClient.connect()
       .catch(function(error) {
         console.log('Error connecting redis client for user sessions: ' + error);
