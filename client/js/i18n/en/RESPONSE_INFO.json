@@ -57,7 +57,7 @@
     },
     "MENTAL_DISORDERS": {
       "TITLE": "Mental disorders",
-      "CONTENT_1": "Under the Mental Health Act 1983, some people can not do Jury Service.",
+      "CONTENT_1": "Under the Mental Health Act 1983, some people can not do jury service.",
       "CONTENT_2": "If you are detained (this is sometimes called being 'sectioned'), in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you can not be on a jury.",
       "CONTENT_3": "If you suffer from a mental disorder (including depression and anxiety) but you are not being detained, looked after or treated under the Mental Health Act, you can still be on a jury."
     },
@@ -69,12 +69,12 @@
       "BULLET_2_2": "Remember the information long enough to be able to make the decision.",
       "BULLET_2_3": "Weigh up the information available to make the decision.",
       "BULLET_2_4": "Communicate the decision by any means.",
-      "CONTENT_3": "If you are not sure if you can do Jury Service because of a mental disorder or lack of mental capacity, you can phone us on [tel_no] for advice.",
+      "CONTENT_3": "If you are not sure if you can do jury service because of a mental disorder or lack of mental capacity, you can phone us on [tel_no] for advice.",
       "CONTENT_TEL": "0300 456 1024"
     },
     "BAIL": {
       "TITLE": "Bail",
-      "CONTENT_1": "If you are on bail in criminal proceedings, you can not do Jury Service."
+      "CONTENT_1": "If you are on bail in criminal proceedings, you can not do jury service."
     },
     "CONVICTIONS": {
       "TITLE": "Convictions",
