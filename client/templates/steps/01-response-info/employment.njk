@@ -1,0 +1,55 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.EMPLOYMENT.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.EMPLOYMENT.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% set welsh = texts.INTERFACE.HTML_LANG == "cy" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.EMPLOYMENT.HEADING }}</h1>
+
+      <h2 class="govuk-heading-m">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.TITLE }}</h2>
+
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.COMMON.LINKS_OPEN_NEW_TAB }}</p>
+
+      {% set content_1_link %}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB }}">
+          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1_LINK_TEXT }}
+        </a>
+      {% endset %}
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_1 | replace("[link]", content_1_link) | safe }}</p>
+
+      <p class="govuk-body">{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_2 }}</p>
+
+      {% set content_3_link %}
+        <a class="govuk-link" href="{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_TAB }}">
+          {{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3_LINK_TEXT }}
+        </a>
+      {% endset %}
+      <div class="govuk-body govuk-!-margin-bottom-6">
+        <p>{{ texts.RESPONSE_INFO.EMPLOYMENT.INFORMATION.CONTENT_3 | replace("[link]", content_3_link) | safe }}</p>
+      </div>
+
+      {{ govukButton({
+        text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+        href: responseStartUrl
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

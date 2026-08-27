@@ -64,7 +64,7 @@
           <li class="govuk-grid-column-one-half card-group__item">
             <div class="card card--clickable" data-test="response-start-{{ card.ID }}">
               <h3 class="govuk-heading-s card__heading">
-                <a class="govuk-link card__link govuk-link--no-visited-state" href="?guidance={{ card.ID }}">
+                <a class="govuk-link card__link govuk-link--no-visited-state" href="{{ url('steps.response-info.get', { id: card.ID }) }}">
                   {{ card.TITLE }}
                 </a>
               </h3>

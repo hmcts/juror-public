@@ -1,6 +1,6 @@
 {
   "HEADING": "Your jury summons information is online",
-  "INTRO": "You are signed in. You can read the information that would normally be included in a printed summons pack, then start your response.",
+  "INTRO": "You are signed in. You can read information below about jury service before completing your response, or go straight to the online reply form. Guidance will be available throughout the process.",
   "NOT_AVAILABLE": "Not available",
   "SUMMONS_DATE_LABEL": "You are summoned to start jury service on",
   "COURT_LABEL": "at",
@@ -8,14 +8,14 @@
   "INFORMATION_HEADING": "Jury service information",
   "GUIDANCE_CARDS": [
     {
-      "ID": "what",
-      "TITLE": "What jury service involves",
-      "DESCRIPTION": "What happens before you attend, how jurors are selected, and what to expect."
+      "ID": "jury-service",
+      "TITLE": "Sut Mae Gwasanaeth Rheithgor yn Gweithio",
+      "DESCRIPTION": "What jury service is, who can be called, and what it means to serve."
     },
     {
-      "ID": "attend",
-      "TITLE": "When and where to attend",
-      "DESCRIPTION": "Your date, court address, arrival time, security, travel, and parking."
+      "ID": "attendance",
+      "TITLE": "Pryd a ble i fynychu",
+      "DESCRIPTION": "Eich dyddiad cychwyn, cyfeiriad y llys, amser cyrraedd a gwybodaeth ddiogelwch."
     },
     {
       "ID": "expenses",
@@ -23,18 +23,18 @@
       "DESCRIPTION": "Travel, food, loss of earnings, childcare, and other financial support."
     },
     {
-      "ID": "work",
-      "TITLE": "Employment and time off work",
-      "DESCRIPTION": "Information for employees, employers, self-employed jurors, and students."
+      "ID": "employment",
+      "TITLE": "Cyflogaeth a chael amser i ffwrdd o'r gwaith",
+      "DESCRIPTION": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig."
     },
     {
-      "ID": "date",
-      "TITLE": "Ask to change your dates",
-      "DESCRIPTION": "When you may be able to defer jury service and what evidence you might need."
+      "ID": "change-dates",
+      "TITLE": "Asking to change your dates or be excused",
+      "DESCRIPTION": "When you can ask for different dates or ask to be excused from jury service."
     },
     {
       "ID": "support",
-      "TITLE": "Support and accessibility",
+      "TITLE": "Cefnogaeth a hygyrchedd",
       "DESCRIPTION": "Request reasonable adjustments, language support, or help with health needs."
     },
     {
