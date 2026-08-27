@@ -49,7 +49,7 @@ const copyClientCode = new CopyWebpackPlugin({
     },
     {
       context: 'client/assets/documents/',
-      from: '*.pdf',
+      from: '**/*.pdf',
       to: '../client/assets/documents',
     },
     {
