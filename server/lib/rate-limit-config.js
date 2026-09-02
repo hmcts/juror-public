@@ -49,8 +49,7 @@ module.exports.RateLimitConfig = class RateLimitConfig {
       },
     });
   
-    console.log('Attempting to connect to redis for rate limiter using connection string:');
-    console.log(redisConnectionUrl);
+    console.log('Attempting to connect to redis for rate limiter using connection string');
   
     this._redisClient.connect()
       .catch(function(error) {

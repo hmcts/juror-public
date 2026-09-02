@@ -131,8 +131,7 @@
     var redisClient;
 
     // Configure Redis connection
-    console.log('Attempting to connect to redis for user sessions using connection string: ');
-    console.log(redisConnectionString);
+    console.log('Attempting to connect to redis for user sessions using connection string');
 
     redisClient = createClient({
       url: redisConnectionString,
