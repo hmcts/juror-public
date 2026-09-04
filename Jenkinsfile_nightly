@@ -13,7 +13,6 @@ String component = "public"
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
 
 withNightlyPipeline(type, product, component) {
-  // loadVaultSecrets(secrets)
   enableSlackNotifications('#juror-build-notices')
 }
 
