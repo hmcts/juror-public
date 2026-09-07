@@ -79,6 +79,9 @@
         // Regenerate session
         req.session.regenerate(function (err) {
           if (err) {
+            app.logger.crit('Error regenerating session for juror number "' + req.body.jurorNumber + '". ', {
+              error: err,
+            });
             throw err;
           }
 
@@ -95,7 +98,7 @@
 
           if (req.session.user.digitalByDefault === true) {
             return res.redirect(app.namedRoutes.build('steps.response-start.get'));
-          } 
+          }
 
           // redirect to confirmation of replying on behalf of someone`
           // if selected, otherwise move on to your details.
@@ -135,17 +138,20 @@
 
         // Summons date has passed for the juror summons
         if (err.statusCode === 403 && err.error.startsWith('Not allowed. Court Date has already passed')) {
+          app.logger.info('Redirect to summons-date page for juror number ' + req.body.jurorNumber);
           // eslint-disable-next-line max-len
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login.summons-date', req.session.user.thirdParty)));
         }
         // Too many login attempts - account locked - redirect to locked info page
         if (err.statusCode === 403 && err.error.startsWith('Juror account is locked')) {
+          app.logger.info('Redirect to locked page for juror number ' + req.body.jurorNumber);
           // eslint-disable-next-line max-len
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login.locked', req.session.user.thirdParty)));
         }
 
         // Response already submitted - redirect to information page
         if (err.statusCode === 409) {
+          app.logger.info('Redirect to replied page for juror number ' + req.body.jurorNumber);
           // eslint-disable-next-line max-len
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login.replied', req.session.user.thirdParty)));
         }
@@ -171,8 +177,10 @@
     };
   };
 
-  module.exports.getReplied = function () {
+  module.exports.getReplied = function (app) {
     return function (req, res) {
+
+      app.logger.info('Rendering replied page for juror');
 
       // Reset user session data
       req.session.user = {
@@ -186,8 +194,10 @@
     };
   };
 
-  module.exports.getSummonsDate = function () {
+  module.exports.getSummonsDate = function (app) {
     return function (req, res) {
+
+      app.logger.info('Rendering summons-date page for juror');
 
       // Reset user session data
       req.session.user = {
@@ -201,8 +211,10 @@
     };
   };
 
-  module.exports.getLoginLocked = function () {
+  module.exports.getLoginLocked = function (app) {
     return function (req, res) {
+
+      app.logger.info('Rendering locked page for juror');
 
       // Reset user session data
       req.session.user = {

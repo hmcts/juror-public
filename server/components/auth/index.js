@@ -36,6 +36,11 @@
           postcode: req.body.jurorPostcode,
         }
         , authSuccess = function(resp) {
+
+          app.logger.info('Auth success response: ', {
+            jurorNumber: userDetails.jurorNumber,
+          });
+
           var tokenBody = {
             data: {
               jurorNumber: resp.jurorNumber + '',
@@ -48,12 +53,16 @@
         }
         , authFailure = function(err) {
 
+          
+
           var errJson = {}
             , identifiedErr
             , logonMsgs = (req.session.ulang === 'cy' ? msgMappingsCy : msgMappingsEn).logon;
 
           if (err.response) {
             errJson = { statusCode: err.response.status, error: 'USER_NOT_FOUND', originalError: err.response.data }
+
+            
 
             // Map the provided error message to our identifiers
             Object.keys(logonMsgs).forEach(function(key) {
@@ -62,11 +71,18 @@
               }
             });
 
+
+
             // Set the returned error message to this identifier
             if (typeof identifiedErr !== 'undefined') {
               errJson.error = identifiedErr;
             }
           }
+
+          app.logger.crit('Auth failure response: ', {
+            jurorNumber: userDetails.jurorNumber,
+            error: errJson,
+          });
           
           // Return the error as an identifier
           return errorCB(errJson);
