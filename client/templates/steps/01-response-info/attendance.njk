@@ -1,0 +1,55 @@
+{% extends "../../layouts/default-gds.njk" %}
+
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block pageTitle %}
+  {{ texts.RESPONSE_INFO.ATTENDANCE.HEADING }} - {{ texts.INTERFACE.SERVICE_TITLE }} - {{ texts.INTERFACE.GOV }}
+{% endblock %}
+
+{% block page_identifier %}{{ texts.RESPONSE_INFO.ATTENDANCE.PAGE_IDENTIFIER }}{% endblock %}
+
+{% block containerStart %}
+  {{ super() }}
+  {% include "../../includes/back-link-gds.njk" %}
+{% endblock %}
+
+{% block content %}
+
+  {% set welsh = texts.INTERFACE.HTML_LANG == "cy" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ texts.RESPONSE_INFO.ATTENDANCE.HEADING }}</h1>
+
+        <h2 class="govuk-body">{{ texts.RESPONSE_INFO.ATTENDANCE.TITLE }}</h2>
+
+        <div class="govuk-body govuk-inset-text govuk-!-margin-bottom-6">
+          <p>{{ texts.RESPONSE_INFO.ATTENDANCE.CONTENT_1 }}</p>  
+          <p class="govuk-body-m">
+            {{ user.responseStartInfo.summonsDate | translateDate("YYYY-MM-DD", "dddd D MMMM YYYY", texts.INTERFACE.HTML_LANG) }}
+            {{ user.responseStartInfo.courtAttendTime }}
+          </p>
+          <p>{{ texts.RESPONSE_INFO.ATTENDANCE.CONTENT_AT }}</p>
+          {{ user.responseStartInfo.courtName | transformCourtName }}<br>
+          {{ user.responseStartInfo.courtAddress | safe}}
+        </div>
+
+        <div class="govuk-body govuk-!-margin-bottom-6">
+          <p>
+            {{ texts.RESPONSE_INFO.ATTENDANCE.CONTENT_2 }}</br>
+            {{ texts.RESPONSE_INFO.ATTENDANCE.CONTENT_3 }}
+            <a class="govuk-link" href="{{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY_LINK_URL }}" rel="noreferrer noopener" target="_blank" alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}">
+              {{ texts.RESPONSE_INFO.ATTENDANCE.SECURITY_LINK_TEXT }} ({{ texts.INTERFACE.LINK_OPENS_NEW_TAB }})</a>.
+          </p>
+        </div>
+
+        {{ govukButton({
+          text: texts.RESPONSE_INFO.COMMON.START_RESPONSE,
+          href: responseStartUrl
+        }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

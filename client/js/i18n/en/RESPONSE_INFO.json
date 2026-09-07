@@ -1,0 +1,176 @@
+{
+  "COMMON": {
+    "START_RESPONSE": "Start your response",
+    "LINKS_OPEN_NEW_TAB": "Links will open in a new tab."    
+  },
+  "JURY_SERVICE": {
+    "PAGE_IDENTIFIER": "Response information - Jury Service",
+    "HEADING": "How jury service works",
+    "INTRO": "What jury service is and who can be called.",
+    "WHAT_IS_JURY_SERVICE": {
+      "TITLE": "What is jury service?",
+      "CONTENT": "Jury service is an important public duty. You and usually 11 other people will form a jury. Together, you'll decide the result of a criminal trial in the Crown court."
+    },
+    "WHO_CAN_BE_CALLED": {
+      "TITLE": "Who can be called for jury service?",
+      "CONTENT_1": "Every adult aged 18 to 75 years that lives in the UK can be picked at random for jury service from the electoral roll.",
+      "CONTENT_2": "If you are going to be under 18 or over 76 on the first day of your jury service, you will be unable to serve but you must still reply to your summons.",
+      "CONTENT_3": "There is more information available here: ",
+      "LINK_TEXT": "jury service",
+      "LINK_URL": "https://www.gov.uk/jury-service"
+    }
+  },
+  "EMPLOYMENT": {
+    "PAGE_IDENTIFIER": "Response information - Employment",
+    "HEADING": "Employment and time off work",
+    "INFORMATION": {
+      "TITLE": "Information for employees and self-employed jurors",
+      "CONTENT_1": "Your employer has to let you do jury service – it's the law, but they can ask you to apply to change the dates to a more convenient time (you can only do this once). See the information about asking to change your dates or be excused, or check [link] for more details.",
+      "CONTENT_1_LINK_TEXT": "delaying or being excused from jury service",
+      "CONTENT_1_LINK_URL": "https://www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service",
+      "CONTENT_2": "Your employer can choose whether or not to pay you during your service. If they do not pay you, you can claim for loss of earnings from the court, subject to a daily maximum. If you are self-employed, you have the right to claim the same allowances as if you were an employee.",
+      "CONTENT_3": "Check the information in the 'claiming expenses' section or at [link] for more details.",
+      "CONTENT_3_LINK_TEXT": "jury service",
+      "CONTENT_3_LINK_URL": "https://www.gov.uk/jury-service"
+    }
+  },
+  "CHANGE_DATES": {
+    "PAGE_IDENTIFIER": "Response information - Change dates",
+    "HEADING": "Asking to change the dates or to be excused",
+    "CONTENT_1": "When you respond to your summons, you can ask to change your dates or to be excused from your jury service.",
+    "CONTENT_2": "You can only change the dates of your service once and you'll need to give us a reason. You will be asked to provide some alternative dates within 12 months when you could serve.",
+    "CONTENT_3": "Excusals are only granted in exceptional circumstances when you cannot serve at any time in the following 12 months. You may be asked to provide evidence, but you won't need to include this when you respond; we'll contact you and give you time to gather anything we need.",
+    "CONTENT_4": "If you need more information, please see [link].",
+    "CONTENT_4_LINK_TEXT": "delaying or being excused from jury service",
+    "CONTENT_4_LINK_URL": "https://www.gov.uk/jury-service/delaying-or-being-excused-from-jury-service"
+  },
+  "ELIGIBILITY": {
+    "PAGE_IDENTIFIER": "Response information - Eligibility",
+    "HEADING": "Who is eligible to serve on a jury?",
+    "INTRO": {
+      "CONTENT_1": "As part of your response, you'll be asked questions to help us decide whether you can do jury service.",
+      "CONTENT_2": "You qualify for jury service if:",
+      "BULLET_2_1": "you will be at least 18 years old, and under 76 years old, on the day that you start your jury service; and",
+      "BULLET_2_2": "you are registered as a parliamentary or local government elector",
+      "BULLET_2_3": "you have lived in the United Kingdom, the Channel Islands or the Isle of Man for any period of at least five years since you were 13 years old.",
+      "CONTENT_3": "If any of the following applies to you, you do not qualify for jury service:"
+    },
+    "MENTAL_DISORDERS": {
+      "TITLE": "Mental disorders",
+      "CONTENT_1": "Under the Mental Health Act 1983, some people can not do jury service.",
+      "CONTENT_2": "If you are detained (this is sometimes called being 'sectioned'), in hospital, under a guardianship order or under a community treatment order because of a mental disorder, you can not be on a jury.",
+      "CONTENT_3": "If you suffer from a mental disorder (including depression and anxiety) but you are not being detained, looked after or treated under the Mental Health Act, you can still be on a jury."
+    },
+    "MENTAL_CAPACITY": {
+      "TITLE": "Mental capacity",
+      "CONTENT_1": "If you lack the mental capacity to serve as a juror, you can not be on a jury. Mental capacity means being able to make a decision for yourself. People who cannot do this are said to lack capacity under the Mental Capacity Act 2005. The lack of capacity must be because of an impairment of or disturbance in the functioning of the mind or brain which may be due to illness, injury, learning disability, or mental health problems.",
+      "CONTENT_2": "To be on a jury, a person must be able to:",
+      "BULLET_2_1": "Understand the information that relates to the decision they want to make.",
+      "BULLET_2_2": "Remember the information long enough to be able to make the decision.",
+      "BULLET_2_3": "Weigh up the information available to make the decision.",
+      "BULLET_2_4": "Communicate the decision by any means.",
+      "CONTENT_3": "If you are not sure if you can do jury service because of a mental disorder or lack of mental capacity, you can phone us on [tel_no] for advice.",
+      "CONTENT_TEL": "0300 456 1024"
+    },
+    "BAIL": {
+      "TITLE": "Bail",
+      "CONTENT_1": "If you are on bail in criminal proceedings, you can not do jury service."
+    },
+    "CONVICTIONS": {
+      "TITLE": "Convictions",
+      "CONTENT_1": "You can do jury service if you have points on your driving licence, speeding fines or have been to a speed awareness course, as long as you have not received any of the sentences below.",
+      "CONTENT_2": "You can not do jury service if you have ever had one of these criminal sentences in the United Kingdom, the Channel Islands or the Isle of Man. You also can not do jury service if you've had one of these criminal sentences for a service offence under the Armed Forces Act 2006 anywhere in the world.",
+      "BULLET_2_1": "to imprisonment for life, detention for life or custody for life,",
+      "BULLET_2_2": "to detention during his Majesty's pleasure or during the pleasure of the Secretary of State,",
+      "BULLET_2_3": "to imprisonment for public protection or detention for public protection,",
+      "BULLET_2_4": "to an extended sentence under section 226A, 226B, 227 or 228 of the Criminal Justice Act 2003 or section 254, 266 or 279 of the Sentencing Act 2020 (including such a sentence imposed as a result of section 219A, 220, 221A or 222 of the Armed Forces Act 2006) or section 210A of the Criminal Procedure (Scotland) Act 1995,",
+      "BULLET_2_5": "to a term of imprisonment of five years or more or a term of detention of five years or more.",
+      "CONTENT_3": "Also, you can not do jury service if you have had one of these criminal sentences in the last 10 years:",
+      "BULLET_3_1": "served any part of a sentence of imprisonment or detention",
+      "BULLET_3_2": "received a suspended sentence of imprisonment or a suspended order for detention",
+      "CONTENT_4": "You can not do jury service if in the last 10 years in England and Wales you have had a community order (including a community rehabilitation order, community punishment order, community punishment and rehabilitation order, drug treatment and testing order, or a drug abstinence order).",
+      "CONTENT_5": "You can not do jury service if in the last 10 years you have had any similar order under the law of Scotland, Northern Ireland, Isle of Man, any of the Channel Islands, or a community or overseas community order under the Armed Forces Act 2006."
+    }
+  },
+  "ATTENDANCE": {
+    "PAGE_IDENTIFIER": "Response information - Attendance",
+    "HEADING": "When and where to attend",
+    "TITLE": "Your start date, court address, arrival time and security information.",
+    "CONTENT_1": "You are summoned to start jury service on ",
+    "CONTENT_AT": "at",
+    "CONTENT_2": "You should allow extra time to go through security at court.",
+    "CONTENT_3": "Information on this and what you can and can't take in can be found here: ",
+    "SECURITY_LINK_TEXT": "entering court or tribunal building",
+    "SECURITY_LINK_URL": "https://www.gov.uk/entering-court-or-tribunal-building"
+  },
+  "SUPPORT": {
+    "PAGE_IDENTIFIER": "Response information - Support and Accessibility",
+    "HEADING": "Support and accessibility",
+    "CONTENT_1": "If you have a disability and need us to make reasonable adjustments to help you during your jury service, you can tell us as part of your response.",
+    "CONTENT_2": "For more information, please visit ",
+    "SUPPORT_LINK_TEXT": "request reasonable adjustments",
+    "SUPPORT_LINK_URL": "https://www.gov.uk/jury-service/request-reasonable-adjustments"
+  },
+  "EXPENSES": {
+    "PAGE_IDENTIFIER": "Response information - Expenses",
+    "HEADING": "Claiming expenses",
+    "INTRO_1": "You do not get paid for doing jury service but you can claim some money back towards loss of earnings, childcare, travel, and food and drink costs.",
+    "INTRO_2": "The rates are set out here: ",
+    "INTRO_3": "and there's also a calculator to help you work out what you may be able to claim from the court: ",
+    "RATES_LINK_TEXT": "jury service",
+    "RATES_LINK_URL": "https://www.gov.uk/jury-service",
+    "CALCULATOR_LINK_TEXT": "check juror claims",
+    "CALCULATOR_LINK_URL": "https://www.gov.uk/check-juror-claims",
+    "LOSS_OF_EARNINGS_1": {
+      "TITLE": "Loss of earnings and extra childcare or care costs",
+      "CONTENT_1": "We can reimburse you a single maximum daily amount to cover both:",
+      "BULLET_1": "Loss of earnings",
+      "BULLET_2": "Additional care costs due to jury service"
+    },
+    "LOSS_OF_EARNINGS_2": {
+      "TITLE": "Loss of earnings",
+      "CONTENT_1": "You can claim for loss of earnings if you're either:",
+      "BULLET_1": "employed and your employer will not pay you during jury service",
+      "BULLET_2": "self-employed or a paid company director",
+      "CONTENT_2": "The maximum rates you can claim are shown here: ",
+      "CONTENT_3": "You cannot claim more if your full pay is higher than these rates.",
+      "CONTENT_4": "If you work part time you can only claim for days you normally work, even if you spend a full week in court.",
+      "CONTENT_5": "For example, if you normally work 3 days a week, you can only claim loss of earnings for those 3 days, as you've not lost earnings on the other 2 days.",
+      "CONTENT_6": "You cannot claim for weekends or bank holidays because the court is closed."
+
+    },
+    "CHILDCARE_OR_CARE_COSTS": {
+      "TITLE": "Childcare or care costs",
+      "CONTENT_1": "You cannot claim for care costs you normally have, for example as part of your usual working week. But if you'll have additional care costs that are only due to jury service, you can claim some money towards these.",
+      "CONTENT_2": "You must be within the combined maximum daily allowance for loss of earnings and caring costs.",
+      "CONTENT_3": "For example, if you're claiming £64.95 for extra care costs, you'll have used up all this allowance and cannot claim any more on top for loss of earnings."
+    },
+    "CLAIM_BENEFITS": {
+      "TITLE": "If you claim benefits",
+      "CONTENT_1": "Your benefits will not be affected for at least 8 weeks, as long as you tell your benefits officer or work coach about your jury service. If you're asked to serve on a longer trial, when you arrive at court, you'll need to speak with the jury manager to find out how your benefits will be affected."
+    },
+    "TRAVEL_COSTS": {
+      "TITLE": "Travel costs",
+      "CONTENT_1": "How much you can claim depends on how you travel to court. You cannot claim any travel or accommodation expenses from abroad. Information on how much you can claim is available here: ",
+      "CONTENT_2": "You must check with your jury manager at the court that you can claim for parking before you pay for it."      
+    },
+    "TRAVEL_TICKETS": {
+      "TITLE": "Travel tickets",
+      "CONTENT_1": "Only buy daily travel tickets unless the court tells you otherwise when you start jury service.",
+      "CONTENT_2": "Keep copies of your tickets or receipts, to submit with your claim. If you do not keep these, we may not be able to pay you back."
+    },
+    "FOOD_AND_DRINK": {
+      "TITLE": "Food and drink costs",
+      "CONTENT_1": "You can claim these amounts even if you bring your own food and drink. The rates are set out here: "
+    },
+    "WHEN_TO_CLAIM": {
+      "TITLE": "When to claim",
+      "CONTENT_1": "Submit your claim at the end of jury service. You'll usually be paid 7 to 10 working days after submitting your claim form. The court may be able to pay your expenses during the trial if it's likely to last a long time or if you're facing financial hardship. Check with the jury manager at your court when you start."
+    },
+    "QUESTIONS": {
+      "TITLE": "If you have questions",
+      "CONTENT_1": "Up to a week before jury service starts please contact:",
+      "CONTENT_5": "In the week before jury service and any point after that, contact the court where you'll be doing jury service. You'll be sent contact details nearer the time."
+    }   
+  }
+}  
