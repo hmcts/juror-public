@@ -95,7 +95,7 @@
 
           if (req.session.user.digitalByDefault === true) {
             return res.redirect(app.namedRoutes.build('steps.response-start.get'));
-          } 
+          }
 
           // redirect to confirmation of replying on behalf of someone`
           // if selected, otherwise move on to your details.
@@ -146,6 +146,8 @@
 
         // Response already submitted - redirect to information page
         if (err.statusCode === 409) {
+          // Store juror number as submitted for use on replied page
+          req.session.jurorNumberSubmitted = req.body.jurorNumber;
           // eslint-disable-next-line max-len
           return res.redirect(app.namedRoutes.build(utils.getRedirectUrl('steps.login.replied', req.session.user.thirdParty)));
         }
@@ -155,7 +157,7 @@
 
       // Reset error and saved field sessions
       delete req.session.errors;
-
+      delete req.session.jurorNumberSubmitted;
 
       // Validate form submission
       req.body.jurorPostcode = req.body.jurorPostcode.trim();
@@ -182,6 +184,7 @@
 
       return res.render('steps/01-login/replied.njk', {
         user: req.session.user,
+        jurorNumber: req.session.jurorNumberSubmitted,
       });
     };
   };
