@@ -1,6 +1,6 @@
 {
   "name": "juror-public",
-  "version": "5.30.0",
+  "version": "5.31.0",
   "private": true,
   "description": "Reply To Jury Summons frontend application",
   "engines": {
@@ -22,7 +22,8 @@
     "test:functional": "echo TODO: functional",
     "lint": "echo TODO: lint",
     "cichecks": "echo TODO: cichecks",
-    "nsp": "nsp check"
+    "nsp": "nsp check",
+    "fortifyScan": "./fortify/gradlew -p ./fortify fortifyScan"
   },
   "dependencies": {
     "@azure/identity": "^4.13.1",
