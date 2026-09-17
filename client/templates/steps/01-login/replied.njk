@@ -18,7 +18,11 @@
       </h1>
 
       <p class="govuk-body">
-        {{ texts.LOGIN_PAGE.ALREADY_REPLIED_GUIDANCE }}
+        {{ texts.LOGIN_PAGE.ALREADY_REPLIED_GUIDANCE_1 | replace("[jurorNumber]", jurorNumber) | safe  }}
+      </p>
+
+      <p class="govuk-body">
+        {{ texts.LOGIN_PAGE.ALREADY_REPLIED_GUIDANCE_2 }}
       </p>
 
       <div class="govuk-body bureau-contact-details">

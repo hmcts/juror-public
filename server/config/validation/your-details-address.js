@@ -6,7 +6,7 @@ const { optionalString } = require('./custom-validation');
 module.exports = function (req, body) {
   const schema = Joi.object({
     addressLineOne: Joi.string()
-      .empty('')
+      .empty(['', null])
       .required()
       .max(35)
       .pattern(name)
@@ -31,7 +31,7 @@ module.exports = function (req, body) {
         'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_LINE_THREE_CHECK', req.session.user.thirdParty),
       }),
     addressTown: Joi.string()
-      .empty('')
+      .empty(['', null])
       .required()
       .max(35)
       .pattern(name)
@@ -49,7 +49,7 @@ module.exports = function (req, body) {
         'string.pattern.base': message(req, 'VALIDATION.YOUR_DETAILS.ADDRESS_COUNTY_CHECK', req.session.user.thirdParty),
       }),
     addressPostcode: Joi.string()
-      .empty('')
+      .empty(['', null])
       .required()
       .max(8)
       .pattern(postcode)
