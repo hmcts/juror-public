@@ -105,43 +105,53 @@
       {% block containerEnd %}{% endblock %}
     </div>
 
+    {% set feedbackSurveyUrl = texts.INTERFACE.SMART_SURVEY_SUMMONS_RESPONSE_URL %}
+    {% if user and user.digitalByDefault %}
+      {% set feedbackSurveyUrl = texts.INTERFACE.SMART_SURVEY_DIGITAL_RESPONSE_URL %}
+    {% endif %}
+
+    {% set footerLinkItems = [
+      {
+        id: "cookiesLink",
+        href: url('cookie-settings.get'),
+        text: texts.INTERFACE.FOOTER_LINKS.COOKIES
+      },
+      {
+        id: "privacyPolicyLink",
+        href: url('privacy.get'),
+        text: texts.INTERFACE.FOOTER_LINKS.PRIVACY,
+        attributes: {
+          target: "_blank",
+          alt: texts.INTERFACE.LINK_OPENS_NEW_WINDOW
+        }
+      },
+      {
+        id: "accessibilityStatementLink",
+        href: url('accessibility-statement.get'),
+        text: texts.INTERFACE.FOOTER_LINKS.ACCESSIBILITY_STATEMENT,
+        attributes: {
+          target: "_blank",
+          alt: texts.INTERFACE.LINK_OPENS_NEW_WINDOW
+        }
+      }
+    ] %}
+
+    {% if surveyLink !== 'none' %}
+      {% set footerLinkItems = footerLinkItems.concat([{
+        id: "feedbackSurveyLink",
+        href: feedbackSurveyUrl,
+        text: texts.INTERFACE.FOOTER_LINKS.FEEDBACK,
+        attributes: {
+          target: "_blank",
+          alt: texts.INTERFACE.LINK_OPENS_NEW_WINDOW
+        }
+      }]) %}
+    {% endif %}
+
     {% block govukFooter %}
       {{ govukFooter({
         meta: {
-          items: [
-            {
-              id: "cookiesLink",
-              href: url('cookie-settings.get'),
-              text: texts.INTERFACE.FOOTER_LINKS.COOKIES
-            },
-            {
-              id: "privacyPolicyLink",
-              href: url('privacy.get'),
-              text: texts.INTERFACE.FOOTER_LINKS.PRIVACY,
-              attributes: {
-                target: "_blank",
-                alt: texts.INTERFACE.LINK_OPENS_NEW_WINDOW
-              }
-            },
-            {
-              id: "accessibilityStatementLink",
-              href: url('accessibility-statement.get'),
-              text: texts.INTERFACE.FOOTER_LINKS.ACCESSIBILITY_STATEMENT,
-              attributes: {
-                target: "_blank",
-                alt: texts.INTERFACE.LINK_OPENS_NEW_WINDOW
-              }
-            },
-            {
-              id: "feedbackSurveyLink",
-              href: texts.INTERFACE.SMART_SURVEY_SUMMONS_RESPONSE_URL,
-              text: texts.INTERFACE.FOOTER_LINKS.FEEDBACK,
-              attributes: {
-                target: "_blank",
-                alt: texts.INTERFACE.LINK_OPENS_NEW_WINDOW
-              }
-            }
-          ]
+          items: footerLinkItems
         }
       }) }}
     {% endblock %}

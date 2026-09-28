@@ -3,15 +3,22 @@
  * GET    /    ->    index
  */
 
-;(function(){
+;(function () {
   'use strict';
   var filters = require('../../../components/filters')
     , texts_en = require('../../../../client/js/i18n/en.json')
     , texts_cy = require('../../../../client/js/i18n/cy.json')
     , validateResponderType = require('../../../config/validation/responder-type')
-    , utils = require('../../../lib/utils');
+    , utils = require('../../../lib/utils')
+    , environmentConfig = require('../../../config/environment')();
 
   module.exports.index = function() {
+    let surveyLink = '';
+
+    if (environmentConfig.featureFlags.digitalByDefault) {
+      surveyLink = 'none';
+    }
+
     return function(req, res) {
       return res.render('steps/00-responder-type/index.njk', {
         errors: {
@@ -19,13 +26,14 @@
           message: '',
           count: typeof req.session.errors !== 'undefined' ? Object.keys(req.session.errors).length : 0,
           items: req.session.errors,
-        }
+        },
+        surveyLink: surveyLink,
       });
     };
   };
 
   module.exports.create = function(app) {
-    return function(req, res) {
+    return function (req, res) {
       // Validate form submission
       // Reset error and saved field sessions
       delete req.session.errors;

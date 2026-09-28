@@ -33,6 +33,7 @@
   "CONTACT_TELEPHONE_LINK_2": "tel:03003035173",
   "CONTACT_EMAIL": "jurysummoning@justice.gov.uk",
   "SMART_SURVEY_SUMMONS_RESPONSE_URL": "https://www.smartsurvey.co.uk/s/DL1RCF/",
+  "SMART_SURVEY_DIGITAL_RESPONSE_URL": "https://www.smartsurvey.co.uk/t/Juror_Digital_Survey/",
   "SMART_SURVEY_EXPENSE_CALCULATOR_URL": "https://www.smartsurvey.co.uk/s/FO8HDU/",
 
   "FOOTER_LINKS": {
