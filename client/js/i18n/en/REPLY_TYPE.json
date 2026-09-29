@@ -2,8 +2,28 @@
   "HEADER":"Are you replying for yourself or for someone else?",
   "REPLY_SELF":"I am replying for myself",
   "REPLY_SELF_INFO":"You can still ask a family member or a person you trust to help you understand or reply.",
-  "NEED_HELP":"What if I need help replying?",
-  "NEED_HELP_TEXT":"You can ask a family member, friend or carer to help you. They can reply for you or help you to do it yourself. You may be able to get help with using a computer at your local library. If you need more help, call 0300 456 1024.",
+  "NEED_HELP": {
+    "TITLE": "What if I need help replying?",
+    "INFO": "You can ask a family member, friend or carer to help you. They can reply for you or help you to do it yourself. If you, or the person helping you, do not have regular access to the internet or do not feel confident using it, contact We Are Group. You may be eligible for a free appointment to help you access and use the online form. They cannot give you legal advice.",
+    "CONTACT_DETAILS": {
+      "SERVICE": "We Are Group",
+      "TELEPHONE": "Telephone [tel_no]",
+      "TEL_NO": "03300 160 051",
+      "TELEPHONE_LINK": "tel:03300160051",
+      "OPENING": "Monday to Friday 9am to 5pm (except public holidays)",
+      "TEXT": "Or text FORM to [text_no] and someone will call you back",
+      "TEXT_NO": "60777",
+      "TEXT_LINK": "sms:60777",
+      "EMAIL": "Email: [email]",
+      "EMAIL_ADDRESS": "support@wearegroup.com",
+      "EMAIL_LINK": "mailto:support@wearegroup.com"
+    },
+    "BUREAU_HELP": "If you need any other help, call the Jury Central Summoning Bureau on [tel_no]",
+    "BUREAU_HELP_TEL_NO": "0300 456 1024",
+    "BUREAU_HELP_TEL_LINK": "tel:03004561024",
+    "CALL_CHARGES": "Find out about call charges",
+    "CALL_CHARGES_LINK": "https://www.gov.uk/call-charges"
+  },
   "REPLY_TP":"I am replying for someone else",
   "REPLY_TP_INFO":"You can reply for someone else if they have a disability or impairment that means they cannot reply for themselves. Or you can reply for a person who is away, or a person who has died."
 }

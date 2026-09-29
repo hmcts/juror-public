@@ -2,8 +2,28 @@
   "HEADER":"A ydych yn ymateb dros eich hun neu ar ran rhywun arall?",
   "REPLY_SELF":"Rwy'n ymateb dros fy hun",
   "REPLY_SELF_INFO":"Gallwch dal ofyn i aelod o'ch teulu neu unigolyn rydych yn ymddiried ynddynt i'ch helpu i ddeall neu ymateb.",
-  "NEED_HELP":"Beth ddylwn ei wneud os oes angen cymorth arnaf i ymateb?",
-  "NEED_HELP_TEXT":"Gallwch ofyn i aelod o'ch teulu, ffrind neu ofalydd i'ch helpu. Gallant ymateb ar eich rhan neu'ch cynorthwyo i ymateb dros eich hun. Mae'n bosib y gallech gael cymorth gyda defnyddio cyfrifiadur yn eich llyfrgell leol. Os oes angen rhagor o gymorth arnoch, gallwch ein ffonio ar:",
+  "NEED_HELP": {
+    "TITLE": "What if I need help replying?",
+    "INFO": "You can ask a family member, friend or carer to help you. They can reply for you or help you to do it yourself. If you, or the person helping you, do not have regular access to the internet or do not feel confident using it, contact We Are Group. You may be eligible for a free appointment to help you access and use the online form. They cannot give you legal advice.",
+    "CONTACT_DETAILS": {
+      "SERVICE": "We Are Group",
+      "TELEPHONE": "Rhif ffôn [tel_no]",
+      "TEL_NO": "03300 160 051",
+      "TELEPHONE_LINK": "tel:03300160051",
+      "OPENING": "Monday to Friday 9am to 5pm (except public holidays)",
+      "TEXT": "Or text FORM to [text_no] and someone will call you back",
+      "TEXT_NO": "60777",
+      "TEXT_LINK": "sms:60777",
+      "EMAIL": "E-bost: [email]",
+      "EMAIL_ADDRESS": "support@wearegroup.com",
+      "EMAIL_LINK": "mailto:support@wearegroup.com"
+    },
+    "BUREAU_HELP": "If you need any other help, call the Jury Central Summoning Bureau on [tel_no]",
+    "BUREAU_HELP_TEL_NO": "0300 456 1024",
+    "BUREAU_HELP_TEL_LINK": "tel:03004561024",
+    "CALL_CHARGES": "Find out about call charges",
+    "CALL_CHARGES_LINK": "https://www.gov.uk/costau-galwadau"
+  },
   "REPLY_TP":"Rwy'n ymateb ar ran rhywun arall",
   "REPLY_TP_INFO":"Gallwch ymateb ar ran rhywun arall os oes ganddynt anabledd neu nam sy'n golygu na allant ymateb dros eu hunain. Neu gallwch ymateb ar ran unigolyn sydd i ffwrdd, neu unigolyn sydd wedi marw."
 }
