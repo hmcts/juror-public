@@ -12,7 +12,7 @@
     "build:prod": "NODE_ENV=production webpack --config webpack.config.js",
     "dev": "yarn build && NODE_ENV=development node ./dev/server/index.js",
     "dev:debug": "yarn build && NODE_ENV=development node --inspect ./dev/server/index.js",
-    "dev:watch": "yarn build && NODE_ENV=development nodemon",
+    "dev:watch": "yarn build && NODE_ENV=development DIGITAL_BY_DEFAULT=true nodemon",
     "serve": "yarn build:prod && NODE_ENV=production node ./dist/server/index.js",
     "debug": "yarn build:prod && NODE_ENV=production node --inspect-brk ./dist/server/index.js",
     "test": "echo TODO: test",
