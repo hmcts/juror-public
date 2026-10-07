@@ -58,10 +58,10 @@
   "JUROR_CHARTER": "Y Siarter Rheithwyr (PDF)",
   "SUPPORTING_YOU": "Bod yn Gefn ichi Drwy'ch Gwasanaeth Rheithgor (PDF)",
   "DIGITAL_FEEDBACK": {
-    "TITLE": "Tell us about your experience",
-    "DESCRIPTION": "Help us understand how easy or difficult you found replying to your jury summons online. Your feedback will be kept confidential and help us make replying easier for everyone.",
-    "SURVEY_TIME": "The survey takes around <b>5 minutes</b> to complete.",
-    "SURVEY_LINK": "Take the survey"
+    "TITLE": "Dywedwch wrthym am eich profiad",
+    "DESCRIPTION": "Helpwch ni i ddeall pa mor hawdd neu anodd oedd ymateb i’ch gwŷs rheithgor ar-lein. Cedwir eich adborth yn gyfrinachol a bydd yn ein helpu i’w gwneud yn haws ymateb i bawb.",
+    "SURVEY_TIME": "Mae’r arolwg yn cymryd tua <b>5 munud</b> i’w gwblhau.",
+    "SURVEY_LINK": "Cwblhewch yr arolwg"
   },
   "SURVEY_LINK": "Beth yw eich barn am y gwasanaeth hwn?",
   "SURVEY_TIME": "(30 eiliad o'ch amser)",
