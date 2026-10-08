@@ -56,28 +56,41 @@
           ]})
         }}
 
-        {% if texts.INTERFACE.HTML_LANG === "cy" %}
-          {% set guidanceText %}
-            {{ texts.REPLY_TYPE.NEED_HELP_TEXT }}
-            <br>
-            {% if texts.INTERFACE.CONTACT_TELEPHONE_1 %}
-              {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_1 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_1 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_1}}</a>
-            {% endif %}
-            <br>
-            {% if texts.INTERFACE.CONTACT_TELEPHONE_2 %}
-              {{ texts.INTERFACE.CONTACT_TELEPHONE_LABEL_2 }}<a class="govuk-link" href="{{ texts.INTERFACE.CONTACT_TELEPHONE_LINK_2 }}">{{ texts.INTERFACE.CONTACT_TELEPHONE_2}}</a>
-            {% endif %}
+        {% set guidanceText %}
+          <p>
+            {{ texts.REPLY_TYPE.NEED_HELP.INFO }}
+          </p>
+          {% set we_are_group_tel_no %}
+            <a href="{{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.TELEPHONE_LINK }}">{{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.TEL_NO }}</a>
           {% endset %}
-        {% else %}
-          {% set guidanceText %}
-            {{ texts.REPLY_TYPE.NEED_HELP_TEXT }}
+          {% set we_are_group_email %}
+            <a href="{{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.EMAIL_LINK }}">{{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.EMAIL_ADDRESS }}</a>
           {% endset %}
-        {% endif %}
+          {% set we_are_group_text_no %}
+            <a href="{{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.TEXT_LINK }}">{{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.TEXT_NO }}</a>
+          {% endset %}
+          <p>
+            {{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.SERVICE }} <br>
+            {{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.TELEPHONE | replace('[tel_no]', we_are_group_tel_no) | safe }} <br>
+            {{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.OPENING }} <br>
+            {{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.TEXT | replace('[text_no]', we_are_group_text_no) | safe }} <br>
+            {{ texts.REPLY_TYPE.NEED_HELP.CONTACT_DETAILS.EMAIL | replace('[email]', we_are_group_email) | safe }}
+          </p>
+          {% set bureau_tel_no %}
+            <a href="{{ texts.REPLY_TYPE.NEED_HELP.BUREAU_HELP_TEL_LINK }}">{{ texts.REPLY_TYPE.NEED_HELP.BUREAU_HELP_TEL_NO }}</a>
+          {% endset %}
+          <p>
+            {{ texts.REPLY_TYPE.NEED_HELP.BUREAU_HELP | replace('[tel_no]', bureau_tel_no) | safe }}
+          </p>
+          <p>
+            <a href="{{ texts.REPLY_TYPE.NEED_HELP.CALL_CHARGES_LINK }}">{{ texts.REPLY_TYPE.NEED_HELP.CALL_CHARGES }}</a>
+          </p>
+        {% endset %}
   
         <details class="govuk-details" data-module="govuk-details">
           <summary class="govuk-details__summary ga-details-help-replying">
             <span class="govuk-details__summary-text ga-details-help-replying">
-              {{ texts.REPLY_TYPE.NEED_HELP }}
+              {{ texts.REPLY_TYPE.NEED_HELP.TITLE }}
             </span>
           </summary>
           <div class="govuk-details__text">
