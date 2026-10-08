@@ -50,6 +50,11 @@
 
       backLinkUrl = 'steps.responder.type.get';
 
+      let surveyLink = '';
+      if (environmentConfig.featureFlags.digitalByDefault) {
+        surveyLink = 'none';
+      }
+
       return res.render('steps/01-login/login.njk', {
         user: req.session.user,
         errors: {
@@ -59,6 +64,7 @@
           items: tmpErrors,
         },
         backLinkUrl: backLinkUrl,
+        surveyLink: surveyLink,
       });
     };
   };
