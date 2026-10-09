@@ -1,25 +1,30 @@
 {% from "govuk/components/feedback/macro.njk" import govukFeedback %}
 
-{% call govukFeedback({
-  titleText: texts.CONFIRMATION.DIGITAL_FEEDBACK.TITLE,
-  headingLevel: 1,
-  classes: "govuk-!-margin-bottom-6"
-}) %}
-  <p class="govuk-body">
-    {{ texts.CONFIRMATION.DIGITAL_FEEDBACK.DESCRIPTION }}
-  </p>
-  <p class="govuk-body">
-    {{ texts.CONFIRMATION.DIGITAL_FEEDBACK.SURVEY_TIME | safe }}
-  </p>
-  <p class="govuk-body">
-    <a 
-      class="govuk-link"
-      id="feedback-survey-link"
-      target="_blank"
-      href="{{ texts.INTERFACE.SMART_SURVEY_DIGITAL_RESPONSE_URL }}"
-      alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}"
-    >
-      {{ texts.CONFIRMATION.DIGITAL_FEEDBACK.SURVEY_LINK }}
-    </a>
-  </p>
-{% endcall %}
+<div class="govuk-feedback govuk-width-container govuk-!-margin-bottom-6">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-feedback__title">
+        {{texts.CONFIRMATION.DIGITAL_FEEDBACK.TITLE}}
+      </h1>
+      <div class="govuk-feedback__body">
+        <p class="govuk-body">
+          {{ texts.CONFIRMATION.DIGITAL_FEEDBACK.DESCRIPTION }}
+        </p>
+        <p class="govuk-body">
+          {{ texts.CONFIRMATION.DIGITAL_FEEDBACK.SURVEY_TIME | safe }}
+        </p>
+        <p class="govuk-body">
+          <a 
+            class="govuk-link"
+            id="feedback-survey-link"
+            target="_blank"
+            href="{{ texts.INTERFACE.SMART_SURVEY_DIGITAL_RESPONSE_URL }}"
+            alt="{{ texts.INTERFACE.LINK_OPENS_NEW_WINDOW }}"
+          >
+            {{ texts.CONFIRMATION.DIGITAL_FEEDBACK.SURVEY_LINK }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
