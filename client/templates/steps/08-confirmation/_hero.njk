@@ -1,6 +1,10 @@
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% if user.digitalByDefault %}
+  {% include "../../includes/digital-feedback.njk" %}
+{% endif %}
+
 <div class="govuk-panel govuk-panel--confirmation">
   <h1 class="govuk-panel__title">
     {{ texts.CONFIRMATION.HERO.FINISHED }}

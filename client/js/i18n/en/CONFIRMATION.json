@@ -57,6 +57,12 @@
 
   "JUROR_CHARTER": "The Juror Charter (PDF)",
   "SUPPORTING_YOU": "Supporting You Through Jury Service (PDF)",
+  "DIGITAL_FEEDBACK": {
+    "TITLE": "Tell us about your experience",
+    "DESCRIPTION": "Help us understand how easy or difficult you found replying to your jury summons online. Your feedback will be kept confidential and help us make replying easier for everyone.",
+    "SURVEY_TIME": "The survey takes around <b>5 minutes</b> to complete.",
+    "SURVEY_LINK": "Take the survey"
+  },
   "SURVEY_LINK": "What did you think of this service?",
   "SURVEY_TIME": "(Takes 30 seconds)",
   "NO_ACTION": "You do not need to do anything else.",

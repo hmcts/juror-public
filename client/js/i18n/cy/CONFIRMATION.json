@@ -57,6 +57,12 @@
 
   "JUROR_CHARTER": "Y Siarter Rheithwyr (PDF)",
   "SUPPORTING_YOU": "Bod yn Gefn ichi Drwy'ch Gwasanaeth Rheithgor (PDF)",
+  "DIGITAL_FEEDBACK": {
+    "TITLE": "Dywedwch wrthym am eich profiad",
+    "DESCRIPTION": "Helpwch ni i ddeall pa mor hawdd neu anodd oedd ymateb i'ch gwŷs rheithgor ar-lein. Cedwir eich adborth yn gyfrinachol a bydd yn ein helpu i'w gwneud yn haws ymateb i bawb.",
+    "SURVEY_TIME": "Mae'r arolwg yn cymryd tua <b>5 munud</b> i'w gwblhau.",
+    "SURVEY_LINK": "Cwblhewch yr arolwg"
+  },
   "SURVEY_LINK": "Beth yw eich barn am y gwasanaeth hwn?",
   "SURVEY_TIME": "(30 eiliad o'ch amser)",
   "NO_ACTION": "Nid oes rhaid ichi wneud unrhyw beth arall.",
