@@ -45,7 +45,7 @@
         logConsole: false,
 
         // If true, log sanitisation is disabled and raw fields will be logged
-        logSanitisationDisabled: process.env.LOG_SANITISATION_DISABLED === 'true' || process.env.NODE_ENV === 'development',
+        logSanitisationDisabled: false,
 
         // rate limiting - defaults to 1 mil requests per minute
         rateLimitEnabled: true,
