@@ -1,9 +1,9 @@
 {
   "HEADING": "Mae eich gwybodaeth gwŷs rheithgor ar-lein",
   "INTRO": "Rydych wedi mewngofnodi. Gallwch ddarllen yr wybodaeth isod am wasanaethu ar reithgor cyn cwblhau eich ymateb, neu fynd yn syth i'r ffurflen ymateb ar-lein. Bydd arweiniad ar gael drwy gydol y broses.",
-  "NOT_AVAILABLE": "Not available",
-  "SUMMONS_DATE_LABEL": "You are summoned to start jury service on",
-  "COURT_LABEL": "at",
+  "NOT_AVAILABLE": "Dim ar gael",
+  "SUMMONS_DATE_LABEL": "Rydych yn cael eich gwysio i gychwyn gwasanaeth rheithgor ar",
+  "COURT_LABEL": "yn",
   "START_RESPONSE": "Dechrau eich ymateb",
   "INFORMATION_HEADING": "Gwybodaeth am wasanaeth rheithgor",
   "GUIDANCE_CARDS": [
