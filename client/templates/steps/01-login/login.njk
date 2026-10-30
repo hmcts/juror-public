@@ -70,7 +70,7 @@
           {% set jurorNumberHintText = texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT_OB %}
         {% else %}
           {% set jurorNumberHintText = texts.LOGIN_PAGE.FIELD_JUROR_NUMBER_HINT %}
-        {% endif %}
+         {% endif %}
         
 
         <div class="govuk-form-group {% if jurorNumberError or lastNameError or postcodeError %}govuk-form-group--error{% endif %}" id="loginGroup">
@@ -108,7 +108,8 @@
               classes: "govuk-!-width-one-third",
               id: "jurorNumber",
               name: "jurorNumber",
-              type: "number",
+              type: "text",
+              inputmode: "numeric",
               pattern: "[0-9]*",
               autocomplete: "off",
               errorMessage: jurorNumberError,
@@ -222,8 +223,8 @@
         <input type="hidden" name="_csrf" value="{{ csrftoken }}">
 
       </form>
-      
+
     </div>
   </div>
 
-{% endblock %}
+  {% endblock %}
