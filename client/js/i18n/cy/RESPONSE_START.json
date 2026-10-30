@@ -1,16 +1,16 @@
 {
-  "HEADING": "Your jury summons information is online",
-  "INTRO": "You are signed in. You can read information below about jury service before completing your response, or go straight to the online reply form. Guidance will be available throughout the process.",
-  "NOT_AVAILABLE": "Not available",
-  "SUMMONS_DATE_LABEL": "You are summoned to start jury service on",
-  "COURT_LABEL": "at",
-  "START_RESPONSE": "Start your response",
-  "INFORMATION_HEADING": "Jury service information",
+  "HEADING": "Mae eich gwybodaeth gwŷs rheithgor ar-lein",
+  "INTRO": "Rydych wedi mewngofnodi. Gallwch ddarllen yr wybodaeth isod am wasanaethu ar reithgor cyn cwblhau eich ymateb, neu fynd yn syth i'r ffurflen ymateb ar-lein. Bydd arweiniad ar gael drwy gydol y broses.",
+  "NOT_AVAILABLE": "Dim ar gael",
+  "SUMMONS_DATE_LABEL": "Rydych yn cael eich gwysio i gychwyn gwasanaeth rheithgor ar",
+  "COURT_LABEL": "yn",
+  "START_RESPONSE": "Dechrau eich ymateb",
+  "INFORMATION_HEADING": "Gwybodaeth am wasanaeth rheithgor",
   "GUIDANCE_CARDS": [
     {
       "ID": "jury-service",
-      "TITLE": "Sut Mae Gwasanaeth Rheithgor yn Gweithio",
-      "DESCRIPTION": "What jury service is, who can be called, and what it means to serve."
+      "TITLE": "Sut mae gwasanaeth rheithgor yn gweithio",
+      "DESCRIPTION": "Beth yw gwasanaeth rheithgor, pwy gellir galw arnynt, a beth mae'n ei olygu i wasanaethu."
     },
     {
       "ID": "attendance",
@@ -19,8 +19,8 @@
     },
     {
       "ID": "expenses",
-      "TITLE": "Claiming expenses",
-      "DESCRIPTION": "Travel, food, loss of earnings, childcare, and other financial support."
+      "TITLE": "Hawlio treuliau",
+      "DESCRIPTION": "Teithio, bwyd, colli enillion, gofal plant a chefnogaeth ariannol arall."
     },
     {
       "ID": "employment",
@@ -29,18 +29,18 @@
     },
     {
       "ID": "change-dates",
-      "TITLE": "Asking to change your dates or be excused",
-      "DESCRIPTION": "When you can ask for different dates or ask to be excused from jury service."
+      "TITLE": "Gofyn am newid eich dyddiadau neu gael eich esgusodi",
+      "DESCRIPTION": "Pryd gallwch ofyn am ddyddiadau gwahanol neu ofyn i gael eich esgusodi o wasanaeth rheithgor."
     },
     {
       "ID": "support",
       "TITLE": "Cefnogaeth a hygyrchedd",
-      "DESCRIPTION": "Request reasonable adjustments, language support, or help with health needs."
+      "DESCRIPTION": "Gofyn am addasiadau rhesymol, cefnogaeth iaith neu gymorth gydag anghenion iechyd."
     },
     {
       "ID": "eligibility",
-      "TITLE": "Juror eligibility",
-      "DESCRIPTION": "Read the eligibility questions you will be asked as part of your reply."
+      "TITLE": "Cymhwysedd rheithgor",
+      "DESCRIPTION": "Darllenwch y cwestiynau cymhwysedd a ofynnir i chi fel rhan o'ch ymateb."
     }
   ]
 }

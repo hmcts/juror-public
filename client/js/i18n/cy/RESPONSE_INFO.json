@@ -1,11 +1,11 @@
 {
   "COMMON": {
-    "START_RESPONSE": "Start your response",
-    "LINKS_OPEN_NEW_TAB": "Links will open in a new tab."
+    "START_RESPONSE": "Dechrau eich ymateb",
+    "LINKS_OPEN_NEW_TAB": "Bydd y dolenni yn agor mewn tabiau newydd."
   },
   "JURY_SERVICE": {
     "PAGE_IDENTIFIER": "Response information - Jury Service",
-    "HEADING": "Sut Mae Gwasanaeth Rheithgor yn Gweithio",
+    "HEADING": "Sut mae gwasanaeth rheithgor yn gweithio",
     "INTRO": "Beth yw gwasanaeth rheithgor a phwy all gael eu galw.",
     "WHAT_IS_JURY_SERVICE": {
       "TITLE": "Beth yw gwasanaeth rheithgor?",
@@ -15,7 +15,7 @@
       "TITLE": "Pwy all gael ei alw i wasanaethu ar reithgor?",
       "CONTENT_1": "Gall bob oedolyn rhwng 18 a 75 mlwydd oed sy'n byw yn y DU gael ei ddewis ar hap o'r rhestr etholiadol i wasanaethu ar reithgor.",
       "CONTENT_2": "Os byddwch yn iau na 18 neu'n hŷn na 76 ar ddiwrnod cyntaf eich gwasanaeth rheithgor, ni fyddwch yn gallu gwasanaethu ond mae'n rhaid i chi dal ymateb i'ch gwŷs.",
-      "CONTENT_3": "Mae mwy o wybodaeth ar gael yn",
+      "CONTENT_3": "Mae rhagor o wybodaeth ar gael yma: ",
       "LINK_TEXT": "gwasanaeth rheithgor",
       "LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor"
     }
@@ -26,7 +26,7 @@
     "INFORMATION": {
       "TITLE": "Gwybodaeth i gyflogeion a rheithwyr sy'n hunangyflogedig",
       "CONTENT_1": "Mae'n rhaid i'ch cyflogwr adael i chi wneud eich gwasanaeth rheithgor - dyma yw'r gyfraith, ond gallant ofyn i chi wneud cais i newid y dyddiadau i amser mwy cyfleus (gallwch ond gwneud hyn unwaith). Gweler yr wybodaeth am ofyn i gael newid eich dyddiadau neu gael eich esgusodi. neu gwiriwch [link] i gael mwy o fanylion.",
-      "CONTENT_1_LINK_TEXT": "www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
+      "CONTENT_1_LINK_TEXT": "gohirio neu gael eich esgusodi rhag cyflawni gwasanaeth rheithgor",
       "CONTENT_1_LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi",
       "CONTENT_2": "Gall eich cyflogwr ddewis eich talu neu beidio eich talu yn ystod eich gwasanaeth. Os na fyddant yn eich talu, gallwch wneud cais i'r llys am golli enillion, sy'n destun uchafswm dyddiol. Os ydych yn hunangyflogedig, mae gennych yr hawl i hawlio'r un treuliau â phetaech yn weithiwr cyflogedig.",
       "CONTENT_3": "Gwiriwch yr wybodaeth yn yr adran 'hawlio treuliau' neu yn [link] i gael mwy o fanylion.",
@@ -41,7 +41,7 @@
     "CONTENT_2": "Gallwch ond newid dyddiadau eich gwasanaeth unwaith, a rhaid i chi roi rheswm i ni. Fe ofynnir i chi ddarparu dyddiadau amgen o fewn y 12 mis nesaf pan fyddwch yn gallu gwasanaethu.",
     "CONTENT_3": "Mae esgusodiadau ond yn cael eu cymeradwyo mewn amgylchiadau eithriadol pan na allwch wasanaethu ar unrhyw adeg yn y 12 mis nesaf.  Efallai y gofynnir i chi ddarparu tystiolaeth, ond ni fydd rhaid i chi gynnwys hyn pan fyddwch yn ymateb; byddwn yn cysylltu â chi ac yn rhoi amser i chi gasglu unrhyw beth rydyn ni ei angen.",
     "CONTENT_4": "Os oes arnoch angen mwy o wybodaeth, gweler [link].",
-    "CONTENT_4_LINK_TEXT": "gofyn am gael newid y dyddiad neu gael eich esgusodi",
+    "CONTENT_4_LINK_TEXT": "gohirio neu gael eich esgusodi rhag cyflawni gwasanaeth rheithgor",
     "CONTENT_4_LINK_URL": "https://www.gov.uk/gwasanaeth-rheithgor/gofyn-am-gael-newid-y-dyddiad-neu-gael-eich-esgusodi"
   },
   "ELIGIBILITY": {
@@ -99,8 +99,8 @@
     "CONTENT_1": "Rydych wedi cael gwŷs i ddechrau gwasanaeth rheithgor ar ",
     "CONTENT_AT": "yn",
     "CONTENT_2": "Caniatewch amser ychwanegol i fynd trwy'r drefn ddiogelwch yn y llys.",
-    "CONTENT_3": "Gallwch ddod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
-    "SECURITY_LINK_TEXT": "mynd i lys neu dribiwnlys",
+    "CONTENT_3": "gellir dod o hyd i wybodaeth am hyn a beth y gallwch ac na allwch ddod gyda chi yma: ",
+    "SECURITY_LINK_TEXT": "mynd i mewn i adeilad llys neu dribiwnlys",
     "SECURITY_LINK_URL": "https://www.gov.uk/mynd-i-lys-neu-dribiwnlys"
   },
   "SUPPORT": {
@@ -113,13 +113,13 @@
   },
   "EXPENSES": {
     "PAGE_IDENTIFIER": "Response information - Expenses",
-    "HEADING": "Claiming expenses",
-    "INTRO_1": "You do not get paid for doing jury service but you can claim some money back towards loss of earnings, childcare, travel, and food and drink costs.",
-    "INTRO_2": "The rates are set out on ",
-    "INTRO_3": "and there's also a calculator to help you work out what you may be able to claim from the court: ",
-    "RATES_LINK_TEXT": "jury service",
+    "HEADING": "Hawlio treuliau",
+    "INTRO_1": "Nid ydych yn cael tâl am wneud gwasanaeth rheithgor ond gallwch hawlio rhywfaint o arian yn ôl am golli enillion, gofal plant, teithio, a chostau bwyd a diod.",
+    "INTRO_2": "Mae'r cyfraddau wedi'u nodi yn ",
+    "INTRO_3": "ac mae teclyn cyfrifo hefyd i'ch helpu i gyfrifo faint y gallwch ei hawlio gan y llys: ",
+    "RATES_LINK_TEXT": "gwasanaeth rheithgor",
     "RATES_LINK_URL": "https://www.gov.uk/jury-service",
-    "CALCULATOR_LINK_TEXT": "check juror claims",
+    "CALCULATOR_LINK_TEXT": "gwirio hawliadau rheithwyr",
     "CALCULATOR_LINK_URL": "https://www.gov.uk/check-juror-claims",
     "LOSS_OF_EARNINGS_1": {
       "TITLE": "Enillion a gollwyd a chostau gofal plant neu gostau gofal arall",
@@ -132,7 +132,7 @@
       "CONTENT_1": "Gallwch hawlio am enillion a gollwyd os ydych un ai:",
       "BULLET_1": "yn gyflogedig ac ni fydd eich cyflogwr yn eich talu yn ystod eich gwasanaeth rheithgor",
       "BULLET_2": "yn hunangyflogedig neu'n gyfarwyddwr cwmni ar gyflog",
-      "CONTENT_2": "The maximum rates you can claim are shown on ",
+      "CONTENT_2": "Mae’r cyfraddau uchaf y gallwch eu hawlio wedi’u nodi yma: ",
       "CONTENT_3": "Ni allwch hawlio mwy os yw eich cyflog llawn yn uwch na'r cyfraddau hyn.",
       "CONTENT_4": "Os ydych yn gweithio ar sail rhan amser, gallwch ond hawlio am y dyddiau y byddwch yn gweithio fel arfer, hyd yn oed os byddwch yn treulio wythnos lawn yn y llys.",
       "CONTENT_5": "Er enghraifft, os ydych yn gweithio 3 diwrnod yr wythnos fel arfer, gallwch ond hawlio am golli enillion am y 3 diwrnod hwnnw, oherwydd nid ydych wedi colli enillion ar y 2 ddiwrnod arall.",
@@ -151,7 +151,7 @@
     },
     "TRAVEL_COSTS": {
       "TITLE": "Costau teithio",
-      "CONTENT_1": "Mae'r swm y gallwch ei hawlio yn dibynnu ar sut rydych yn teithio i'r llys. Ni allwch hawlio unrhyw gostau teithio neu gostau llety o dramor. Ceir gwybodaeth am faint y gallwch ei hawlio yn ",
+      "CONTENT_1": "Mae'r swm y gallwch ei hawlio yn dibynnu ar sut rydych yn teithio i'r llys. Ni allwch hawlio unrhyw gostau teithio neu gostau llety o dramor. Ceir gwybodaeth am faint y gallwch ei hawlio yma: ",
       "CONTENT_2": "Rhaid ichi wirio gyda Rheolwr y Rheithgor yn y llys eich bod yn cael hawlio arian yn ôl am docyn parcio cyn ichi dalu amdano."      
     },
     "TRAVEL_TICKETS": {
@@ -161,7 +161,7 @@
     },
     "FOOD_AND_DRINK": {
       "TITLE": "Costau bwyd a diod",
-      "CONTENT_1": "Gallwch hawlio'r symiau hyn hyd yn oed os ydych yn dod â bwyd a diod eich hun. Mae'r cyfraddau wedi'u nodi yn "
+      "CONTENT_1": "Gallwch hawlio'r symiau hyn hyd yn oed os ydych yn dod â bwyd a diod eich hun. Mae'r cyfraddau wedi'u nodi yma: "
     },
     "WHEN_TO_CLAIM": {
       "TITLE": "Pryd i hawlio",
