@@ -108,7 +108,8 @@
               classes: "govuk-!-width-one-third",
               id: "jurorNumber",
               name: "jurorNumber",
-              type: "number",
+              type: "text",
+              inputmode: "numeric",
               pattern: "[0-9]*",
               autocomplete: "off",
               errorMessage: jurorNumberError,
@@ -222,7 +223,7 @@
         <input type="hidden" name="_csrf" value="{{ csrftoken }}">
 
       </form>
-      
+
     </div>
   </div>
 
